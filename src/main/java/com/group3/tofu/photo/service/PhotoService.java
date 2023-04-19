@@ -28,7 +28,7 @@ public class PhotoService {
 				byte[] photoContent = bis.readAllBytes() ;
 				bis.close();
 				
-				Photo p = pDao.findById(pID, photoContent);
+				Photo p = pDao.findById(pID).get();
 				p.setPhoto(photoContent);
 				pDao.save(p) ;
 			}

@@ -35,5 +35,12 @@ public class PageController {
 		return "customer/login";
 	}
 	
+	//跳轉到商品頁面
+		@GetMapping("/product")
+		public String product() {
+
+			return "product";
+		}
+	
 	
 }

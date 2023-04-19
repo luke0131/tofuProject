@@ -9,6 +9,6 @@ import com.group3.tofu.product.service.ProductService;
 public class ProductController {
 	
 	@Autowired
-	private ProductService pSer ;
+	private ProductService pService ;
 	
 }
