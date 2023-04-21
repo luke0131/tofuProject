@@ -224,7 +224,7 @@ uri="http://java.sun.com/jsp/jstl/functions"%>
 													<div class="ctTitle" style="margin-bottom: 20px;">
 														<span style="font-weight: 700; margin-right: 5px;">是否為豆腐車主</span>
 														<input id="istofu1" name="istofuowner" type="radio" style="width:16px; height:16px; border:0px solid;" value="1" checked>
-														<label for="istofu1">是，您愛車的車身號碼或車牌號碼:<input type="text" name="carno" class="input1"  style="width: 150px" size="20"></label>
+														<label for="istofu1">是，您愛車的車身號碼或車牌號碼<input type="text" name="carno" class="input1"  style="width: 150px" size="20"></label>
 														<input id="istofu2" name="istofuowner" type="radio" style="width:16px; height:16px; border:0px solid;" value="0" checked>
 														<label for="istofu2">否</label>
 														<br>
