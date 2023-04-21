@@ -36,11 +36,12 @@ public class PageController {
 	}
 	
 	//跳轉到商品頁面
-		@GetMapping("/product")
-		public String product() {
-
-			return "product";
-		}
+	@GetMapping("product/product")
+	public String product() {
+		
+		return "product/product";
+	
+	}
 	
 	
 }
