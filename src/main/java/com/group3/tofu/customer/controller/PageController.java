@@ -43,5 +43,15 @@ public class PageController {
 	
 	}
 	
+	//跳轉保養介紹頁面
+			@GetMapping("/introduce")
+			public String introduce() {
+				return "maintenance/introduce";
+			}
+		//跳轉預約保養頁面	
+			@GetMapping("/main")
+			  public String showNextPage() {
+			    return "maintenance/add";
+			  }
 	
 }
