@@ -21,3 +21,9 @@
 <script src="https://code.jquery.com/jquery-3.6.4.js"
 	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
 	crossorigin="anonymous"></script>
+	
+<!-- bootbox 彈跳視窗 -->
+<script src="https://www.unpkg.com/bootbox@6.0.0/dist/bootbox.all.min.js"></script>
+
+<!-- axios ajax功能 -->
+<script src="https://www.unpkg.com/axios@1.3.5/dist/axios.min.js"></script>

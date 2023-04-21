@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.customer.model.CustomerDao;
+import com.group3.tofu.exception.AccountNotEnabledException;
+import com.group3.tofu.exception.LoginFailedException;
+
 
 @Service
 public class CustomerService {
@@ -16,7 +19,7 @@ public class CustomerService {
 	@Autowired
 	private CustomerDao customerDao;
 
-	//findAllMember
+	//findAllCustomer
 	public List<Customer> findAllCustomer(){
 		return customerDao.findAll();
 	}
@@ -32,4 +35,16 @@ public class CustomerService {
 		}
 		return null;
 	}
+	
+	//find Customer by email and password	
+	public Customer findEmailAndPassword(String email  , String password) {
+	
+		Customer findByEmailAndPassword = customerDao.findByEmailAndPassword(email , password);
+		
+		
+		
+		
+		return findByEmailAndPassword;
+	}
+	
 }
