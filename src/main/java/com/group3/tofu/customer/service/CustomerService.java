@@ -8,8 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.customer.model.CustomerDao;
-import com.group3.tofu.exception.AccountNotEnabledException;
-import com.group3.tofu.exception.LoginFailedException;
+
 
 
 @Service
