@@ -50,15 +50,10 @@
             <li class="nav-item dropdown">
               <a
                 class="nav-link active"
-                href="#"
-                data-bs-toggle="dropdown"
-                aria-current="page"
+                href="${contextRoot}/product/product"
                 >商品展示</a
               >
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">1</a></li>
-                <li><a class="dropdown-item" href="#">2</a></li>
-              </ul>
+              
             </li>
 
             <li class="nav-item dropdown">
