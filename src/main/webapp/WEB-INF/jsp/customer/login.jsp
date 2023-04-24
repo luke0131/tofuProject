@@ -29,14 +29,12 @@
 				<div class="modal-body p-5 pt-0">
 					<form action="${contextRoot}/customer/findemail" method="post" class="">
 						<div class="form-floating mb-3">
-							<input type="email" class="form-control rounded-3"
-								id="floatingInput" placeholder="Email" name="email"> <label
-								for="floatingInput">Email</label>
+							<input type="email" class="form-control rounded-3" placeholder="Email" name="email" id="email"> 
+							<label for="email">Email</label>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="password" class="form-control rounded-3"
-								id="floatingPassword" placeholder="Password" name="password"> <label
-								for="floatingPassword">Password</label>
+							<input type="password" class="form-control rounded-3" placeholder="Password" name="password" id="password"> 
+							<label for="password">Password</label>
 						</div>
 						
 						<div style="margin-top:20px;font-weight:bold;margin-bottom:10px"><input type="checkbox" value="remember" style="margin-right:10px;"/>記住我</div>
@@ -53,9 +51,9 @@
 						
 						<hr class="my-4">
 						<div class="d-flex justify-content-between mt-3">
-						<button type="button" class="btn btn-danger" id="notEnabledBTN">未認證</button>
-						<button type="button" class="btn btn-success" id="memberLoginBTN">使用者</button>
-						<button type="button" class="btn btn-warning" id="adminLoginBTN">管理員</button>
+						<button type="button" class="btn btn-primary" id="tofu">Tofu</button>
+						<!-- <button type="button" class="btn btn-success" id="memberLoginBTN">使用者</button>
+						<button type="button" class="btn btn-warning" id="adminLoginBTN">管理員</button> -->
 						</div>
 						<!--  
 						<hr class="my-4">
@@ -86,6 +84,12 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		document.querySelector('#tofu').addEventListener('click' , function(){
+			document.querySelector('#email').value = 'a1234@gmail.com';
+			document.querySelector('#password').value = '1234';
+		});
+	</script>
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>
 
