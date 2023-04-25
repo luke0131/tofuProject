@@ -28,7 +28,7 @@ img {
 	<jsp:include page="/WEB-INF/jsp/layout/navbar.jsp" />
 
 	<div class="cont">
-		<img src="./img/mPicture/images.jpg" alt="Your Image">
+		<img src="../img/mPicture/images.jpg" alt="Your Image">
 
 	</div>
 
