@@ -159,9 +159,7 @@ body {
 
 					<div class="container">
 						<div class="carousel-caption text-start">
-							<h1>Example headline.</h1>
-							<p>Some representative placeholder content for the first
-								slide of the carousel.</p>
+							<h1>Toyota Corolla Altis</h1>
 							<p>
 								<a class="btn btn-lg btn-primary" href="#">Sign up today</a>
 							</p>
@@ -233,11 +231,11 @@ body {
 							fill="#777" />
 						<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
 
-					<h2 class="fw-normal">Heading</h2>
+					<h2 class="fw-normal">設計理念</h2>
 					<p>Some representative placeholder content for the three
 						columns of text below the carousel. This is the first column.</p>
 					<p>
-						<a class="btn btn-secondary" href="#">View details &raquo;</a>
+						<a class="btn btn-secondary" href="#introduce">前往介紹 &raquo;</a>
 					</p>
 				</div>
 				<!-- /.col-lg-4 -->
@@ -250,11 +248,11 @@ body {
 							fill="#777" />
 						<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
 
-					<h2 class="fw-normal">Heading</h2>
+					<h2 class="fw-normal">預約賞車</h2>
 					<p>Another exciting bit of representative placeholder content.
 						This time, we've moved on to the second column.</p>
 					<p>
-						<a class="btn btn-secondary" href="#">View details &raquo;</a>
+						<a class="btn btn-secondary" href="#book">前往預約 &raquo;</a>
 					</p>
 				</div>
 				<!-- /.col-lg-4 -->
@@ -267,11 +265,11 @@ body {
 							fill="#777" />
 						<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
 
-					<h2 class="fw-normal">Heading</h2>
+					<h2 class="fw-normal">打造專屬</h2>
 					<p>And lastly this, the third column of representative
 						placeholder content.</p>
 					<p>
-						<a class="btn btn-secondary" href="#">View details &raquo;</a>
+						<a class="btn btn-secondary" href="${contextRoot}/product/buyCar">前往打造 &raquo;</a>
 					</p>
 				</div>
 				<!-- /.col-lg-4 -->
@@ -283,14 +281,12 @@ body {
 
 			<hr class="featurette-divider">
 
-			<div class="row featurette">
+			<div id="introduce" class="row featurette">
 				<div class="col-md-7">
-					<h2 class="featurette-heading fw-normal lh-1">
-						First featurette heading. <span class="text-muted">It’ll
-							blow your mind.</span>
+					<h2 class="fw-normal lh-2">
+						外觀設計：<br/>
+						Toyota Corolla Altis採用了現代化的設計風格，強調簡潔、流線型和動感的外形。車頭部分採用了大面積的中網格設計，燈組造型富有層次感，整體風格比較具有豪華感。車側部分則突出了輪拱造型，並加入了流線型的腰線和拉長的車身比例，讓整體造型更加具有時尚感和運動感。
 					</h2>
-					<p class="lead">Some great placeholder content for the first
-						featurette here. Imagine some exciting prose here.</p>
 				</div>
 				<div class="col-md-5">
 					<svg
@@ -309,13 +305,10 @@ body {
 
 			<div class="row featurette">
 				<div class="col-md-7 order-md-2">
-					<h2 class="featurette-heading fw-normal lh-1">
-						Oh yeah, it’s that good. <span class="text-muted">See for
-							yourself.</span>
+					<h2 class="fw-normal lh-1">
+						車內空間：<br/>
+						Toyota Corolla Altis車內空間較為寬敞，前排座椅支撐力度較好，後排座椅也有較為舒適的座椅設計。車內儀表盤採用了現代化的設計風格，中控臺配置合理，且有許多科技配置，如8吋多媒體顯示屏、智慧型行車輔助系統、360度全景鏡頭等，讓駕駛者和乘客可以更加方便地享受愉悅的駕乘體驗。
 					</h2>
-					<p class="lead">Another featurette? Of course. More placeholder
-						content here to give you an idea of how this layout would work
-						with some actual real-world content in place.</p>
 				</div>
 				<div class="col-md-5 order-md-1">
 					<svg
@@ -334,13 +327,10 @@ body {
 
 			<div class="row featurette">
 				<div class="col-md-7">
-					<h2 class="featurette-heading fw-normal lh-1">
-						And lastly, this one. <span class="text-muted">Checkmate.</span>
+					<h2 class="fw-normal lh-1">
+						動力性能：<br/>
+						Toyota Corolla Altis搭載了1.8升汽油引擎，最大馬力為138匹，最大扭力為172牛米。配合CVT無段變速器，可提供平順、靈活的動力輸出，並且具有較為經濟的油耗表現。
 					</h2>
-					<p class="lead">And yes, this is the last block of
-						representative placeholder content. Again, not really intended to
-						be actually read, simply here to give you a better view of what
-						this would look like with some actual content. Your content.</p>
 				</div>
 				<div class="col-md-5">
 					<svg
@@ -356,9 +346,43 @@ body {
 			</div>
 
 			<hr class="featurette-divider">
-
+		
 			<!-- /END THE FEATURETTES -->
-
+			
+			<div id="book" class="row featurette">
+				<h1>預約賞車</h1>
+				<form action="">
+					<div class="mb-3">
+		  				<label for="formGroupExampleInput" class="form-label">姓名</label>
+		  				<input type="text" class="form-control" id="formGroupExampleInput" placeholder="姓名">
+					</div>
+					
+					<div class="mb-3">
+		  				<label for="formGroupExampleInput2" class="form-label">連絡電話</label>
+		  				<input type="text" class="form-control" id="formGroupExampleInput2" placeholder="連絡電話">
+					</div>
+					
+					<div class="mb-3">
+		  				<label for="formGroupExampleInput3" class="form-label">預約車型</label>
+		  				<input type="text" class="form-control" id="formGroupExampleInput3" placeholder="預約車型">
+					</div>								
+			
+					<label for="appointment">預約時間:</label>
+					<div class="formgroup">
+						<input type="datetime-local" id="appointment" name="appointment"
+							value="2023-06-01 10:00" min="2023-06-01 10:00"
+							max="2023-06-30 18:00">
+					</div>	
+					
+					<div class="col-md-4 offset-md-11">
+					<button type="submit" class="btn btn-primary">預約</button>
+					</div>
+								
+				</form>			
+			</div>						
+			
+			<hr class="featurette-divider">
+			
 		</div>
 		<!-- /.container -->
 

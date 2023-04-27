@@ -162,9 +162,8 @@
 				</div>
 				<hr>
 				<div>
-					<a href="#" class="btn btn-primary my-2">篩選</a> <a href="#"
-						class="btn btn-secondary my-2">清除篩選</a> <a
-						href="${contextRoot}/product/buyCar" class="btn btn-primary my-2">購買</a>
+					<a href="#" class="btn btn-primary my-2">篩選</a> 
+					<a href="#" class="btn btn-secondary my-2">清除篩選</a>
 				</div>
 			</div>
 		</div>
@@ -177,10 +176,10 @@
 				<div class="col">
 					<div class="card shadow-sm h-100">
 						<div class="bd-placeholder-img card-img-top">
-							<img src="../img/mPicture/images.jpg" class="card-img-top"
+							<img src="../img/product/Toyota Corolla Altis.jpg" class="card-img-top"
 								alt="..." width="100%" height="180">
 							<div class="card-body">
-								<h5 class="card-title">Card title</h5>
+								<h5 class="card-title">Toyota Corolla Altis</h5>
 								<a href="${contextRoot}/product/productDetail" class="btn btn-sm btn-outline-secondary">View</a>
 							</div>
 						</div>
