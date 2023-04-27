@@ -1,7 +1,14 @@
 package com.group3.tofu.customer.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.group3.tofu.content.model.Contact;
+import com.group3.tofu.content.service.ContactService;
 
 @Controller
 public class PageController {
@@ -51,4 +58,6 @@ public class PageController {
 		return "customer/register";
 	}
 	
+
+
 }

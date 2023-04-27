@@ -16,9 +16,16 @@ public class Contact {
 	@Column(name = "contentUs_id")
 	private Integer contentUs_id;
 
-//	@JoinColumn(name = "f_customer_name", referencedColumnName = "customer_id", nullable = false)
-//	@ManyToOne
-//	private Customer customer; 
+	@Column(name = "name")
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	@Column(name = "gender")
 	private String gender;

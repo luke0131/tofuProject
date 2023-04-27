@@ -34,6 +34,7 @@
               
             </li>
 
+
 			<div class="collapse navbar-collapse" id="navbarsExample04">
 				<ul class="navbar-nav me-auto mb-2 mb-md-0">
 					<li class="nav-item dropdown"><a class="nav-link active"
@@ -43,6 +44,34 @@
 							<li><a class="dropdown-item" href="${contextRoot}/about">成員介紹</a></li>
 						</ul></li>
 
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link active"
+                href="#"
+                data-bs-toggle="dropdown"
+                aria-current="page"
+                >豆腐論壇</a
+              >
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="${contextRoot}/post">豆腐討論區</a></li>
+                <li><a class="dropdown-item" href="#">2</a></li>
+              </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link active"
+                href="#"
+                data-bs-toggle="dropdown"
+                aria-current="page"
+                >客戶服務</a
+              >
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="${contextRoot}/introduce">維修保養</a></li>
+                <li><a class="dropdown-item" href="${contextRoot}/contactUs">聯絡我們</a></li>
+              </ul>
+            </li>
 
 					<li class="nav-item dropdown"><a class="nav-link active"
 						href="${contextRoot}/product/allProduct">商品展示</a></li>
