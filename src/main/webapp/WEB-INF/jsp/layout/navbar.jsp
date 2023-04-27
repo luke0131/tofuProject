@@ -50,7 +50,7 @@
             <li class="nav-item dropdown">
               <a
                 class="nav-link active"
-                href="${contextRoot}/product/product"
+                href="${contextRoot}/product/allProduct"
                 >商品展示</a
               >
               
