@@ -45,7 +45,7 @@
 
 
 					<li class="nav-item dropdown"><a class="nav-link active"
-						href="${contextRoot}/product/product">商品展示</a></li>
+						href="${contextRoot}/product/allProduct">商品展示</a></li>
 
 					<li class="nav-item dropdown"><a class="nav-link active"
 						href="#" data-bs-toggle="dropdown" aria-current="page">豆腐論壇</a>
