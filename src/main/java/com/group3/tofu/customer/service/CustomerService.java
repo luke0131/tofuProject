@@ -40,10 +40,25 @@ public class CustomerService {
 	
 		Customer findByEmailAndPassword = customerDao.findByEmailAndPassword(email , password);
 		
-		
-		
-		
+		if(findByEmailAndPassword == null) {
+			return null;
+		}
 		return findByEmailAndPassword;
 	}
 	
+	
+	//create member
+	public Customer createMember(Customer customer){
+		return customerDao.save(customer);
+	}
+	
+	//檢查帳號是否已經被註冊(一般的controller用)
+	public Optional<Customer> findByAccount(String account){
+		return customerDao.findCustomerByAccount(account);
+	}
+	
+	//檢查帳號是否存在(ajax用)
+	public boolean checkAccountExist(String account) {
+		return findByAccount(account).isPresent();
+	}
 }

@@ -54,6 +54,13 @@ public class PageController {
 		return "maintenance/add";
 	}
 	
+	// 跳轉到註冊
+	@GetMapping("customer/register")
+	public String register() {
+
+		return "customer/register";
+	}
+	
 
 
 }

@@ -46,6 +46,7 @@ table, td, th{
 			<th>account</th>
 			<th>email</th>
 			<th>phone</th>
+			<th>birthday</th>
 			<th>address</th>
 		</tr>
 	</thead>
@@ -60,6 +61,7 @@ table, td, th{
 				<td>${cList.account}</td>
 				<td>${cList.email}</td>
 				<td>${cList.phone}</td>
+				<td>${cList.birthday}</td>
 				<td>${cList.address}</td>
 				<td>
 					<button type="submit" value=update>修改</button>

@@ -77,26 +77,36 @@
               aria-label="Search"
             /> -->
 				</form>
-				<c:if test="${accountName == null}">
+				
+				<c:if test="${loggedInCustomer == null}">
 					<div class="text-end">
 						<button type="button" class="btn btn-success me-2">
 							<a class="loginhover" href="${contextRoot}/customer/login">登入</a>
 						</button>
 						<button type="button" class="btn btn-warning">
-							<a class="loginhover" href="${contextRoot}/customer/xxxx">註冊</a>
+							<a class="loginhover" href="${contextRoot}/customer/register">註冊</a>
 						</button>
 					</div>
 				</c:if>
 
-				
-				<c:if test="${accountName != null}">
-					<p style="color: white" class="fs-5 text-center m-3"><span>Hello!，${accountName}</span></p>
+
+				<c:if test="${loggedInCustomer != null}">
+					<p style="color: white" class="fs-5 text-center m-3">
+						<span>Hello!，${loggedInCustomer.account}</span>
+					</p>
 					<div class="dropstart text-end">
 						<a href="#"
 							class="d-block link-dark text-decoration-none dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false"> <img
-							src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
-							class="rounded-circle">
+							data-bs-toggle="dropdown" aria-expanded="false"> <c:choose>
+								<c:when test="${loggedInCustomer.photo != null}">
+									<img src="${contextRoot}/downloadPhoto/${loggedInCustomer.customer_id}" width="32"
+										height="32" class="rounded-circle">
+								</c:when>
+								<c:otherwise>
+									<img src="${contextRoot}/img/indexPicture/tofu.png" width="32"
+										height="32" class="rounded-circle">
+								</c:otherwise>
+							</c:choose>
 						</a>
 						<ul class="dropdown-menu text-center dropdown-menu-dark">
 							<li><a class="dropdown-item" href="#">修改會員資料</a></li>
@@ -107,8 +117,6 @@
 						</ul>
 					</div>
 				</c:if>
-				
-
 			</div>
 		</div>
 	</nav>
