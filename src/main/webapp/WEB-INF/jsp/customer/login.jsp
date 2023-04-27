@@ -4,8 +4,7 @@
 <html>
 <head>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<link href="${contextRoot}/img/indexPicture/favicon.ico" rel="icon"
-	type="image/x-icon" />
+<link href="${contextRoot}/img/indexPicture/favicon.ico" rel="icon" type="image/x-icon" />
 <meta charset="UTF-8">
 <title>Tofucars Company</title>
 </head>
@@ -14,7 +13,6 @@
 	<jsp:include page="/WEB-INF/jsp/layout/navbar.jsp" />
 
 	<!-- 製作登入畫面 -->
-	<!-- <img class="bg" src="${contextRoot}/img/indexPicture/loginbgimg.jpg"> -->
 	<div
 		class="modal modal-signin position-static d-block loginbodycontent"
 		tabindex="-1" role="dialog" id="modalSignin">
@@ -27,25 +25,28 @@
 				</div>
 
 				<div class="modal-body p-5 pt-0">
-					<form action="${contextRoot}/customer/findemail" method="post" class="">
+					<form action="${contextRoot}/customer/login/checkPage" method="post" id="login-form">
+						
 						<div class="form-floating mb-3">
-							<input type="email" class="form-control rounded-3"
-								id="floatingInput" placeholder="Email" name="email"> <label
-								for="floatingInput">Email</label>
+							<input type="email" class="form-control rounded-3" placeholder="Email" name="email" id="email"> 
+							<label for="email">Email</label>
+							<div id="email-error" class="invalid-feedback"></div>
 						</div>
 						<div class="form-floating mb-3">
-							<input type="password" class="form-control rounded-3"
-								id="floatingPassword" placeholder="Password" name="password"> <label
-								for="floatingPassword">Password</label>
+							<input type="password" class="form-control rounded-3" placeholder="Password" name="password" id="password"> 
+							<label for="password">Password</label>
+							<div id="password-error" class="invalid-feedback"></div>
 						</div>
 						
+
+						
 						<div style="margin-top:20px;font-weight:bold;margin-bottom:10px"><input type="checkbox" value="remember" style="margin-right:10px;"/>記住我</div>
-						<button class="w-100 mt-3 mb-2 btn btn-lg rounded-3 btn-dark"
-							type="submit">Sign up</button>
+						<div id="check-login" class="text-danger text-center">${errors.loginFailed}</div>
+						<button class="w-100 mt-3 mb-2 btn btn-lg rounded-3 btn-dark" type="button" id="login-button" >登入</button>
 							
 						<div class="d-flex justify-content-around mt-5">
 							<a href="#" class="text-dark fw-bold">忘記密碼?</a>
-							<a href="#" class="text-dark fw-bold">立即註冊</a>
+							<a href="${contextRoot}/customer/register" class="text-dark fw-bold">立即註冊</a>
 						</div>
 
 						<div class="text-primary text-center fw-bold fs-5 mt-5"><a href="#" class="text-decoration-none">員工登入請按此→</a></div>
@@ -53,9 +54,9 @@
 						
 						<hr class="my-4">
 						<div class="d-flex justify-content-between mt-3">
-						<button type="button" class="btn btn-danger" id="notEnabledBTN">未認證</button>
-						<button type="button" class="btn btn-success" id="memberLoginBTN">使用者</button>
-						<button type="button" class="btn btn-warning" id="adminLoginBTN">管理員</button>
+						<button type="button" class="btn btn-primary" id="tofu">Tofu</button>
+						<!-- <button type="button" class="btn btn-success" id="memberLoginBTN">使用者</button>
+						<button type="button" class="btn btn-warning" id="adminLoginBTN">管理員</button> -->
 						</div>
 						<!--  
 						<hr class="my-4">
@@ -86,6 +87,15 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		document.querySelector('#tofu').addEventListener('click' , function(){
+			document.querySelector('#email').value = 'a1234@gmail.com';
+			document.querySelector('#password').value = '1234';
+		});
+	</script>
+	
+	<script type="text/javascript" src="${contextRoot}/js/pages/login.js"></script>
+	
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>
 
