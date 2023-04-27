@@ -65,7 +65,7 @@
                 >豆腐論壇</a
               >
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="">1</a></li>
+                <li><a class="dropdown-item" href="${contextRoot}/post">豆腐討論區</a></li>
                 <li><a class="dropdown-item" href="#">2</a></li>
               </ul>
             </li>
@@ -80,7 +80,7 @@
               >
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="${contextRoot}/introduce">維修保養</a></li>
-                <li><a class="dropdown-item" href="#">2</a></li>
+                <li><a class="dropdown-item" href="${contextRoot}/contactUs">聯絡我們</a></li>
               </ul>
             </li>
 

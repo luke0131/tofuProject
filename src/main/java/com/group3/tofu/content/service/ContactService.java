@@ -20,4 +20,18 @@ public class ContactService {
 		return contactDao.findAll();
 	}
 	
+	//新增使用者
+	public Contact createUser(Contact contactName) {
+		return contactDao.save(contactName);
+	} 
+	
+	//查詢使用者
+	public Contact findContactByName(String name) {
+		return contactDao.findByName(name);
+	}
+	
+	//查詢email
+	public Contact findContactByEmail(String email) {
+		return contactDao.findByEmail(email);
+	}
 }
