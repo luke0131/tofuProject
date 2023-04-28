@@ -21,9 +21,6 @@ public class OrderDetail {
 	@Column(name = "orderdetail_id")
 	private Integer orderdetail_id;
 	
-	@Column(name = "f_order_id")
-	private Integer f_order_id;
-	
 	@Column(name = "f_customer_id")
 	private Integer f_customer_id;
 	
@@ -57,14 +54,6 @@ public class OrderDetail {
 
 	public void setOrderdetail_id(Integer orderdetail_id) {
 		this.orderdetail_id = orderdetail_id;
-	}
-
-	public Integer getF_order_id() {
-		return f_order_id;
-	}
-
-	public void setF_order_id(Integer f_order_id) {
-		this.f_order_id = f_order_id;
 	}
 
 	public Integer getF_customer_id() {
@@ -122,6 +111,8 @@ public class OrderDetail {
 	public void setOrder(Order order) {
 		this.order = order;
 	}
+
+	
 	
 	
 }
