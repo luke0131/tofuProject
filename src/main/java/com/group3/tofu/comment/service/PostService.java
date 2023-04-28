@@ -4,10 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.group3.tofu.comment.model.Post;
 import com.group3.tofu.comment.model.PostDao;
+
 
 @Service
 public class PostService {
@@ -49,7 +54,7 @@ public class PostService {
 	
 	
 	//更新資料
-	@org.springframework.transaction.annotation.Transactional
+	@Transactional
 	public Post updatePostById(Integer post_id , String newPost) {
 		Optional<Post> option = postDao.findById(post_id);
 		
@@ -60,5 +65,14 @@ public class PostService {
 		}
 		
 		return null;
+	}
+	
+	//分頁
+	public Page<Post> findByPage(Integer pageNumber) {
+		PageRequest pgb = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "added");
+
+		Page<Post> page = postDao.findAll(pgb);
+
+		return page;
 	}
 }

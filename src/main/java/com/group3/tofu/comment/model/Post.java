@@ -1,20 +1,13 @@
 package com.group3.tofu.comment.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "Post")
@@ -34,23 +27,23 @@ public class Post {
 	@Column(name = "authorName")
 	private String authorName;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss EEEE", timezone = "GMT+8")
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@Column(name = "added")
-	private Date added;
+//	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "added", columnDefinition = "DATE") 
+	private LocalDate added;
 	
 	
 	public Post() {
 
 	}
 	
-	@PrePersist // 當物件要轉換成 Persistent 狀態時，發動該方法
-	public void onCreate() {
-		if (added == null) {
-			added = new Date();
-		}
-	}
+//	@PrePersist // 當物件要轉換成 Persistent 狀態時，發動該方法
+//	public void onCreate() {
+//		if (added == null) {
+//			added = new Date();
+//		}
+//	}
 
 	public Integer getPost_id() {
 		return post_id;
@@ -84,13 +77,15 @@ public class Post {
 		this.authorName = authorName;
 	}
 
-	public Date getadded() {
+	public LocalDate getAdded() {
 		return added;
 	}
 
-	public void setadded(Date added) {
+	public void setAdded(LocalDate added) {
 		this.added = added;
 	}
+
+	
 	
 	
 }
