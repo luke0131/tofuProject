@@ -12,7 +12,7 @@ public class Gift {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "gift_id")
-	private Integer gift_id;
+	private Integer id;
 	
 	@Column(name = "name")
 	private String name;
@@ -26,12 +26,12 @@ public class Gift {
 	public Gift() {
 	}
 
-	public Integer getGift_id() {
-		return gift_id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setGift_id(Integer gift_id) {
-		this.gift_id = gift_id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -57,6 +57,7 @@ public class Gift {
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+
 	
 	
 

@@ -26,8 +26,9 @@ public class GiftService {
 	}
 	
 	public Page<Gift> findByPage(Integer pageNumber) {
-		Pageable pgb = PageRequest.of(pageNumber-1, 3, Direction.ASC, "gift_id");
+		Pageable pgb = PageRequest.of(pageNumber-1, 9, Direction.ASC, "id");
 		Page<Gift> page = gDAO.findAll(pgb);
 		return page;
 	}
+	
 }
