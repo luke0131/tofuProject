@@ -1,10 +1,14 @@
 package com.group3.tofu.gift.model.bean;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
 @Table(name = "Gift")
@@ -22,7 +26,10 @@ public class Gift {
 	
 	@Column(name = "photo")
 	private byte[] photo;
-
+	
+	@OneToMany(mappedBy = "gift",cascade = CascadeType.ALL)
+	private List<ShoppingCart> shoppingcarts;
+	
 	public Gift() {
 	}
 
@@ -58,6 +65,15 @@ public class Gift {
 		this.photo = photo;
 	}
 
+	public List<ShoppingCart> getShoppingcarts() {
+		return shoppingcarts;
+	}
+
+	public void setShoppingcarts(List<ShoppingCart> shoppingcarts) {
+		this.shoppingcarts = shoppingcarts;
+	}
+
+	
 	
 	
 

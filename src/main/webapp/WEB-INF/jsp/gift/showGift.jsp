@@ -68,7 +68,22 @@ img{
 
 
 
+<script>
+	function addToCart(id){
+		console.log("id = " + id);
 
+		let requestBody = {
+			"id":id,
+			"name":"Mary"
+		}
+		axios.post("http://localhost:8080/tofu/xxxxxxxxxxxxxxxxxx",requestBody).then(function(response){
+			console.log("response = " + response);
+		}).catch(function(error){
+			console.log("error = " + error);
+		}).finally();
+	}
+
+</script>
 
 
 
