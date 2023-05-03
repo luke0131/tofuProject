@@ -80,7 +80,7 @@
 
 				<span
 					style="display: none; background: rgba(255, 255, 255, .9); border: 1px solid #eee; margin: 1px; font-family: monospace; position: fixed; right: 10px; top: 0; z-index: 99; overflow-x: hidden; overflow-y: auto; width: 500px; font-size: 11px; line-height: 1; padding: 1em; max-height: 140px;">prog={{main.prog}}<br>
-					<form action="/nissan/build/choose" id="bmn_form" method="post">
+					<form action="https://new.nissan.com.tw/nissan/build/choose" id="bmn_form" method="post">
 						<input type="text" name="operation" id="operation" value=""
 							style="width: 40px;" /> <input type="text" name="val" id="val"
 							value="" style="width: 90px;" /> <input type="text"
@@ -153,7 +153,7 @@
 						function proceedToNext() {
 							var $form = $("#bmn_form");
 							$form.find("[name=operation]").val("next");
-							global.sendBmnOperation("/nissan/build/choose",
+							global.sendBmnOperation("https://new.nissan.com.tw/nissan/build/choose",
 									$form.serialize());
 						}
 					})(jQuery, getGlobal());

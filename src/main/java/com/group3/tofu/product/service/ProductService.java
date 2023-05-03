@@ -39,7 +39,7 @@ public class ProductService {
 		return page;
 	}
 	
-	public byte[] getPetPhotoByID(Integer photoID) {
+	public byte[] getProductPhotoByID(Integer photoID) {
 		Optional<Photo> oPhoto = photoDAO.findById(photoID) ;
 		Photo photo = oPhoto.orElse(new Photo());
 		return photo.getPhoto();
@@ -53,8 +53,8 @@ public class ProductService {
 		productDAO.deleteById(id);
 	}
 	
-	public Product findById(Integer id) {
-		Optional<Product> op = productDAO.findById(id);
+	public Product findById(Integer productId) {
+		Optional<Product> op = productDAO.findById(productId);
 		
 		if(op.isPresent()) {
 			return op.get();
@@ -67,9 +67,9 @@ public class ProductService {
 	}
 	
 	@Transactional
-	public Product updateProductById(Integer id, String newProduct) {
+	public Product updateProductById(Integer productId, String newProduct) {
 		
-		Optional<Product> option = productDAO.findById(id);
+		Optional<Product> option = productDAO.findById(productId);
 		
 		if(option.isPresent()) {
 			Product product = option.get();
