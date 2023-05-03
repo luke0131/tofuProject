@@ -1,13 +1,19 @@
-package com.group3.tofu.comment.model;
+package com.group3.tofu.post.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.group3.tofu.comment.model.Comment;
 
 @Entity
 @Table(name = "Post")
@@ -33,6 +39,19 @@ public class Post {
 	@Column(name = "added", columnDefinition = "DATE") 
 	private LocalDate added;
 	
+	@OneToOne(mappedBy = "post")
+	private Comment comment;
+	
+	public Comment getComment() {
+		return comment;
+	}
+
+	public void setComment(Comment comment) {
+		this.comment = comment;
+	}
+
+	
+	
 	
 	public Post() {
 
@@ -44,6 +63,8 @@ public class Post {
 //			added = new Date();
 //		}
 //	}
+
+	
 
 	public Integer getPost_id() {
 		return post_id;
@@ -83,6 +104,12 @@ public class Post {
 
 	public void setAdded(LocalDate added) {
 		this.added = added;
+	}
+
+	@Override
+	public String toString() {
+		return "Post [post_id=" + post_id + ", title=" + title + ", hot=" + hot + ", authorName=" + authorName
+				+ ", added=" + added + ", comment=" + comment + "]";
 	}
 
 	

@@ -1,4 +1,4 @@
-package com.group3.tofu.content.controller;
+package com.group3.tofu.post.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -7,8 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.group3.tofu.comment.model.Post;
-import com.group3.tofu.comment.service.PostService;
+import com.group3.tofu.post.model.Post;
+import com.group3.tofu.post.service.PostService;
 
 
 @Controller

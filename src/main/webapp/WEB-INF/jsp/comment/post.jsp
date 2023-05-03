@@ -271,7 +271,7 @@ div.pagelink span {
 								  <li class="title">
 							      <div class="vam">
 								      <h3>
-                      <a href="#" class="title text-wrap" title="標題1" data-title="標題1">${post.title}</a>
+                      <a href="${contextRoot}/comment/${post.comment.comment_id}" class="title text-wrap" title="標題" data-title="標題">${post.title}</a>
                     </h3>
                     </div>
                   </li>

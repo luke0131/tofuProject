@@ -1,4 +1,4 @@
-package com.group3.tofu.comment.service;
+package com.group3.tofu.post.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,8 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.group3.tofu.comment.model.Post;
-import com.group3.tofu.comment.model.PostDao;
+import com.group3.tofu.post.model.Post;
+import com.group3.tofu.post.model.PostDao;
 
 
 @Service
