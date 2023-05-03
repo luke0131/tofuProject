@@ -38,11 +38,9 @@ public class ContactController {
 		return "contact/contactUs";
 	}
 	
-	//跳轉到留言板頁面(還要思考)
-	@GetMapping("/comment")
-	public String findAllComment() {
-		return "comment/comment";
-	}
+	
+	
+	
 	
 	
 }
