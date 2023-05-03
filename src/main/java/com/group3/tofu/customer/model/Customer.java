@@ -16,7 +16,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -70,6 +69,10 @@ public class Customer {
 	@Column(name="enabled")
 	private boolean enabled;
 	
+	@Column(name="isAdmin")
+	private String isAdmin;
+	
+	
 //	@Lob
 //	@Column(name="photo")
 //	private byte[] photo;
@@ -77,9 +80,6 @@ public class Customer {
 	@Lob
 	@Column(name="photo")
 	private byte[] photo;
-
-
-
 
 	@Column(name="verification")
 	private String verification;
@@ -183,7 +183,7 @@ public class Customer {
 		this.address = address;
 	}
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
@@ -218,23 +218,26 @@ public class Customer {
 	}
 
 
+	public String getIsAdmin() {
+		return isAdmin;
+	}
+
+
+	public void setIsAdmin(String isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Customer [customer_id=" + customer_id + ", name=" + name + ", account=" + account + ", password="
 				+ password + ", age=" + age + ", gender=" + gender + ", birthday=" + birthday + ", email=" + email
-				+ ", phone=" + phone + ", address=" + address + ", enabled=" + enabled + ", photo="
-				+ Arrays.toString(photo) + ", verification=" + verification + ", register_date=" + register_date + "]";
+				+ ", phone=" + phone + ", address=" + address + ", enabled=" + enabled + ", isAdmin=" + isAdmin
+				+ ", photo=" + Arrays.toString(photo) + ", verification=" + verification + ", register_date="
+				+ register_date + "]";
 	}
 
 
-
-
-
-
-
-	
-	
-	
 	
 }
 

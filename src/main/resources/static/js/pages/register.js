@@ -222,7 +222,6 @@ registerButton.addEventListener("click", function (e) {
               "#register-form div[id=register-error-message]"
             ).innerText = "此帳號已被註冊，請重新輸入正確的資料！";
 
-            // return;
           } else {
             console.log("submit成功");
             registerForm.submit();
@@ -233,17 +232,6 @@ registerButton.addEventListener("click", function (e) {
         console.log(error);
       });
 
-    // let cA = checkAccount(account.value);
-    // if (cA=="失敗") {
-    //     console.log("資料已存在，註冊失敗");
-    // }else{
-    // registerForm.submit();
-    // console.log("布林判斷"  ,  cA == "成功");
-    // }
+    
   }
 });
-// email.value.includes("@") &&
-// password.value &&
-// confirmPassword.value &&
-// password.value == confirmPassword.value &&
-// termsAgreement.checked

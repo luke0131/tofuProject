@@ -25,16 +25,6 @@
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link active"
-                href="${contextRoot}/product/allProduct"
-                >商品展示</a
-              >
-              
-            </li>
-
-
 			<div class="collapse navbar-collapse" id="navbarsExample04">
 				<ul class="navbar-nav me-auto mb-2 mb-md-0">
 					<li class="nav-item dropdown"><a class="nav-link active"
@@ -86,8 +76,7 @@
               aria-label="Search"
             /> -->
 				</form>
-				
-				<c:if test="${loggedInCustomer == null}">
+				<c:if test="${loggedInCustomer==null}">
 					<div class="text-end">
 						<button type="button" class="btn btn-success me-2">
 							<a class="loginhover" href="${contextRoot}/customer/login">登入</a>
@@ -99,7 +88,7 @@
 				</c:if>
 
 
-				<c:if test="${loggedInCustomer != null}">
+				<c:if test="${loggedInCustomer!=null}">
 					<p style="color: white" class="fs-5 text-center m-3">
 						<span>Hello!，${loggedInCustomer.account}</span>
 					</p>

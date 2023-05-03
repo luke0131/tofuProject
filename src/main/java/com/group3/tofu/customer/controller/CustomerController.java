@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.customer.service.CustomerService;
@@ -30,7 +31,7 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	// 尋找所有customer
-	@GetMapping("/customer/all")
+	@GetMapping(path = "/customer/all")
 	public String findAllCustomers(Model model) {
 
 		List<Customer> customerList = customerService.findAllCustomer();
@@ -42,7 +43,7 @@ public class CustomerController {
 
 	// 顯示圖片在畫面上的controller，專門處理圖片的
 	// 尋找customer的photo
-	@GetMapping("/downloadPhoto/{customer_id}")
+	@GetMapping(path = "/downloadPhoto/{customer_id}")
 	public ResponseEntity<byte[]> downloadPhoto(@PathVariable Integer customer_id) throws IOException {
 
 		// 先從CustomerService裡面找findPhotoById的方法
@@ -56,6 +57,12 @@ public class CustomerController {
 		headers.setContentType(MediaType.IMAGE_JPEG);
 		// 資料, header, 回應標頭的狀態碼
 		return new ResponseEntity<byte[]>(photoFile, headers, HttpStatus.OK);
+	}
+
+	@GetMapping(path = "/findCustomerById/{id}")
+	@ResponseBody
+	public Customer findCustomerById(@PathVariable("id") Integer id) {
+		return customerService.findCustomerById(id).get();
 	}
 
 	// 製作find email and password 的 controller
@@ -78,10 +85,10 @@ public class CustomerController {
 //	}
 
 	// 製作find email and password 的 controller
-	@PostMapping("/customer/login/checkPage")
+	@PostMapping(path = "/customer/login/checkPage")
 	public String findemail(@RequestParam("email") String email, @RequestParam("password") String password,
 			HttpSession session, Model model) {
-
+	
 		// 若錯誤的話就送error字串給他
 		HashMap<String, String> errors = new HashMap<String, String>();
 		model.addAttribute("errors", errors);
@@ -102,24 +109,29 @@ public class CustomerController {
 
 		// 要下判斷式，當我今天資料庫有抓到這筆資料時，我就讓他登入進去;如果沒有抓到這筆資料，我就繼續讓他停留在login畫面
 		if (loggedInCustomer != null) {
+
+			// 判斷有沒有enabled
+			if (!loggedInCustomer.getEnabled()) {
+				errors.put("enabled", "信箱未驗證，請檢查驗證信!");
+				return "customer/login";
+			}
+			
 			session.setAttribute("loggedInCustomer", loggedInCustomer);
 
-			// 當我剛註冊會員時，我會依照路徑給預設圖片
-//			session.setAttribute("loginPic", loggedInCustomer.getPhoto());
-//
-//			// 為了要顯示圖片在hi!xxx旁邊，所以要用session getId，透過id找照片
-//			session.setAttribute("loginID", loggedInCustomer.getCustomer_id());
 			System.out.println("透過id找照片執行成功");
+
 			return "redirect:/";
+
 		} else {
 			errors.put("loginFailed", "查無此會員資料，請重新輸入或立即註冊!");
+
 			return "customer/login";
 
 		}
 	}
 
 	// 跳轉到登出
-	@GetMapping("customer/logout")
+	@GetMapping(path = "customer/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
@@ -139,7 +151,7 @@ public class CustomerController {
 //	}
 
 	// 製作註冊的controller，並且新增成功後，顯示Hi!xxx 在畫面
-	@PostMapping("customer/createMember")
+	@PostMapping(path = "customer/createMember")
 	public String insert(@RequestParam("account") String account, @RequestParam("email") String email,
 			@RequestParam("password") String password, HttpSession session) throws Exception {
 
@@ -152,19 +164,39 @@ public class CustomerController {
 		System.out.println("新增會員到資料庫，執行成功");
 
 		customerService.createMember(customer);
-//		// 呼叫model
-//		Customer findEmailAndPassword = customerService.findEmailAndPassword(email, password);
-//
-//		// 要下判斷式，當我今天資料庫有抓到這筆資料時，我就讓他登入進去;如果沒有抓到這筆資料，我就繼續讓他停留在login畫面
-//		if (findEmailAndPassword != null) {
-//			session.setAttribute("accountName", findEmailAndPassword.getAccount());
-			session.setAttribute("loggedInCustomer", customer);
-//			System.out.println("從資料庫抓到資料，執行成功");
-//		}
 
-		return "redirect:/";
+		customerService.sendVerificationEmail(customer);
+
+		// 判斷有沒有enabled
+		if (!customer.getEnabled()) {
+			return "customer/checkEnabled";
+		} else {
+			System.out.println(customer);
+
+			session.setAttribute("loggedInCustomer", customer);
+
+			return "redirect:/";
+
+		}
+
 	}
 
+	/*
+	 * @GetMapping(path = "customer/verify")
+	 * 
+	 * @ResponseBody public String verifyEmail(@RequestParam(value="token") String
+	 * token, @RequestParam(value="email") String email) {
+	 * System.out.println("email: " + email + "verified");
+	 * customerService.enableAccount(email, token); return "驗證成功"; }
+	 */
 
+	// 驗證email
+	@GetMapping(path = "customer/verify")
+//	@ResponseBody
+	public String verifyEmail(@RequestParam("email") String email) {
+		System.out.println("email: " + email + "verified");
+		customerService.enableAccount(email);
+		return "customer/login";
+	}
 
 }

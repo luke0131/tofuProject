@@ -51,6 +51,13 @@ public class PageController {
 		return "customer/register";
 	}
 	
+	//跳轉到請驗證的頁面(check Enabled)
+	@GetMapping("customer/checkEnabled")
+	public String checkEnabled() {
+
+		return "customer/checkEnabled";
+	}
+	
 
 
 }
