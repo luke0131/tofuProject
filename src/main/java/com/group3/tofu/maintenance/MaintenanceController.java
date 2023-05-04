@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,11 +22,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.group3.tofu.appointment.Appointment;
+
 @Controller
 public class MaintenanceController {
 	@Autowired
 	private MaintenanceService mService;
-//	@ResponseBody
+//	@ResponseBody@ResponseBody
+//	@GetMapping("/test/tt")
 //	@GetMapping("/test/tt")
 //	public Maintenance add() {
 //		Maintenance ms = new Maintenance();
@@ -46,17 +50,21 @@ public class MaintenanceController {
 		return mav;
 		
 	}
-	
+	private String generateKeyCode() {
+        
+        return  UUID.randomUUID().toString().substring(0, 8);
+    }
 	@PostMapping("/main")
 	public String postMaintenance(@ModelAttribute(name="maintenanceForm")Maintenance maintenance,Model model ) {
+		maintenance.setKeycode(generateKeyCode());
 		mService.insertMaintenance(maintenance);
 		
 		LocalDateTime appointmentDateTime = LocalDateTime.ofInstant(maintenance.getAppointment().toInstant(), ZoneId.systemDefault());
-		String formattedDate = appointmentDateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd a hh:mm"));
+		String formattedDate = appointmentDateTime.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
 		
-
+        model.addAttribute("keycode",maintenance.getKeycode());
 		model.addAttribute("formattedDate",formattedDate);
-	    
+	    model.addAttribute("appointmenttime",maintenance.getAppointmenttime());
 	    return "maintenance/success";
 	}
 	

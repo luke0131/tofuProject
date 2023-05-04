@@ -15,30 +15,47 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
-@Table(name="maintenance")
+@Table(name="Maintenance")
 public class Maintenance {
 	
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name="mid")
 private Integer mid;
-@Column(name="cid")
+@Column(name="f_customer_id")
 private Integer cid;
-@Column(name="eid")
+@Column(name="f_employee_id")
 private Integer eid;
-@Column(name="pid")
+@Column(name="f_product_id")
 private Integer pid;
 @Column(name="mcategory")
 private String mcategory;
-@Column(name="note")
-private String note;
+@Column(name="notes")
+private String notes;
 @Temporal(TemporalType.TIMESTAMP)
-@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
+@DateTimeFormat(pattern="yyyy-MM-dd")
 @Column(name="appointment")
 private Date appointment;
-
+private String appointmenttime;
+private String keycode ;
 public Maintenance() {
 	
+}
+
+public String getKeycode() {
+	return keycode;
+}
+
+public void setKeycode(String keycode) {
+	this.keycode = keycode;
+}
+
+public String getAppointmenttime() {
+	return appointmenttime;
+}
+
+public void setAppointmenttime(String appointmenttime) {
+	this.appointmenttime = appointmenttime;
 }
 
 public Integer getMid() {
@@ -81,12 +98,14 @@ public void setMcategory(String mcategory) {
 	this.mcategory = mcategory;
 }
 
-public String getNote() {
-	return note;
+
+
+public String getNotes() {
+	return notes;
 }
 
-public void setNote(String note) {
-	this.note = note;
+public void setNotes(String notes) {
+	this.notes = notes;
 }
 
 public Date getAppointment() {

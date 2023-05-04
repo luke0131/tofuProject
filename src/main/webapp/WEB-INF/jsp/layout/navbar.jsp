@@ -50,7 +50,7 @@
             <li class="nav-item dropdown">
               <a
                 class="nav-link active"
-                href="${contextRoot}/product/product"
+                href="${contextRoot}/product/all"
                 >商品展示</a
               >
               
@@ -80,7 +80,7 @@
               >
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="${contextRoot}/introduce">維修保養</a></li>
-                <li><a class="dropdown-item" href="#">2</a></li>
+                <li><a class="dropdown-item" href="${contextRoot}/show">家用充電座評估與安裝預約</a></li>
               </ul>
             </li>
 

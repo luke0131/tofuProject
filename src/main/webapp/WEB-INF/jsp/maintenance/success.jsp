@@ -38,9 +38,10 @@ p {
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
 	<jsp:include page="/WEB-INF/jsp/layout/navbar.jsp" />
 	<div class="container">
-		<h1>預約成功!</h1>
+		<h1>您已成功完成 TOFU保養預約</h1>
 		<p>感謝您的預約，豆腐車業專業保養竭誠為您服務</p>
-		<p>預約時間：${formattedDate}</p>
+		<P>您的訂單編號為:${keycode}</p>
+		<p>預約時間：${formattedDate}號${appointmenttime}</p>
 	</div>
 
 </body>
