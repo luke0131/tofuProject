@@ -12,5 +12,6 @@ public interface ShoppingCartDAO extends JpaRepository<ShoppingCart, Integer> {
 	@Query(value = "from ShoppingCart where f_cID = ?1")
 	List<ShoppingCart> findByCustomerId(Integer cID);
 	
+	
 
 }

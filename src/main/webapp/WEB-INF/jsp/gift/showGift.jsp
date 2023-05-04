@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
 .w{
@@ -25,7 +26,9 @@ img{
 	
 	
 	<h1>Hi Gift Page</h1>
-	
+	<a href="http://localhost:8080/tofu/showCart">
+        <button class="btn btn-danger"><i class="fa-solid fa-cart-shopping" style="font-size:24px;"></i> cart</button>
+    </a>
 	
 	
 	<div class="row row-cols-1 row-cols-md-3 g-4 w">
@@ -73,13 +76,15 @@ img{
 		console.log("id = " + id);
 
 		let requestBody = {
-			"id":id,
-			"name":"Mary"
+			"giftid":id,
+			"qty":"1",
+			"name":"MARY!!!!!!!!!"
 		}
-		axios.post("http://localhost:8080/tofu/xxxxxxxxxxxxxxxxxx",requestBody).then(function(response){
-			console.log("response = " + response);
+		axios.post("http://localhost:8080/tofu/add",requestBody).then(function(response){
+			console.log("response",response);
+			
 		}).catch(function(error){
-			console.log("error = " + error);
+			console.log("error",error);
 		}).finally();
 	}
 

@@ -31,4 +31,8 @@ public class GiftService {
 		return page;
 	}
 	
+	public void createGift(Gift newGift) {
+		gDAO.save(newGift);
+	}
+	
 }

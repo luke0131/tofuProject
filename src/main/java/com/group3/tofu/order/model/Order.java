@@ -2,13 +2,11 @@ package com.group3.tofu.order.model;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name = "Order")
@@ -16,10 +14,10 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")
-	private Integer oid;
+	private Integer order_id;
 	
 	@Column(name = "order_number")
-	private Integer orderNumber;
+	private String order_number;
 	
 	@Column(name = "f_product_id")
 	private Integer f_product_id;
@@ -27,42 +25,44 @@ public class Order {
 	@Column(name = "f_gift_id")
 	private Integer f_gift_id;
 	
-	@Column(name = "order_date")	
-	private Date order_date;
+	@Column(name = "f_customer_id")
+	private Integer f_customer_id;
 	
-	@Column(name = "shipped_date")	
-	private Date shipped_date;
-	
-	@Column(name = "ship_address")	
+	@Column(name = "f_employee_id")
+	private Integer f_employee_id;
+		
+	@Column(name = "ship_address")
 	private String ship_address;
 	
-	@Column(name = "payment")	
+	@Column(name = "payment")
 	private String payment;
 	
-	@Column(name = "ship_status")	
+	@Column(name = "ship_status")
 	private String ship_status;
 	
-	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
-	private OrderDetail orderDetail;
+	@Column(name = "order_date")
+	private Date order_date;
+	
+	@Column(name = "shipped_date")
+	private Date shipped_date;
 	
 	public Order() {
-		// TODO Auto-generated constructor stub
 	}
 
-	public Integer getOid() {
-		return oid;
+	public Integer getOrder_id() {
+		return order_id;
 	}
 
-	public void setOid(Integer oid) {
-		this.oid = oid;
+	public void setOrder_id(Integer order_id) {
+		this.order_id = order_id;
 	}
 
-	public Integer getOrderNumber() {
-		return orderNumber;
+	public String getOrder_number() {
+		return order_number;
 	}
 
-	public void setOrderNumber(Integer orderNumber) {
-		this.orderNumber = orderNumber;
+	public void setOrder_number(String order_number) {
+		this.order_number = order_number;
 	}
 
 	public Integer getF_product_id() {
@@ -81,20 +81,20 @@ public class Order {
 		this.f_gift_id = f_gift_id;
 	}
 
-	public Date getOrder_date() {
-		return order_date;
+	public Integer getF_customer_id() {
+		return f_customer_id;
 	}
 
-	public void setOrder_date(Date order_date) {
-		this.order_date = order_date;
+	public void setF_customer_id(Integer f_customer_id) {
+		this.f_customer_id = f_customer_id;
 	}
 
-	public Date getShipped_date() {
-		return shipped_date;
+	public Integer getF_employee_id() {
+		return f_employee_id;
 	}
 
-	public void setShipped_date(Date shipped_date) {
-		this.shipped_date = shipped_date;
+	public void setF_employee_id(Integer f_employee_id) {
+		this.f_employee_id = f_employee_id;
 	}
 
 	public String getShip_address() {
@@ -121,12 +121,28 @@ public class Order {
 		this.ship_status = ship_status;
 	}
 
-	public OrderDetail getOrderDetail() {
-		return orderDetail;
+	public Date getOrder_date() {
+		return order_date;
 	}
 
-	public void setOrderDetail(OrderDetail orderDetail) {
-		this.orderDetail = orderDetail;
+	public void setOrder_date(Date order_date) {
+		this.order_date = order_date;
+	}
+
+	public Date getShipped_date() {
+		return shipped_date;
+	}
+
+	public void setShipped_date(Date shipped_date) {
+		this.shipped_date = shipped_date;
+	}
+
+	@Override
+	public String toString() {
+		return "Order [order_id=" + order_id + ", order_number=" + order_number + ", f_product_id=" + f_product_id
+				+ ", f_gift_id=" + f_gift_id + ", f_customer_id=" + f_customer_id + ", f_employee_id=" + f_employee_id
+				+ ", ship_address=" + ship_address + ", payment=" + payment + ", ship_status=" + ship_status
+				+ ", order_date=" + order_date + ", shipped_date=" + shipped_date + "]";
 	}
 	
 	

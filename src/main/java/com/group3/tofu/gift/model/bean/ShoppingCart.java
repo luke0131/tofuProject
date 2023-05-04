@@ -28,6 +28,19 @@ public class ShoppingCart {
 	
 	
 
+	public ShoppingCart() {
+	}
+
+	
+
+	public ShoppingCart(Integer f_cID, Gift gift, Integer qty) {
+		this.f_cID = f_cID;
+		this.gift = gift;
+		this.qty = qty;
+	}
+
+
+
 	public Integer getId() {
 		return id;
 	}
