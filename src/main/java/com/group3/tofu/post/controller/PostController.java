@@ -16,22 +16,9 @@ public class PostController {
 
 	@Autowired
 	private PostService pService;
-	
-	
-//		//跳轉到討論區頁面
-//		@GetMapping("/post")
-//		public ModelAndView addPostPage(ModelAndView mav) {
-//			Post post = new Post();
-//			
-//			mav.addObject("post" , post);
-//			mav.setViewName("comment/post");
-//			
-//			Post latest = pService.findLastest();
-//			
-//			mav.addObject("latest" , latest);
-//			return mav;
-//		}
+
 		
+		//分頁
 		@GetMapping("/post")
 		public String showMessage(@RequestParam(name="p" ,defaultValue = "1") Integer pageNumber , Model model) {
 			Page<Post> page = pService.findByPage(pageNumber);
@@ -41,6 +28,8 @@ public class PostController {
 			
 			return "comment/post";
 		}
+		
+
 		
 		
 }
