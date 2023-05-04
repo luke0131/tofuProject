@@ -1,4 +1,4 @@
-package com.group3.tofu.order.model;
+package com.group3.tofu.order.model.bean;
 
 import java.util.Date;
 
