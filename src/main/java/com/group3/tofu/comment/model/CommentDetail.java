@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,7 +40,7 @@ public class CommentDetail {
 	private LocalDate comment_date;
 	
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="f_comment_id" ,referencedColumnName = "comment_id")
 	private Comment comment;
 	

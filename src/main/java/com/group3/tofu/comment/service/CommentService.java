@@ -1,5 +1,6 @@
 package com.group3.tofu.comment.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class CommentService {
 	private CustomerDao customerDao;
 	
 	
+	public List<Comment> getAllComment(){
+		return commentDAO.findAll();
+	}
+	
 	
 	//用comment_id找資料
 	public Comment findByCommentId (Integer comment_id) {
@@ -30,10 +35,14 @@ public class CommentService {
 		return opComment.isPresent() ? opComment.get() : null;
 	} 
 	
+	
+	
 	//用comment_id刪除資料
-		public void deleteByPostId(Integer comment_id) {
+		public void deleteByCommentId(Integer comment_id) {
 			commentDAO.deleteById(comment_id);
 		}
+		
+		
 		
 		
 	
