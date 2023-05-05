@@ -8,15 +8,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 @Entity
-@Table(name = "Order")
+@Table(name = "Orders")
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")
 	private Integer order_id;
 	
-	@Column(name = "order_number")
+	@Column(name = "order_number",columnDefinition = "nvarchar(50)")
 	private String order_number;
 	
 	@Column(name = "f_product_id")
@@ -30,7 +32,14 @@ public class Order {
 	
 	@Column(name = "f_employee_id")
 	private Integer f_employee_id;
-		
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "order_date")
+	private Date order_date;
+	
+	@Column(name = "shipped_date")
+	private Date shipped_date;
+	
 	@Column(name = "ship_address")
 	private String ship_address;
 	
@@ -39,12 +48,6 @@ public class Order {
 	
 	@Column(name = "ship_status")
 	private String ship_status;
-	
-	@Column(name = "order_date")
-	private Date order_date;
-	
-	@Column(name = "shipped_date")
-	private Date shipped_date;
 	
 	public Order() {
 	}
@@ -97,6 +100,22 @@ public class Order {
 		this.f_employee_id = f_employee_id;
 	}
 
+	public Date getOrder_date() {
+		return order_date;
+	}
+
+	public void setOrder_date(Date order_date) {
+		this.order_date = order_date;
+	}
+
+	public Date getShipped_date() {
+		return shipped_date;
+	}
+
+	public void setShipped_date(Date shipped_date) {
+		this.shipped_date = shipped_date;
+	}
+
 	public String getShip_address() {
 		return ship_address;
 	}
@@ -121,29 +140,7 @@ public class Order {
 		this.ship_status = ship_status;
 	}
 
-	public Date getOrder_date() {
-		return order_date;
-	}
-
-	public void setOrder_date(Date order_date) {
-		this.order_date = order_date;
-	}
-
-	public Date getShipped_date() {
-		return shipped_date;
-	}
-
-	public void setShipped_date(Date shipped_date) {
-		this.shipped_date = shipped_date;
-	}
-
-	@Override
-	public String toString() {
-		return "Order [order_id=" + order_id + ", order_number=" + order_number + ", f_product_id=" + f_product_id
-				+ ", f_gift_id=" + f_gift_id + ", f_customer_id=" + f_customer_id + ", f_employee_id=" + f_employee_id
-				+ ", ship_address=" + ship_address + ", payment=" + payment + ", ship_status=" + ship_status
-				+ ", order_date=" + order_date + ", shipped_date=" + shipped_date + "]";
-	}
+	
 	
 	
 
