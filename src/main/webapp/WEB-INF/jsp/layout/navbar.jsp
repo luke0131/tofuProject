@@ -41,14 +41,14 @@
 						href="#" data-bs-toggle="dropdown" aria-current="page">豆腐論壇</a>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="${contextRoot}/post">豆腐討論區</a></li>
-							<li><a class="dropdown-item" href="#">2</a></li>
+							<li><a class="dropdown-item" href="#">聯絡我們</a></li>
 						</ul></li>
 
 					<li class="nav-item dropdown"><a class="nav-link active"
 						href="#" data-bs-toggle="dropdown" aria-current="page">客戶服務</a>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="${contextRoot}/introduce">維修保養</a></li>
-							<li><a class="dropdown-item" href="${contextRoot}/contactUs">聯絡我們</a></li>
+							<li><a class="dropdown-item" href="#">2</a></li>
 						</ul></li>
 
 					<!-- <li class="nav-item dropdown">
@@ -95,7 +95,8 @@
 					<div class="dropstart text-end">
 						<a href="#"
 							class="d-block link-dark text-decoration-none dropdown-toggle"
-							data-bs-toggle="dropdown" aria-expanded="false"> <c:choose>
+							data-bs-toggle="dropdown" aria-expanded="false"> 
+							<c:choose>
 								<c:when test="${loggedInCustomer.photo != null}">
 									<img src="${contextRoot}/downloadPhoto/${loggedInCustomer.customer_id}" width="32"
 										height="32" class="rounded-circle">
@@ -107,14 +108,14 @@
 							</c:choose>
 						</a>
 						<ul class="dropdown-menu text-center dropdown-menu-dark">
-							<li><a class="dropdown-item" href="#">修改會員資料</a></li>
-							<li><a class="dropdown-item" href="#">查詢歷史訂單</a></li>
+							<li><a class="dropdown-item" href="${contextRoot}/customer/customerCenter">會員中心</a></li>
 							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item"
 								href="${contextRoot}/customer/logout">登出</a></li>
 						</ul>
 					</div>
 				</c:if>
+				
 			</div>
 		</div>
 	</nav>

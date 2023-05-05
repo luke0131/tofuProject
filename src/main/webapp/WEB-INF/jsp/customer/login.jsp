@@ -44,14 +44,16 @@
 						</div>
 
 
-
+						<!--  
 						<div
 							style="margin-top: 20px; font-weight: bold; margin-bottom: 10px">
 							<input type="checkbox" value="remember"
 								style="margin-right: 10px;" />記住我
 						</div>
+						-->
 						<div id="check-login" class="text-danger text-center">${errors.loginFailed}</div>
-						<div id="check-login" class="text-danger text-center">${errors.enabled}</div>
+						<div id="check-enabled" class="text-danger text-center">${errors.enabled}</div>
+						
 						<button class="w-100 mt-3 mb-2 btn btn-lg rounded-3 btn-dark"
 							type="button" id="login-button">登入</button>
 
@@ -69,8 +71,9 @@
 
 						<hr class="my-4">
 						<div class="d-flex justify-content-evenly mt-3">
-							<button type="button" class="btn btn-primary" id="tofu">Tofu</button>
+							<button type="button" class="btn btn-warning" id="tofu">新會員</button>
 							<button type="button" class="btn btn-danger" id="unverified">未驗證</button>
+							<button type="button" class="btn btn-success" id="verified">已驗證</button>
 							<!-- <button type="button" class="btn btn-success" id="memberLoginBTN">使用者</button>
 						<button type="button" class="btn btn-warning" id="adminLoginBTN">管理員</button> -->
 						</div>
@@ -109,14 +112,15 @@
 			document.querySelector('#password').value = 'fgdh844546';
 		});
 
-		document
-				.querySelector('#unverified')
-				.addEventListener(
-						'click',
-						function() {
-							document.querySelector('#email').value = 'sarahmoore456@gmail.com';
-							document.querySelector('#password').value = 'Z5hN6tP7';
-						});
+		document.querySelector('#unverified').addEventListener('click', function() {
+			document.querySelector('#email').value = 'sarahmoore456@gmail.com';
+			document.querySelector('#password').value = 'Z5hN6tP7';
+		});
+		
+		document.querySelector('#verified').addEventListener('click', function() {
+			document.querySelector('#email').value = 'JolinTsai@gmail.com';
+			document.querySelector('#password').value = '7fH6T2rE';
+		});
 		
 	
 	    

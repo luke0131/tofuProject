@@ -1,14 +1,15 @@
 package com.group3.tofu.customer.service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
-
-import org.apache.commons.lang3.RandomStringUtils;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.customer.model.CustomerDao;
@@ -66,6 +67,43 @@ public class CustomerService {
 		return customerDao.save(customer);
 	}
 
+	@Transactional
+	public Customer updateMember(Customer customer) {
+		return customerDao.save(customer);
+	}
+
+	// update member
+//	public Customer updateMember(String body , HttpSession session) {
+//		
+//		Customer oldCustomer = (Customer)session.getAttribute("loggedInCustomer");
+//		
+//		String oldEmail = oldCustomer.getEmail();
+//		
+//	
+//		JSONObject obj = new JSONObject(body);
+//		String name = obj.isNull("name") ? null : obj.getString("name");
+//		//String email = obj.isNull("email") ? null : obj.getString("email");
+//		//String account = obj.isNull("account") ? null : obj.getString("account");
+//		String password = obj.isNull("password") ? null : obj.getString("password");
+//		String phone = obj.isNull("phone") ? null : obj.getString("phone");
+//		String birthday = obj.isNull("birthday") ? null : obj.getString("birthday");
+//		Integer age = obj.isNull("age") ? null : obj.getInt("age");
+//		String gender = obj.isNull("age") ? null : obj.getString("age");
+//		String address = obj.isNull("address") ? null : obj.getString("address");
+//	
+//		Customer customer = new Customer();
+//		customer.setName(name);
+//		customer.setEmail(oldEmail);
+//		
+//		
+//		
+//		customerDao.save(customer);
+//		session.setAttribute("loggedInCustomer", customer);
+//		
+//		
+//		return customer;
+//	}
+
 	// 檢查帳號是否已經被註冊(一般的controller用)
 	public Optional<Customer> findByAccount(String account) {
 		return customerDao.findCustomerByAccount(account);
@@ -84,13 +122,9 @@ public class CustomerService {
 	// send email
 	public void sendVerificationEmail(Customer customer) {
 		String email = customer.getEmail();
-		String subject = "Verify your email";
-		// String content = "<p>請點選以下連結驗證您的Email：<br/>" + "<a href
-		// =\"http://localhost:8080/tofu/customer/verify?email=" + email
-		// + "&token" + customer.getVerification() + "\">點此驗證</a><p>";
-
-		String content = "<p>請點選以下連結驗證您的Email：<br/>" + "<a href =\"http://localhost:8080/tofu/customer/verify?email="
-				+ email + "\">點此驗證</a><p>";
+		String subject = "豆腐車業會員註冊驗證信";
+		String content = "<h2>請點選以下連結驗證您的Email：<br/>" + "<a href =\"http://localhost:8080/tofu/customer/verify?email="
+				+ email + "\">啟用會員</a><h2>";
 
 		mailService.sendEmail(email, subject, content);
 	}
@@ -123,7 +157,7 @@ public class CustomerService {
 		customer.setEnabled(true);
 
 	}
-	
+
 	// find Customer by email and password isEnabled
 	public boolean isEnabled(String email, String password) {
 
@@ -134,7 +168,44 @@ public class CustomerService {
 		}
 		return false;
 	}
-	
-	
 
+	// update profile
+	@Transactional
+	public Customer updateProfile(Customer c, MultipartFile uploadImg, HttpSession session) throws IOException {
+		// 先把之前存在session裡面的物件拿出來，因為我要透過email找人
+		Customer oldCustomer = (Customer) session.getAttribute("loggedInCustomer");
+
+		//把email設進去
+		String oldEmail = oldCustomer.getEmail();
+
+		System.out.println(c.getName() + " " + c.getPhone());
+
+		Optional<Customer> option = findCustomerByEmail(oldEmail);
+
+		//如果email存在，我就透過使用者輸入的值，並將其設值進去
+		if (option.isPresent()) {
+			Customer customer = option.get();
+			customer.setName(c.getName());
+			customer.setPhone(c.getPhone());
+			customer.setBirthday(c.getBirthday());
+			customer.setAge(c.getAge());
+			customer.setGender(c.getGender());
+			customer.setAddress(c.getAddress());
+			
+			System.out.println(c.getGender());
+			//單獨判斷圖片，如果有上傳圖片，我就設圖片給他，反之如果沒有設圖片進去，我就用預設圖片就好
+			if (!uploadImg.isEmpty()) {
+				customer.setPhoto(uploadImg.getBytes());
+			}
+
+			System.out.println("修改個人資料成功!!");
+
+			session.setAttribute("loggedInCustomer", customer);
+
+			return customer;
+		}
+
+		return null;
+
+	}
 }

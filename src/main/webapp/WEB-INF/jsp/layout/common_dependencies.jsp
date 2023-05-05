@@ -27,3 +27,23 @@
 
 <!-- axios ajax功能 -->
 <script src="https://www.unpkg.com/axios@1.3.5/dist/axios.min.js"></script>
+
+<!-- siderbar功能 
+<link href="${contextRoot}/css/sidebars.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="${contextRoot}/js/pages/sidebars.js"></script>
+-->
+<!-- 
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+<meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+
+<script>
+    if(performance.navigation.type == 2 ){
+        console.log("Doing reload");   
+        location.reload(true);
+        console.log("Done with reload");
+    }
+    console.log("Script loaded.")
+</script>
+
+ -->
