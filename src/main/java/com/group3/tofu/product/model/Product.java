@@ -14,45 +14,45 @@ import javax.persistence.Table;
 import com.group3.tofu.photo.model.Photo;
 
 @Entity
-@Table(name = "Product")
+@Table(name="Product")
 public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "product_id")
+	@Column(name="product_id")
 	private Integer productId;
 
-	@Column(name = "brand", columnDefinition = "nvarchar(255)")
+	@Column(name="brand", columnDefinition="nvarchar(255)")
 	private String brand;
 
-	@Column(name = "product_model", columnDefinition = "nvarchar(255)")
+	@Column(name="product_model", columnDefinition="nvarchar(255)")
 	private String productModel;
 
-	@Column(name = "category", columnDefinition = "nvarchar(255)")
+	@Column(name="category", columnDefinition="nvarchar(255)")
 	private String category;
 
-	@Column(name = "engine_type", columnDefinition = "nvarchar(255)")
+	@Column(name="engine_type", columnDefinition="nvarchar(255)")
 	private String engineType;
 
-	@Column(name = "displacement")
+	@Column(name="displacement")
 	private Integer displacement;
 
-	@Column(name = "product_price")
+	@Column(name="product_price")
 	private Integer productPrice;
 
-	@Column(name = "appearance_design", columnDefinition = "nvarchar(255)")
+	@Column(name="appearance_design", columnDefinition="nvarchar(255)")
 	private String appearanceDesign;
 
-	@Column(name = "car_interior", columnDefinition = "nvarchar(255)")
+	@Column(name="car_interior", columnDefinition="nvarchar(255)")
 	private String carInterior;
 
-	@Column(name = "power_performance", columnDefinition = "nvarchar(255)")
+	@Column(name="power_performance", columnDefinition="nvarchar(255)")
 	private String powerPerformance;
 
-	@Column(name = "color", columnDefinition = "nvarchar(255)")
+	@Column(name="color", columnDefinition="nvarchar(255)")
 	private String color;
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="product", cascade=CascadeType.ALL)
 	private List<Photo> photos;
 
 	public Integer getProductId() {

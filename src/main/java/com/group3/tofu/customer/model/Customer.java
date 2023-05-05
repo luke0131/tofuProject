@@ -2,6 +2,7 @@ package com.group3.tofu.customer.model;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,9 +43,18 @@ public class Customer {
 	@Column(name="gender")
 	private String gender;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd")
-	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	@Column(name= "birthday")
+	
+	/*
+	 *   @JsonFormat主要是后台到前台的时间格式的转换
+	 *   
+	 *   @DataFormAT主要是前后到后台的时间格式的转换
+	 */
+	
+//	@JsonFormat(pattern = "yyyy-MM-dd" , timezone = "GMT+8")
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name= "birthday" , columnDefinition = "DATE")
 	private LocalDate birthday;
 	
 	@Column(name="email")
@@ -56,9 +69,35 @@ public class Customer {
 	@Column(name="enabled")
 	private boolean enabled;
 	
+	@Column(name="isAdmin")
+	private String isAdmin;
+	
+	
+//	@Lob
+//	@Column(name="photo")
+//	private byte[] photo;
+	
 	@Lob
 	@Column(name="photo")
 	private byte[] photo;
+
+	@Column(name="verification")
+	private String verification;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" , timezone = "GMT+8")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name="register_date")
+	private Date register_date;
+	
+	
+	@PrePersist //當物件要轉換成 Persistent 狀態時，發動該方法
+	public void onCreate() {
+		if(register_date == null) { //如果日期是空值，我就新增日期進去
+			register_date = new Date();
+		}
+	}
+	
 
 	public Customer() {
 		
@@ -144,7 +183,7 @@ public class Customer {
 		this.address = address;
 	}
 
-	public boolean isEnabled() {
+	public boolean getEnabled() {
 		return enabled;
 	}
 
@@ -156,20 +195,49 @@ public class Customer {
 		return photo;
 	}
 
+
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+
+
+	public String getVerification() {
+		return verification;
+	}
+
+	public void setVerification(String verification) {
+		this.verification = verification;
+	}
+
+	public Date getRegister_date() {
+		return register_date;
+	}
+
+	public void setRegister_date(Date register_date) {
+		this.register_date = register_date;
+	}
+
+
+	public String getIsAdmin() {
+		return isAdmin;
+	}
+
+
+	public void setIsAdmin(String isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Customer [customer_id=" + customer_id + ", name=" + name + ", account=" + account + ", password="
 				+ password + ", age=" + age + ", gender=" + gender + ", birthday=" + birthday + ", email=" + email
-				+ ", phone=" + phone + ", address=" + address + ", enabled=" + enabled + ", photo="
-				+ Arrays.toString(photo) + "]";
+				+ ", phone=" + phone + ", address=" + address + ", enabled=" + enabled + ", isAdmin=" + isAdmin
+				+ ", photo=" + Arrays.toString(photo) + ", verification=" + verification + ", register_date="
+				+ register_date + "]";
 	}
-	
-	
-	
+
+
 	
 }
 
