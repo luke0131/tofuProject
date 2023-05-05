@@ -18,12 +18,18 @@ public class OrderController {
 	private OrderService orderService;
 	
 	@GetMapping("order/find")
-	public String findCustomerOrder(HttpSession session) {
+	public String findCustomerOrder() {
 		
-		Customer customer = (Customer)session.getAttribute("loggedInCustomer");
-		Integer customerId= customer.getCustomer_id();
+//		Customer customer = (Customer)session.getAttribute("loggedInCustomer");
+//		Integer customerId= customer.getCustomer_id();
+//		
+		List<Order> orders = orderService.findByCustomerId(1);
+		for (Order order : orders) {
+			System.out.println("-------------------++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-------------------------------------");
+			System.out.println(order.getOrder_date()+"--------------------------------------------------------");
+			System.out.println(order.getShip_address()+"--------------------------------------------------------");
+		}
 		
-		List<Order> orders = orderService.findByCustomerId(customerId);
 		
 		return "order/showOrder";
 	}
