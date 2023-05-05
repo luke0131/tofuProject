@@ -37,7 +37,6 @@
 			</div>
 		</div>
 	</div>
-	
 
 	<script type="text/javascript"
 		src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
