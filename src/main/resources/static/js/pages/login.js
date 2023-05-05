@@ -60,4 +60,5 @@ loginButton.addEventListener("click" , function(e){
 document.querySelector("body").addEventListener("click" , function(e){
     console.log("test");
     document.querySelector("#check-login").classList.add("d-none");
+    document.querySelector("#check-enabled").classList.add("d-none");
 });

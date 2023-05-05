@@ -54,8 +54,13 @@ public class Customer {
 //	@Temporal(TemporalType.TIMESTAMP)
 //	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 //	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name= "birthday" , columnDefinition = "DATE")
-	private LocalDate birthday;
+//	@JsonFormat(pattern = "yyyy-MM-dd")
+//	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+//	@Column(name= "birthday" , columnDefinition = "DATE")
+//	private LocalDate birthday;
+	
+	@Column(name= "birthday")
+	private String birthday;
 	
 	@Column(name="email")
 	private String email;
@@ -151,14 +156,7 @@ public class Customer {
 		this.gender = gender;
 	}
 
-	public LocalDate getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(LocalDate birthday) {
-		this.birthday = birthday;
-	}
-
+	
 	public String getEmail() {
 		return email;
 	}
@@ -228,6 +226,16 @@ public class Customer {
 	}
 
 
+	public String getBirthday() {
+		return birthday;
+	}
+
+
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Customer [customer_id=" + customer_id + ", name=" + name + ", account=" + account + ", password="
@@ -237,6 +245,8 @@ public class Customer {
 				+ register_date + "]";
 	}
 
+	
+	
 
 	
 }

@@ -18,6 +18,9 @@ public interface CustomerDao extends JpaRepository<Customer, Integer> {
 	// 透過email找顧客
 	public Customer findByEmail(String email);
 	
+	@Query("from Customer where customer_id = :customer_id")
+	public Customer select(@Param("customer_id") String customer_id);
+	
 	
 //	@Query("from Customer where enabled = :enabled")
 //	public Customer checkEnabledStatus(@Param("enabled") boolean enabled);

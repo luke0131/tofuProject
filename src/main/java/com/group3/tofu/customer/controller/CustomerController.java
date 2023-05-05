@@ -1,11 +1,15 @@
 package com.group3.tofu.customer.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,11 +18,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.customer.service.CustomerService;
@@ -88,7 +94,7 @@ public class CustomerController {
 	@PostMapping(path = "/customer/login/checkPage")
 	public String findemail(@RequestParam("email") String email, @RequestParam("password") String password,
 			HttpSession session, Model model) {
-	
+
 		// 若錯誤的話就送error字串給他
 		HashMap<String, String> errors = new HashMap<String, String>();
 		model.addAttribute("errors", errors);
@@ -115,7 +121,7 @@ public class CustomerController {
 				errors.put("enabled", "信箱未驗證，請檢查驗證信!");
 				return "customer/login";
 			}
-			
+
 			session.setAttribute("loggedInCustomer", loggedInCustomer);
 
 			System.out.println("透過id找照片執行成功");
@@ -197,6 +203,16 @@ public class CustomerController {
 		System.out.println("email: " + email + "verified");
 		customerService.enableAccount(email);
 		return "customer/login";
+	}
+
+	// 更新個人資料
+	@PostMapping(path = "customer/update")
+	public String updateProfile(@ModelAttribute Customer c, @RequestParam(required = false) MultipartFile uploadImg,
+			HttpSession session) throws IOException {
+
+		customerService.updateProfile(c, uploadImg, session);
+
+		return "customer/updateProfile";
 	}
 
 }

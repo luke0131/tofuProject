@@ -42,14 +42,26 @@ public class PageController {
 
 		return "customer/register";
 	}
-	
-	//跳轉到請驗證的頁面(check Enabled)
+
+	// 跳轉到請驗證的頁面(check Enabled)
 	@GetMapping("customer/checkEnabled")
 	public String checkEnabled() {
 
 		return "customer/checkEnabled";
 	}
-	
 
+	// 跳轉到會員中心的頁面
+	@GetMapping("customer/customerCenter")
+	public String customerCenter() {
+
+		return "customer/customerCenter";
+	}
+	
+	// 跳轉到修改會員-個人資料的頁面
+	@GetMapping("customer/updateProfile")
+	public String updateProfile() {
+
+		return "customer/updateProfile";
+	}
 
 }
