@@ -7,12 +7,21 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.customer.model.CustomerDao;
+import com.group3.tofu.employee.model.Employee;
+import com.group3.tofu.employee.model.EmployeeDao;
+import com.group3.tofu.gift.model.bean.Gift;
+import com.group3.tofu.gift.model.dao.GiftDAO;
+import com.group3.tofu.order.model.bean.Order;
+import com.group3.tofu.order.model.dao.OrderDAO;
+import com.group3.tofu.product.model.Product;
+import com.group3.tofu.product.model.ProductDao;
 
 @Service
 public class CustomerService {
@@ -21,12 +30,21 @@ public class CustomerService {
 //	@Autowired
 //	private CustomerDao customerDao;
 
+	private final OrderDAO orderDAO;
+	private final ProductDao productDAO;
+	private final GiftDAO giftDAO;
+	private final EmployeeDao employeeDAO;
 	private final CustomerDao customerDao;
 	private final MailService mailService;
 
-	public CustomerService(CustomerDao customerDao, MailService mailService) {
+	public CustomerService(CustomerDao customerDao, MailService mailService, OrderDAO orderDAO, ProductDao productDAO,
+			GiftDAO giftDAO, EmployeeDao employeeDAO) {
 		this.customerDao = customerDao;
 		this.mailService = mailService;
+		this.orderDAO = orderDAO;
+		this.productDAO = productDAO;
+		this.giftDAO = giftDAO;
+		this.employeeDAO = employeeDAO;
 	}
 
 	// findAllCustomer
@@ -72,38 +90,6 @@ public class CustomerService {
 		return customerDao.save(customer);
 	}
 
-	// update member
-//	public Customer updateMember(String body , HttpSession session) {
-//		
-//		Customer oldCustomer = (Customer)session.getAttribute("loggedInCustomer");
-//		
-//		String oldEmail = oldCustomer.getEmail();
-//		
-//	
-//		JSONObject obj = new JSONObject(body);
-//		String name = obj.isNull("name") ? null : obj.getString("name");
-//		//String email = obj.isNull("email") ? null : obj.getString("email");
-//		//String account = obj.isNull("account") ? null : obj.getString("account");
-//		String password = obj.isNull("password") ? null : obj.getString("password");
-//		String phone = obj.isNull("phone") ? null : obj.getString("phone");
-//		String birthday = obj.isNull("birthday") ? null : obj.getString("birthday");
-//		Integer age = obj.isNull("age") ? null : obj.getInt("age");
-//		String gender = obj.isNull("age") ? null : obj.getString("age");
-//		String address = obj.isNull("address") ? null : obj.getString("address");
-//	
-//		Customer customer = new Customer();
-//		customer.setName(name);
-//		customer.setEmail(oldEmail);
-//		
-//		
-//		
-//		customerDao.save(customer);
-//		session.setAttribute("loggedInCustomer", customer);
-//		
-//		
-//		return customer;
-//	}
-
 	// 檢查帳號是否已經被註冊(一般的controller用)
 	public Optional<Customer> findByAccount(String account) {
 		return customerDao.findCustomerByAccount(account);
@@ -112,11 +98,6 @@ public class CustomerService {
 	// 檢查帳號是否存在(ajax用)
 	public boolean checkAccountExist(String account) {
 		return findByAccount(account).isPresent();
-	}
-
-	// findCustomerById
-	public Optional<Customer> findCustomerById(Integer id) {
-		return customerDao.findById(id);
 	}
 
 	// send email
@@ -175,14 +156,14 @@ public class CustomerService {
 		// 先把之前存在session裡面的物件拿出來，因為我要透過email找人
 		Customer oldCustomer = (Customer) session.getAttribute("loggedInCustomer");
 
-		//把email設進去
+		// 把email設進去
 		String oldEmail = oldCustomer.getEmail();
 
 		System.out.println(c.getName() + " " + c.getPhone());
 
 		Optional<Customer> option = findCustomerByEmail(oldEmail);
 
-		//如果email存在，我就透過使用者輸入的值，並將其設值進去
+		// 如果email存在，我就透過使用者輸入的值，並將其設值進去
 		if (option.isPresent()) {
 			Customer customer = option.get();
 			customer.setName(c.getName());
@@ -191,9 +172,9 @@ public class CustomerService {
 			customer.setAge(c.getAge());
 			customer.setGender(c.getGender());
 			customer.setAddress(c.getAddress());
-			
+
 			System.out.println(c.getGender());
-			//單獨判斷圖片，如果有上傳圖片，我就設圖片給他，反之如果沒有設圖片進去，我就用預設圖片就好
+			// 單獨判斷圖片，如果有上傳圖片，我就設圖片給他，反之如果沒有設圖片進去，我就用預設圖片就好
 			if (!uploadImg.isEmpty()) {
 				customer.setPhoto(uploadImg.getBytes());
 			}
@@ -208,4 +189,46 @@ public class CustomerService {
 		return null;
 
 	}
+
+	// 查詢歷史訂單，透過order裡面的customerId找人
+	public List<Order> findByCustomerId(Integer customerId) {
+		return orderDAO.findByCustomerId(customerId);
+	}
+
+	// findCustomerById
+	public Customer findCustomerById(Integer id) {
+		Optional<Customer> op = customerDao.findById(id);
+		if (!op.isEmpty()) {
+			return op.get();
+		}
+		return null;
+	}
+
+	// findProductById
+	public Product findProductById(Integer id) {
+		Optional<Product> op = productDAO.findById(id);
+		if (!op.isEmpty()) {
+			return op.get();
+		}
+		return null;
+	}
+	
+	// findGiftById
+	public Gift findGiftById(Integer id) {
+		Optional<Gift> op = giftDAO.findById(id);
+		if (!op.isEmpty()) {
+			return op.get();
+		}
+		return null;
+	}
+	
+	// findEmployeeById
+	public Employee findEmployeeById(Integer id) {
+		Optional<Employee> op = employeeDAO.findById(id);
+		if (!op.isEmpty()) {
+			return op.get();
+		}
+		return null;
+	}
+
 }

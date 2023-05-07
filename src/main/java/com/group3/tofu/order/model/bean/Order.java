@@ -37,6 +37,7 @@ public class Order {
 	@Column(name = "order_date")
 	private Date order_date;
 	
+	@Temporal(TemporalType.DATE)
 	@Column(name = "shipped_date")
 	private Date shipped_date;
 	

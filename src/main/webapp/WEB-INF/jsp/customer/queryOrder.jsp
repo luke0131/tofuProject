@@ -8,12 +8,14 @@
 <link href="${contextRoot}/img/indexPicture/favicon.ico" rel="icon"
 	type="image/x-icon" />
 <meta charset="UTF-8" />
-<title>小豆腐會員中心</title>
+<title>小豆腐會員中心-查詢歷史訂單</title>
 <link href="${contextRoot}/css/sidebars.css" rel="stylesheet">
-
 <link
 	href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'
 	rel='stylesheet'></link>
+<script src="https://code.jquery.com/jquery-3.6.4.js"
+	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+	crossorigin="anonymous"></script>
 <style>
 /* 製作top */
 .top {
@@ -41,15 +43,35 @@
 * {
 	scroll-behavior: smooth;
 }
+
+.title {
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: center;
+}
+
+table {
+	/*border: 1px solid black;*/
+	border-collapse: collapse;
+	margin: auto;
+	text-align: center;
+	width: 1800px;
+	font-size: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+	/*width:100%*/
+}
+
+
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/layout/navbar.jsp" />
-	<h1 class="fw-bold text-center"
+	<h1 class="text-center fw-bold"
 		style="margin-top: 20px; color: #005AB5">
-		<i class="fa fa-car" style="margin-right: 20px; color: #000079"></i>歡迎豆腐車業會員中心<i
-			class="fa fa-car" style="margin-left: 20px; color: #000079"></i>
+		<i class="fa fa-pencil"
+			style="margin-right: 10px; color: #000079; margin-bottom: 10px"></i>查詢歷史訂單
 	</h1>
+
+
 	<div class="d-flex">
 		<div style="margin-top: 20px; margin-left: 20px">
 			<div class="flex-shrink-0 p-3 bg-white" style="width: 280px;">
@@ -74,7 +96,8 @@
 							aria-expanded="false">查詢歷史訂單</button>
 						<div class="collapse" id="orders-collapse">
 							<ul class="btn-toggle-nav list-unstyled fw-normal large">
-								<li style="margin-left: 20px"><a href="${contextRoot}/customer/queryOrder"
+								<li style="margin-left: 20px"><a
+									href="${contextRoot}/customer/queryOrder"
 									class="link-dark d-inline-flex text-decoration-none rounded">訂單資料</a></li>
 							</ul>
 						</div>
@@ -86,8 +109,9 @@
 							aria-expanded="false">查詢預約紀錄</button>
 
 						<div class="collapse" id="home-collapse" style="">
-							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li style="margin-left: 20px"><a href="${contextRoot}/customer/queryBook"
+							<ul class="btn-toggle-nav list-unstyled fw-normal large">
+								<li style="margin-left: 20px"><a
+									href="${contextRoot}/customer/queryBook"
 									class="link-dark d-inline-flex text-decoration-none rounded">預約資料</a></li>
 							</ul>
 						</div>
@@ -95,20 +119,52 @@
 				</ul>
 			</div>
 		</div>
-
-		<figure class="d-flex justify-content-center"
-			style="width: 1200px; height: 700px; margin-left: 50px">
-			<img src="${contextRoot}/img/indexPicture/change.gif" />
-		</figure>
-
+		<table style="margin-right: 100px">
+			<thead class="text-decoration-underline">
+				<tr>
+					<th>項目</th>
+					<th>訂單編號</th>
+					<th>商品名稱</th>
+					<th>禮物名稱</th>
+					<th>訂單成立時間</th>
+					<th>預計到貨日期</th>
+					<th>訂單寄送地址</th>
+					<th>是否已付款</th>
+					<th>是否已送達</th>
+					<th>服務人員</th>
+					<th>修改</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach begin="0" end="${orders.size()-1}" step="1" var="i">
+					<tr>
+						<td>${orders.get(i).order_id}</td>
+						<td>${orders.get(i).order_number}</td>
+						<td>${products.get(i).productModel}</td>
+						<td>${gifts.get(i).name}</td>
+						<td>${orders.get(i).order_date}</td>
+						<td>${orders.get(i).shipped_date}</td>
+						<td><input type="text" value="${orders.get(i).ship_address}"
+							style="width: 350px; text-align: center"></td>
+						<td>${orders.get(i).payment}</td>
+						<td>${orders.get(i).ship_status}</td>
+						<td>${employees.get(i).account}</td>
+						<td>
+							<button type="submit" value=update
+								style="margin-left:15px ; border: 0px solid transparent ; background-color:transparent">
+								<img src="${contextRoot}/img/indexPicture/pencil.png">
+							</button>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
-
 
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>
 	<script type="text/javascript"
 		src="${contextRoot}/js/pages/sidebars.js"></script>
 	<jsp:include page="/WEB-INF/jsp/layout/footer.jsp" />
-
 </body>
 </html>

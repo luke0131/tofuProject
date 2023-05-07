@@ -53,7 +53,7 @@
 						-->
 						<div id="check-login" class="text-danger text-center">${errors.loginFailed}</div>
 						<div id="check-enabled" class="text-danger text-center">${errors.enabled}</div>
-						
+
 						<button class="w-100 mt-3 mb-2 btn btn-lg rounded-3 btn-dark"
 							type="button" id="login-button">登入</button>
 
@@ -64,14 +64,18 @@
 								class="text-dark fw-bold">立即註冊</a>
 						</div>
 
-						<div class="text-primary text-center fw-bold fs-5 mt-5">
-							<a href="#" class="text-decoration-none">員工登入請按此→</a>
+						<div class="text-center fw-bold fs-5 mt-3">
+							<a href="#" class="text-decoration-none text-primary">站長登入請按此</a>
+						</div>
+						
+						<div class="text-center fw-bold fs-5 mt-1">
+							<a href="#" class="text-decoration-none text-primary ">員工登入請按此</a>
 						</div>
 
 
 						<hr class="my-4">
 						<div class="d-flex justify-content-evenly mt-3">
-							<button type="button" class="btn btn-warning" id="tofu">新會員</button>
+							<!--  <button type="button" class="btn btn-warning" id="tofu">新會員</button>-->
 							<button type="button" class="btn btn-danger" id="unverified">未驗證</button>
 							<button type="button" class="btn btn-success" id="verified">已驗證</button>
 							<!-- <button type="button" class="btn btn-success" id="memberLoginBTN">使用者</button>
@@ -107,23 +111,28 @@
 		</div>
 	</div>
 	<script>
-		document.querySelector('#tofu').addEventListener('click', function() {
-			document.querySelector('#email').value = 'tofucars@gmail.com';
-			document.querySelector('#password').value = 'fgdh844546';
-		});
+		//document.querySelector('#tofu').addEventListener('click', function() {
+		//document.querySelector('#email').value = 'tofucars@gmail.com';
+		//document.querySelector('#password').value = 'fgdh844546';
+		//});
 
-		document.querySelector('#unverified').addEventListener('click', function() {
-			document.querySelector('#email').value = 'sarahmoore456@gmail.com';
-			document.querySelector('#password').value = 'Z5hN6tP7';
-		});
-		
-		document.querySelector('#verified').addEventListener('click', function() {
-			document.querySelector('#email').value = 'JolinTsai@gmail.com';
-			document.querySelector('#password').value = '7fH6T2rE';
-		});
-		
-	
-	    
+		document
+				.querySelector('#unverified')
+				.addEventListener(
+						'click',
+						function() {
+							document.querySelector('#email').value = 'sarahmoore456@gmail.com';
+							document.querySelector('#password').value = 'Z5hN6tP7';
+						});
+
+		document
+				.querySelector('#verified')
+				.addEventListener(
+						'click',
+						function() {
+							document.querySelector('#email').value = 'JolinTsai@gmail.com';
+							document.querySelector('#password').value = '7fH6T2rE';
+						});
 	</script>
 
 	<script type="text/javascript" src="${contextRoot}/js/pages/login.js"></script>

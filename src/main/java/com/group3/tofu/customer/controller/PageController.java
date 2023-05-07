@@ -63,5 +63,19 @@ public class PageController {
 
 		return "customer/updateProfile";
 	}
+	
+	//跳轉到查詢歷史訂單畫面
+	//@GetMapping("customer/queryOrder")
+	//public String queryOrder() {
+		
+		//return "customer/queryOrder";
+	//}
+	//跳轉到查詢預約紀錄畫面
+		@GetMapping("customer/queryBook")
+		public String queryBook() {
+			
+			return "customer/queryBook";
+		}
+
 
 }

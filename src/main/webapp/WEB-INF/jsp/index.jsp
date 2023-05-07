@@ -6,7 +6,7 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <link href="${contextRoot}/img/indexPicture/favicon.ico" rel="icon" type="image/x-icon" />
 <meta charset="UTF-8">
-<title>Tofucars Company</title>
+<title>豆腐車業股份有限公司</title>
 
 </head>
 <body>

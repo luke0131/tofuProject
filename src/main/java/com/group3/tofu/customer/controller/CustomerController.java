@@ -1,15 +1,12 @@
 package com.group3.tofu.customer.controller;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,13 +18,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.customer.service.CustomerService;
+import com.group3.tofu.employee.model.Employee;
+import com.group3.tofu.gift.model.bean.Gift;
+import com.group3.tofu.order.model.bean.Order;
+import com.group3.tofu.product.model.Product;
 
 //@SessionAttributes(names= {"accountName"})
 @Controller
@@ -45,6 +45,47 @@ public class CustomerController {
 		model.addAttribute("customerList", customerList);
 
 		return "customer/profile";
+	}
+	
+	//尋找屬於該customer的所有訂單
+	@GetMapping(path = "/customer/queryOrder")
+	public String findAllCustomerByOrderId(Model model , HttpSession session) {
+		
+		Customer customer = (Customer)session.getAttribute("loggedInCustomer");
+		Integer cid = customer.getCustomer_id();
+		
+		List<Order> orders = customerService.findByCustomerId(cid);
+		
+		ArrayList<Product> products = new ArrayList<Product>();
+		ArrayList<Gift> gifts = new ArrayList<Gift>();
+		ArrayList<Employee> employees = new ArrayList<Employee>();
+		
+		for(Order order : orders) {
+			Integer f_product_id = order.getF_product_id();
+			Integer f_gift_id = order.getF_gift_id();
+			Integer f_employee_id = order.getF_employee_id();
+			
+			//product productDao 用f_product_id找到Product物件
+			Product product = customerService.findProductById(f_product_id);
+			
+			//gift GiftDao 用f_gift_id找到Gift物件
+			Gift gift = customerService.findGiftById(f_gift_id);
+			
+			//employee EmployeeDao 用f_employee_id找到Employee物件
+			Employee employee = customerService.findEmployeeById(f_employee_id);
+			
+			products.add(product);
+			gifts.add(gift);
+			employees.add(employee);
+			
+		}
+		model.addAttribute("orders", orders);
+		model.addAttribute("products", products);
+		model.addAttribute("gifts", gifts);
+		model.addAttribute("employees", employees);
+		
+		System.out.println("查詢歷史訂單成功!");
+		return "customer/queryOrder";
 	}
 
 	// 顯示圖片在畫面上的controller，專門處理圖片的
@@ -65,12 +106,13 @@ public class CustomerController {
 		return new ResponseEntity<byte[]>(photoFile, headers, HttpStatus.OK);
 	}
 
+	/*
 	@GetMapping(path = "/findCustomerById/{id}")
 	@ResponseBody
 	public Customer findCustomerById(@PathVariable("id") Integer id) {
-		return customerService.findCustomerById(id).get();
+		return customerService.findCustomerById(id);
 	}
-
+*/
 	// 製作find email and password 的 controller
 //	@PostMapping("/customer/findemail")
 //	@ResponseBody
@@ -208,10 +250,12 @@ public class CustomerController {
 	// 更新個人資料
 	@PostMapping(path = "customer/update")
 	public String updateProfile(@ModelAttribute Customer c, @RequestParam(required = false) MultipartFile uploadImg,
-			HttpSession session) throws IOException {
+			HttpSession session , Model m) throws IOException {
 
 		customerService.updateProfile(c, uploadImg, session);
-
+		m.addAttribute("success", "true");
+		System.out.println(m);
+		
 		return "customer/updateProfile";
 	}
 
