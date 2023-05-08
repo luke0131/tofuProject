@@ -16,7 +16,7 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "order_id")
-	private Integer order_id;
+	private Integer id;
 	
 	@Column(name = "order_number",columnDefinition = "nvarchar(50)")
 	private String order_number;
@@ -52,12 +52,12 @@ public class Order {
 	public Order() {
 	}
 
-	public Integer getOrder_id() {
-		return order_id;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setOrder_id(Integer order_id) {
-		this.order_id = order_id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getOrder_number() {
@@ -139,6 +139,8 @@ public class Order {
 	public void setShip_status(String ship_status) {
 		this.ship_status = ship_status;
 	}
+
+	
 
 	
 	
