@@ -1,14 +1,12 @@
 package com.group3.tofu.order.controller;
 
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.order.model.bean.Order;
 import com.group3.tofu.order.service.OrderService;
 
@@ -17,20 +15,27 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 	
-	@GetMapping("order/find")
-	public String findCustomerOrder() {
+	@GetMapping("order/findAll")
+	public String findCustomerOrder(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber,Model model) {
 		
-//		Customer customer = (Customer)session.getAttribute("loggedInCustomer");
-//		Integer customerId= customer.getCustomer_id();
-//		
-		List<Order> orders = orderService.findByCustomerId(1);
-		for (Order order : orders) {
-			System.out.println("-------------------++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-------------------------------------");
-			System.out.println(order.getOrder_date()+"--------------------------------------------------------");
-			System.out.println(order.getShip_address()+"--------------------------------------------------------");
-		}
-		
+		Page<Order> page = orderService.findByPage(pageNumber);
+		model.addAttribute("page",page);
 		
 		return "order/showOrder";
+	}
+	@GetMapping("order/removeOrder")
+	public String removeOrder(@RequestParam(name = "id")Integer id) {
+		
+		orderService.removeOrder(id);
+		
+		return "redirect:/order/findAll";
+	}
+	
+	@GetMapping("order/showDetail")
+	public String showDetail() {
+		
+		
+		
+		return "order/showDetail";
 	}
 }
