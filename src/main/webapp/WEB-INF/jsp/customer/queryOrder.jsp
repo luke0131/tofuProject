@@ -16,6 +16,10 @@
 <script src="https://code.jquery.com/jquery-3.6.4.js"
 	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
 	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.js"
+	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+	crossorigin="anonymous"></script>
 <style>
 /* 製作top */
 .top {
@@ -52,15 +56,14 @@
 table {
 	/*border: 1px solid black;*/
 	border-collapse: collapse;
-	margin: auto;
+	/* 	margin: auto; */
 	text-align: center;
-	width: 1800px;
+	width: 1500px;
 	font-size: 20px;
 	font-family: Arial, Helvetica, sans-serif;
+	width: 1500px;
 	/*width:100%*/
 }
-
-
 </style>
 </head>
 <body>
@@ -119,52 +122,98 @@ table {
 				</ul>
 			</div>
 		</div>
-		<table style="margin-right: 100px">
-			<thead class="text-decoration-underline">
-				<tr>
-					<th>項目</th>
-					<th>訂單編號</th>
-					<th>商品名稱</th>
-					<th>禮物名稱</th>
-					<th>訂單成立時間</th>
-					<th>預計到貨日期</th>
-					<th>訂單寄送地址</th>
-					<th>是否已付款</th>
-					<th>是否已送達</th>
-					<th>服務人員</th>
-					<th>修改</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach begin="0" end="${orders.size()-1}" step="1" var="i">
+
+		<form action="${contextRoot}/customer/updateAddress/1" method="post"
+			id="poni">
+			<table>
+				<thead class="text-decoration-underline">
 					<tr>
-						<td>${orders.get(i).order_id}</td>
-						<td>${orders.get(i).order_number}</td>
-						<td>${products.get(i).productModel}</td>
-						<td>${gifts.get(i).name}</td>
-						<td>${orders.get(i).order_date}</td>
-						<td>${orders.get(i).shipped_date}</td>
-						<td><input type="text" value="${orders.get(i).ship_address}"
-							style="width: 350px; text-align: center"></td>
-						<td>${orders.get(i).payment}</td>
-						<td>${orders.get(i).ship_status}</td>
-						<td>${employees.get(i).account}</td>
-						<td>
-							<button type="submit" value=update
-								style="margin-left:15px ; border: 0px solid transparent ; background-color:transparent">
-								<img src="${contextRoot}/img/indexPicture/pencil.png">
-							</button>
-						</td>
+						<th>項目</th>
+						<th>訂單編號</th>
+						<th>商品名稱</th>
+						<th>禮物名稱</th>
+						<th>訂單成立時間</th>
+						<th>預計到貨日期</th>
+						<th>訂單寄送地址</th>
+						<th>是否已付款</th>
+						<th>是否已送達</th>
+						<th>服務人員</th>
+						<th>修改</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+
+
+					<c:forEach begin="0" end="${orders.size()-1}" step="1" var="i">
+						<tr>
+							<td>${orders.get(i).order_id}</td>
+							<td>${orders.get(i).order_number}</td>
+							<td>${products.get(i).productModel}</td>
+							<td>${gifts.get(i).name}</td>
+							<td>${orders.get(i).order_date}</td>
+							<td>${orders.get(i).shipped_date}</td>
+							<td><input type="text" value="${orders.get(i).ship_address}"
+								data-id="${orders.get(i).order_id}"
+								data-address="${orders.get(i).ship_address}" id="shipAddress"
+								class="addressClass" name="shipAddress"
+								style="width: 350px; text-align: center"></td>
+							<td>${orders.get(i).payment}</td>
+							<td>${orders.get(i).ship_status}</td>
+							<td>${employees.get(i).account}</td>
+							<td>
+								<button name="${orders.get(i).order_id}" type="submit"
+									value=update onclick="updateOrder(event,this.name)"
+									style="margin-left: 15px; border: 0px solid transparent; background-color: transparent">
+									<img src="${contextRoot}/img/indexPicture/pencil.png">
+								</button>
+							</td>
+						</tr>
+					</c:forEach>
+
+
+				</tbody>
+			</table>
+		</form>
 	</div>
 
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>
 	<script type="text/javascript"
 		src="${contextRoot}/js/pages/sidebars.js"></script>
+	<script type="text/javascript">
+
+	let addressClass = document.getElementsByClassName('addressClass');
+	for(i=0 ; i<addressClass.length ; i++){
+		
+		addressClass[i].addEventListener('click' , function(){
+			
+		let addressid = this.getAttribute('data-id');
+		let address = this.getAttribute('data-address');
+		
+		console.log(addressid);
+		console.log(address);
+			})
+		}   
+		
+		    
+		    
+		function updateOrder(event,orderId){
+			$("#poni")[0].action = "${contextRoot}/customer/updateAddress/" + orderId;
+ 			event.preventDefault();
+			Swal.fire({
+				  title: '您確定要修改地址嗎?',
+				  showCancelButton: true,
+				  confirmButtonText: '確定',
+				}).then((result) => {
+				  if (result.isConfirmed) {
+				    Swal.fire('修改成功', '', 'success')
+				  }
+				    document.querySelector("#poni").submit();
+				})
+		}
+		
+		
+		</script>
 	<jsp:include page="/WEB-INF/jsp/layout/footer.jsp" />
 </body>
 </html>

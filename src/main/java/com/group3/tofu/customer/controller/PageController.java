@@ -70,12 +70,13 @@ public class PageController {
 		
 		//return "customer/queryOrder";
 	//}
+	
 	//跳轉到查詢預約紀錄畫面
-		@GetMapping("customer/queryBook")
-		public String queryBook() {
+	//@GetMapping("customer/queryBook")
+	//public String queryBook() {
 			
-			return "customer/queryBook";
-		}
+		//return "customer/queryBook";
+	//}
 
 
 }

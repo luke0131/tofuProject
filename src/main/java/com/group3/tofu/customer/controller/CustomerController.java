@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.group3.tofu.book.model.Book;
 import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.customer.service.CustomerService;
 import com.group3.tofu.employee.model.Employee;
@@ -46,46 +48,88 @@ public class CustomerController {
 
 		return "customer/profile";
 	}
-	
-	//尋找屬於該customer的所有訂單
+
+	// 尋找屬於該customer的所有訂單
 	@GetMapping(path = "/customer/queryOrder")
-	public String findAllCustomerByOrderId(Model model , HttpSession session) {
-		
-		Customer customer = (Customer)session.getAttribute("loggedInCustomer");
+	public String findAllCustomerByOrderId(Model model, HttpSession session) {
+
+		Customer customer = (Customer) session.getAttribute("loggedInCustomer");
 		Integer cid = customer.getCustomer_id();
-		
+
 		List<Order> orders = customerService.findByCustomerId(cid);
-		
+
 		ArrayList<Product> products = new ArrayList<Product>();
 		ArrayList<Gift> gifts = new ArrayList<Gift>();
 		ArrayList<Employee> employees = new ArrayList<Employee>();
-		
-		for(Order order : orders) {
+
+		for (Order order : orders) {
 			Integer f_product_id = order.getF_product_id();
 			Integer f_gift_id = order.getF_gift_id();
 			Integer f_employee_id = order.getF_employee_id();
-			
-			//product productDao 用f_product_id找到Product物件
+
+			// product productDao 用f_product_id找到Product物件
 			Product product = customerService.findProductById(f_product_id);
-			
-			//gift GiftDao 用f_gift_id找到Gift物件
+
+			// gift GiftDao 用f_gift_id找到Gift物件
 			Gift gift = customerService.findGiftById(f_gift_id);
-			
-			//employee EmployeeDao 用f_employee_id找到Employee物件
+
+			// employee EmployeeDao 用f_employee_id找到Employee物件
 			Employee employee = customerService.findEmployeeById(f_employee_id);
-			
+
 			products.add(product);
 			gifts.add(gift);
 			employees.add(employee);
-			
+
 		}
 		model.addAttribute("orders", orders);
 		model.addAttribute("products", products);
 		model.addAttribute("gifts", gifts);
 		model.addAttribute("employees", employees);
-		
+
 		System.out.println("查詢歷史訂單成功!");
 		return "customer/queryOrder";
+	}
+
+
+	// 尋找屬於該customer的所有預約賞車紀錄
+	@GetMapping(path = "/customer/queryBook")
+	public String findAllCustomerByBookId(Model model, HttpSession session) {
+
+		Customer customer = (Customer) session.getAttribute("loggedInCustomer");
+		Integer cid = customer.getCustomer_id();
+
+		List<Book> books = customerService.findBookByCustomerId(cid);
+
+		ArrayList<Product> products = new ArrayList<Product>();
+		ArrayList<Employee> employees = new ArrayList<Employee>();
+
+		for (Book book : books) {
+
+			Integer f_product_id = book.getF_product_id();
+
+			Integer f_employee_id = book.getF_employee_id();
+
+			// product productDao 用f_product_id找到Product物件
+			Product product = customerService.findProductById(f_product_id);
+			if (product == null) {
+				Product product2 = new Product();
+				products.add(product2);
+			} else {
+				products.add(product);
+			}
+
+			// employee EmployeeDao 用f_employee_id找到Employee物件
+			Employee employee = customerService.findEmployeeById(f_employee_id);
+
+			employees.add(employee);
+
+		}
+		model.addAttribute("books", books);
+		model.addAttribute("products", products);
+		model.addAttribute("employees", employees);
+
+		System.out.println("查詢預約賞車表單成功!");
+		return "customer/queryBook";
 	}
 
 	// 顯示圖片在畫面上的controller，專門處理圖片的
@@ -107,12 +151,11 @@ public class CustomerController {
 	}
 
 	/*
-	@GetMapping(path = "/findCustomerById/{id}")
-	@ResponseBody
-	public Customer findCustomerById(@PathVariable("id") Integer id) {
-		return customerService.findCustomerById(id);
-	}
-*/
+	 * @GetMapping(path = "/findCustomerById/{id}")
+	 * 
+	 * @ResponseBody public Customer findCustomerById(@PathVariable("id") Integer
+	 * id) { return customerService.findCustomerById(id); }
+	 */
 	// 製作find email and password 的 controller
 //	@PostMapping("/customer/findemail")
 //	@ResponseBody
@@ -250,13 +293,36 @@ public class CustomerController {
 	// 更新個人資料
 	@PostMapping(path = "customer/update")
 	public String updateProfile(@ModelAttribute Customer c, @RequestParam(required = false) MultipartFile uploadImg,
-			HttpSession session , Model m) throws IOException {
+			HttpSession session, Model m) throws IOException {
 
 		customerService.updateProfile(c, uploadImg, session);
 		m.addAttribute("success", "true");
 		System.out.println(m);
-		
+
 		return "customer/updateProfile";
 	}
+
+	//測試
+	@GetMapping("/michael")
+	public String michael() {
+		System.out.println("近來michael了");
+		return "customer/login";
+	}
+	
+	// 更新訂單裡面的orderAddress
+	@PostMapping(path = "customer/updateAddress/{order_id}")
+	public String updateAddress(@RequestParam (name="ship_address")String address, @PathVariable("order_id") Integer order_id) throws IOException {
+		System.out.println(address);
+		System.out.println("---------------------------"+order_id);
+		
+		
+		
+
+		return "redirect:/customer/queryOrder";
+	}
+	
+	
+	
+	
 
 }

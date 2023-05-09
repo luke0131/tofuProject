@@ -141,6 +141,14 @@ public class Order {
 		this.ship_status = ship_status;
 	}
 
+	@Override
+	public String toString() {
+		return "Order [order_id=" + order_id + ", order_number=" + order_number + ", f_product_id=" + f_product_id
+				+ ", f_gift_id=" + f_gift_id + ", f_customer_id=" + f_customer_id + ", f_employee_id=" + f_employee_id
+				+ ", order_date=" + order_date + ", shipped_date=" + shipped_date + ", ship_address=" + ship_address
+				+ ", payment=" + payment + ", ship_status=" + ship_status + "]";
+	}
+
 	
 	
 	

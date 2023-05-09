@@ -7,11 +7,15 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.group3.tofu.book.model.Book;
+import com.group3.tofu.book.model.BookDao;
 import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.customer.model.CustomerDao;
 import com.group3.tofu.employee.model.Employee;
@@ -36,15 +40,17 @@ public class CustomerService {
 	private final EmployeeDao employeeDAO;
 	private final CustomerDao customerDao;
 	private final MailService mailService;
+	private final BookDao bookDao;
 
 	public CustomerService(CustomerDao customerDao, MailService mailService, OrderDAO orderDAO, ProductDao productDAO,
-			GiftDAO giftDAO, EmployeeDao employeeDAO) {
+			GiftDAO giftDAO, EmployeeDao employeeDAO, BookDao bookDao) {
 		this.customerDao = customerDao;
 		this.mailService = mailService;
 		this.orderDAO = orderDAO;
 		this.productDAO = productDAO;
 		this.giftDAO = giftDAO;
 		this.employeeDAO = employeeDAO;
+		this.bookDao = bookDao;
 	}
 
 	// findAllCustomer
@@ -190,6 +196,55 @@ public class CustomerService {
 
 	}
 
+	// update OrderAddress
+//	@Transactional
+//	public Order updateOrderAddress(String address , Integer orderId) {
+//
+//		Optional<Order> option = orderDAO.findById(orderId);
+//		if (!option.isEmpty()) {
+//			Order order = option.get();
+//			
+//			order.setShip_address(address);
+//
+//			System.out.println("修改地址成功!!");
+//
+//			return order;
+//		}
+//
+//		return null;
+//
+//	}
+
+//	@Transactional
+//	public Order modify(String json) {
+//		try {
+//			JSONObject obj = new JSONObject(json);
+//			
+//			Integer id = obj.isNull("id") ? null : obj.getInt("id");
+//			
+//			String address = obj.isNull("ship_address") ? null : obj.getString("ship_address");
+//
+//			Optional<Order> updateOrder = orderDAO.findById(id);
+//
+//			if (!updateOrder.isEmpty()) {
+//
+//				Order order = updateOrder.get();
+//				
+//				order.setShip_address(address);
+//
+//				return order;
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return null;
+//	}
+
+//	public Order findNewAddress(Integer id , String address) {
+//		return orderDAO.findNewAddress(id, address);
+//	}
+	
 	// 查詢歷史訂單，透過order裡面的customerId找人
 	public List<Order> findByCustomerId(Integer customerId) {
 		return orderDAO.findByCustomerId(customerId);
@@ -212,7 +267,7 @@ public class CustomerService {
 		}
 		return null;
 	}
-	
+
 	// findGiftById
 	public Gift findGiftById(Integer id) {
 		Optional<Gift> op = giftDAO.findById(id);
@@ -221,7 +276,7 @@ public class CustomerService {
 		}
 		return null;
 	}
-	
+
 	// findEmployeeById
 	public Employee findEmployeeById(Integer id) {
 		Optional<Employee> op = employeeDAO.findById(id);
@@ -229,6 +284,11 @@ public class CustomerService {
 			return op.get();
 		}
 		return null;
+	}
+
+	// 查詢預約賞車的表單，透過book裡面的customerId找人
+	public List<Book> findBookByCustomerId(Integer customerId) {
+		return bookDao.findBookByCustomerId(customerId);
 	}
 
 }
