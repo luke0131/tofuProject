@@ -16,6 +16,12 @@
 img{
   height: 250px;
 }
+.linker{
+		border: black solid 2px;
+		width: 30px;
+		height: 30px;
+		display: inline-block;
+	}
 </style>
 
 </head>
@@ -30,8 +36,8 @@ img{
         <button class="btn btn-danger"><i class="fa-solid fa-cart-shopping" style="font-size:24px;"></i> cart</button>
     </a>
 	
-	
-	<div class="row row-cols-1 row-cols-md-3 g-4 w">
+
+	<div class="row row-cols-1 row-cols-md-3 g-4 w" style="margin: auto;">
 
 		<c:forEach items="${page.content}" var="gList">
 
@@ -42,7 +48,7 @@ img{
 				  </a>
 				  <div class="card-body">
 				    <h5 class="card-title">${gList.name}</h5>
-				    <p class="card-text">${gList.price}</p>
+				    <p class="card-text"><span>$</span>${gList.price}</p>
 				
 				    <div>
 				      <input type="button" value="ADD" onclick="addToCart(${gList.id})" class="btn btn-primary">
@@ -57,18 +63,18 @@ img{
 		</c:forEach>
 	</div>
 
-
+<div style="text-align: center; padding-top: 50px;">
 <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
 
   	<c:choose>
     	<c:when test="${page.number !=  pageNumber-1}">
-        <a href="${contextRoot}/tofu/showGift?p=${pageNumber}">${pageNumber}</a>
+        <a href="${contextRoot}/tofu/showGift?p=${pageNumber}" style="text-decoration: none;"  class="linker"><span style="color: black;">${pageNumber}</span></a>
     	</c:when>
-  		<c:otherwise>${pageNumber}</c:otherwise>
+  		<c:otherwise><span style="background-color: black; color: aliceblue;" class="linker">${pageNumber}</span></c:otherwise>
 	</c:choose>
 
 </c:forEach>
-
+</div>
 
 
 <script>

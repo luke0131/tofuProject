@@ -11,5 +11,11 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
 	//HQL語法參考的是JAVA的class name(Order)跟property name(f_customer_id),不是SQL SERVER的table(Orders)跟Column name
 	@Query(value = "from Order where f_customer_id = ?1")
 	List<Order> findByCustomerId(Integer customerId);
+	
+	@Query(value = "from Order where payment = ?1")
+	List<Order> findByPayment(String payment);
+	
+	@Query(value = "from Order where ship_status = ?1")
+	List<Order> findByShipment(String ship_status);
 
 }

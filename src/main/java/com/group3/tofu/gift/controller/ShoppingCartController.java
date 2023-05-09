@@ -1,5 +1,6 @@
 package com.group3.tofu.gift.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -20,6 +21,10 @@ import com.group3.tofu.gift.model.bean.Gift;
 import com.group3.tofu.gift.model.bean.ShoppingCart;
 import com.group3.tofu.gift.service.GiftService;
 import com.group3.tofu.gift.service.ShoppingCartService;
+import com.group3.tofu.order.model.bean.Order;
+import com.group3.tofu.order.model.bean.OrderDetail;
+import com.group3.tofu.order.service.OrderDetailService;
+import com.group3.tofu.order.service.OrderService;
 
 @Controller
 public class ShoppingCartController {
@@ -28,6 +33,12 @@ public class ShoppingCartController {
 	
 	@Autowired
 	private GiftService gService;
+	
+	@Autowired
+	private OrderService oService;
+	
+	@Autowired
+	private OrderDetailService odService;
 	
 	@GetMapping("/showCart")
 	public String showCart(Model model,HttpSession session) {
@@ -39,11 +50,7 @@ public class ShoppingCartController {
 		
 		List<ShoppingCart> carts = spcService.findByCustomerId(customerId);
 		model.addAttribute("carts",carts);
-//		for (ShoppingCart cart : carts) {	
-//			System.out.println("Cus id = " + cart.getF_cID());
-//			System.out.println("Gif id = " + cart.getGift().getId());
-//			System.out.println("Gif name  = " + cart.getGift().getName());
-//		}
+
 		
 		return "gift/showCart";
 	}
@@ -116,5 +123,40 @@ public class ShoppingCartController {
 		}
 		
 		return responseJson.toString();
+	}
+	@GetMapping("/checkout")
+	public String checkout(HttpSession session) {
+		Customer customer = (Customer)session.getAttribute("loggedInCustomer");
+		Integer customerId= customer.getCustomer_id();
+
+		Order newOrder = new Order();
+		newOrder.setF_customer_id(customerId);
+		newOrder.setOrder_number("001");
+		newOrder.setPayment("001");
+		Order saved = oService.insert(newOrder);
+		System.out.println(saved.getId()+"IDDDDDDDDDDDDDDDDDD");
+		int id =saved.getId();
+		List<OrderDetail> list = new ArrayList<>();
+		
+		List<ShoppingCart> carts = spcService.findByCustomerId(customerId);
+		for (ShoppingCart c : carts) {
+			OrderDetail od = new OrderDetail();
+			od.setGid(c.getGift().getId());
+			od.setPrice(c.getGift().getPrice());
+			od.setQty(c.getQty());
+			od.setOrder(saved);
+			list.add(od);
+			odService.save(od);
+		}
+		System.out.println(id+"XXXXX");
+		Order order = oService.findbyId(12);
+		List<OrderDetail> odList = order.getOrderDetails();
+		for (OrderDetail od : odList) {
+			System.out.println(od.getId());
+			System.out.println(od.getPrice());
+		}
+		
+		
+		return "123";
 	}
 }

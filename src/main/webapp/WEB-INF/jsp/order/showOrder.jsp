@@ -24,6 +24,7 @@
 	<h1>Hello Order</h1>
 	
 	
+	<div style="height: 600px;">
 	
 	<table class="table align-middle mb-0 bg-white table-hover" style="width: 1000px;margin: auto;">
 		<thead class="bg-light">
@@ -53,7 +54,7 @@
 						<button type="button" class="btn btn-success Shipment">${orders.ship_status }</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-success">${orders.order_number }</button>
+						<button type="button" class="btn btn-success">${orders.id }</button>
 					</td>
 					<td>
 						<button type="button" class="btn btn-outline-success"><i class="fa-solid fa-file" style="width: 20px;"></i></button>
@@ -71,21 +72,19 @@
 			</c:forEach>
 		</tbody>
 	  </table>
-	
-<div style="text-align: center;padding-top: 50px;">
+	<div style="text-align: center; padding-top: 50px;">
+		<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
 
-	<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
-		
-		<c:choose>
-			<c:when test="${page.number !=  pageNumber-1}">
-				<a href="${contextRoot}/tofu/order/findAll?p=${pageNumber}" style="text-decoration: none; "><span style="color: black;" class="linker">${pageNumber}</span></a>
-			</c:when>
-			<c:otherwise><span style="background-color: black;color: aliceblue;" class="linker">${pageNumber}</span></c:otherwise>
-		</c:choose>
-		
-	</c:forEach>
+			<c:choose>
+				<c:when test="${page.number !=  pageNumber-1}">
+				<a href="${contextRoot}/tofu/order/findAll?p=${pageNumber}" style="text-decoration: none;" class="linker"><span style="color: black;">${pageNumber}</span></a>
+				</c:when>
+				<c:otherwise><span style="background-color: black; color: aliceblue;" class="linker">${pageNumber}</span></c:otherwise>
+			</c:choose>
+
+		</c:forEach>
+	</div>
 </div>
-	
 	
 	<script>
 		for (let i = 0; i < $('.payment').length; i++) {

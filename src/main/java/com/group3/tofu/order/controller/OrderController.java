@@ -1,5 +1,7 @@
 package com.group3.tofu.order.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,7 @@ public class OrderController {
 		
 		return "order/showOrder";
 	}
+	
 	@GetMapping("order/removeOrder")
 	public String removeOrder(@RequestParam(name = "id")Integer id) {
 		
@@ -31,11 +34,26 @@ public class OrderController {
 		return "redirect:/order/findAll";
 	}
 	
-	@GetMapping("order/showDetail")
-	public String showDetail() {
+	@GetMapping("order/findByPayment")
+	public String findByPayment(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber,Model model) {
 		
+		List<Order> orders = orderService.findByPayment("未付款");
 		
+		int pages=pageNumber-1;
+		int count=2;
+		int totalpage = 0;
+		if (orders.size()%count == 0) {
+			totalpage = orders.size()/count;
+		}else {
+			totalpage = orders.size()/count +1;
+		}
+		int start = (0+pages)*count;
+		int end=count*(pages+1);
 		
-		return "order/showDetail";
+		List<Order> subList = orders.subList(start, end);
+		model.addAttribute("page",subList);
+		model.addAttribute("totalpage",totalpage);
+		
+		return "order/showOrder";
 	}
 }

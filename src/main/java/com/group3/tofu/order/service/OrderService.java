@@ -18,12 +18,12 @@ public class OrderService {
 	@Autowired
 	private OrderDAO orderDAO;
 	
-	public Order findbyId() {
-		return orderDAO.findById(1).get();
+	public Order findbyId(Integer id) {
+		return orderDAO.findById(id).get();
 	}
 	
-	public void insert(Order order) {
-		orderDAO.save(order);
+	public Order insert(Order order) {
+		return orderDAO.save(order);
 	}
 	
 	public List<Order> findByCustomerId(Integer customerId) {
@@ -35,12 +35,25 @@ public class OrderService {
 	}
 	
 	public Page<Order> findByPage(Integer pageNumber) {
-		Pageable pgb = PageRequest.of(pageNumber-1, 10, Direction.ASC, "id");
+		
+		Pageable pgb = PageRequest.of(pageNumber-1, 3, Direction.ASC, "id");
 		Page<Order> page = orderDAO.findAll(pgb);
 		return page;
 	}
 	
 	public void removeOrder(Integer id) {
 		orderDAO.deleteById(id);
+	}
+	
+	public List<Order> findByPayment(String payment) {
+		return orderDAO.findByPayment(payment);
+	}
+	
+	public List<Order> findPaymentByPage(String payment) {
+		
+		List<Order> orders = orderDAO.findByPayment(payment);
+		
+		
+		return orders;
 	}
 }
