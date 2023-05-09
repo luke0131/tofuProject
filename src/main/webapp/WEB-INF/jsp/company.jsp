@@ -22,7 +22,7 @@
 		<li style="margin-top: 20px; font-size: 20px" class="fw-bold" >即時預約維修保養，讓您擁有各項專屬貼心服務。</li>
 		<li style="margin-top: 20px; font-size: 20px" class="fw-bold" >專門販售各地區最熱銷的車款商品，希望能吸引不同車友來購買。</li>
 		<li style="margin-top: 20px; font-size: 20px" class="fw-bold" >員工管理部分則擁有任務系統、打卡系統以及請假系統，除了能讓員工業績強強滾之外，也讓管理者提高效率，事半功倍。</li>
-		<li style="margin-top: 20px; font-size: 20px" class="fw-bold" >處理顧客問題及傾聽顧客聲音是我們應該做的，設立論壇及留言板功能。</li>
+		<li style="margin-top: 20px; font-size: 20px" class="fw-bold" >處理顧客問題及傾聽顧客聲音是我們應該做的，專門設立論壇及留言功能，擁有最完善的售後服務。</li>
 	</ul>
 	<hr class="my-4">
 	<p style="margin-top: 20px; font-weight: bold ; margin-left:10px ; background-color:black ; color:white ; width:180px ; text-align:center" class="fs-1">專利技術</p>

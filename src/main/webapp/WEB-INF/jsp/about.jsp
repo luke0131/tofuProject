@@ -83,7 +83,7 @@
 				class="card-img-top" />
 			<div class="card-body" style="margin: auto;">
 				<p class="fw-bold text-primary text-center fs-1">
-					< 特有功能 >
+					< 獨家功能 >
 				</p>
 				<h2 class="card-title fw-bold text-center">獨立董事-蔡明學 xxxxxx</h2>
 				<p class="card-text">
@@ -106,7 +106,7 @@
 				<ul>
 					<li class="fs-5 fw-bold">登入、登出</li>
 					<li class="fs-5 fw-bold">修改員工資本資料</li>
-					<li class="fs-5 fw-bold">任務功能、打卡功能、請假功能</li>
+					<li class="fs-5 fw-bold">任務派發功能、上下班打卡功能、出缺勤請假功能</li>
 				</ul>
 				</p>
 			</div>

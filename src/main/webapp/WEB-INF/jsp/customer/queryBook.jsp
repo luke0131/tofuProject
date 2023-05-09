@@ -16,6 +16,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.js"
 	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
 	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 /* 製作top */
 .top {
@@ -42,6 +43,22 @@
 /* 卷軸移動效果 */
 * {
 	scroll-behavior: smooth;
+}
+
+.title {
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: center;
+}
+
+table {
+	/*border: 1px solid black;*/
+	border-collapse: collapse;
+	margin: auto;
+	text-align: center;
+	width: 1500px;
+	font-size: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+	/*width:100%*/
 }
 </style>
 </head>
@@ -101,11 +118,59 @@
 				</ul>
 			</div>
 		</div>
-		</div>
-		<!-- 製作回到頂端的TOP-->
-		<a href="#top" class="top">Top</a>
-		<script type="text/javascript"
-			src="${contextRoot}/js/pages/sidebars.js"></script>
-		<jsp:include page="/WEB-INF/jsp/layout/footer.jsp" />
+		<table style="margin-right: 100px">
+			<thead class="text-decoration-underline">
+				<tr>
+					<th>項目</th>
+					<th>商品品牌</th>
+					<th>商品名稱</th>
+					<th>預約賞車日期</th>
+					<th>目前狀態</th>
+					<th>服務專員</th>
+					<th>專員電話</th>
+					<th>立刻撥打</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach begin="0" end="${books.size()-1}" step="1" var="i">
+					<tr>
+						<td>${books.get(i).book_id}</td>
+						<td>${products.get(i).brand}</td>
+						<td>${products.get(i).productModel}</td>
+						<td>${books.get(i).book_date}</td>
+						<td>${books.get(i).status}</td>
+						<td>${employees.get(i).account}</td>
+						<td>${employees.get(i).phone}</td>
+						<td>
+							<button type="button" value=update id="call" onclick="call(event)"
+								style="margin-left: 15px; border: 0px solid transparent; background-color: transparent">
+								<img src="${contextRoot}/img/indexPicture/phone.png">
+							</button>
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	<!-- 製作回到頂端的TOP-->
+	<a href="#top" class="top">Top</a>
+	<script type="text/javascript"
+		src="${contextRoot}/js/pages/sidebars.js"></script>
+		<script type="text/javascript">
+		
+		function call(event){
+			event.preventDefault();
+			Swal.fire({
+				title: '您確定要撥打服務專員的電話嗎?',
+				  showCancelButton: true,
+				  confirmButtonText: '確定',
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					Swal.fire('正在撥打中....', '', 'warning')
+				  }
+				})
+		}
+		</script>
+	<jsp:include page="/WEB-INF/jsp/layout/footer.jsp" />
 </body>
 </html>
