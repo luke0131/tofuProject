@@ -13,10 +13,7 @@
 <body>
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
 	<jsp:include page="../layout/navbar.jsp" />
-	
-	Hi CART
 
-<a href="http://localhost:8080/tofu/showGift"><button class="btn btn-warning"><i class="fa-solid fa-reply" style="font-size: 24px;"></i>Back TO Shopping</button></a>
 
 
 <section class="h-100 h-custom">
@@ -105,9 +102,15 @@
                   <p class="mb-2 final_price">$26.48</p>
                 </div>
 
+                <button type="button" class="btn btn-warning btn-block btn-lg">
+                  <div class="d-flex justify-content-between">
+                    <span><a href="http://localhost:8080/tofu/showGift" style="text-decoration: none; color: black;"><i class="fa-solid fa-reply" style="font-size: 24px;"></i>Back Shopping</a></span> 
+                  </div>
+                </button>
+
                 <button type="button" class="btn btn-primary btn-block btn-lg">
                   <div class="d-flex justify-content-between">
-                    <span>Checkout</span>
+                    <span>Checkout</span> 
                   </div>
                 </button>
 
