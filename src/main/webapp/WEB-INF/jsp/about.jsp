@@ -20,32 +20,28 @@
 	<!-- 個人卡片 -->
 	<div class="card-group"
 		style="margin-top: 10px; width: 83rem; margin: auto;">
-		
+
 		<div class="card">
 			<img src="${contextRoot}/img/group3member/Poni.jpg"
 				class="card-img-top" />
 			<div class="card-body" style="margin: auto;">
-				<p class="fw-bold text-primary text-center fs-1">
-					< 會員系統 >
-				</p>
+				<p class="fw-bold text-primary text-center fs-1">< 會員系統 ></p>
 				<h2 class="card-title fw-bold text-center">CEO-王芃琳 Poni Wang</h2>
 				<p class="card-text">
 				<ul>
-					<li class="fs-5 fw-bold" >註冊、登入、登出</li>
-					<li class="fs-5 fw-bold" >修改會員資料、查看訂單資料及賞車紀錄</li>
-					<li class="fs-5 fw-bold" >豆腐車業網頁視覺設計</li>
+					<li class="fs-5 fw-bold">註冊、登入、登出</li>
+					<li class="fs-5 fw-bold">修改會員資料、查看訂單資料及賞車紀錄</li>
+					<li class="fs-5 fw-bold">豆腐車業網頁前後台視覺設計</li>
 				</ul>
 				</p>
 			</div>
 		</div>
-		
+
 		<div class="card">
-			<img src="${contextRoot}/img/indexPicture/profoliocard.jpg"
-				class="card-img-top" />
+			<img src="${contextRoot}/img/group3member/Jackie.jpg"
+				class="card-img-top" style="height:780px"/>
 			<div class="card-body" style="margin: auto;">
-				<p class="fw-bold text-primary text-center fs-1">
-					< 商品系統 >
-				</p>
+				<p class="fw-bold text-primary text-center fs-1">< 商品系統 ></p>
 				<h2 class="card-title fw-bold text-center">行銷總監-陳博軒 Jackie Chen</h2>
 				<p class="card-text">
 				<ul>
@@ -55,15 +51,13 @@
 				</ul>
 				</p>
 			</div>
-
 		</div>
+		
 		<div class="card">
 			<img src="${contextRoot}/img/group3member/Luke.jpg"
-				class="card-img-top"/>
+				class="card-img-top" />
 			<div class="card-body" style="margin: auto;">
-				<p class="fw-bold text-primary text-center fs-1">
-					 < 購買系統 >
-				</p>
+				<p class="fw-bold text-primary text-center fs-1">< 購買系統 ></p>
 				<h2 class="card-title fw-bold text-center">財務總監-賴昱廷 Luke Lai</h2>
 				<p class="card-text">
 				<ul>
@@ -76,15 +70,14 @@
 
 		</div>
 	</div>
+	
 	<div class="card-group"
 		style="margin-top: 10px; width: 83rem; margin: auto;">
 		<div class="card">
 			<img src="${contextRoot}/img/group3member/Min.jpg"
 				class="card-img-top" />
 			<div class="card-body" style="margin: auto;">
-				<p class="fw-bold text-primary text-center fs-1">
-					< 獨家功能 >
-				</p>
+				<p class="fw-bold text-primary text-center fs-1">< 獨家功能 ></p>
 				<h2 class="card-title fw-bold text-center">獨立董事-蔡明學 xxxxxx</h2>
 				<p class="card-text">
 				<ul>
@@ -96,11 +89,9 @@
 		</div>
 		<div class="card">
 			<img src="${contextRoot}/img/group3member/PeiHua.jpg"
-				class="card-img-top"  />
+				class="card-img-top" />
 			<div class="card-body" style="margin: auto;">
-				<p class="fw-bold text-primary text-center fs-1">
-					< 員工系統 >
-				</p>
+				<p class="fw-bold text-primary text-center fs-1">< 員工系統 ></p>
 				<h2 class="card-title fw-bold text-center">業務總監-溫佩樺 PeiHua Wen</h2>
 				<p class="card-text">
 				<ul>
@@ -116,9 +107,7 @@
 			<img src="${contextRoot}/img/group3member/Daniel.jpg"
 				class="card-img-top" />
 			<div class="card-body" style="margin: auto;">
-				<p class="fw-bold text-primary text-center fs-1">
-					< 客服系統 >
-				</p>
+				<p class="fw-bold text-primary text-center fs-1">< 客服系統 ></p>
 				<h2 class="card-title fw-bold text-center">策略顧問-劉書佑 Daniel Liu</h2>
 				<p class="card-text">
 				<ul>

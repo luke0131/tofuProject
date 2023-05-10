@@ -10,6 +10,9 @@
 <meta charset="UTF-8" />
 <title>小豆腐會員中心-查詢歷史訂單</title>
 <link href="${contextRoot}/css/sidebars.css" rel="stylesheet">
+<script type="text/javascript">
+	const contextRoot = "${pageContext.request.contextPath}";
+</script>
 <link
 	href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'
 	rel='stylesheet'></link>
@@ -20,6 +23,8 @@
 <script src="https://code.jquery.com/jquery-3.6.4.js"
 	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
 	crossorigin="anonymous"></script>
+<!-- axios ajax功能 -->
+<script src="https://www.unpkg.com/axios@1.3.5/dist/axios.min.js"></script>
 <style>
 /* 製作top */
 .top {
@@ -131,7 +136,7 @@ table {
 						<th>項目</th>
 						<th>訂單編號</th>
 						<th>商品名稱</th>
-						<th>禮物名稱</th>
+						<!-- 						<th>禮物名稱</th> -->
 						<th>訂單成立時間</th>
 						<th>預計到貨日期</th>
 						<th>訂單寄送地址</th>
@@ -146,14 +151,14 @@ table {
 
 					<c:forEach begin="0" end="${orders.size()-1}" step="1" var="i">
 						<tr>
-							<td>${orders.get(i).order_id}</td>
-							<td>${orders.get(i).order_number}</td>
+							<td>${orders.get(i).id}</td>
+							<td>ORD000${orders.get(i).id}</td>
 							<td>${products.get(i).productModel}</td>
-							<td>${gifts.get(i).name}</td>
+							<%-- 							<td>${gifts.get(i).name}</td> --%>
 							<td>${orders.get(i).order_date}</td>
 							<td>${orders.get(i).shipped_date}</td>
 							<td><input type="text" value="${orders.get(i).ship_address}"
-								data-id="${orders.get(i).order_id}"
+								data-id="${orders.get(i).id}"
 								data-address="${orders.get(i).ship_address}" id="shipAddress"
 								class="addressClass" name="shipAddress"
 								style="width: 350px; text-align: center"></td>
@@ -161,16 +166,14 @@ table {
 							<td>${orders.get(i).ship_status}</td>
 							<td>${employees.get(i).account}</td>
 							<td>
-								<button name="${orders.get(i).order_id}" type="submit"
-									value=update onclick="updateOrder(event,this.name)"
+								<button name="${orders.get(i).id}" type="button" value=update
+									onclick="updateOrder(event,this.name)" 
 									style="margin-left: 15px; border: 0px solid transparent; background-color: transparent">
 									<img src="${contextRoot}/img/indexPicture/pencil.png">
 								</button>
 							</td>
 						</tr>
 					</c:forEach>
-
-
 				</tbody>
 			</table>
 		</form>
@@ -180,38 +183,74 @@ table {
 	<a href="#top" class="top">Top</a>
 	<script type="text/javascript"
 		src="${contextRoot}/js/pages/sidebars.js"></script>
+
 	<script type="text/javascript">
 
 	let addressClass = document.getElementsByClassName('addressClass');
+	let orderid = 0;
+	let address = "";
+
 	for(i=0 ; i<addressClass.length ; i++){
 		
-		addressClass[i].addEventListener('click' , function(){
+			addressClass[i].addEventListener('change' , function(){
+			neworderid = this.value;
+			newaddress = this.value;
 			
-		let addressid = this.getAttribute('data-id');
-		let address = this.getAttribute('data-address');
-		
-		console.log(addressid);
-		console.log(address);
+				console.log(neworderid);
+				console.log(newaddress);
+					})
+		addressClass[i].addEventListener('click' , function(){
+			orderid = this.getAttribute('data-id');
+			address = this.getAttribute('data-address');
+			
+			console.log(orderid);
+			console.log(address);
 			})
-		}   
+			
+			
+		}
+  
+	
+	
 		
+	 //let requestBody = {
+			 //shipAddress: "address", 
+			  //};    
+	 
+	 //console.log("requestBody", requestBody);
 		    
-		    
-		function updateOrder(event,orderId){
-			$("#poni")[0].action = "${contextRoot}/customer/updateAddress/" + orderId;
- 			event.preventDefault();
+		function updateOrder(event , orderid){
+// 			$("#poni")[0].action = "${contextRoot}/customer/updateAddress/" + orderId;
+
+			console.log("orderid" , orderid);
+			console.log("data-address" , newaddress);
+			
+ 			//event.preventDefault();
 			Swal.fire({
 				  title: '您確定要修改地址嗎?',
 				  showCancelButton: true,
 				  confirmButtonText: '確定',
 				}).then((result) => {
+					
+					axios.post(contextRoot + "/customer/updateAddress/" + orderid + "/" + newaddress).then(function(response){
+						console.log(response);
+
+
+					}).catch(function(error){
+						console.log(error);
+
+					})
+					
+					
+					
 				  if (result.isConfirmed) {
 				    Swal.fire('修改成功', '', 'success')
 				  }
-				    document.querySelector("#poni").submit();
+// 				    document.querySelector("#poni").submit();
 				})
 		}
 		
+
 		
 		</script>
 	<jsp:include page="/WEB-INF/jsp/layout/footer.jsp" />

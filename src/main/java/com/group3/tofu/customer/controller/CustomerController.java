@@ -29,6 +29,7 @@ import com.group3.tofu.customer.service.CustomerService;
 import com.group3.tofu.employee.model.Employee;
 import com.group3.tofu.gift.model.bean.Gift;
 import com.group3.tofu.order.model.bean.Order;
+import com.group3.tofu.order.service.OrderService;
 import com.group3.tofu.product.model.Product;
 
 //@SessionAttributes(names= {"accountName"})
@@ -37,6 +38,9 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
+
+	@Autowired
+	private OrderService orderService;
 
 	// 尋找所有customer
 	@GetMapping(path = "/customer/all")
@@ -64,20 +68,20 @@ public class CustomerController {
 
 		for (Order order : orders) {
 			Integer f_product_id = order.getF_product_id();
-			Integer f_gift_id = order.getF_gift_id();
+			// Integer f_gift_id = order.getF_gift_id();
 			Integer f_employee_id = order.getF_employee_id();
 
 			// product productDao 用f_product_id找到Product物件
 			Product product = customerService.findProductById(f_product_id);
 
 			// gift GiftDao 用f_gift_id找到Gift物件
-			Gift gift = customerService.findGiftById(f_gift_id);
+			// Gift gift = customerService.findGiftById(f_gift_id);
 
 			// employee EmployeeDao 用f_employee_id找到Employee物件
 			Employee employee = customerService.findEmployeeById(f_employee_id);
 
 			products.add(product);
-			gifts.add(gift);
+			// gifts.add(gift);
 			employees.add(employee);
 
 		}
@@ -89,7 +93,6 @@ public class CustomerController {
 		System.out.println("查詢歷史訂單成功!");
 		return "customer/queryOrder";
 	}
-
 
 	// 尋找屬於該customer的所有預約賞車紀錄
 	@GetMapping(path = "/customer/queryBook")
@@ -228,6 +231,44 @@ public class CustomerController {
 		return "redirect:/";
 	}
 
+	// 製作find email and password 的 controller(for mgmDashboard用)
+	@PostMapping(path = "/mgm/login/checkPage")
+	public String findemailformgmDB(@RequestParam("email") String email, @RequestParam("password") String password,
+			HttpSession session, Model model) {
+
+		// 若錯誤的話就送error字串給他
+		HashMap<String, String> errors = new HashMap<String, String>();
+		model.addAttribute("errors", errors);
+		if (email == null || email.length() == 0) {
+			errors.put("email", "請輸入您的信箱");
+		}
+
+		if (password == null || password.length() == 0) {
+			errors.put("password", "請輸入您的密碼");
+		}
+
+		if (errors != null && !errors.isEmpty()) {
+			return "customer/login";
+		}
+
+		// 呼叫model
+		Customer loggedInCustomer = customerService.findEmailAndPassword(email, password);
+
+		// 要下判斷式，當我今天資料庫有抓到這筆資料時，我就讓他登入進去;如果沒有抓到這筆資料，我就繼續讓他停留在login畫面
+		if (loggedInCustomer != null) {
+
+			session.setAttribute("loggedInCustomerForDB", loggedInCustomer);
+
+			return "mgm/Dashboard" ;
+
+		} else {
+			errors.put("loginFailed", "查無此會員資料，請重新輸入或立即註冊!");
+
+			return "mgm/Management" ;
+
+		}
+	}
+
 	// 製作註冊的controller
 //	@ResponseBody
 //	@PostMapping("customer/createMember")
@@ -302,27 +343,30 @@ public class CustomerController {
 		return "customer/updateProfile";
 	}
 
-	//測試
+	// 測試
 	@GetMapping("/michael")
 	public String michael() {
 		System.out.println("近來michael了");
 		return "customer/login";
 	}
-	
+
 	// 更新訂單裡面的orderAddress
-	@PostMapping(path = "customer/updateAddress/{order_id}")
-	public String updateAddress(@RequestParam (name="ship_address")String address, @PathVariable("order_id") Integer order_id) throws IOException {
+	@ResponseBody
+	@PostMapping(path = "customer/updateAddress/{order_id}/{shipAddress}")
+	public String updateAddress(@PathVariable("shipAddress") String address, @PathVariable("order_id") Integer order_id)
+			throws IOException {
 		System.out.println(address);
-		System.out.println("---------------------------"+order_id);
-		
-		
-		
+		System.out.println("---------------------------" + order_id);
+
+		Order option = orderService.findbyId(order_id);
+
+		System.out.println(option);
+
+		option.setShip_address(address);
+
+		orderService.insert(option);
 
 		return "redirect:/customer/queryOrder";
 	}
-	
-	
-	
-	
 
 }

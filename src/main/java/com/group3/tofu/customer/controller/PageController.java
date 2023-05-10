@@ -64,19 +64,19 @@ public class PageController {
 		return "customer/updateProfile";
 	}
 	
-	//跳轉到查詢歷史訂單畫面
-	//@GetMapping("customer/queryOrder")
-	//public String queryOrder() {
+	//跳轉到管理者後台的頁面
+	@GetMapping("mgm/Management")
+	public String management() {
 		
-		//return "customer/queryOrder";
-	//}
+		return "mgm/Management" ;
+	}
 	
-	//跳轉到查詢預約紀錄畫面
-	//@GetMapping("customer/queryBook")
-	//public String queryBook() {
-			
-		//return "customer/queryBook";
-	//}
+	//挑轉進去管理者dashboard畫面
+//	@GetMapping("mgm/Dashboard")
+//	public String Dashboard() {
+//		
+//		return "mgm/Dashboard" ;
+//	}
 
 
 }

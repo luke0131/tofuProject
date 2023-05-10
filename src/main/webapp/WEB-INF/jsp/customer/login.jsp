@@ -65,11 +65,11 @@
 						</div>
 
 						<div class="text-center fw-bold fs-5 mt-3">
-							<a href="#" class="text-decoration-none text-primary">站長登入請按此</a>
+							<a href="${contextRoot}/mgm/Management" class="text-decoration-none text-primary">→站長登入請按此</a>
 						</div>
 						
 						<div class="text-center fw-bold fs-5 mt-1">
-							<a href="#" class="text-decoration-none text-primary ">員工登入請按此</a>
+							<a href="#" class="text-decoration-none text-primary">→員工登入請按此</a>
 						</div>
 
 
