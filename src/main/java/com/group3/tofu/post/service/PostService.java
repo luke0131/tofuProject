@@ -20,10 +20,14 @@ public class PostService {
 	@Autowired
 	private PostDao postDao;
 	
-	//insert資料
-	public void insertPost(Post post) {
-		postDao.save(post);
+
+	
+	//insert文章標題及內容
+	public Post createPost(Post post) {
+		return postDao.save(post);
 	}
+	
+
 	
 	//找全部
 	public List<Post> getAllPost(){
@@ -58,7 +62,7 @@ public class PostService {
 	public Post updatePostById(Integer post_id , String newPost) {
 		Optional<Post> option = postDao.findById(post_id);
 		
-		if(!option.isEmpty()) {
+		if(option.isPresent()) {
 			Post post = option.get();
 			post.setTitle(newPost);
 			return post;
@@ -69,7 +73,7 @@ public class PostService {
 	
 	//分頁
 	public Page<Post> findByPage(Integer pageNumber) {
-		PageRequest pgb = PageRequest.of(pageNumber - 1, 5, Sort.Direction.DESC, "added");
+		PageRequest pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "added");
 
 		Page<Post> page = postDao.findAll(pgb);
 

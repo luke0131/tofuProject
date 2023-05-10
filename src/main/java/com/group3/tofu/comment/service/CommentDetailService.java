@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.group3.tofu.comment.model.CommentDetail;
@@ -19,8 +20,8 @@ public class CommentDetailService {
 	private CommentDetailDAO detailDao;
 		
 	
-	public void insertDetail(CommentDetail cDetail) {
-		detailDao.save(cDetail);
+	public void insertDetail(CommentDetail detail) {
+		detailDao.save(detail);
 	}
 	
 	
@@ -49,10 +50,16 @@ public class CommentDetailService {
 	}
 	
 	
+	public List<CommentDetail> getCustomerDetailById(Integer customer_id){
+		
+		return detailDao.findByCustomerId(customer_id);
+	}
+	
+	
 	
 	
 	public Page<CommentDetail> findByDetailPage(Integer pageNumber) {
-		PageRequest pgb = PageRequest.of(pageNumber - 1, 2, Sort.Direction.DESC, "comment_date");
+		PageRequest pgb = PageRequest.of(pageNumber - 1, 3, Direction.DESC, "commentDate");
 
 		Page<CommentDetail> page = detailDao.findAll(pgb);
 

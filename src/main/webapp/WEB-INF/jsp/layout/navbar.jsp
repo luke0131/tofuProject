@@ -40,8 +40,8 @@
 					<li class="nav-item dropdown"><a class="nav-link active"
 						href="#" data-bs-toggle="dropdown" aria-current="page">豆腐論壇</a>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="${contextRoot}/post">豆腐討論區</a></li>
-							<li><a class="dropdown-item" href="#">聯絡我們</a></li>
+							<li><a class="dropdown-item" href="${contextRoot}/showPost">豆腐討論區</a></li>
+							<li><a class="dropdown-item" href="${contextRoot}/contactUs">聯絡我們</a></li>
 						</ul></li>
 
 					<li class="nav-item dropdown"><a class="nav-link active"

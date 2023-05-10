@@ -71,10 +71,10 @@ uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <script type="text/javascript">
     window.onload = function() {
-        // 3秒後跳轉回首頁
+        // 2秒後跳轉回首頁
         setTimeout(function(){
             window.location.href = "${contextRoot}/";
-        }, 3000);
+        }, 2000);
     }
 </script>
 

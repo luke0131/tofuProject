@@ -1,18 +1,23 @@
 package com.group3.tofu.post.model;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.group3.tofu.comment.model.Comment;
 
 @Entity
@@ -33,39 +38,29 @@ public class Post {
 	@Column(name = "authorName")
 	private String authorName;
 	
-//	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-//	@Temporal(TemporalType.TIMESTAMP)
-//	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "added", columnDefinition = "DATE") 
-	private LocalDate added;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm EEEE")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm EEEE")
+	@Column(name = "added") 
+	private Date added;
 	
-	@OneToOne(mappedBy = "post")
+	@JsonIgnore
+	@OneToOne(mappedBy = "post", fetch = FetchType.LAZY)
 	private Comment comment;
-	
-	public Comment getComment() {
-		return comment;
-	}
 
-	public void setComment(Comment comment) {
-		this.comment = comment;
-	}
-
-	
-	
 	
 	public Post() {
 
 	}
 	
-//	@PrePersist // 當物件要轉換成 Persistent 狀態時，發動該方法
-//	public void onCreate() {
-//		if (added == null) {
-//			added = new Date();
-//		}
-//	}
-
+	@PrePersist // 當物件要轉換成 Persistent 狀態時，發動該方法
+	public void onCreate() {
+		if (added == null) {
+			added = new Date();
+		}
+	}
 	
-
+	
 	public Integer getPost_id() {
 		return post_id;
 	}
@@ -98,12 +93,20 @@ public class Post {
 		this.authorName = authorName;
 	}
 
-	public LocalDate getAdded() {
+	public Date getAdded() {
 		return added;
 	}
 
-	public void setAdded(LocalDate added) {
+	public void setAdded(Date added) {
 		this.added = added;
+	}
+	
+	public Comment getComment() {
+		return comment;
+	}
+
+	public void setComment(Comment comment) {
+		this.comment = comment;
 	}
 
 	@Override

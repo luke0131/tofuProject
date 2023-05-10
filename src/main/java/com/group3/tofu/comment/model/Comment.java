@@ -1,6 +1,6 @@
 package com.group3.tofu.comment.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,8 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group3.tofu.post.model.Post;
 
 @Entity
@@ -28,6 +36,7 @@ public class Comment {
 	@Column(name = "text")
 	private String text;
 	
+	@JsonIgnore
 	@OneToOne
 	@JoinColumn(name="f_post_id",referencedColumnName = "post_id")
 	private Post post;
@@ -35,11 +44,23 @@ public class Comment {
 	@Column(name = "authorName")
 	private String authorName;
 	
-	@Column(name = "create_date" , columnDefinition = "DATE")
-	private LocalDate create_date;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm EEEE")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm EEEE")
+	@Column(name = "create_date")
+	private Date createDate;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "comment" , cascade = CascadeType.ALL)
 	private List<CommentDetail> commentDetail;
+	
+	
+	@PrePersist // 當物件要轉換成 Persistent 狀態時，發動該方法
+	public void onCreate() {
+		if (createDate == null) {
+			createDate = new Date();
+		}
+	}
 
 	public Integer getComment_id() {
 		return comment_id;
@@ -77,18 +98,18 @@ public class Comment {
 		this.authorName = authorName;
 	}
 
-	public LocalDate getCreate_date() {
-		return create_date;
+	public Date getCreate_date() {
+		return createDate;
 	}
 
-	public void setCreate_date(LocalDate create_date) {
-		this.create_date = create_date;
+	public void setCreate_date(Date create_date) {
+		this.createDate = create_date;
 	}
 
 	@Override
 	public String toString() {
 		return "Comment [comment_id=" + comment_id + ", text=" + text + ", post=" + post + ", authorName=" + authorName
-				+ ", create_date=" + create_date + "]";
+				+ ", create_date=" + createDate + "]";
 	}
 	
 	

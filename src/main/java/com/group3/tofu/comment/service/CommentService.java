@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.group3.tofu.comment.model.Comment;
 import com.group3.tofu.comment.model.CommentDAO;
-import com.group3.tofu.comment.model.CommentDetailDAO;
-import com.group3.tofu.customer.model.CustomerDao;
 
 @Service
 public class CommentService {
@@ -17,13 +15,16 @@ public class CommentService {
 	@Autowired
 	private CommentDAO commentDAO;
 	
-	@Autowired
-	private CommentDetailDAO commentDetailDAO;
+
+	//insert文章標題及內容
+	public Comment createComment(Comment comment) {
+		return commentDAO.save(comment);
+	}
+		
+		
 	
-	@Autowired
-	private CustomerDao customerDao;
 	
-	
+	//找全部的文章內容
 	public List<Comment> getAllComment(){
 		return commentDAO.findAll();
 	}
@@ -33,7 +34,21 @@ public class CommentService {
 	public Comment findByCommentId (Integer comment_id) {
 		Optional<Comment> opComment = commentDAO.findById(comment_id);
 		return opComment.isPresent() ? opComment.get() : null;
-	} 
+	}
+	
+	
+	
+	//用f_post_id帶進新增內容的畫面
+	public Comment getByFkPostId(Integer f_post_id) {
+	
+		return commentDAO.findByFkPostId(f_post_id);		
+	}
+	
+	
+	public Comment getByCommentId (Integer comment_id) {
+		
+		return commentDAO.findByCommentId(comment_id);
+	}
 	
 	
 	
