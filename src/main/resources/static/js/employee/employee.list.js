@@ -62,7 +62,7 @@ function Home() {
                 setCurrentUserInfo(data.filter((user)=>user.eid===employee.eid));
                 setShowModal(true)}}
             >
-              <i className="fas fa-user-edit"></i> Edit
+              <i className="fas fa-user-edit"></i>
             </button>
           </a>
         </td>
@@ -72,7 +72,7 @@ function Home() {
             onClick={() => tableRowRemove(employee.eid)}
             id={"d" + employee.eid}
           >
-            <i className="fas fa-trash-alt"></i> Delete
+            <i className="fas fa-trash-alt"></i>
           </button>
         </td>
       </tr>

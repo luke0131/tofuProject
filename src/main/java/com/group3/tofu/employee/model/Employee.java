@@ -2,6 +2,7 @@ package com.group3.tofu.employee.model;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "Employee")
-public class Employee{
+public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,8 +64,11 @@ public class Employee{
 	@Column(name= "salary")
 	private Integer salary;
 	
-	@Column(name= "level")
-	private Integer level;
+	@Column(name= "enabled")
+	private Integer enabled;
+	
+	@Column(name= "authority")
+	private String authority;
 	
 	@Lob
 	@Column(name= "photo")
@@ -177,12 +181,20 @@ public class Employee{
 		this.salary = salary;
 	}
 
-	public Integer getLevel() {
-		return level;
+	public Integer getEnabled() {
+		return enabled;
 	}
 
-	public void setLevel(Integer level) {
-		this.level = level;
+	public void setEnabled(Integer enabled) {
+		this.enabled = enabled;
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 
 	public byte[] getPhoto() {
@@ -193,10 +205,9 @@ public class Employee{
 		this.photo = photo;
 	}
 
-	
 	public Employee(Integer eid, String firstName, String lastName, String account, String password, String gender,
 			LocalDate birthday, String email, String phone, String department, String position, LocalDate hireDate,
-			Integer salary, Integer level, byte[] photo) {
+			Integer salary, Integer enabled, String authority, byte[] photo) {
 		this.eid = eid;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -210,7 +221,8 @@ public class Employee{
 		this.position = position;
 		this.hireDate = hireDate;
 		this.salary = salary;
-		this.level = level;
+		this.enabled = enabled;
+		this.authority = authority;
 		this.photo = photo;
 	}
 
@@ -219,8 +231,11 @@ public class Employee{
 		return "Employee [eid=" + eid + ", firstName=" + firstName + ", lastName=" + lastName + ", account=" + account
 				+ ", password=" + password + ", gender=" + gender + ", birthday=" + birthday + ", email=" + email
 				+ ", phone=" + phone + ", department=" + department + ", position=" + position + ", hireDate="
-				+ hireDate + ", salary=" + salary + ", level=" + level + ", photo=" + Arrays.toString(photo) + "]";
+				+ hireDate + ", salary=" + salary + ", enabled=" + enabled + ", authority=" + authority + ", photo="
+				+ Arrays.toString(photo) + "]";
 	}
+
+	
 	
 	
 	

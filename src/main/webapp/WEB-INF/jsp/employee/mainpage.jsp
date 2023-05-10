@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Employee List</title>
+<title>Employee System Mainpage</title>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js" integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js"></script>
@@ -21,8 +21,7 @@
 <body id="journal-scroll">
 <div id="root"></div>
 <script type="text/babel" src="${contextRoot}/js/employee/components/sidebar.js"></script>
-<script type="text/babel" src="${contextRoot}/js/employee/editEmployee_1.js"></script>
-<script type="text/babel" src="${contextRoot}/js/employee/employee.list.js"></script>
-<script type="text/babel">ReactDOM.render(<Home />, document.getElementById('root'));</script>
+<script type="text/babel" src="${contextRoot}/js/employee/employee.main.js"></script>
+<script type="text/babel">ReactDOM.render(<MainPage />, document.getElementById('root'));</script>
 </body>
 </html>
