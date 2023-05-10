@@ -21,7 +21,7 @@
 <body id="journal-scroll">
 <div id="root"></div>
 <script type="text/babel" src="${contextRoot}/js/employee/components/sidebar.js"></script>
-<script type="text/babel" src="${contextRoot}/js/employee/editEmployee_1.js"></script>
+<script type="text/babel" src="${contextRoot}/js/employee/editEmployee.js"></script>
 <script type="text/babel" src="${contextRoot}/js/employee/employee.list.js"></script>
 <script type="text/babel">ReactDOM.render(<Home />, document.getElementById('root'));</script>
 </body>

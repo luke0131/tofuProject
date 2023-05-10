@@ -30,17 +30,9 @@ function EditEmployee({userInfo}) {
   return (
     <div className="modal" id="my-modal">
       <div className="modal-box max-w-none w-5/12" id="journal-scroll">
-        <h3 className="font-bold text-lg">
-          Congratulations random Internet user!
-        </h3>
-
         <div className="container mx-auto px-14 py-16 flex justify-between">
           <form>
             <div className="space-y-12">
-
-              <div className="border-b border-gray-900/10 pb-12"></div>
-
-              {/* <div className="border-b border-gray-900/10 pb-12"> */}
               <h2 className="text-base font-semibold leading-7 text-gray-900">
                 Profile
               </h2>
@@ -50,7 +42,7 @@ function EditEmployee({userInfo}) {
               </p>
               <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-5">
                 <div className="mt-10 grid col-span-3">
-                  {/* ID */}
+
                   <div className="sm:col-span-2 mr-6" hidden>
                     <label
                       htmlFor="eid"
@@ -360,7 +352,7 @@ function EditEmployee({userInfo}) {
                     </div>
                   </fieldset>
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-2" hidden>
                   <fieldset>
                     <legend
             
