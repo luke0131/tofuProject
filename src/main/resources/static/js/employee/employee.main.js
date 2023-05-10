@@ -1,0 +1,1 @@
+function MainPage() {return (<><div className="container mx-auto px-14 py-16 flex justify-between"><Sidebar /><div className="flex-wrap justify-center w-full w-4/5"><div className="w-4/5 text-2xl my-6">Hello!</div><div className="overflow-x-auto flex justify-center"></div></div></div></>);}
