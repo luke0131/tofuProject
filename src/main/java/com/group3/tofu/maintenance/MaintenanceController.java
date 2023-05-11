@@ -65,6 +65,9 @@ public class MaintenanceController {
         model.addAttribute("keycode",maintenance.getKeycode());
 		model.addAttribute("formattedDate",formattedDate);
 	    model.addAttribute("appointmenttime",maintenance.getAppointmenttime());
+	    model.addAttribute("mcategory",maintenance.getMcategory());
+	    model.addAttribute("inspection",maintenance.getInspection());
+	    model.addAttribute("electric",maintenance.getElectric());
 	    return "maintenance/success";
 	}
 	

@@ -2,6 +2,8 @@ package com.group3.tofu.appointment;
 
 import java.util.UUID;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.group3.tofu.customer.service.MailService;
+
 @Controller
 public class AppointmentController {
 	@Autowired
 	private AppointmentService aService;
-	
+	@Autowired
+	private MailService mailService;
+	 
 //	@ResponseBody
 //	@GetMapping("/test/gg")
 //	public Appointment add() {
@@ -54,10 +60,16 @@ public class AppointmentController {
 		    }
 
 		 @PostMapping("/install")
-		 public String postAppointment(@ModelAttribute(name="appointmentForm")Appointment appointment,Model model) {
+		 public String postAppointment(@ModelAttribute(name="appointmentForm")Appointment appointment,Model model) throws MessagingException {
 			appointment.setKeycode(generateKeyCode());
 			 aService.saveAppointment(appointment);
 			 model.addAttribute("keycode",appointment.getKeycode());
+			 
+			
+			 String to = appointment.getCustomeremail();
+		        String subject = "預約確認";
+		        String content = "您已成功預約！\n"+appointment.getContactperson()+appointment.getContactmobile();
+			 mailService.sendEmail(to, subject, content);
 			 return "appointment/finish";
 			
 			  

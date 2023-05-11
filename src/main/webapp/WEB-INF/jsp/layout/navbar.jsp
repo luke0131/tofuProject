@@ -48,7 +48,7 @@
 						href="#" data-bs-toggle="dropdown" aria-current="page">客戶服務</a>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="${contextRoot}/introduce">維修保養</a></li>
-							<li><a class="dropdown-item" href="#">2</a></li>
+							<li><a class="dropdown-item" href="${contextRoot}/show">家用充電座安裝評估預約</a></li>
 						</ul></li>
 
 					<!-- <li class="nav-item dropdown">

@@ -10,7 +10,6 @@
 <title>專業保養</title>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
@@ -64,15 +63,10 @@
 			<a href="${contextRoot}/main" class="btn btn-dark">預約保養</a>
 		</div>
 	</div>
-</div>
 <br>
 <br>
 
-	<script type="text/javascript"
-		src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript"
-		src="${contextRoot}/js/js/jquery-3.6.4.min.js"></script>
-
+	
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>
 

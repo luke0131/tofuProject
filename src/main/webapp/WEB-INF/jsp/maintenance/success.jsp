@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <title>預約成功</title>
 <style>
 body {
@@ -41,9 +42,10 @@ p {
 		<h1>您已成功完成 TOFU保養預約</h1>
 		<p>感謝您的預約，豆腐車業專業保養竭誠為您服務</p>
 		<P>您的訂單編號為:${keycode}</p>
+		<P>您的預約項目:${mcategory}${inspection}${electric}</p>
 		<p>預約時間：${formattedDate}號${appointmenttime}</p>
 	</div>
-
+	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
 </body>
 
 </html>
