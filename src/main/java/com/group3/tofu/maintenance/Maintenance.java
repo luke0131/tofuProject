@@ -38,8 +38,26 @@ private String notes;
 private Date appointment;
 private String appointmenttime;
 private String keycode ;
+private String inspection;
+private String electric;
 public Maintenance() {
 	
+}
+
+public String getInspection() {
+	return inspection;
+}
+
+public void setInspection(String inspection) {
+	this.inspection = inspection;
+}
+
+public String getElectric() {
+	return electric;
+}
+
+public void setElectric(String electric) {
+	this.electric = electric;
 }
 
 public String getKeycode() {

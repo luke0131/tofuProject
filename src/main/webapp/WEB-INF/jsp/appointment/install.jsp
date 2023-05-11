@@ -25,7 +25,7 @@
 
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
@@ -51,7 +51,7 @@
 
 				<h4>安裝評估費用</h4>
 				<p>
-					評估前需支付華城電能新台幣 2,000元(含稅，離島城市另提供報價)</br>，如後續確定安裝，該筆費用可折抵後續安裝費
+					評估前需支付飛鴻電能新台幣 2,000元(含稅，離島城市另提供報價)</br>，如後續確定安裝，該筆費用可折抵後續安裝費
 				</p>
 			</div>
 
@@ -175,15 +175,18 @@
 
 	<div style="font-size: 18px; line-height: 2;" class="container">
 
-
+<div class="d-flex flex-row ">
+<img src="./img/mPicture/th.jpg" width="650" height="550"
+				class="rounded float-end" alt="...">
+<div>
 		<h2>顧客基本資料與安裝評估聯絡資訊</h2>
 		<p class="desc">
 			填妥資料後，將由專人與您聯繫安排評估時間。 
 		</p>
-		<div>
-			<img src="./img/mPicture/imggg.jpg" width="450" height="450"
-				class="rounded float-end" alt="...">
-		</div>
+		
+			
+		
+		
 		<p>
 			<label class="form-label">*購車人姓名:</label> <input type="text"
 				style="border: 1px solid blue; border-radius: 5px; width: 300px;"
@@ -266,7 +269,8 @@
 
 
 		<button type="submit" class="btn btn-primary btn-lg">完成送出</button>
-
+</div>
+</div>
 		</form:form>
 	</div>
 	
@@ -316,10 +320,7 @@ function showDialog() {
 
 
 
-	<script type="text/javascript"
-		src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript"
-		src="${contextRoot}/js/js/jquery-3.6.4.min.js"></script>
+	
 
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>
