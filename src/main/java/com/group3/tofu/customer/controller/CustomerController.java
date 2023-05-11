@@ -64,20 +64,20 @@ public class CustomerController {
 
 		for (Order order : orders) {
 			Integer f_product_id = order.getF_product_id();
-			Integer f_gift_id = order.getF_gift_id();
+//			Integer f_gift_id = order.getF_gift_id();
 			Integer f_employee_id = order.getF_employee_id();
 
 			// product productDao 用f_product_id找到Product物件
 			Product product = customerService.findProductById(f_product_id);
 
 			// gift GiftDao 用f_gift_id找到Gift物件
-			Gift gift = customerService.findGiftById(f_gift_id);
+//			Gift gift = customerService.findGiftById(f_gift_id);
 
 			// employee EmployeeDao 用f_employee_id找到Employee物件
 			Employee employee = customerService.findEmployeeById(f_employee_id);
 
 			products.add(product);
-			gifts.add(gift);
+//			gifts.add(gift);
 			employees.add(employee);
 
 		}

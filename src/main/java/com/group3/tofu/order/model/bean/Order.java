@@ -32,9 +32,6 @@ public class Order {
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderDetail> orderDetails;
 	
-//	@Column(name = "f_gift_id")
-//	private Integer f_gift_id;
-	
 	@Column(name = "f_customer_id")
 	private Integer f_customer_id;
 	
@@ -141,20 +138,6 @@ public class Order {
 	public void setShip_status(String ship_status) {
 		this.ship_status = ship_status;
 	}
-	
-
-	
-
-	@Override
-	public String toString() {
-		return "Order [id=" + id + ", order_number=" + order_number + ", f_product_id=" + f_product_id + ", f_gift_id="
-				+ f_gift_id + ", f_customer_id=" + f_customer_id + ", f_employee_id=" + f_employee_id + ", order_date="
-				+ order_date + ", shipped_date=" + shipped_date + ", ship_address=" + ship_address + ", payment="
-				+ payment + ", ship_status=" + ship_status + "]";
-	}
-
-
-
 	
 
 	

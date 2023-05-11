@@ -6,97 +6,112 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.group {
+	clear: left;
+	width: 650px;
+	border-bottom: 2px dashed gray;
+	padding-bottom: 10px;
+	margin: 10px;
+  }
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
 	<jsp:include page="../layout/navbar.jsp" />
 	
-	
-	
-	
-	<section class="order-form m-4">
-		<div class="container pt-4">
-			<div class="row">
-				<div class="col-12 px-4">
-					<h1>You can see my Order Form</h1>
-					<span>with some explanation below</span>
-					<hr class="mt-1" />
-				</div>
-	  
-				<div class="col-8">
-					<div class="row mx-4">
-						<div class="col-8">
-							<label class="form-label" for="form1">Order Number</label>
-							<input type="text" id="form1" class="form-control order-form-input" />
-						</div>
-						<div class="col-8">
-							<label class="form-label" for="form1">Order Number</label>
-							<input type="text" id="form1" class="form-control order-form-input" />
-						</div>
-						<div class="col-8">
-							<label class="form-label" for="form1">Order Number</label>
-							<input type="text" id="form1" class="form-control order-form-input" />
-						</div>
-						<div class="col-8">
-							<label class="form-label" for="form1">Order Number</label>
-							<input type="text" id="form1" class="form-control order-form-input" />
-						</div>
-						<div class="col-8">
-							<label class="form-label" for="form1">xxxxxxxxxxx Number</label>
-							<input type="text" id="form1" class="form-control order-form-input" />
-						</div>
-						<div class="col-sm-8  mt-2">
-							<select class="form-select" aria-label="Default select example">
-								<option value="1">已付款</option>
-								<option value="2">已付款</option>
-							  </select>	  
-						</div>
-						<div>Payment</div>
-						<div class="col-sm-8 mt-2">
-							<select class="form-select" >
-								<option value="1">未出貨</option>
-								<option value="2">運送中</option>
-								<option value="3">已送達</option>
-							  </select>
-							  
-						</div>
-						<div class="col-sm-8 mt-2">
-							<select class="form-select" >
-								<option value="1">未出貨</option>
-								<option value="2">運送中</option>
-								<option value="3">已送達</option>
-							</select>
-							  
-						</div>
-					</div>
-					
+	<div style="margin: auto; width: 800px;border: black dashed 2px;">
+        <h5>訂單資訊</h5>
+        <div class="group">
+            <label for="">訂單編號：</label>
+            <span>ORD0000${order.id}</span>
+        </div>
+        <div class="group">
+            <label for="">訂單日期： </label>
+            <span>${order.order_date}</span>
+        </div>
+        <div class="group">
+            <label for="">付款狀態：</label>
+            <span>${order.payment}</span>
+        </div>
+        <div class="group">
+            <label for="">出貨狀態：</label>
+            <span>${order.ship_status}</span>
+        </div>
+        <div class="group">
+            <label for="">出貨地址：</label>
+            <span>${order.ship_address}</span>
+        </div>
+    </div>
 
-					<form action="">
-						<select class="form-select" >
-							<option value="1">未出貨</option>
-							<option value="2">運送中</option>
-							<option value="3">已送達</option>
-						</select>
+    <div style="margin: auto; width: 800px;border: black dashed 2px;margin-top: 50px;">
+        <h5>訂購人資料</h5>
+        <div class="group">
+            <label for="">姓名：</label>
+            <span>${customer.name}</span>
+        </div>
+        <div class="group">
+            <label for="">電話： </label>
+            <span>${customer.phone}</span>
+        </div>
+        <div class="group">
+            <label for="">信箱：</label>
+            <span>${customer.email}</span>
+        </div>
+        <div class="group">
+            <label for="">地址：</label>
+            <span>${customer.address}</span>
+        </div>
 
-						<select class="form-select" >
-							<option value="1">待出貨</option>
-							<option value="2">已出貨</option>
-							<option value="3">已送達</option>
-						</select>
-					</form>
-	  
-					
-				</div>
-			</div>
-		</div>
-	  </section>
+        
+    </div>
+
 	
 	
+    
+    <table class="table table-striped" style="width: 800px;margin: auto;margin-top: 50px;border: black dashed 2px;">
+        <thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">商品</th>
+				<th scope="col">數量</th>
+				<th scope="col">價錢</th>
+			</tr>
+        </thead>
+        <tbody>
+			<c:forEach items="${orderDetails}" var="details">
+				<tr>
+					<th scope="row">1</th>
+					<td>${details.name}</td>
+					<td class="qty">${details.qty}</td>
+					<td class="price">${details.price}</td>
+				</tr>
+			</c:forEach>
+			<tr>
+				<th scope="row">總共:</th>
+				<td> </td>
+				<td></td>
+				<td class="total">123</td>
+			</tr>
+        </tbody>
+      </table>
 	
-	
-	
-	
-	
+	<script>
+	let total = 0;
+	$('.price').each(function(){
+		let p = $(this).closest("tr").find('.price').text();
+		let q = $(this).closest("tr").find('.qty').text();
+		let sum = p*q;
+		$(this).text(sum);
+
+		total += Number($(this).text());
+    });
+	console.log(total);
+	$('.total').text(total);
+
+
+
+	</script>
 	
 	
 	
