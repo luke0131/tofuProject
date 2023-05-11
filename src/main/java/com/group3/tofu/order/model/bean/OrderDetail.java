@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "OrdersDetail")
 public class OrderDetail {
@@ -25,6 +27,10 @@ public class OrderDetail {
 	@Column(name = "price")
 	private Integer price;
 	
+	@Column(name = "name")
+	private String name;
+	
+	@JsonIgnoreProperties({ "orderDetails" })
 	@JoinColumn(name = "f_order_id", referencedColumnName = "order_id")
 	@ManyToOne
 	private Order order;
@@ -74,6 +80,16 @@ public class OrderDetail {
 	}
 
 
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
 	public Order getOrder() {
 		return order;
 	}
@@ -82,6 +98,12 @@ public class OrderDetail {
 	public void setOrder(Order order) {
 		this.order = order;
 	}
+
+
+	
+
+
+	
 	
 	
 

@@ -24,7 +24,7 @@
 	<h1>Hello Order</h1>
 	
 	
-	<div style="height: 600px;">
+	<div style="height: 750px;">
 	
 	<table class="table align-middle mb-0 bg-white table-hover" style="width: 1000px;margin: auto;">
 		<thead class="bg-light">
@@ -42,7 +42,7 @@
 			<c:forEach items="${page.content}" var="orders">
 				<tr>
 					<td>
-						<p class="fw-bold mb-1">${orders.order_number }</p>
+						<p class="fw-bold mb-1">ORD0000${orders.id }</p>
 					</td>
 					<td>
 						<p class="fw-bold mb-1">${orders.order_date }</p>
@@ -57,13 +57,16 @@
 						<button type="button" class="btn btn-success">${orders.id }</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-outline-success"><i class="fa-solid fa-file" style="width: 20px;"></i></button>
+						<a href="${contextRoot}/tofu/order/showDetail?id=${orders.id}">
+							<button type="button" class="btn btn-outline-success"><i class="fa-solid fa-file" style="width: 20px;"></i></button>
+						</a>
 					</td>
 					<td>
-						<a href=""></a>
+						<a href="${contextRoot}/tofu/order/showModify?id=${orders.id}" style="text-decoration: none;">
 							<button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-file-pen" style="width: 20px;"></i></button>
-						
-						<a href="${contextRoot}/tofu/order/removeOrder?id=${orders.id}">
+						</a>
+					
+						<a href="${contextRoot}/tofu/order/removeOrder?id=${orders.id}" style="text-decoration: none;">
 							<button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-trash-can" style="width: 20px;"></i></button>
 						</a>
 						

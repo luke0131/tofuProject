@@ -108,11 +108,13 @@
                   </div>
                 </button>
 
-                <button type="button" class="btn btn-primary btn-block btn-lg">
+                <a href="http://localhost:8080/tofu/order/test">
+                  <button type="button" class="btn btn-primary btn-block btn-lg">
                   <div class="d-flex justify-content-between">
-                    <span>Checkout</span> 
+                    <span>Checkout</span>
                   </div>
-                </button>
+                  </button>
+                </a>
 
               </div>
 

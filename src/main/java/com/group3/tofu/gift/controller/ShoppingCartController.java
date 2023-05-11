@@ -124,39 +124,6 @@ public class ShoppingCartController {
 		
 		return responseJson.toString();
 	}
-	@GetMapping("/checkout")
-	public String checkout(HttpSession session) {
-		Customer customer = (Customer)session.getAttribute("loggedInCustomer");
-		Integer customerId= customer.getCustomer_id();
-
-		Order newOrder = new Order();
-		newOrder.setF_customer_id(customerId);
-		newOrder.setOrder_number("001");
-		newOrder.setPayment("001");
-		Order saved = oService.insert(newOrder);
-		System.out.println(saved.getId()+"IDDDDDDDDDDDDDDDDDD");
-		int id =saved.getId();
-		List<OrderDetail> list = new ArrayList<>();
-		
-		List<ShoppingCart> carts = spcService.findByCustomerId(customerId);
-		for (ShoppingCart c : carts) {
-			OrderDetail od = new OrderDetail();
-			od.setGid(c.getGift().getId());
-			od.setPrice(c.getGift().getPrice());
-			od.setQty(c.getQty());
-			od.setOrder(saved);
-			list.add(od);
-			odService.save(od);
-		}
-		System.out.println(id+"XXXXX");
-		Order order = oService.findbyId(12);
-		List<OrderDetail> odList = order.getOrderDetails();
-		for (OrderDetail od : odList) {
-			System.out.println(od.getId());
-			System.out.println(od.getPrice());
-		}
-		
-		
-		return "123";
-	}
+	
+	
 }

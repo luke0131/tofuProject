@@ -22,32 +22,15 @@
 					<hr class="mt-1" />
 				</div>
 	  
-				<div class="col-12">
-					<div class="row mx-4">
-						<div class="col-12">
-							<label class="order-form-label">Name</label>
-						</div>
-						<div class="col-sm-6">
-							<div class="form-outline">
-								<input type="text" id="form1" class="form-control order-form-input" />
-								<label class="form-label" for="form1">First</label>
-							</div>
-						</div>
-						<div class="col-sm-6 mt-2 mt-sm-0">
-							<div class="form-outline">
-								<input type="text" id="form2" class="form-control order-form-input" />
-								<label class="form-label" for="form2">Last</label>
-							</div>
-						</div>
-					</div>
+
 	  
 					<div class="row mt-3 mx-4">
 						<div class="col-12">
-							<label class="order-form-label">Type of thing you want to order</label>
+							<label class="order-form-label">ORD0000</label>
 						</div>
 						<div class="col-12">
 							<div class="form-outline">
-								<input type="text" id="form3" class="form-control order-form-input" />
+								<input type="text" id="form3" class="form-control order-form-input" value="China" readonly="readonly"/>
 							</div>
 						</div>
 					</div>
@@ -63,18 +46,7 @@
 						</div>
 					</div>
 	  
-					<div class="row mt-3 mx-4">
-						<div class="col-12">
-							<label class="order-form-label" for="date-picker-example">Date</label>
-						</div>
-						<div class="col-12">
-							<div class="form-outline datepicker" data-mdb-toggle-button="false">
-								<input
-								type="text" class="form-control order-form-input" id="datepicker1" data-mdb-toggle="datepicker" />
-								<label for="datepicker1" class="form-label">Select a date</label>
-							</div>
-						</div>
-					</div>
+
 	  
 					<div class="row mt-3 mx-4">
 						<div class="col-12">
@@ -104,20 +76,8 @@
 								<label class="form-label" for="form8">Region</label>
 							</div>
 						</div>
-						<div class="col-sm-6 mt-2 pe-sm-2">
-							<select name="" id="">
-								<option value="">A</option>
-								<option value="">Z</option>
+						
 
-							</select>
-						</div>
-						<div class="col-sm-6 mt-2 ps-sm-0">
-							<div class="form-outline">
-								<input type="text" id="form10" class="form-control order-form-input" />
-								<label class="form-label" for="form10">Country</label>
-							</div>
-						</div>
-					</div>
 	  
 					<div class="row mt-3 mx-4">
 						<div class="col-12">
