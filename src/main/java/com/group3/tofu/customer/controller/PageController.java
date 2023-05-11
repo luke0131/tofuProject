@@ -72,11 +72,19 @@ public class PageController {
 	}
 	
 	//挑轉進去管理者dashboard畫面
-//	@GetMapping("mgm/Dashboard")
-//	public String Dashboard() {
+	@GetMapping("mgm/Dashboard")
+	public String Dashboard() {
+		
+		return "mgm/Dashboard" ;
+	}
+	
+//	//跳轉customerManagement頁面
+//	@GetMapping(path="mgm/customerManagement")
+//	public String customerManagement() {
 //		
-//		return "mgm/Dashboard" ;
+//		return "mgm/customerManagement" ;
 //	}
-
+	
+	
 
 }

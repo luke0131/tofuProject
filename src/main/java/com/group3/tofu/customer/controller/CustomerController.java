@@ -43,14 +43,14 @@ public class CustomerController {
 	private OrderService orderService;
 
 	// 尋找所有customer
-	@GetMapping(path = "/customer/all")
-	public String findAllCustomers(Model model) {
+	@GetMapping(path="mgm/customerManagement")
+	public String findAllCustomers(HttpSession session) {
 
 		List<Customer> customerList = customerService.findAllCustomer();
 
-		model.addAttribute("customerList", customerList);
+		session.setAttribute("customerList", customerList);
 
-		return "customer/profile";
+		return "mgm/customerManagement" ;
 	}
 
 	// 尋找屬於該customer的所有訂單
@@ -244,7 +244,7 @@ public class CustomerController {
 	}
 
 	// 製作find email and password 的 controller(for mgmDashboard用)
-	@PostMapping(path = "/mgm/login/checkPage")
+	@PostMapping(path = "mgm/Dashboard")
 	public String findemailformgmDB(@RequestParam("email") String email, @RequestParam("password") String password,
 			HttpSession session, Model model) {
 
@@ -280,6 +280,15 @@ public class CustomerController {
 
 		}
 	}
+	
+	// 跳轉mgmDB登出
+	@GetMapping(path = "mgm/logout")
+	public String logoutDB(HttpSession session) {
+		session.invalidate();
+		return "mgm/Management";
+	}
+	
+	
 
 	// 製作註冊的controller
 //	@ResponseBody
@@ -380,5 +389,6 @@ public class CustomerController {
 
 		return "redirect:/customer/queryOrder";
 	}
+	
 
 }

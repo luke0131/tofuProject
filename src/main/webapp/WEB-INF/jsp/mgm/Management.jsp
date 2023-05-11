@@ -26,7 +26,7 @@
 			<!-- 					submit the form without completing it.</p> -->
 			<!-- 			</div> -->
 			<div class="col-md-10 mx-auto col-lg-5">
-				<form class="p-4 p-md-5 border rounded-3 bg-light" action="${contextRoot}/mgm/login/checkPage"
+				<form class="p-4 p-md-5 border rounded-3 bg-light" action="${contextRoot}/mgm/Dashboard"
 						method="post">
 					<h4 class="text-center fw-bold">
 						<i class="fa fa-car" style="margin-right: 20px; color: black"></i>豆腐車業管理者平台<i

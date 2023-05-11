@@ -8,7 +8,7 @@
 <link href="${contextRoot}/img/indexPicture/favicon.ico" rel="icon"
 	type="image/x-icon" />
 <meta charset="UTF-8" />
-<title>豆腐車業管理者報表</title>
+<title>豆腐車業管理平台-會員管理</title>
 <script type="text/javascript"
 	src="${contextRoot}/js/pages/dashboard.js"></script>
 <script type="text/javascript" src="${contextRoot}/css/dashboard.css"></script>
@@ -16,18 +16,13 @@
 <body>
 	<jsp:include page="/WEB-INF/jsp/layout/mgmDependencies.jsp" />
 	<jsp:include page="/WEB-INF/jsp/layout/mgmHeader.jsp" />
-
+	
+	
 	<div class="container-fluid">
 		<div class="row">
-
 			<jsp:include page="/WEB-INF/jsp/layout/mgmNavbar.jsp" />
-
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-			<h1 class="text-center mt-3 fw-bold">~豆腐車業管理平台~</h1>
-				<figure class="d-flex justify-content-center"
-					style="width: 1200px; height: 700px; margin-left: 50px">
-					<img src="${contextRoot}/img/mgm/newDB.gif" />
-				</figure>
+				<h2>這裡是產品的管理頁面</h2>
 			</main>
 		</div>
 	</div>
