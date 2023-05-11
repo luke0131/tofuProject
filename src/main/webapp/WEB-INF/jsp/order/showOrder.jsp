@@ -6,6 +6,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
+
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<link href="${contextRoot}/img/indexPicture/favicon.ico" rel="icon"
+	type="image/x-icon" />
+<meta charset="UTF-8" />
+<title>豆腐車業管理平台-會員管理</title>
+<script type="text/javascript"
+	src="${contextRoot}/js/pages/dashboard.js"></script>
+<script type="text/javascript" src="${contextRoot}/css/dashboard.css"></script>
+
+
+
+
+
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <style>
 	.linker{
@@ -18,10 +35,27 @@
 </style>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
-	<jsp:include page="../layout/navbar.jsp" />
+
+
+
+<jsp:include page="/WEB-INF/jsp/layout/mgmDependencies.jsp" />
+	<jsp:include page="/WEB-INF/jsp/layout/mgmHeader.jsp" />
 	
-	<h1>Hello Order</h1>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<jsp:include page="/WEB-INF/jsp/layout/mgmNavbar.jsp" />
+			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+				<h2>這裡是訂單及禮物的管理頁面</h2>
+
+
+
+
+
+
+
+
+
 	
 	
 	<div style="height: 750px;">
@@ -111,7 +145,10 @@
 
 	</script>
 	
-	
-	<jsp:include page="../layout/footer.jsp" />
+			
+			</main>
+		</div>
+	</div>
+	<jsp:include page="/WEB-INF/jsp/layout/mgmfooter.jsp" />
 </body>
 </html>

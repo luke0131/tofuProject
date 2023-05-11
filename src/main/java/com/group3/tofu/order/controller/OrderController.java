@@ -179,4 +179,13 @@ public class OrderController {
 		
 		return "redirect:/order/findAll";
 	}
+	
+	@GetMapping(path="mgm/OrderAndGiftManagement")	
+	public String OrderAndGiftManagement(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber,Model model) {
+
+		Page<Order> page = orderService.findByPage(pageNumber);
+		model.addAttribute("page",page);
+		
+		return "mgm/OrderAndGiftManagement" ;
+	}
 }
