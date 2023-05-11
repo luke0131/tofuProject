@@ -69,7 +69,7 @@
 						</div>
 						
 						<div class="text-center fw-bold fs-5 mt-1">
-							<a href="#" class="text-decoration-none text-primary">→員工登入請按此</a>
+							<a href="${contextRoot}/login_emp" class="text-decoration-none text-primary">→員工登入請按此</a>
 						</div>
 
 

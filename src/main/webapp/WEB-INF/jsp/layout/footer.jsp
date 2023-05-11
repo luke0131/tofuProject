@@ -36,14 +36,15 @@
       <h5 class="text-white fw-bold py-4">豆腐論壇</h5>
       <ul class="nav flex-column">
         <li class="nav-item mb-2"><a href="${contextRoot}/post" class="nav-link p-0 text-white">豆腐討論區</a></li>
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">聯絡我們</a></li>
+        <li class="nav-item mb-2"><a href="${contextRoot}/contactUs" class="nav-link p-0 text-white">聯絡我們</a></li>
 
       </ul>
     </div>
     <div class="col mb-3">
       <h5 class="text-white fw-bold py-4">客戶服務</h5>
       <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-white">維修保養</a></li>
+        <li class="nav-item mb-2"><a href="${contextRoot}/introduce" class="nav-link p-0 text-white">維修保養</a></li>
+        <li class="nav-item mb-2"><a href="${contextRoot}/show" class="nav-link p-0 text-white">家用充電座安裝評估預約</a></li>
       </ul>
        
     </div>

@@ -30,7 +30,8 @@
 				<p class="card-text">
 				<ul>
 					<li class="fs-5 fw-bold">註冊、登入、登出</li>
-					<li class="fs-5 fw-bold">修改會員資料、查看訂單資料及賞車紀錄</li>
+					<li class="fs-5 fw-bold">前台管理-修改會員資料、查看訂單資料及賞車紀錄</li>
+					<li class="fs-5 fw-bold">後台管理-會員權限</li>
 					<li class="fs-5 fw-bold">豆腐車業網頁前後台視覺設計</li>
 				</ul>
 				</p>
@@ -48,6 +49,7 @@
 					<li class="fs-5 fw-bold">商品展示</li>
 					<li class="fs-5 fw-bold">商品下單</li>
 					<li class="fs-5 fw-bold">預約賞車表單</li>
+					<li class="fs-5 fw-bold">後台管理-商品CRUD</li>
 				</ul>
 				</p>
 			</div>
@@ -61,9 +63,10 @@
 				<h2 class="card-title fw-bold text-center">財務總監-賴昱廷 Luke Lai</h2>
 				<p class="card-text">
 				<ul>
-					<li class="fs-5 fw-bold">物流功能</li>
+					<li class="fs-5 fw-bold">購物車</li>
+					<li class="fs-5 fw-bold">禮物下單</li>
 					<li class="fs-5 fw-bold">金流功能</li>
-					<li class="fs-5 fw-bold">商品下單系統</li>
+					<li class="fs-5 fw-bold">後台管理-商品及禮物CRUD</li>
 				</ul>
 				</p>
 			</div>
@@ -78,10 +81,12 @@
 				class="card-img-top" />
 			<div class="card-body" style="margin: auto;">
 				<p class="fw-bold text-primary text-center fs-1">< 獨家功能 ></p>
-				<h2 class="card-title fw-bold text-center">獨立董事-蔡明學 xxxxxx</h2>
+				<h2 class="card-title fw-bold text-center">獨立董事-蔡明學 Mick Tsai</h2>
 				<p class="card-text">
 				<ul>
 					<li class="fs-5 fw-bold">維修保養及表單設計</li>
+					<li class="fs-5 fw-bold">安裝評估服務說明表單設計</li>
+					<li class="fs-5 fw-bold">後台管理-維修保養CRUD</li>
 				</ul>
 				</p>
 			</div>
@@ -107,13 +112,13 @@
 			<img src="${contextRoot}/img/group3member/Daniel.jpg"
 				class="card-img-top" />
 			<div class="card-body" style="margin: auto;">
-				<p class="fw-bold text-primary text-center fs-1">< 客服系統 ></p>
+				<p class="fw-bold text-primary text-center fs-1">< 論壇系統 ></p>
 				<h2 class="card-title fw-bold text-center">策略顧問-劉書佑 Daniel Liu</h2>
 				<p class="card-text">
 				<ul>
-					<li class="fs-5 fw-bold">豆腐論壇功能</li>
-					<li class="fs-5 fw-bold">即時客服線上諮詢</li>
+					<li class="fs-5 fw-bold">豆腐論壇討論區功能</li>
 					<li class="fs-5 fw-bold">聯絡我們</li>
+					<li class="fs-5 fw-bold">後台管理-留言即發文權限CRUD</li>
 				</ul>
 				</p>
 			</div>
