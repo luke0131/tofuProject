@@ -25,12 +25,13 @@
                             <div class="c-post main_editor_section box-shadow__fromabove">
                                 <div class="c-post__header">
                                     <h3>發表新文章</h3>
+                                    
                                  </div> 
                                
                                 <div class="c-post__body">
+                                    <input type="hidden" class="form-control" name="name" value="${post.authorName}">  
                                     <input type="text" class="form-control" name="title" value="" placeholder="請輸入文章標題>>>">
                                     <input type="hidden" class="form-control" name="added" value="${post.added}">
-                                    <input type="hidden" class="form-control" name="authorName" value="${post.authorName}">  
                                     <textarea class="form-control main-editor is-focused" name="text" id="editor" style="height: 462px;"
                                      placeholder="請輸入文章內容"></textarea>
                                
@@ -46,8 +47,6 @@
             </div>
         </div>
     </div>
-
-
-
+ 
 </body>
 </html>

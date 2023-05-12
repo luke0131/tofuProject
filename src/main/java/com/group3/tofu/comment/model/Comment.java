@@ -41,8 +41,7 @@ public class Comment {
 	@JoinColumn(name="f_post_id",referencedColumnName = "post_id")
 	private Post post;
 	
-	@Column(name = "authorName")
-	private String authorName;
+	
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm EEEE")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -90,13 +89,7 @@ public class Comment {
 		this.post = post;
 	}
 
-	public String getAuthorName() {
-		return authorName;
-	}
-
-	public void setAuthorName(String authorName) {
-		this.authorName = authorName;
-	}
+	
 
 	public Date getCreate_date() {
 		return createDate;
@@ -108,9 +101,11 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return "Comment [comment_id=" + comment_id + ", text=" + text + ", post=" + post + ", authorName=" + authorName
-				+ ", create_date=" + createDate + "]";
+		return "Comment [comment_id=" + comment_id + ", text=" + text + ", post=" + post + ", createDate=" + createDate
+				+ ", commentDetail=" + commentDetail + "]";
 	}
+
+	
 	
 	
 	

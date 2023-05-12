@@ -23,6 +23,16 @@
 			
             <div class="addArticle">
                 <a href="${contextRoot}/showPost/add"><input type="button" value="發表文章"></a>
+				<form id="orderForm" action="${contextRoot}/orderBy" >
+				<select id="orderBySelect" name="orderBy" onchange="document.getElementById('orderForm').submit()">
+          <!-- <option value="">請選擇排序方式</option> -->
+					<option value="0" ${sessionScope.orderBy == 0 ? 'selected' : ''}>時間近到遠</option>
+    				<option value="1" ${sessionScope.orderBy == 1 ? 'selected' : ''}>時間遠到近</option>
+    				<option value="2" ${sessionScope.orderBy == 2 ? 'selected' : ''}>人氣高到低</option>
+    				<option value="3" ${sessionScope.orderBy == 3 ? 'selected' : ''}>人氣低到高</option>
+				</select>
+        <!-- <button>送出</button> -->
+				</form>
             </div>
 					
 
@@ -31,8 +41,8 @@
 							<dt>
 								<ul class="field-list">
 									<li class="title">標題</li>
-									<li class="hot">人氣</li>
-									<li class="author">作者</li>
+									<li class="hot" id="dataList">人氣
+									<li class="author">作者
 									<li class="respond">發佈時間</li>
 							  	</ul>
 							</dt>
@@ -50,7 +60,7 @@
                       <span class="num">${post.hot}</span>
                   </li> 
                   <li class="author">
-                    <a href="#" title="authorName" target="_blank" style="text-decoration: none;">${post.authorName}</a>
+                    <a href="#" title="account" target="_blank" style="text-decoration: none;">${loggedInCustomer.account}</a>
                   </li>
                   <li class="added">
                    <span style="text-decoration: none" ><fmt:formatDate value="${post.added}"
@@ -86,8 +96,45 @@
 
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
 	<jsp:include page="/WEB-INF/jsp/layout/footer.jsp" />
- 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+// 定义全局变量sortOrder，默认值为desc
+// var sortOrder = 'desc';
+
+// // 当向上箭头被点击时
+// $('.up-arrow').click(function() {
+//   // 将排序顺序设置为asc
+//   sortOrder = 'asc';
+//   // 发送ajax请求
+//   $.ajax({
+//     url: 'showPost?sort=' + sortOrder,
+//     success: function(data) {
+//     	console.log(data);
+//       // 用新帖子列表替换旧帖子列表
+//       $('.hot .num').html(data);
+//     }
+//   });
+// });
+
+// // 当向下箭头被点击时
+// $('.down-arrow').click(function() {
+//   // 将排序顺序设置为desc
+//   sortOrder = 'desc';
+//   // 发送ajax请求
+//   $.ajax({
+//     url: 'showPost?sort=' + sortOrder,
+//     success: function(data) {
+//       // 用新帖子列表替换旧帖子列表
+//       $('.hot .num').html(data);
+//     }
+//   });
+// });
+
+
+
+</script> 
     
 </body>
 

@@ -3,11 +3,7 @@ pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<link
-  href="${contextRoot}/img/indexPicture/favicon.ico"
-  rel="icon"
-  type="image/x-icon"
-/>
+<link href="${contextRoot}/img/indexPicture/favicon.ico" rel="icon" type="image/x-icon"/>
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,9 +13,10 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
       rel="stylesheet"
       href="${contextRoot}/css/postAndComment/comment.css"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <span id="comment_id" style="display: none">${allComment.comment_id}</span>
+<%--     <span id="comment_id" style="display: none">${allComment.comment_id}</span> --%>
     <jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
     <jsp:include page="/WEB-INF/jsp/layout/navbar.jsp" />
 
@@ -41,8 +38,8 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                 data-tippy-content="只看此樓"
                 >樓主</a
               >
-              <a href="#" class="username" target="_blank"
-                >${allComment.authorName}</a
+              <a href="#" class="username" target="_blank" title="account"
+                >${loggedInCustomer.account}</a
               >
               <div class="postcount">
                 <span class="postgp"
@@ -69,12 +66,11 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
             <div class="c-post__body__buttonbar">
               <div>
                 <div class="gp">
-                  <button
-                    id="gp_14873"
+                  <button                    
                     class="ef-btn ef-firework tippy-gpbp"
                     type="button"
-                  ></button>
-                  <div class="ef-btn__effect">
+                  ><img src="../img/comment/star.png"></button>
+                  <!-- <div class="ef-btn__effect">
                     <i class="icon material-icons"></i>
                     <div class="effect-group">
                       <span class="effect"></span>
@@ -83,7 +79,7 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                       <span class="effect"></span>
                       <span class="effect"></span>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -91,13 +87,13 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
           <div>
             <div class="c-post__footer c-reply">
-              <div class="c-reply__head nocontent">顯示留言</div>
-
+              <div class="c-reply__head nocontent"><button type="button" class="btn btn-outline-secondary" onclick="toggleComments()" >顯示留言</button></div>
+              
               <div class="c-reply__item">
                 <!-- <c:forEach items="${allDetail}" var="allDetail" > -->
 
-                <div class="c-reply-content" id="comments">
-                  <!--                             <a href="#" class="reply-content__user" target="_blank">Customer</a> -->
+                <div class="c-reply-content" id="comments" style="display:none;">
+                   <div href="#" class="reply-content__user">${allCustomer.account}</div>
                   <article class="reply-content__article c-article">
                     <span class="comment_content"
                       >${allDetail.comment_detail}</span
@@ -139,7 +135,7 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
       </section>
     </div>
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
     <script>
       const commentsDiv = document.getElementById("comments");
       const submitBtn = document.getElementById("submitBtn");
@@ -160,6 +156,9 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
             const commentsDiv = document.getElementById("comments");
 
             // 建立一個新的 <div> 元素來放置新留言的內容
+            var newCustomer = document.createElement("div");
+            newCustomer.classList.add("reply-content__user");
+
             var newCommentDiv = document.createElement("div");
             newCommentDiv.classList.add("c-reply-content");
 
@@ -184,7 +183,7 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 			var day =currentTime.getDay(); 
 
             var commentDate = currentTime.getFullYear() + "-0"+ month +"-" + currentTime.getDate() + " " + 
-            currentTime.getHours() + ":" + currentTime.getMinutes() + " " + "星期" + day_list[day];
+            currentTime.getHours() + ":0" + currentTime.getMinutes() + " " + "星期" + day_list[day];
             var newCommentTimeContent = document.createTextNode(
               "留言時間：" + commentDate
             );
@@ -205,6 +204,16 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
             alert("留言失败！");
           });
       });
+
+      function toggleComments() {
+  var commentsDiv = document.getElementById("comments");
+  if (commentsDiv.style.display === "none") {
+    commentsDiv.style.display = "block";
+  } else {
+    commentsDiv.style.display = "none";
+  }
+}
+
     </script>
   </body>
 </html>

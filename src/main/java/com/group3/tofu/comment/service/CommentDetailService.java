@@ -20,8 +20,8 @@ public class CommentDetailService {
 	private CommentDetailDAO detailDao;
 		
 	
-	public void insertDetail(CommentDetail detail) {
-		detailDao.save(detail);
+	public CommentDetail crateDetail(CommentDetail detail) {
+		return detailDao.save(detail);
 	}
 	
 	

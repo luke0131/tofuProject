@@ -51,6 +51,13 @@ public class PostService {
 		return postDao.findFirstByOrderByAddedDesc();
 	}
 	
+	//用f_customer_id帶到新增回來的畫面
+	public Post getByFkCustomerId(Integer f_customer_id) {
+		
+		return postDao.findByFkCustomerId(f_customer_id);
+	}
+	
+	
 	//用post_id刪除資料
 	public void deleteByPostId(Integer post_id) {
 		postDao.deleteById(post_id);
@@ -72,9 +79,23 @@ public class PostService {
 	}
 	
 	//分頁
-	public Page<Post> findByPage(Integer pageNumber) {
-		PageRequest pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "added");
+	public Page<Post> findByPage(Integer pageNumber , Integer orderBy ) {
+		PageRequest pgb = null;
+		if(orderBy == 0) {
+			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "added");
+		}
+		if(orderBy == 1) {
+			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "added");
+		}
+		if(orderBy == 2) {
+			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "hot");
+		}
+		
+		if(orderBy == 3) {
+			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "hot");
+		}
 
+		
 		Page<Post> page = postDao.findAll(pgb);
 
 		return page;
