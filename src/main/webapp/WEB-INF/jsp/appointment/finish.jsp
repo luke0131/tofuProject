@@ -48,7 +48,7 @@ p {
                         <span class="remind">*如您尚未收到確認信，<br class="mobile">建議請至垃圾郵件資料匣檢查。</span>
                     </p>
                 </div>
-           
+          
         
 </body>
 </html>

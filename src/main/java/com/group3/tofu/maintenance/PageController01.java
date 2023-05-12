@@ -11,10 +11,10 @@ public class PageController01 {
 		return "maintenance/introduce";
 	}
     //跳轉預約保養頁面	
-	@GetMapping("/main")
-	public String showNextPage() {
-		return "maintenance/add";
-	}
+//	@GetMapping("/main")
+//	public String showNextPage() {
+//		return "maintenance/add";
+//	}
 	//跳轉安裝介紹頁面
 	@GetMapping("/show")
 	public String install() {

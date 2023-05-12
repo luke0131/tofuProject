@@ -22,7 +22,60 @@
 		<div class="row">
 			<jsp:include page="/WEB-INF/jsp/layout/mgmNavbar.jsp" />
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-				<h2>這裡是維修保養的管理頁面</h2>
+				<h2>維修保養管理</h2>
+			<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Serial number</th>
+      <th scope="col">維修保養種類</th>
+      <th scope="col">備註</th>
+      <th scope="col">日期</th>
+      <th scope="col">時段</th>
+      <th scope="col">訂單編號</th>
+    </tr>
+  </thead>
+  <tbody>
+  <c:forEach items="${page.content}" var="main">
+    <tr>
+      <td>${main.mid}</td>
+      <td>${main.mcategory}${main.inspection}${main.electric}</td>
+      <td>${main.notes}</td>
+      <td>${main.appointment}</td>
+      <td>${main.appointmenttime}</td>
+      <td>${main.keycode}</td>
+    </tr>
+   
+    </c:forEach>
+    
+  </tbody>
+  
+</table>
+
+ 
+<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+<c:choose>
+<c:when test="${page.number!= pageNumber-1}">
+ <a href="${contextRoot}/mgm/MaintenanceManagement?m=${pageNumber}" >${pageNumber}</a>
+</c:when>
+<c:otherwise>
+${pageNumber}
+</c:otherwise>
+</c:choose>
+   
+    </c:forEach>
+			
+			
+			
+			
+				
+				
+				
+				
+				
+				
+				
+				
+				
 			</main>
 		</div>
 	</div>

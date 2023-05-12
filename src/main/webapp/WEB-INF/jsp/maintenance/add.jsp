@@ -23,7 +23,7 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 	<jsp:include page="/WEB-INF/jsp/layout/navbar.jsp" />
 
 	<div class="d-flex flex-row ">
-		<img src="./img/mPicture/s992.jpg" alt="Your Image">
+		<img src="${contextRoot}/img/mPicture/s992.jpg" alt="Your Image">
 
 
 
@@ -142,10 +142,10 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 
 							<div style="font-size: 18px;" class="formgroup">
 
-								<input type="checkbox" name="electric" value="大保養" /> <label
+								<input type="checkbox" name="electric" value="EV大保養" /> <label
 									for="">大保養</label> <input type="checkbox" name="electric"
-									value="鈑金烤漆" /> <label for="">鈑金烤漆</label> <input
-									type="checkbox" name="electric" value="冷氣系統保養/清潔" /> <label
+									value="EV鈑金烤漆" /> <label for="">鈑金烤漆</label> <input
+									type="checkbox" name="electric" value="EV冷氣系統保養/清潔" /> <label
 									for="">冷氣系統保養/清潔</label>
 							</div>
 						</div>
@@ -184,7 +184,7 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 
 				<div class="formgroup">
 
-					<span for="notes" class="t1">備註:</span> <b class="text-danger">可簡單敘述車輛狀況，方便技師快速診斷</b>
+					<span for="notes" class="t1">備註:</span> <p class="text-danger">可簡單敘述車輛狀況，方便技師快速診斷</p>
 					<textarea style="border: 2px solid gray;" name="notes" id="note"
 						cols="72" rows="3"></textarea>
 				</div>

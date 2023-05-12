@@ -32,10 +32,11 @@
 	background-position: right center;
 	height: 100vh;
 }
+
 .underline {
-  text-decoration: underline;
-  text-decoration-color: blue;
-  text-underline-offset: 5px;
+	text-decoration: underline;
+	text-decoration-color: blue;
+	text-underline-offset: 5px;
 }
 </style>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
@@ -75,31 +76,20 @@
 		</div>
 	</div>
 	<div class="container text-center">
-	 <div class="col">
+		<div class="col">
 			<h4>輕鬆預約家用充電座安裝，啟動 tofu 引領世代的電能科技</h4>
 		</div>
-		</div>
+	</div>
 	<br>
 	<br>
 	<ol class="steps">
-		<li><img src="./img/mPicture/icon_index_s1.png" alt="1"> <span
-			class="number"><span>(1)</span></span> <span class="text">預約安裝評估</span>
-		</li>
-		<li><img src="./img/mPicture/images3.png" alt="2"> <span
-			class="number"><span>(2)</span></span> <span class="text">專人聯繫</span>
-		</li>
-		<li><img src="./img/mPicture/images4.png" alt="3"> <span
-			class="number"><span>(3)</span></span> <span class="text">安裝評估費付款完成</span>
-		</li>
-		<li><img src="./img/mPicture/images (2).png" alt="4"> <span
-			class="number"><span>(4)</span></span> <span class="text">安裝評估</span>
-		</li>
-		<li><img src="./img/mPicture/images5.png" alt="5"> <span
-			class="number"><span>(5)</span></span> <span class="text">安裝費付款完成</span>
-		</li>
-		<li><img src="./img/mPicture/images (7).png" alt="6"> <span
-			class="number"><span>(6)</span></span> <span class="text">專業施工</span>
-		</li>
+		<li><img src="./img/mPicture/icon_index_s1.png" alt="1"><P>安裝預約評估-><p>(1)</></P></li>
+		
+		<li><img src="./img/mPicture/images3.png" alt="2"> <p>專人聯繫-><p>(2)</></p> </li>
+		<li><img src="./img/mPicture/images4.png" alt="3"> <p>評估費付款完成-><p>(3)</></p></li>
+		<li><img src="./img/mPicture/images (2).png" alt="4"> <p>安裝評估-><p>(4)</></p></li>
+		<li><img src="./img/mPicture/images5.png" alt="5"> <p>安裝費付款完成-><p>(5)</></p></li>
+		<li><img src="./img/mPicture/images (7).png" alt="6"><p>專業施工<p>(6)</></p> </li>
 
 	</ol>
 	<br>
@@ -110,7 +100,8 @@
 			<div class="title">
 
 				<h2>
-					<span class="cube"></span> <span class="underline">tofu 家用充電座安裝服務說明</span>
+					<span class="cube"></span> <span class="underline">tofu
+						家用充電座安裝服務說明</span>
 				</h2>
 			</div>
 			<div class="info-block">
@@ -166,7 +157,7 @@
 	</div>
 	<br>
 	<br>
-	
+
 	<a href="#top" class="top">Top</a>
 
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />

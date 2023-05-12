@@ -68,7 +68,13 @@ public class AppointmentController {
 			
 			 String to = appointment.getCustomeremail();
 		        String subject = "預約確認";
-		        String content = "您已成功預約！\n"+appointment.getContactperson()+appointment.getContactmobile();
+		        String content = "<h2>您已成功預約！請查看以下訊息是否正確</h2><br/>"
+		        +"<h4>您的訂單編號:</h4>"+appointment.getKeycode()+"<br/>"		
+		        +"<h4>聯絡人:</h4>"+appointment.getContactperson()+"\n"
+		        +"<h4>聯絡人電話:</h4>"+appointment.getContactmobile()+"\n"
+		        +"<h4>安裝評估地址:</h4>"+appointment.getInstalladdress()+"\n"
+		        +"<h5>我們將指派 TOFU 充電策略合作夥伴飛鴻電能 專業人員與您聯繫。</h5>\n"
+		        +"<h5>若有任何問題，歡迎電洽飛鴻電能免付費客服專線 : 0800-888-168</h5>";
 			 mailService.sendEmail(to, subject, content);
 			 return "appointment/finish";
 			

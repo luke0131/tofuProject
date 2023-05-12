@@ -45,7 +45,7 @@ p {
 		<P>您的預約項目:${mcategory}${inspection}${electric}</p>
 		<p>預約時間：${formattedDate}號${appointmenttime}</p>
 	</div>
-	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
+	
 </body>
 
 </html>
