@@ -166,7 +166,7 @@ article {
 }
 .c-post__body__buttonbar .gp button {
     margin-right: 4px;
-    border: 2px solid #FF8B2C;
+    border: 2px solid white;
     transition: all 0.15s ease;
 }
 .ef-btn {

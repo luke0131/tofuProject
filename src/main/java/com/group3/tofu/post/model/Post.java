@@ -8,6 +8,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -19,6 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.group3.tofu.comment.model.Comment;
+import com.group3.tofu.customer.model.Customer;
 
 @Entity
 @Table(name = "Post")
@@ -35,8 +38,7 @@ public class Post {
 	@Column(name = "hot")
 	private Integer hot;
 	
-	@Column(name = "authorName")
-	private String authorName;
+	
 	
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm EEEE")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -47,7 +49,10 @@ public class Post {
 	@JsonIgnore
 	@OneToOne(mappedBy = "post", fetch = FetchType.LAZY)
 	private Comment comment;
-
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "f_customer_id")
+	private Customer customer;
 	
 	public Post() {
 
@@ -61,6 +66,15 @@ public class Post {
 	}
 	
 	
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
 	public Integer getPost_id() {
 		return post_id;
 	}
@@ -85,13 +99,7 @@ public class Post {
 		this.hot = hot;
 	}
 
-	public String getAuthorName() {
-		return authorName;
-	}
-
-	public void setAuthorName(String authorName) {
-		this.authorName = authorName;
-	}
+	
 
 	public Date getAdded() {
 		return added;
@@ -111,9 +119,12 @@ public class Post {
 
 	@Override
 	public String toString() {
-		return "Post [post_id=" + post_id + ", title=" + title + ", hot=" + hot + ", authorName=" + authorName
-				+ ", added=" + added + ", comment=" + comment + "]";
+		return "Post [post_id=" + post_id + ", title=" + title + ", hot=" + hot + ", added=" + added + ", comment="
+				+ comment + ", customer=" + customer + "]";
 	}
+
+
+	
 
 	
 	
