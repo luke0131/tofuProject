@@ -9,6 +9,9 @@ import javax.transaction.Transactional;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -144,6 +147,41 @@ public class CustomerService {
 		customer.setEnabled(true);
 
 	}
+	
+	
+	//將coustomer 的 權限(enabled) 從 1 -> 0
+	@Modifying
+	@Transactional
+	public void enableAccountStop(Integer id) {
+		Optional<Customer> option = customerDao.findById(id);
+		if(option.isPresent()) {
+			Customer customer = option.get();
+			
+			if(customer.getEnabled() == true) {
+				customer.setEnabled(false);
+			}
+			
+			return;
+		}
+			
+	}
+	
+	//將coustomer 的 權限(enabled) 從 0 -> 1
+	@Modifying
+	@Transactional
+	public void enableAccountRecover(Integer id) {
+		Optional<Customer> option = customerDao.findById(id);
+		if(option.isPresent()) {
+			Customer customer = option.get();
+			
+			if(customer.getEnabled() == false) {
+				customer.setEnabled(true);				
+			}
+			
+			return;
+		}
+			
+	}
 
 	// find Customer by email and password isEnabled
 	public boolean isEnabled(String email, String password) {
@@ -196,55 +234,6 @@ public class CustomerService {
 
 	}
 
-	// update OrderAddress
-//	@Transactional
-//	public Order updateOrderAddress(String address , Integer orderId) {
-//
-//		Optional<Order> option = orderDAO.findById(orderId);
-//		if (!option.isEmpty()) {
-//			Order order = option.get();
-//			
-//			order.setShip_address(address);
-//
-//			System.out.println("修改地址成功!!");
-//
-//			return order;
-//		}
-//
-//		return null;
-//
-//	}
-
-//	@Transactional
-//	public Order modify(String json) {
-//		try {
-//			JSONObject obj = new JSONObject(json);
-//			
-//			Integer id = obj.isNull("id") ? null : obj.getInt("id");
-//			
-//			String address = obj.isNull("ship_address") ? null : obj.getString("ship_address");
-//
-//			Optional<Order> updateOrder = orderDAO.findById(id);
-//
-//			if (!updateOrder.isEmpty()) {
-//
-//				Order order = updateOrder.get();
-//				
-//				order.setShip_address(address);
-//
-//				return order;
-//			}
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
-
-//	public Order findNewAddress(Integer id , String address) {
-//		return orderDAO.findNewAddress(id, address);
-//	}
-	
 	// 查詢歷史訂單，透過order裡面的customerId找人
 	public List<Order> findByCustomerId(Integer customerId) {
 		return orderDAO.findByCustomerId(customerId);
@@ -290,5 +279,20 @@ public class CustomerService {
 	public List<Book> findBookByCustomerId(Integer customerId) {
 		return bookDao.findBookByCustomerId(customerId);
 	}
+	
+	
+	//製作分頁功能
+	public Page<Customer> findByPage(Integer pageNumber){
+		
+		//拿到Pageable物件
+		PageRequest pgb = PageRequest.of(pageNumber-1 , 7);
+		
+		Page<Customer> page = customerDao.findAll(pgb);
+		
+		return page;
+	
+	}
+	
+
 
 }

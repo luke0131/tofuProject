@@ -7,8 +7,12 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <link href="${contextRoot}/img/indexPicture/favicon.ico" rel="icon"
 	type="image/x-icon" />
+<link
+	href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'
+	rel='stylesheet'></link>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <meta charset="UTF-8">
-<title>Tofucars Company</title>
+<title>豆腐車業股份有限公司</title>
 </head>
 <body class="loginbody">
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
@@ -65,11 +69,15 @@
 						</div>
 
 						<div class="text-center fw-bold fs-5 mt-3">
-							<a href="${contextRoot}/mgm/Management" class="text-decoration-none text-primary">→站長登入請按此</a>
+							<a href="${contextRoot}/mgm/Management"
+								class="text-decoration-none text-primary">站長登入請按此 <i
+								class="fa fa-hand-o-right"></i></a>
 						</div>
-						
+
 						<div class="text-center fw-bold fs-5 mt-1">
-							<a href="${contextRoot}/login_emp" class="text-decoration-none text-primary">→員工登入請按此</a>
+							<a href="${contextRoot}/login_emp"
+								class="text-decoration-none text-primary">員工登入請按此 <i
+								class="fa fa-hand-o-right"></i></a>
 						</div>
 
 
@@ -78,6 +86,10 @@
 							<!--  <button type="button" class="btn btn-warning" id="tofu">新會員</button>-->
 							<button type="button" class="btn btn-danger" id="unverified">未驗證</button>
 							<button type="button" class="btn btn-success" id="verified">已驗證</button>
+							<button type="button" class="btn btn-outline-warning"
+								id="stopAccount">停權-豆腐</button>
+							<button type="button" class="btn btn-outline-info"
+								id="recoverAccount">復權-吳宗憲</button>
 							<!-- <button type="button" class="btn btn-success" id="memberLoginBTN">使用者</button>
 						<button type="button" class="btn btn-warning" id="adminLoginBTN">管理員</button> -->
 						</div>
@@ -133,10 +145,38 @@
 							document.querySelector('#email').value = 'JolinTsai@gmail.com';
 							document.querySelector('#password').value = '7fH6T2rE';
 						});
+		document
+				.querySelector('#stopAccount')
+				.addEventListener(
+						'click',
+						function() {
+							document.querySelector('#email').value = 'tofu8888@gmail.com';
+							document.querySelector('#password').value = 'V3kG5tR8';
+						});
+		document
+				.querySelector('#recoverAccount')
+				.addEventListener(
+						'click',
+						function() {
+							document.querySelector('#email').value = 'JackyWu@gmail.com';
+							document.querySelector('#password').value = 'b4nJ6yD8';
+						});
 	</script>
 
 	<script type="text/javascript" src="${contextRoot}/js/pages/login.js"></script>
 
+	<script>
+		// 讀取訊息值
+		var message = "${message}";
+		if (message !== "") {
+			// 使用SweetAlert2顯示提醒訊息
+			Swal.fire({
+				title : "系統提醒",
+				text : message,
+				icon : "warning"
+			});
+		}
+	</script>
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>
 

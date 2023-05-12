@@ -8,7 +8,7 @@
 <link href="${contextRoot}/img/indexPicture/favicon.ico" rel="icon"
 	type="image/x-icon" />
 <meta charset="UTF-8">
-<title>Tofucars Company</title>
+<title>豆腐車業股份有限公司</title>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
