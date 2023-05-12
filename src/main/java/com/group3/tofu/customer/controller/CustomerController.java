@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,14 +44,22 @@ public class CustomerController {
 	private OrderService orderService;
 
 	// 尋找所有customer
-	@GetMapping(path="mgm/customerManagement")
-	public String findAllCustomers(HttpSession session) {
+	// 以及增加分頁功能
+	@GetMapping(path = "mgm/customerManagement")
+	public String findAllCustomers(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model model,
+			HttpSession session) {
 
+		Page<Customer> page = customerService.findByPage(pageNumber);
+		
+		// 要帶到下一頁，要用model帶過去
+		model.addAttribute("page", page);
+		
 		List<Customer> customerList = customerService.findAllCustomer();
 
 		session.setAttribute("customerList", customerList);
 
-		return "mgm/customerManagement" ;
+
+		return "mgm/customerManagement";
 	}
 
 	// 尋找屬於該customer的所有訂單
@@ -63,30 +72,27 @@ public class CustomerController {
 		List<Order> orders = customerService.findByCustomerId(cid);
 
 		ArrayList<Product> products = new ArrayList<Product>();
-		ArrayList<Gift> gifts = new ArrayList<Gift>();
 		ArrayList<Employee> employees = new ArrayList<Employee>();
 
 		for (Order order : orders) {
+			System.out.println("----------------------------");
+			System.out.println(order);
 			Integer f_product_id = order.getF_product_id();
 			Integer f_employee_id = order.getF_employee_id();
 
 			// product productDao 用f_product_id找到Product物件
 			Product product = customerService.findProductById(f_product_id);
 
-
-
 			// employee EmployeeDao 用f_employee_id找到Employee物件
 			Employee employee = customerService.findEmployeeById(f_employee_id);
 
 			products.add(product);
-
 
 			employees.add(employee);
 
 		}
 		model.addAttribute("orders", orders);
 		model.addAttribute("products", products);
-		model.addAttribute("gifts", gifts);
 		model.addAttribute("employees", employees);
 
 		System.out.println("查詢歷史訂單成功!");
@@ -205,7 +211,7 @@ public class CustomerController {
 
 			// 判斷有沒有enabled
 			if (!loggedInCustomer.getEnabled()) {
-				errors.put("enabled", "信箱未驗證，請檢查驗證信!");
+				errors.put("enabled", "有可能出現以下錯誤：<br/>" + "1.您的信箱未驗證<br/>" + "2.您的帳號被停權<br/>" + "若有需要請聯絡客服人員，謝謝!");
 				return "customer/login";
 			}
 
@@ -258,24 +264,22 @@ public class CustomerController {
 
 			session.setAttribute("loggedInCustomerForDB", loggedInCustomer);
 
-			return "mgm/Dashboard" ;
+			return "mgm/Dashboard";
 
 		} else {
 			errors.put("loginFailed", "查無此會員資料，請重新輸入或立即註冊!");
 
-			return "mgm/Management" ;
+			return "mgm/Management";
 
 		}
 	}
-	
+
 	// 跳轉mgmDB登出
 	@GetMapping(path = "mgm/logout")
 	public String logoutDB(HttpSession session) {
 		session.invalidate();
 		return "mgm/Management";
 	}
-	
-	
 
 	// 製作註冊的controller
 //	@ResponseBody
@@ -351,7 +355,7 @@ public class CustomerController {
 		return "customer/updateProfile";
 	}
 
-	// 測試
+	// 測試的controller
 	@GetMapping("/michael")
 	public String michael() {
 		System.out.println("近來michael了");
@@ -376,6 +380,29 @@ public class CustomerController {
 
 		return "redirect:/customer/queryOrder";
 	}
-	
+
+	// 將coustomer 的 權限(enabled) 從 1 -> 0
+	@ResponseBody
+	@GetMapping(path = "mgm/stopAccount/{customerId}")
+	public String enableAccountStop(@PathVariable("customerId") Integer customerId, Model model) {
+
+		System.out.println("有進來stopAccount方法，成功停權!!");
+
+		customerService.enableAccountStop(customerId);
+
+		return "redirect:/mgm/customerManagement";
+	}
+
+	// 將coustomer 的 權限(enabled) 從 1 -> 0
+	@ResponseBody
+	@GetMapping(path = "mgm/recoverAccount/{customerId}")
+	public String enableAccountRecover(@PathVariable("customerId") Integer customerId) {
+
+		System.out.println("有進來recoverAccount方法，成功復權!!");
+
+		customerService.enableAccountRecover(customerId);
+
+		return "redirect:/mgm/customerManagement";
+	}
 
 }

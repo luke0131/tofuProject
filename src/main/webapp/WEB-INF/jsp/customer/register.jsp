@@ -12,7 +12,7 @@ prefix="c"%>
     />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <meta charset="UTF-8" />
-    <title>Tofucars Company</title>
+    <title>豆腐車業股份有限公司</title>
   </head>
   <body class="registerbody">
     <jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
