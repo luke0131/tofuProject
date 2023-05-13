@@ -1,6 +1,8 @@
 package com.group3.tofu.post.controller;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.group3.tofu.comment.model.Comment;
 import com.group3.tofu.comment.service.CommentService;
@@ -42,6 +45,8 @@ public class PostController {
 	public String createNewPost(@RequestParam String title, @RequestParam String text, HttpSession session) {
 
 		Customer customer = (Customer) session.getAttribute("loggedInCustomer");
+		
+		//Integer customerId = customer.getCustomer_id();
 
 		String oldCustomer = customer.getEmail();
 
@@ -53,10 +58,14 @@ public class PostController {
 			
 			Post postTitle = new Post();
 			postTitle.setTitle(title);
+			
+			//postTitle.setPost_id(customerId);
+			
 			postService.createPost(postTitle);
 
 			Comment comment = new Comment();
 			comment.setText(text);
+			//comment.setComment_id(customerId);
 			commentService.createComment(comment);
 
 			session.setAttribute("loggedInCustomer", newCustomer);
@@ -68,29 +77,79 @@ public class PostController {
 		return "customer/login";
 	}
 
-	// 分頁
+//	// 分頁
 	@GetMapping("/showPost")
-	public String showPost(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model model,HttpSession session) {
+	public String showPost(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
+							@RequestParam(name = "keyword", required = false) String keyword,
+					Model model,HttpSession session) {
 		Integer orderBy = 0;
 		if(session.getAttribute("orderBy") != null) {
 			orderBy = (Integer)session.getAttribute("orderBy");
 		}
 		
+		Page<Post> page;
+	    if (keyword == null || keyword.isEmpty()) {
+	        page = postService.findAll(pageNumber,orderBy);
+	    } else {
+	        page = postService.findByKeyword(keyword, pageNumber, orderBy);
+	        
+	        model.addAttribute("keyword", keyword);
+	    }
+
 		
-		Page<Post> page = postService.findByPage(pageNumber,orderBy);
+		//return page;
 
-		model.addAttribute("page", page);
+	model.addAttribute("page", page);
+		
+		
 
-		return "comment/post";
+	return "comment/post";
 	}
-	
-	//紀錄排序
+	/*
+	@GetMapping("/showPost/test")
+	@ResponseBody
+	public List<Post> test(@RequestParam("keyword") String keyword) {
+		return postService.findByKeyword(keyword);
+	}
+	*/
+	//紀錄人氣排序
 	@GetMapping("/orderBy")
 	public String orderBy(@RequestParam("orderBy") Integer orderBy, HttpSession session) {
 		session.setAttribute("orderBy", orderBy);
 		
 		return "redirect:/showPost";
 	}
+	
+//	@GetMapping("/showPost")
+//	public String showPost(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, 
+//	                       @RequestParam(name = "orderByType", defaultValue = "time") String orderByType,
+//	                       Model model, HttpSession session) {
+//	    Integer orderBy = 0;
+//	    switch(orderByType) {
+//	        case "time":
+//	            orderBy = 0;
+//	            break;
+//	        case "popularity":
+//	            orderBy = 2;
+//	            break;
+//	        default:
+//	            orderBy = 0;
+//	            break;
+//	    }
+//
+//	    Page<Post> page = postService.findByPage(pageNumber, orderBy);
+//	    model.addAttribute("page", page);
+//
+//	    return "comment/post";
+//	}
+//
+//	@GetMapping("/orderBy")
+//	public String orderBy(@RequestParam("orderBy") String orderBy, HttpSession session) {
+//	    session.setAttribute("orderByType", orderBy);
+//
+//	    return "redirect:/showPost";
+//	}
+
 
 	
 }

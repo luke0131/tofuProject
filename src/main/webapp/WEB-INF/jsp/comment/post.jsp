@@ -23,18 +23,22 @@
 			
             <div class="addArticle">
                 <a href="${contextRoot}/showPost/add"><input type="button" value="發表文章"></a>
-				<form id="orderForm" action="${contextRoot}/orderBy" >
+				 <form id="orderForm" action="${contextRoot}/orderBy" >
 				<select id="orderBySelect" name="orderBy" onchange="document.getElementById('orderForm').submit()">
-          <!-- <option value="">請選擇排序方式</option> -->
-					<option value="0" ${sessionScope.orderBy == 0 ? 'selected' : ''}>時間近到遠</option>
-    				<option value="1" ${sessionScope.orderBy == 1 ? 'selected' : ''}>時間遠到近</option>
-    				<option value="2" ${sessionScope.orderBy == 2 ? 'selected' : ''}>人氣高到低</option>
-    				<option value="3" ${sessionScope.orderBy == 3 ? 'selected' : ''}>人氣低到高</option>
+          <!-- <option value="">請選擇排序方式</option>  -->
+					<option value="0" ${sessionScope.orderBy == 0 ? 'selected' : ''}>時間近<span>&#x2192</span>遠</option>
+    				<option value="1" ${sessionScope.orderBy == 1 ? 'selected' : ''}>時間遠<span>&#x2192</span>近</option>
+    				<option value="2" ${sessionScope.orderBy == 2 ? 'selected' : ''}>人氣高<span>&#x2192</span>低</option>
+    				<option value="3" ${sessionScope.orderBy == 3 ? 'selected' : ''}>人氣低<span>&#x2192</span>高</option>
 				</select>
-        <!-- <button>送出</button> -->
+        <!--  <button>送出</button> -->
 				</form>
             </div>
-					
+				<form id="searchForm" action="${contextRoot}/showPost" method="GET">
+  					<input type="text" id="keywordInput" name="keyword" value="${keyword}" placeholder="輸入關鍵字">
+  					<button type="submit" >搜索</button>
+				</form>
+
 
 					<div class="content">
 						<dl class="thread-list">
@@ -47,6 +51,7 @@
 							  	</ul>
 							</dt>
               <c:forEach var="post" items="${page.content}">
+              
 							<dd>
 								<ul class="field-list normal">
 								  <li class="title">
@@ -57,19 +62,20 @@
                     </div>
                   </li>
                   <li class="hot">
-                      <span class="num">${post.hot}</span>
+                      <span class="num" style="color: red;">${post.hot}</span>
                   </li> 
                   <li class="author">
                     <a href="#" title="account" target="_blank" style="text-decoration: none;">${loggedInCustomer.account}</a>
                   </li>
                   <li class="added">
-                   <span style="text-decoration: none" ><fmt:formatDate value="${post.added}"
+                   <span style="text-decoration: none;" ><fmt:formatDate value="${post.added}"
 								pattern="yyyy-MM-dd HH:mm EEEE" /></span>
                 </li> 
                 </ul> 
-              </dd>    
+              </dd>
+               
                 </c:forEach>  
-						</dl>							
+						</dl>					
 					</div>
 
 
@@ -99,6 +105,27 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+function submitSearchForm() {
+  // 獲取表單元素和關鍵字輸入框元素
+  var form = document.getElementById("searchForm");
+  var keywordInput = document.getElementById("keywordInput");
+
+  // 獲取查詢關鍵字
+  var keyword = keywordInput.value.trim();
+
+  // 如果查詢關鍵字為空，直接返回
+  if (keyword === "") {
+    return;
+  }
+
+  // 更新表單的 action 屬性，將查詢關鍵字作為 URL 參數傳遞
+  var action = form.getAttribute("action");
+  var url = action + "?q=" + encodeURIComponent(keyword);
+  form.setAttribute("action", url);
+
+  // 提交表單
+  form.submit();
+}
 
 // 定义全局变量sortOrder，默认值为desc
 // var sortOrder = 'desc';
