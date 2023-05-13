@@ -1,5 +1,6 @@
 package com.group3.tofu.post.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +31,22 @@ public class PostService {
 
 	
 	//找全部
-	public List<Post> getAllPost(){
-		return postDao.findAll();
-	}
+	public Page<Post> findAll(Integer pageNumber, Integer orderBy) {
+		PageRequest pgb = null;
+	    if(orderBy == 0) {
+	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "added");
+	    }
+	    if(orderBy == 1) {
+	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "added");
+	    }
+	    if(orderBy == 2) {
+	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "hot");
+	    }
+	    if(orderBy == 3) {
+	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "hot");
+	    }
+	    return postDao.findAll(pgb);    
+     }
 	
 	//用post_id找資料
 	public Post findByPostId(Integer post_id) {
@@ -79,25 +93,50 @@ public class PostService {
 	}
 	
 	//分頁
-	public Page<Post> findByPage(Integer pageNumber , Integer orderBy ) {
-		PageRequest pgb = null;
-		if(orderBy == 0) {
-			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "added");
-		}
-		if(orderBy == 1) {
-			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "added");
-		}
-		if(orderBy == 2) {
-			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "hot");
-		}
-		
-		if(orderBy == 3) {
-			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "hot");
-		}
+//	public Page<Post> findByPage(Integer pageNumber , Integer orderBy ) {
+//		PageRequest pgb = null;
+//		if(orderBy == 0) {
+//			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "added");
+//		}
+//		if(orderBy == 1) {
+//			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "added");
+//		}
+//		if(orderBy == 2) {
+//			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "hot");
+//		}
+//		
+//		if(orderBy == 3) {
+//			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "hot");
+//		}
+//
+//		
+//		Page<Post> page = postDao.findAll(pgb);
+//
+//		return page;
+//	}
+	
+	public Page<Post> findByKeyword(String keyword, Integer pageNumber, Integer orderBy) {
+	    PageRequest pgb = null;
+	    if(orderBy == 0) {
+	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "added");
+	    }
+	    if(orderBy == 1) {
+	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "added");
+	    }
+	    if(orderBy == 2) {
+	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "hot");
+	    }
+	    if(orderBy == 3) {
+	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "hot");
+	    }
 
-		
-		Page<Post> page = postDao.findAll(pgb);
+	    Page<Post> page = postDao.findByPostTitleLike(keyword, pgb);
 
-		return page;
+	    return page;
 	}
+	
+//	public Page<Post> findLike(String keyword){
+//		return postDao.findByPostTitleLike(keyword);
+//		
+//	}
 }

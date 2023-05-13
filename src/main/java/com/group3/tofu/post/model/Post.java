@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.group3.tofu.comment.model.Comment;
@@ -50,8 +51,9 @@ public class Post {
 	@OneToOne(mappedBy = "post", fetch = FetchType.LAZY)
 	private Comment comment;
 	
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "f_customer_id")
+    @JoinColumn(name = "f_customer_id", referencedColumnName = "customer_id")
 	private Customer customer;
 	
 	public Post() {
