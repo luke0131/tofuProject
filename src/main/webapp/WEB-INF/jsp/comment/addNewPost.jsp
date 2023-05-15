@@ -48,5 +48,34 @@
         </div>
     </div>
  
+ <script type="text/javascript">
+ 
+//選擇textarea元素
+ var textarea = document.querySelector('#editor');
+
+ document.getElementById('form1').addEventListener('submit', function(event) {
+	  // 如果textarea的值為空
+	  if (textarea.value.trim() === '') {
+	    // 添加error CSS類
+	    textarea.classList.add('error');
+	    // 設置placeholder文本
+	    textarea.placeholder = '文章內容必填！！！！！！！';
+	    // 取消表單提交
+	    event.preventDefault();
+	  }
+	});
+
+	// 監聽textarea的輸入事件
+	textarea.addEventListener('input', function() {
+	  // 如果textarea的值不為空
+	  if (textarea.value.trim() !== '') {
+	    // 移除error CSS類
+	    textarea.classList.remove('error');
+	    // 移除placeholder文本
+	    textarea.placeholder = '';
+	  }
+	});
+ </script>
+ 
 </body>
 </html>

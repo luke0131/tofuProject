@@ -157,3 +157,7 @@ h3{
     border-bottom: #117e96 1px solid;
     background-color: #FFF;
 }
+/* 定義紅色邊框的CSS類 */
+form-control main-editor is-focused error {
+  border: 1px solid red;
+}

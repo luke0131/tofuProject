@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.group3.tofu.comment.model.Comment;
 import com.group3.tofu.comment.model.CommentDAO;
+import com.group3.tofu.customer.model.Customer;
+import com.group3.tofu.post.model.Post;
 
 @Service
 public class CommentService {
@@ -21,7 +23,11 @@ public class CommentService {
 		return commentDAO.save(comment);
 	}
 		
-		
+	public Comment createComment(Comment comment, Customer newCustomer, Post post) {
+	    comment.setPost(post);
+	    comment.setCustomer(newCustomer);
+	    return commentDAO.save(comment);
+	}	
 	
 	
 	//找全部的文章內容

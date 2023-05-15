@@ -1,7 +1,5 @@
 package com.group3.tofu.post.model;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,6 +11,7 @@ public interface PostDao extends JpaRepository<Post, Integer>{
 	
 	Post findFirstByOrderByAddedDesc();
 	
+	//nativeQuery = true為原生SQL語句
 	@Query(value = "select * from Post where title like %:title%", nativeQuery = true)
 	Page<Post> findByPostTitleLike(@Param("title") String keyword,Pageable pageble);
 	
@@ -20,6 +19,8 @@ public interface PostDao extends JpaRepository<Post, Integer>{
    
 	@Query(value = "from Post where f_customer_id=:f_customer_id")
 	Post findByFkCustomerId(@Param("f_customer_id") Integer f_customer_id);
+	
+	
 	
 	//用人氣排序高到低123()
 	

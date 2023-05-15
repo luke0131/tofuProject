@@ -1,8 +1,6 @@
 package com.group3.tofu.post.controller;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,9 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.group3.tofu.comment.model.Comment;
 import com.group3.tofu.comment.service.CommentService;
@@ -36,13 +35,28 @@ public class PostController {
 
 	// 跳轉到新增的畫面
 	@GetMapping("/showPost/add")
-	public String addPost() {
+	public String addPost(Model model, HttpSession session) {
+		
+		Customer customer = (Customer) session.getAttribute("loggedInCustomer");
+		
+		
+		System.out.println("尚未登入-------------" + customer);
+		
+		if(customer == null) {
+			model.addAttribute("message", "請先登入會員");
+			return "customer/login";
+		}
+		
+		
 		return "comment/addNewPost";
 	}
+	
+	
+	
 
 	// 新增文章標題，並轉到標題
 	@PostMapping("/showPost")
-	public String createNewPost(@RequestParam String title, @RequestParam String text, HttpSession session) {
+	public String createNewPost(@RequestParam String title, @RequestParam String text, @ModelAttribute Post post, HttpSession session) {
 
 		Customer customer = (Customer) session.getAttribute("loggedInCustomer");
 		
@@ -57,18 +71,22 @@ public class PostController {
 			Customer newCustomer = option.get();
 			
 			Post postTitle = new Post();
-			postTitle.setTitle(title);
-			
-			//postTitle.setPost_id(customerId);
+			postTitle.setTitle(title);		
 			
 			postService.createPost(postTitle);
 
 			Comment comment = new Comment();
 			comment.setText(text);
-			//comment.setComment_id(customerId);
+			
+			comment.setPost(postTitle);
+			comment.setCustomer(newCustomer);
+			
+//			postService.createPost(postTitle);
 			commentService.createComment(comment);
 
 			session.setAttribute("loggedInCustomer", newCustomer);
+			
+			
 			
 			return "redirect:/showPost";
 
@@ -77,7 +95,7 @@ public class PostController {
 		return "customer/login";
 	}
 
-//	// 分頁
+	// 分頁
 	@GetMapping("/showPost")
 	public String showPost(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
 							@RequestParam(name = "keyword", required = false) String keyword,
@@ -96,22 +114,14 @@ public class PostController {
 	        model.addAttribute("keyword", keyword);
 	    }
 
-		
-		//return page;
-
 	model.addAttribute("page", page);
+	
+session.setAttribute("orderBy", orderBy);	
 		
 		
-
 	return "comment/post";
 	}
-	/*
-	@GetMapping("/showPost/test")
-	@ResponseBody
-	public List<Post> test(@RequestParam("keyword") String keyword) {
-		return postService.findByKeyword(keyword);
-	}
-	*/
+	
 	//紀錄人氣排序
 	@GetMapping("/orderBy")
 	public String orderBy(@RequestParam("orderBy") Integer orderBy, HttpSession session) {
@@ -120,36 +130,16 @@ public class PostController {
 		return "redirect:/showPost";
 	}
 	
-//	@GetMapping("/showPost")
-//	public String showPost(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, 
-//	                       @RequestParam(name = "orderByType", defaultValue = "time") String orderByType,
-//	                       Model model, HttpSession session) {
-//	    Integer orderBy = 0;
-//	    switch(orderByType) {
-//	        case "time":
-//	            orderBy = 0;
-//	            break;
-//	        case "popularity":
-//	            orderBy = 2;
-//	            break;
-//	        default:
-//	            orderBy = 0;
-//	            break;
-//	    }
-//
-//	    Page<Post> page = postService.findByPage(pageNumber, orderBy);
-//	    model.addAttribute("page", page);
-//
-//	    return "comment/post";
-//	}
-//
-//	@GetMapping("/orderBy")
-//	public String orderBy(@RequestParam("orderBy") String orderBy, HttpSession session) {
-//	    session.setAttribute("orderByType", orderBy);
-//
-//	    return "redirect:/showPost";
-//	}
+	
+	//點文章標題，讓人氣值+1
+	@PutMapping("/updateHot")
+	public String updateHot(@RequestParam("post_id") Integer post_id) {
+	    postService.increaseHot(post_id);
+	    return "redirect:/showPost";
+	}
 
 
+
+	
 	
 }

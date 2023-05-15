@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ContentUs")
+@Table(name = "ContactUs")
 public class Contact {
 
 	@Id
@@ -41,7 +41,7 @@ public class Contact {
 
 	@Column(name = "email_topic")
 	private String email_topic;
-
+	
 	@Column(name = "email_subject")
 	private String email_subject;
 
