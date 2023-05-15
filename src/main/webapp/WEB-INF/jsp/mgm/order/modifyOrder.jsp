@@ -5,6 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
+
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<link href="${contextRoot}/img/indexPicture/favicon.ico" rel="icon"
+	type="image/x-icon" />
+<meta charset="UTF-8" />
+<title>豆腐車業管理平台-會員管理</title>
+<script type="text/javascript"
+	src="${contextRoot}/js/pages/dashboard.js"></script>
+<script type="text/javascript" src="${contextRoot}/css/dashboard.css"></script>
+
+
+
+
+
+
 <style>
 	.group {
 	clear: left;
@@ -19,13 +36,24 @@
 </style>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
-	<jsp:include page="../layout/navbar.jsp" />
+	<jsp:include page="/WEB-INF/jsp/layout/mgmDependencies.jsp" />
+	<jsp:include page="/WEB-INF/jsp/layout/mgmHeader.jsp" />
+	
+	<div class="container-fluid">
+	<div class="row">
+		<jsp:include page="/WEB-INF/jsp/layout/mgmNavbar.jsp" />
+		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+			
+			
+			
+			
+			
+			
 	
 	
-	<h1 style="text-align: center;">詳細訂單資料</h1>
+	<h1 style="text-align: center; margin-top: 50px;">訂單資料修改</h1>
 	
-	<div style="margin: auto; width: 800px;" class="borders">
+	<div style="margin: auto; width: 800px;margin-top: 50px;" class="borders">
         <h5 style="text-align: center;">訂單資訊</h5>
         <div class="group">
             <label for="">訂單編號：</label>
@@ -56,13 +84,23 @@
 				</select>
 			</div>
 			<div class="group">
+				<label for="">訂單狀態：</label>
+				<select name="status">
+					<option value="">訂單狀態</option>
+					<option value="${order.order_status}" selected>${order.order_status}</option>
+					<option value="訂單完成">訂單完成</option>
+					<option value="訂單取消">訂單取消</option>
+					<option value="正在處理">正在處理</option>
+				</select>
+			</div>
+			<div class="group">
 				<label for="">出貨地址：</label>
 				<input type="text" name="address" value="${order.ship_address}" style="width: 350px;">
 			</div>
 
 				<input type="text" name="id" value="${order.id}" hidden>
 
-			<div style="margin:auto;">
+			<div style="text-align: center;">
 				<button type="submit" class="btn btn-outline-primary">確認修改</button>
 			</div>
 		</form>
@@ -98,8 +136,9 @@
 	
 	
 	
-	
-	
-	<jsp:include page="../layout/footer.jsp" />
+		</main>
+		</div>
+	</div>
+	<jsp:include page="/WEB-INF/jsp/layout/mgmfooter.jsp" />
 </body>
 </html>

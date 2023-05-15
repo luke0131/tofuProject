@@ -11,7 +11,7 @@ public class OrderDetailService {
 	@Autowired
 	private OrderDetailDAO odDAO;
 	
-	public void save(OrderDetail orderDetail) {
-		odDAO.save(orderDetail);
+	public OrderDetail save(OrderDetail orderDetail) {
+		return odDAO.save(orderDetail);
 	}
 }

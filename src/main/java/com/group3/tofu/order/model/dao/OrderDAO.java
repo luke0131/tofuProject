@@ -2,6 +2,8 @@ package com.group3.tofu.order.model.dao;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,6 +18,8 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
 	List<Order> findByPayment(String payment);
 	
 	@Query(value = "from Order where ship_status = ?1")
-	List<Order> findByShipment(String ship_status);
-
+	List<Order> findByShipment(String ship_status,Pageable pageable);
+	
+	@Query(value = "select o from Order o where o.ship_status = ?1")
+	Page<Order> findByShipment2(String ship_status,Pageable pageable);
 }
