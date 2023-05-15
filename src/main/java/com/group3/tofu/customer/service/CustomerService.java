@@ -285,12 +285,23 @@ public class CustomerService {
 	public Page<Customer> findByPage(Integer pageNumber){
 		
 		//拿到Pageable物件
-		PageRequest pgb = PageRequest.of(pageNumber-1 , 7);
+		PageRequest pgb = PageRequest.of(pageNumber-1 , 8);
 		
 		Page<Customer> page = customerDao.findAll(pgb);
 		
 		return page;
 	
+	}
+	
+	//製作模糊搜尋功能
+	public Page<Customer> findByKeyword(String keyword , Integer pageNumber){
+		
+		//拿到Pageable物件
+		PageRequest pgb = PageRequest.of(pageNumber-1 , 8);
+		
+		Page<Customer> page = customerDao.findByCustomerNameLike(keyword, pgb);
+		
+		return page;
 	}
 	
 

@@ -31,6 +31,7 @@ import com.group3.tofu.employee.model.Employee;
 import com.group3.tofu.gift.model.bean.Gift;
 import com.group3.tofu.order.model.bean.Order;
 import com.group3.tofu.order.service.OrderService;
+import com.group3.tofu.post.model.Post;
 import com.group3.tofu.product.model.Product;
 
 //@SessionAttributes(names= {"accountName"})
@@ -46,18 +47,25 @@ public class CustomerController {
 	// 尋找所有customer
 	// 以及增加分頁功能
 	@GetMapping(path = "mgm/customerManagement")
-	public String findAllCustomers(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model model,
-			HttpSession session) {
+	public String findAllCustomers(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
+			@RequestParam(name = "keyword", required = false) String keyword, Model model, HttpSession session) {
 
-		Page<Customer> page = customerService.findByPage(pageNumber);
+		Page<Customer> page;
 		
+		if (keyword == null || keyword.isEmpty()) {
+			page = customerService.findByPage(pageNumber);
+		} else {
+			page = customerService.findByKeyword(keyword, pageNumber);
+
+			model.addAttribute("keyword", keyword);
+		}
+
 		// 要帶到下一頁，要用model帶過去
 		model.addAttribute("page", page);
-		
-		List<Customer> customerList = customerService.findAllCustomer();
 
-		session.setAttribute("customerList", customerList);
+		// List<Customer> customerList = customerService.findAllCustomer();
 
+		// session.setAttribute("customerList", customerList);
 
 		return "mgm/customerManagement";
 	}
@@ -91,9 +99,9 @@ public class CustomerController {
 			employees.add(employee);
 
 		}
-		model.addAttribute("orders", orders);
-		model.addAttribute("products", products);
-		model.addAttribute("employees", employees);
+		session.setAttribute("orders", orders);
+		session.setAttribute("products", products);
+		session.setAttribute("employees", employees);
 
 		System.out.println("查詢歷史訂單成功!");
 		return "customer/queryOrder";

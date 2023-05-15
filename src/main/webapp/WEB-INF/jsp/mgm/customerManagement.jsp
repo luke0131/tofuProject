@@ -36,6 +36,49 @@ table {
 	width: 80px;
 	height: 80px;
 }
+
+.linker {
+	border: black solid 2px;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	text-align: center;
+	width: 30px;
+}
+
+.search {
+	/*   width: 60%; */
+	position: relative;
+	display: flex;
+}
+
+.searchTerm {
+	width: 250px;
+	border: 3px solid black;
+	border-right: none;
+	padding: 5px;
+	height: 36px;
+	border-radius: 20px 0 0 20px;
+	outline: none;
+	color: #9DBFAF;
+}
+
+.searchTerm:focus {
+	color: navy;
+}
+
+.searchButton {
+	width: 40px;
+	height: 36px;
+	border: 1px solid black;
+	background: black;
+	text-align: center;
+	color: #fff;
+	border-radius: 0 20px 20px 0;
+	cursor: pointer;
+	font-size: 20px;
+}
 </style>
 <script type="text/javascript"
 	src="${contextRoot}/js/pages/dashboard.js"></script>
@@ -50,6 +93,21 @@ table {
 			<jsp:include page="/WEB-INF/jsp/layout/mgmNavbar.jsp" />
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 				<h2 class="text-center mt-2 fw-bold">小豆腐會員列表</h2>
+
+				<!-- 製作搜尋列表-->
+				<form action="${contextRoot}/mgm/customerManagement" method="GET">
+					<div class="d-flex justify-content-end mb-3 mt-3">
+						<div class="search">
+							<input type="text" class="searchTerm text-center" value="${keyword}" name="keyword"
+								placeholder="搜尋小豆腐">
+							<button type="submit" class="searchButton">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+
+
 				<div class="table-responsive">
 					<table>
 						<thead>
@@ -106,25 +164,35 @@ table {
 							</c:forEach>
 						</tbody>
 					</table>
+
+
+
+					<div
+						style="margin-left: 750px; margin-top: 20px; margin-bottom: 20px">
+						<!--           這裡是放page的foreach -->
+						<
+						<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+
+							<c:choose>
+
+								<c:when test="${page.number !=  pageNumber-1}">
+									<a href="${contextRoot}/mgm/customerManagement?p=${pageNumber}"
+										style="text-decoration: none; text-align: center"
+										class="linker">
+										<div style="color: black">${pageNumber}</div>
+									</a>
+								</c:when>
+
+								<c:otherwise>
+									<div style="background-color: black; color: white;"
+										class="linker">${pageNumber}</div>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						>
+					</div>
+
 				</div>
-
-
-
-
-				<!--           這裡是放page的foreach -->
-				<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
-
-					<c:choose>
-
-						<c:when test="${page.number !=  pageNumber-1}">
-							<a href="${contextRoot}/mgm/customerManagement?p=${pageNumber}">${pageNumber}</a>
-						</c:when>
-
-						<c:otherwise>
-							${pageNumber}
-                 		</c:otherwise>
-					</c:choose>
-				</c:forEach>
 
 
 			</main>
