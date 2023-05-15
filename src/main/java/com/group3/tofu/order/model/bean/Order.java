@@ -55,8 +55,12 @@ public class Order {
 	@Column(name = "ship_status")
 	private String ship_status;
 	
+	@Column(name = "order_status")
+	private String order_status;
+	
 	public Order() {
 	}
+	
 	@PrePersist//當物件要轉換成persistent狀態時發動該方法
 	public void onCreateTime() {
 		if(order_date == null) {
@@ -68,10 +72,14 @@ public class Order {
 			c.add(Calendar.DATE, 7);
 			shipped_date = c.getTime();
 			
-			payment="已付款";
+			payment="未付款";
 			ship_status="未出貨";
+			order_status="正在處理";
 		}
 	}
+	
+	
+
 	public Integer getId() {
 		return id;
 	}
@@ -138,7 +146,12 @@ public class Order {
 	public void setShip_status(String ship_status) {
 		this.ship_status = ship_status;
 	}
-
+	public String getOrder_status() {
+		return order_status;
+	}
+	public void setOrder_status(String order_status) {
+		this.order_status = order_status;
+	}
 	@Override
 	public String toString() {
 		return "Order [id=" + id + ", order_number=" + order_number + ", f_product_id=" + f_product_id

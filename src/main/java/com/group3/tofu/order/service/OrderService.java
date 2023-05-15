@@ -56,4 +56,17 @@ public class OrderService {
 		
 		return orders;
 	}
+	
+	public List<Order> findByShipment(Integer pageNumber,String status) {
+		
+		Pageable pgb = PageRequest.of(pageNumber-1, 5, Direction.DESC, "id");
+		return orderDAO.findByShipment(status,pgb);
+	}
+	
+	public Page<Order> findByShipment2(Integer pageNumber,String status) {
+		
+		Pageable pgb = PageRequest.of(pageNumber-1, 3, Direction.DESC, "id");
+		return orderDAO.findByShipment2(status,pgb);
+	}
+
 }

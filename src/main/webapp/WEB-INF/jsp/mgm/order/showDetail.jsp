@@ -6,6 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
+
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<link href="${contextRoot}/img/indexPicture/favicon.ico" rel="icon"
+	type="image/x-icon" />
+<meta charset="UTF-8" />
+<title>豆腐車業管理平台-會員管理</title>
+<script type="text/javascript"
+	src="${contextRoot}/js/pages/dashboard.js"></script>
+<script type="text/javascript" src="${contextRoot}/css/dashboard.css"></script>
+
+
+
+
 <style>
 	.group {
 	clear: left;
@@ -14,15 +29,26 @@
 	padding-bottom: 10px;
 	margin: 10px;
   }
-
 </style>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
-	<jsp:include page="../layout/navbar.jsp" />
+
+	<jsp:include page="/WEB-INF/jsp/layout/mgmDependencies.jsp" />
+	<jsp:include page="/WEB-INF/jsp/layout/mgmHeader.jsp" />
 	
-    <div style="border: black dashed 2px;width: 800px;margin: auto">
-	<div style="margin: auto; width: 800px;">
+	
+	<div class="container-fluid">
+	<div class="row">
+		<jsp:include page="/WEB-INF/jsp/layout/mgmNavbar.jsp" />
+		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+			
+
+
+	<h1 style="text-align: center; margin-top: 50px;">詳細訂單資料</h1>
+	
+	
+	
+	<div style="margin: auto; width: 800px;border: black dashed 2px; margin-top: 50px;">
         <h5 style="text-align: center;">訂單資訊</h5>
         <div class="group">
             <label for="">訂單編號：</label>
@@ -40,13 +66,17 @@
             <label for="">出貨狀態：</label>
             <span>${order.ship_status}</span>
         </div>
+		<div class="group">
+            <label for="">訂單狀態：</label>
+            <span>${order.order_status}</span>
+        </div>
         <div class="group">
             <label for="">出貨地址：</label>
             <span>${order.ship_address}</span>
         </div>
     </div>
 
-    <div style="margin: auto; width: 800px;margin-top: 15px;">
+    <div style="margin: auto; width: 800px;border: black dashed 2px;margin-top: 50px;">
         <h5 style="text-align: center;">訂購人資料</h5>
         <div class="group">
             <label for="">姓名：</label>
@@ -71,8 +101,7 @@
 	
 	
     
-    <table class="table table-striped" style="width: 800px;margin: auto;margin-top: 15px;">
-        <h5 style="text-align: center;">訂購商品資訊</h5>
+    <table class="table table-striped" style="width: 800px;margin: auto;margin-top: 50px;border: black dashed 2px;">
         <thead>
 			<tr>
 				<th scope="col">#</th>
@@ -98,16 +127,7 @@
 			</tr>
         </tbody>
       </table>
-      <span>選擇付款方式</span>
-      <label for=""><input type="checkbox" name="" id="">信用卡</label>
-      <label for=""><input type="checkbox" name="" id="">信用卡</label>
-      
-      <div style="text-align: center; margin-top: 15px;">
-          <a href="http://localhost:8080/tofu/order/ecpay/"+${order.id}><button type="button" class="btn btn-primary">PURCHASE</button></a>
-      </div>
-
-
-	</div>
+	
 	<script>
 	let total = 0;
 	$('.price').each(function(){
@@ -128,6 +148,9 @@
 	
 	
 	
-	<jsp:include page="../layout/footer.jsp" />
+		</main>
+		</div>
+	</div>
+	<jsp:include page="/WEB-INF/jsp/layout/mgmfooter.jsp" />
 </body>
 </html>

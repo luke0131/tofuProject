@@ -1,6 +1,9 @@
 package com.group3.tofu.order.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,7 +12,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.customer.service.CustomerService;
@@ -19,6 +24,9 @@ import com.group3.tofu.order.model.bean.Order;
 import com.group3.tofu.order.model.bean.OrderDetail;
 import com.group3.tofu.order.service.OrderDetailService;
 import com.group3.tofu.order.service.OrderService;
+
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
 
 @Controller
 public class OrderController {
@@ -38,10 +46,13 @@ public class OrderController {
 	@GetMapping("order/findAll")
 	public String findCustomerOrder(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber,Model model) {
 		
+		String str = "findAll";
+		
 		Page<Order> page = orderService.findByPage(pageNumber);
 		model.addAttribute("page",page);
+		model.addAttribute("str", str);
 		
-		return "order/showOrder";
+		return "mgm/order/showOrder" ;
 	}
 	
 	@GetMapping("order/removeOrder")
@@ -51,6 +62,21 @@ public class OrderController {
 		
 		return "redirect:/order/findAll";
 	}
+	
+	@GetMapping("order/updateStatus")
+	public String updateStatus(@RequestParam(name = "id")Integer id,
+							   @RequestParam(name = "source")String source) {
+		System.out.println("comefrom = " + source);
+		System.out.println("**************************************************");
+		Order order = orderService.findbyId(id);
+		order.setOrder_status("訂單取消");
+		orderService.insertOrder(order);
+		if(source.equals("findAll")) {
+			return "redirect:/order/findAll";			
+		}
+		return "redirect:/order/findStatus";
+	}
+	
 	
 	@GetMapping("order/showDetail")
 	public String showDetail(@RequestParam(name = "id")Integer orderid,Model model) {
@@ -65,7 +91,7 @@ public class OrderController {
 		model.addAttribute("order",order);
 		model.addAttribute("orderDetails",orderDetails);
 
-		return "order/showDetail";
+		return "mgm/order/showDetail";
 	}
 	
 	@GetMapping("order/showModify")
@@ -78,12 +104,13 @@ public class OrderController {
 		model.addAttribute("customer",customer);
 		model.addAttribute("order",order);
 		
-		return "order/modifyOrder";
+		return "mgm/order/modifyOrder";
 	}
 	@GetMapping("order/updateOrder")
 	public String updateOrder(@RequestParam(name = "id")Integer orderid,
 							  @RequestParam(name = "shipment")String shipment,
 							  @RequestParam(name = "payment")String payment,
+							  @RequestParam(name = "status")String status,
 							  @RequestParam(name = "address")String address,Model model) {
 
 		Order order = orderService.findbyId(orderid);
@@ -91,10 +118,10 @@ public class OrderController {
 		order.setShip_status(shipment);
 		order.setPayment(payment);
 		order.setShip_address(address);
+		order.setOrder_status(status);
 		orderService.insertOrder(order);
 		
-		String str = "redirect:/order/findAll" + orderid;
-		System.out.println(str);
+
 		return "redirect:/order/findAll";
 	}
 	
@@ -148,11 +175,41 @@ public class OrderController {
 			odService.save(od);
 		}
 		
-		return "123";
+		return "order/showDetail";
+	}
+
+	
+	@ResponseBody
+	@GetMapping("order/ecpay")
+	public String ECPay() {
+		AllInOne allInOne = new AllInOne("");
+		AioCheckOutALL aioCheckOutALL = new AioCheckOutALL();
+		
+		//產生UUID
+		String uuid = UUID.randomUUID().toString();
+		uuid = uuid.replace("-", "A").substring(0, 20);
+
+	
+		aioCheckOutALL.setMerchantTradeNo(uuid);
+		
+		
+		aioCheckOutALL.setItemName("哇哈哈綠界測試商品"+"#"+"哇哈"+"#");
+		aioCheckOutALL.setMerchantMemberID("ec0001");
+		aioCheckOutALL.setTotalAmount("1000");
+		
+		aioCheckOutALL.setBidingCard("1");
+		aioCheckOutALL.setMerchantID("2000132");
+		aioCheckOutALL.setMerchantTradeDate("2023/05/28 08:00:00");
+		aioCheckOutALL.setTradeDesc("這裡是商品描述");
+		aioCheckOutALL.setReturnURL("http://localhost:8080/tofu/");
+		aioCheckOutALL.setClientBackURL("http://localhost:8080/tofu/");
+		
+		
+		return allInOne.aioCheckOut(aioCheckOutALL, null);
 	}
 	
 	@GetMapping("order/test")
-	public String insert(HttpSession session) {
+	public String insert(HttpSession session,Model model) {
 		
 		Customer customer = (Customer)session.getAttribute("loggedInCustomer");
 		Integer customerId= customer.getCustomer_id();
@@ -163,8 +220,10 @@ public class OrderController {
 		newOrder.setShip_address(customer.getAddress());
 		
 		Order saved = orderService.insertOrder(newOrder);
-		
+		saved.setOrder_number("ORD000"+saved.getId());
 		List<ShoppingCart> carts = spcService.findByCustomerId(customerId);
+		
+		List<OrderDetail> odList = new ArrayList<>();
 		
 		for (ShoppingCart c : carts) {
 			OrderDetail od = new OrderDetail();
@@ -174,18 +233,79 @@ public class OrderController {
 			od.setName(c.getGift().getName());
 			od.setOrder(saved);
 			
-			odService.save(od);
+			OrderDetail savedOd = odService.save(od);
+			odList.add(savedOd);
 		}
 		
-		return "redirect:/order/findAll";
+		model.addAttribute("customer",customer);
+		model.addAttribute("order",saved);
+		model.addAttribute("orderDetails",odList);
+		
+		return "order/showDetail";
+	}
+	@GetMapping("order/findStatus")
+	public String findByShipment(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber,Model model) {
+		Page<Order> page = orderService.findByShipment2(pageNumber,"已送達");
+		System.out.println("TotalPages :"+page.getTotalPages() );
+		System.out.println("now :"+page.getNumber() );
+		
+		List<Order> orders = page.getContent();
+		
+		for (Order order : orders) {
+			System.out.println(order.getId());
+		}
+		System.out.println("****************");
+		String str = "findStatus";
+		
+		model.addAttribute("page", page);
+		model.addAttribute("str", str);
+		
+		return "mgm/order/showOrder";
 	}
 	
-	@GetMapping(path="mgm/OrderAndGiftManagement")	
-	public String OrderAndGiftManagement(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber,Model model) {
-
-		Page<Order> page = orderService.findByPage(pageNumber);
-		model.addAttribute("page",page);
+	@ResponseBody
+	@GetMapping("/order/findAllOrders")
+	public List<Order> findAllOrders(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber) {
 		
-		return "mgm/OrderAndGiftManagement" ;
+		
+		return orderService.findByPage(pageNumber).getContent();
 	}
+	@ResponseBody
+	@GetMapping("/order/findAllOrderByPage")
+	public Page<Order> findAllOrderByPage(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber) {
+		Page<Order> page = orderService.findByPage(pageNumber);
+		
+		return page;
+	}
+	
+	@GetMapping("/order/showByAjax")
+	public String showByAjax() {
+		
+		return "mgm/order/showOrder2";
+	}
+	@ResponseBody
+	@GetMapping("/order/cancel/{id}")
+	public Order cancelOrder(@PathVariable(name = "id")Integer id) {
+		
+		Order order = orderService.findbyId(id);
+		order.setOrder_status("訂單取消");
+		orderService.insertOrder(order);
+		
+		return order;
+	}
+	
+	@GetMapping("/order/findByCondition")
+	public String findByCondition(@RequestParam(name = "payment",required = false)String payment,
+			  					  @RequestParam(name = "shipment",required = false)String shipment,
+			  					  @RequestParam(name = "status",required = false)String status) {
+		
+	System.out.println("*************************************");
+	System.out.println("payment = " + payment);
+	System.out.println("shipment = " + shipment);
+	System.out.println("status = " + status);
+		
+		return "mgm/order/showOrder2";
+	}
+	
+	
 }

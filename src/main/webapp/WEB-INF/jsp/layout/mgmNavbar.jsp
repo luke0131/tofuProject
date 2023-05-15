@@ -39,7 +39,7 @@
                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                   </svg> 會員管理
 						</a></li>
-						<li class="nav-item"><a class="nav-link active" href="#"
+						<li class="nav-item"><a class="nav-link active" href="http://localhost:8080/tofu/order/findAll"
 							style="color: black"> <svg xmlns="http://www.w3.org/2000/svg"
 									width="24" height="24" viewBox="0 0 24 24" fill="none"
 									stroke="currentColor" stroke-width="2" stroke-linecap="round"
