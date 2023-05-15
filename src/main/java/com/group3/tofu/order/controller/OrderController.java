@@ -3,6 +3,7 @@ package com.group3.tofu.order.controller;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -231,6 +232,8 @@ public class OrderController {
 		Order newOrder = new Order();
 		newOrder.setF_customer_id(customerId);
 		newOrder.setShip_address(customer.getAddress());
+		newOrder.setF_employee_id(((int)Math.random()*10+1));
+		newOrder.setF_product_id(((int)Math.random()*20+1));
 		
 		Order saved = orderService.insertOrder(newOrder);
 		saved.setOrder_number("ORD000"+saved.getId());

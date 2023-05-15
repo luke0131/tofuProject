@@ -36,6 +36,8 @@
 
 					<li class="nav-item dropdown"><a class="nav-link active"
 						href="${contextRoot}/product/all">商品展示</a></li>
+					<li class="nav-item dropdown"><a class="nav-link active"
+							href="${contextRoot}/showGift">購物商城</a></li>
 
 					<li class="nav-item dropdown"><a class="nav-link active"
 						href="#" data-bs-toggle="dropdown" aria-current="page">豆腐論壇</a>
@@ -50,6 +52,7 @@
 							<li><a class="dropdown-item" href="${contextRoot}/introduce">維修保養</a></li>
 							<li><a class="dropdown-item" href="${contextRoot}/show">家用充電座安裝評估預約</a></li>
 						</ul></li>
+					
 
 					<!-- <li class="nav-item dropdown">
               <a

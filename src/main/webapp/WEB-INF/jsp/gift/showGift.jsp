@@ -13,9 +13,9 @@
   width: 1000px;
   margin: auto;
 }
-img{
-  height: 250px;
-}
+/* img{ */
+/*   height: 250px; */
+/* } */
 .linker{
 		border: black solid 2px;
 		width: 30px;
@@ -44,7 +44,7 @@ img{
 			<div class="col">
 				<div class="card" style="width: 18rem;">
 				  <a href="${contextRoot}/">
-				    <img src="${contextRoot}/tofu/showGift/${gList.id}" class="card-img-top" alt="...">
+				    <img src="${contextRoot}/tofu/showGift/${gList.id}" class="card-img-top" style="height: 250px;">
 				  </a>
 				  <div class="card-body">
 				    <h5 class="card-title">${gList.name}</h5>
