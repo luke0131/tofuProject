@@ -22,7 +22,9 @@
 			<h1 >歡樂豆腐討論區</h1>
 			
             <div class="addArticle">
-                <a href="${contextRoot}/showPost/add"><input type="button" value="發表文章"></a>
+            
+                <a id="postButton" href="${contextRoot}/showPost/add"><input type="button" value="發表文章"></a>
+                
 				 <form id="orderForm" action="${contextRoot}/orderBy" >
 				<select id="orderBySelect" name="orderBy" onchange="document.getElementById('orderForm').submit()">
           <!-- <option value="">請選擇排序方式</option>  -->
@@ -54,7 +56,7 @@
               
 							<dd>
 								<ul class="field-list normal">
-								  <li class="title">
+								  <li class="title" id="myTitle">
 							      <div class="vam">
 								      <h3>
                       <a href="${contextRoot}/comment/${post.post_id}" class="title text-wrap"  title="標題" data-title="標題" style="text-decoration: none;">${post.title}</a>
@@ -65,7 +67,7 @@
                       <span class="num" style="color: red;">${post.hot}</span>
                   </li> 
                   <li class="author">
-                    <a href="#" title="account" target="_blank" style="text-decoration: none;">${loggedInCustomer.account}</a>
+                    <a href="#" title="account" target="_blank" style="text-decoration: none;">${loggedInCustomer.name}</a>
                   </li>
                   <li class="added">
                    <span style="text-decoration: none;" ><fmt:formatDate value="${post.added}"
@@ -105,27 +107,6 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-function submitSearchForm() {
-  // 獲取表單元素和關鍵字輸入框元素
-  var form = document.getElementById("searchForm");
-  var keywordInput = document.getElementById("keywordInput");
-
-  // 獲取查詢關鍵字
-  var keyword = keywordInput.value.trim();
-
-  // 如果查詢關鍵字為空，直接返回
-  if (keyword === "") {
-    return;
-  }
-
-  // 更新表單的 action 屬性，將查詢關鍵字作為 URL 參數傳遞
-  var action = form.getAttribute("action");
-  var url = action + "?q=" + encodeURIComponent(keyword);
-  form.setAttribute("action", url);
-
-  // 提交表單
-  form.submit();
-}
 
 // 定义全局变量sortOrder，默认值为desc
 // var sortOrder = 'desc';
@@ -158,6 +139,15 @@ function submitSearchForm() {
 //     }
 //   });
 // });
+
+var titleElement = document.getElementById("myTitle");
+
+titleElement.addEventListener("click", function() {
+	var popularityElement = document.getElementById("dataList");
+	var popularity = parseInt(popularityElement.innerText) + 1;
+	console.log(popularity);
+	  popularityElement.innerText = popularity;
+	});
 
 
 

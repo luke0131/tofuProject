@@ -1,7 +1,5 @@
 package com.group3.tofu.post.service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +21,22 @@ public class PostService {
 	
 
 	
-	//insert文章標題及內容
-	public Post createPost(Post post) {
-		return postDao.save(post);
+	//新增文章標題及內容
+	public Post createPost(Post article) {	
+		 Post post = postDao.save(article);
+		 post.setHot(0);
+		 return post;
+		
 	}
 	
-
+	
+	public void updatePost(Post post) {
+        postDao.save(post);
+    }
+	
+	 public Optional<Post> findPostById(Integer post_id) {
+	        return postDao.findById(post_id);
+	    }
 	
 	//找全部
 	public Page<Post> findAll(Integer pageNumber, Integer orderBy) {
@@ -47,6 +55,30 @@ public class PostService {
 	    }
 	    return postDao.findAll(pgb);    
      }
+	
+	
+	//關鍵字模糊搜尋
+	public Page<Post> findByKeyword(String keyword, Integer pageNumber, Integer orderBy) {
+	    PageRequest pgb = null;
+	    if(orderBy == 0) {
+	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "added");
+	    }
+	    if(orderBy == 1) {
+	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "added");
+	    }
+	    if(orderBy == 2) {
+	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "hot");
+	    }
+	    if(orderBy == 3) {
+	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "hot");
+	    }
+
+	    Page<Post> page = postDao.findByPostTitleLike(keyword, pgb);
+
+	    return page;
+	}
+	
+	
 	
 	//用post_id找資料
 	public Post findByPostId(Integer post_id) {
@@ -92,51 +124,14 @@ public class PostService {
 		return null;
 	}
 	
-	//分頁
-//	public Page<Post> findByPage(Integer pageNumber , Integer orderBy ) {
-//		PageRequest pgb = null;
-//		if(orderBy == 0) {
-//			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "added");
-//		}
-//		if(orderBy == 1) {
-//			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "added");
-//		}
-//		if(orderBy == 2) {
-//			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "hot");
-//		}
-//		
-//		if(orderBy == 3) {
-//			pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "hot");
-//		}
-//
-//		
-//		Page<Post> page = postDao.findAll(pgb);
-//
-//		return page;
-//	}
 	
-	public Page<Post> findByKeyword(String keyword, Integer pageNumber, Integer orderBy) {
-	    PageRequest pgb = null;
-	    if(orderBy == 0) {
-	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "added");
+	public void increaseHot(Integer post_id) {
+	    Optional<Post> optionalPost = postDao.findById(post_id);
+	    if (optionalPost.isPresent()) {
+	    	Post post = optionalPost.get();
+	    	post.setHot(post.getHot() + 1);
+	    	postDao.save(post);
 	    }
-	    if(orderBy == 1) {
-	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "added");
-	    }
-	    if(orderBy == 2) {
-	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "hot");
-	    }
-	    if(orderBy == 3) {
-	        pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.ASC, "hot");
-	    }
-
-	    Page<Post> page = postDao.findByPostTitleLike(keyword, pgb);
-
-	    return page;
 	}
-	
-//	public Page<Post> findLike(String keyword){
-//		return postDao.findByPostTitleLike(keyword);
-//		
-//	}
+
 }

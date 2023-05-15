@@ -93,7 +93,7 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                 <!-- <c:forEach items="${allDetail}" var="allDetail" > -->
 
                 <div class="c-reply-content" id="comments" style="display:none;">
-                   <div href="#" class="reply-content__user">${allCustomer.account}</div>
+                   <div class="reply-content__user">${allCustomer.account}</div>
                   <article class="reply-content__article c-article">
                     <span class="comment_content"
                       >${allDetail.comment_detail}</span
@@ -117,6 +117,7 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                 </a>
 
                 <div class="reply-input">
+                  <input type="hidden" id="myCustomer" class="content-edit"/>
                   <input
                     id="myComment"
                     class="content-edit"
@@ -142,8 +143,16 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
       submitBtn.addEventListener("click", async function (event) {
         //event.preventDefault();
+        let myCustomer = document.getElementById("myCustomer").value;
         let myComment = document.getElementById("myComment").value;
+
+        if (!myComment) {
+          alert("留言不能為空！");
+          return;
+        }
+        
         let json = {
+          csutomer: myCustomer,
           comment: myComment,
         };
 
@@ -155,25 +164,31 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
             alert("留言成功！");
             const commentsDiv = document.getElementById("comments");
 
-            // 建立一個新的 <div> 元素來放置新留言的內容
-            var newCustomer = document.createElement("div");
-            newCustomer.classList.add("reply-content__user");
-
-            var newCommentDiv = document.createElement("div");
-            newCommentDiv.classList.add("c-reply-content");
-
+            // 建立一個新的 <div> 元素來放置新留言的內容及發言者
+              var newCommentDiv = document.createElement("div");
+              newCommentDiv.classList.add("c-reply-content");
+           
+            //新發言者 
+              // var newCustomer = document.createElement("div");
+              //  newCustomer.classList.add(
+              //   "reply-content__user"
+              //   );
+              // var newCustomerAdd = document.createTextNode(myCustomer);
+              // newCustomer.appendChild(newCustomerAdd);
+              // newCommentDiv.appendChild(newCustomer);
+            
             // 新留言的內容
-            const newCommentArticle = document.createElement("article");
+            var newCommentArticle = document.createElement("article");
             newCommentArticle.classList.add(
               "reply-content__article",
               "c-article"
             );
-            const newCommentContent = document.createTextNode(myComment);
+            var newCommentContent = document.createTextNode(myComment);
             newCommentArticle.appendChild(newCommentContent);
             newCommentDiv.appendChild(newCommentArticle);
 
             // 新留言的時間
-            const newCommentTime = document.createElement("div");
+            var newCommentTime = document.createElement("div");
             newCommentTime.classList.add("edittime");
             newCommentTime.style.fontSize = "6px";
 			
@@ -183,7 +198,7 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 			var day =currentTime.getDay(); 
 
             var commentDate = currentTime.getFullYear() + "-0"+ month +"-" + currentTime.getDate() + " " + 
-            currentTime.getHours() + ":0" + currentTime.getMinutes() + " " + "星期" + day_list[day];
+            currentTime.getHours() + ":" + currentTime.getMinutes() + " " + "星期" + day_list[day];
             var newCommentTimeContent = document.createTextNode(
               "留言時間：" + commentDate
             );

@@ -208,7 +208,7 @@ label {
 													</div>
 													<div class="ctTitle" style="margin-bottom: 20px;">
 														<label for="userName" style="font-weight: 700; margin-right: 5px;">您的大名</label>
-														<input type="text" id="userName" name="userName"
+														<input type="text" id="userName" name="name"
 															style="width: 150px" size="20" />
 														<div id="userName-error" class="invalid-feedback"></div>
 													</div>
@@ -237,11 +237,24 @@ label {
 															style="font-size: 12px; margin-left: 120px;">可以從行照或引擎附近的小金屬板上找到車身號碼。）</span>
 													</div>
 													<div class="ctTitle" style="margin-bottom: 20px;">
-														<label for="email" style="font-weight: 700; margin-right: 5px;">您的E-mail</label>
-														<input id="email" name="email" type="text" 
-															style="width: 250px" size="40"/>
-													<div id="email-error" class="invalid-feedback"></div>
+														<label for="email"
+															style="font-weight: 700; margin-right: 5px;">您的E-mail</label>
+														<c:choose>
+															<c:when test="${loggedInCustomer == null}">
+																<input id="email" name="email" type="text"
+																	style="width: 250px" size="40" />
+															</c:when>
+															<c:otherwise>
+																<input id="email" value="${loggedInCustomer.email}"
+																	disabled="true" name="email" type="text"
+																	style="width: 250px" size="40" />
+															</c:otherwise>
+														</c:choose>
+
+
+														<div id="email-error" class="invalid-feedback"></div>
 													</div>
+
 													
 													<div class="ctTitle" style="margin-bottom: 20px;">
 														<label for="phoneNumber" style="font-weight: 700; margin-right: 5px;">您的聯絡電話</label>
