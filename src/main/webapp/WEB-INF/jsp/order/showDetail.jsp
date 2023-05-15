@@ -101,10 +101,15 @@
       <span>選擇付款方式</span>
       <label for=""><input type="checkbox" name="" id="">信用卡</label>
       <label for=""><input type="checkbox" name="" id="">信用卡</label>
-      
-      <div style="text-align: center; margin-top: 15px;">
-          <a href="http://localhost:8080/tofu/order/ecpay/"+${order.id}><button type="button" class="btn btn-primary">PURCHASE</button></a>
-      </div>
+
+      <form action="http://localhost:8080/tofu/order/ecpay" method="get">
+
+          <div style="text-align: center; margin-top: 15px;">
+            <input type="text" name="id" value="${order.id}" hidden>
+             <button type="submit" class="btn btn-primary">PURCHASE</button>
+          </div>
+
+      </form>
 
 
 	</div>

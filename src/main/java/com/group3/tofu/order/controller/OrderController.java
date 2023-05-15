@@ -181,7 +181,19 @@ public class OrderController {
 	
 	@ResponseBody
 	@GetMapping("order/ecpay")
-	public String ECPay() {
+	public String ECPay(@RequestParam(name = "id") Integer id) {
+		Order order = orderService.findbyId(id);
+		List<OrderDetail> details = order.getOrderDetails();
+		//商品名稱組合字串
+		String str = "";
+		//商品金額相加
+		Integer sum = 0;
+		
+		for (OrderDetail d : details) {
+			str += d.getName()+"x"+d.getQty()+"#";
+			sum += d.getPrice()*d.getQty();
+		}
+		//綠界方法
 		AllInOne allInOne = new AllInOne("");
 		AioCheckOutALL aioCheckOutALL = new AioCheckOutALL();
 		
@@ -193,14 +205,15 @@ public class OrderController {
 		aioCheckOutALL.setMerchantTradeNo(uuid);
 		
 		
-		aioCheckOutALL.setItemName("哇哈哈綠界測試商品"+"#"+"哇哈"+"#");
+		aioCheckOutALL.setItemName(str);
 		aioCheckOutALL.setMerchantMemberID("ec0001");
-		aioCheckOutALL.setTotalAmount("1000");
+		aioCheckOutALL.setTotalAmount(sum.toString());
 		
 		aioCheckOutALL.setBidingCard("1");
 		aioCheckOutALL.setMerchantID("2000132");
 		aioCheckOutALL.setMerchantTradeDate("2023/05/28 08:00:00");
 		aioCheckOutALL.setTradeDesc("這裡是商品描述");
+		//綠界交易完成導向網址
 		aioCheckOutALL.setReturnURL("http://localhost:8080/tofu/");
 		aioCheckOutALL.setClientBackURL("http://localhost:8080/tofu/");
 		
