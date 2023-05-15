@@ -74,7 +74,8 @@
 							aria-expanded="false">查詢歷史訂單</button>
 						<div class="collapse" id="orders-collapse">
 							<ul class="btn-toggle-nav list-unstyled fw-normal large">
-								<li style="margin-left: 20px"><a href="${contextRoot}/customer/queryOrder"
+								<li style="margin-left: 20px"><a
+									href="${contextRoot}/customer/queryOrder"
 									class="link-dark d-inline-flex text-decoration-none rounded">訂單資料</a></li>
 							</ul>
 						</div>
@@ -86,9 +87,24 @@
 							aria-expanded="false">查詢預約紀錄</button>
 
 						<div class="collapse" id="home-collapse" style="">
-							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-								<li style="margin-left: 20px"><a href="${contextRoot}/customer/queryBook"
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 large">
+								<li style="margin-left: 20px"><a
+									href="${contextRoot}/customer/queryBook"
 									class="link-dark d-inline-flex text-decoration-none rounded">預約資料</a></li>
+							</ul>
+						</div>
+					</li>
+					<li class="mb-1">
+						<button
+							class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fw-bold"
+							data-bs-toggle="collapse" data-bs-target="#account-collapse"
+							aria-expanded="false">查詢發文紀錄</button>
+
+						<div class="collapse" id="account-collapse" style="">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 large">
+								<li style="margin-left: 20px"><a
+									href="#"
+									class="link-dark d-inline-flex text-decoration-none rounded">發文留言</a></li>
 							</ul>
 						</div>
 					</li>

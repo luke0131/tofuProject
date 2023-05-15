@@ -115,6 +115,19 @@ table {
 							</ul>
 						</div>
 					</li>
+					<li class="mb-1">
+						<button
+							class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fw-bold"
+							data-bs-toggle="collapse" data-bs-target="#account-collapse"
+							aria-expanded="false">查詢發文紀錄</button>
+
+						<div class="collapse" id="account-collapse" style="">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 large">
+								<li style="margin-left: 20px"><a href="#"
+									class="link-dark d-inline-flex text-decoration-none rounded">發文留言</a></li>
+							</ul>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -141,9 +154,10 @@ table {
 						<td>${books.get(i).status}</td>
 						<td>${employees.get(i).account}</td>
 						<td>${employees.get(i).phone}</td>
-<!-- 						<td><a href="tel:+886938659639">Phone: 0938-659-639</a></td> -->
+						<!-- 						<td><a href="tel:+886938659639">Phone: 0938-659-639</a></td> -->
 						<td>
-							<button type="button" value=update id="call" onclick="call(event)"
+							<button type="button" value=update id="call"
+								onclick="call(event)"
 								style="margin-left: 15px; border: 0px solid transparent; background-color: transparent">
 								<img src="${contextRoot}/img/indexPicture/phone.png">
 							</button>
@@ -157,7 +171,7 @@ table {
 	<a href="#top" class="top">Top</a>
 	<script type="text/javascript"
 		src="${contextRoot}/js/pages/sidebars.js"></script>
-		<script type="text/javascript">
+	<script type="text/javascript">
 		
 		function call(event){
 			event.preventDefault();

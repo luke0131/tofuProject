@@ -124,6 +124,19 @@ table {
 							</ul>
 						</div>
 					</li>
+					<li class="mb-1">
+						<button
+							class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed fw-bold"
+							data-bs-toggle="collapse" data-bs-target="#account-collapse"
+							aria-expanded="false">查詢發文紀錄</button>
+
+						<div class="collapse" id="account-collapse" style="">
+							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 large">
+								<li style="margin-left: 20px"><a href="#"
+									class="link-dark d-inline-flex text-decoration-none rounded">發文留言</a></li>
+							</ul>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -167,7 +180,7 @@ table {
 							<td>${employees.get(i).account}</td>
 							<td>
 								<button name="${orders.get(i).id}" type="button" value=update
-									onclick="updateOrder(event,this.name)" 
+									onclick="updateOrder(event,this.name)"
 									style="margin-left: 15px; border: 0px solid transparent; background-color: transparent">
 									<img src="${contextRoot}/img/indexPicture/pencil.png">
 								</button>
