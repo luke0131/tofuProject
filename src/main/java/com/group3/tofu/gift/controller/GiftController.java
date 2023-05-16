@@ -48,4 +48,43 @@ public class GiftController {
 		
 		return new ResponseEntity<byte[]>(photo, headers, HttpStatus.OK);
 	}
+	@GetMapping("showGift/findBySearch")
+	public String findBySearch(@RequestParam(name = "search",required = false)String search,
+							   @RequestParam(name = "p",defaultValue = "1") Integer pageNumber,
+							   Model model) {
+		int startItem = 0 + (pageNumber-1)*9;
+		List<Gift> gifts;
+		if(!search.equals("")) {
+			gifts = gService.findBySearch(search, startItem);			
+		}else {
+			return"redirect:/showGift";
+		}
+		model.addAttribute("gifts", gifts);
+		return"gift/showGift2";
+	}
+	
+	@GetMapping("showGift/findByOption")
+	public String findByOption(@RequestParam(name = "tool",required = false)String tool,
+							   @RequestParam(name = "food",required = false)String food,
+							   @RequestParam(name = "elec",required = false)String elec,
+							   @RequestParam(name = "drink",required = false)String drink,
+							   @RequestParam(name = "outdoor",required = false)String outdoor,
+							   @RequestParam(name = "min",required = false)Integer min,
+							   @RequestParam(name = "max",required = false)Integer max,
+							   @RequestParam(name = "p",defaultValue = "1") Integer pageNumber,
+							   Model model) {
+		int startItem = 0 + (pageNumber-1)*9;
+		
+
+		if(tool==null && food==null && elec==null && drink==null && outdoor==null && min==null && max==null) {
+			return"redirect:/showGift";
+		}
+		
+		
+		List<Gift> gifts = gService.findByOption(tool, food, elec, drink, outdoor, min, max,startItem);
+		
+		model.addAttribute("gifts", gifts);
+		
+		return"gift/showGift2";
+	}
 }

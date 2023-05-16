@@ -223,22 +223,23 @@
 
 
 
-	// function callRemove(id) {
+	function callRemove(id) {
+		console.log("id = "+id);
+		axios.get("http://localhost:8080/tofu/order/cancel/"+id).then(function(response) {
+			console.log("response",response);
+			let index = id-1;
+			$('.status')[index].innerText = "訂單取消";
+			console.log($(this));
+			$('.status')[index].style.backgroundColor="red";
+			$('.status')[index].style.borderColor="red";
 
-	// 	axios.get("http://localhost:8080/tofu/order/cancel/"+id).then(function(response) {
-	// 		console.log("response",response);
-	// 		console.log($('.status')[id].innerText);
 
-	// 		$('.status')[id].style.backgroundColor="red";
-	// 		$('.status')[id].style.borderColor="red";
+		}).catch(function(){
 
-
-	// 	}).catch(function(){
-
-	// 	}).finally(function(){
+		}).finally(function(){
 			
-	// 	});
-	// };
+		});
+	};
 
 
 

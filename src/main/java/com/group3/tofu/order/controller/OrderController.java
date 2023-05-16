@@ -194,6 +194,16 @@ public class OrderController {
 			str += d.getName()+"x"+d.getQty()+"#";
 			sum += d.getPrice()*d.getQty();
 		}
+		
+		String mailStr = "<table><thead><tr><th>商品</th><th>數量</th><th>價錢</th></tr></thead><tbody>";
+		for (OrderDetail d : details) {
+			mailStr+="<tr><td>"+d.getName()+"</td><td>"+d.getQty()+"</td><td>"+d.getPrice()+"</td></tr>";			
+		}
+		mailStr+="</tbody></table><br><span>總價:"+sum+"</span>";
+
+		 
+		orderService.mailOrder(mailStr);
+		
 		//綠界方法
 		AllInOne allInOne = new AllInOne("");
 		AioCheckOutALL aioCheckOutALL = new AioCheckOutALL();
@@ -222,18 +232,20 @@ public class OrderController {
 		return allInOne.aioCheckOut(aioCheckOutALL, null);
 	}
 	
+	
 	@GetMapping("order/test")
 	public String insert(HttpSession session,Model model) {
 		
 		Customer customer = (Customer)session.getAttribute("loggedInCustomer");
 		Integer customerId= customer.getCustomer_id();
-
+		
 		
 		Order newOrder = new Order();
 		newOrder.setF_customer_id(customerId);
 		newOrder.setShip_address(customer.getAddress());
-		newOrder.setF_employee_id(((int)Math.random()*10+1));
-		newOrder.setF_product_id(((int)Math.random()*20+1));
+		newOrder.setF_employee_id((int)(Math.random()*10+1));
+		newOrder.setF_product_id((int)(Math.random()*20+1));
+		newOrder.setPayment("已付款");
 		
 		Order saved = orderService.insertOrder(newOrder);
 		saved.setOrder_number("ORD000"+saved.getId());

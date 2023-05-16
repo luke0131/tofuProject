@@ -1,7 +1,7 @@
 package com.group3.tofu.gift.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,10 +21,10 @@ import com.group3.tofu.gift.model.bean.Gift;
 import com.group3.tofu.gift.model.bean.ShoppingCart;
 import com.group3.tofu.gift.service.GiftService;
 import com.group3.tofu.gift.service.ShoppingCartService;
-import com.group3.tofu.order.model.bean.Order;
-import com.group3.tofu.order.model.bean.OrderDetail;
 import com.group3.tofu.order.service.OrderDetailService;
 import com.group3.tofu.order.service.OrderService;
+import com.group3.tofu.product.model.Product;
+import com.group3.tofu.product.model.ProductDao;
 
 @Controller
 public class ShoppingCartController {
@@ -40,6 +40,9 @@ public class ShoppingCartController {
 	@Autowired
 	private OrderDetailService odService;
 	
+	@Autowired
+	private ProductDao pDAO;
+	
 	@GetMapping("/showCart")
 	public String showCart(Model model,HttpSession session) {
 		
@@ -48,9 +51,11 @@ public class ShoppingCartController {
 		Customer customer = (Customer)session.getAttribute("loggedInCustomer");
 		Integer customerId= customer.getCustomer_id();
 		
+		Product product = pDAO.findById((int)(Math.random()*10+1)).get();
+		
 		List<ShoppingCart> carts = spcService.findByCustomerId(customerId);
 		model.addAttribute("carts",carts);
-
+		model.addAttribute("product",product);
 		
 		return "gift/showCart";
 	}
@@ -91,7 +96,7 @@ public class ShoppingCartController {
 		}
 		
 		
-		return "123456";
+		return "success";
 	}
 	
 	@ResponseBody

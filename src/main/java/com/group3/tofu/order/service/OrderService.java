@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.group3.tofu.customer.service.MailService;
 import com.group3.tofu.order.model.bean.Order;
 import com.group3.tofu.order.model.dao.OrderDAO;
 
@@ -17,6 +18,9 @@ public class OrderService {
 	
 	@Autowired
 	private OrderDAO orderDAO;
+	
+	@Autowired
+	private MailService mailService;
 	
 	public Order findbyId(Integer id) {
 		return orderDAO.findById(id).get();
@@ -67,6 +71,13 @@ public class OrderService {
 		
 		Pageable pgb = PageRequest.of(pageNumber-1, 3, Direction.DESC, "id");
 		return orderDAO.findByShipment2(status,pgb);
+	}
+	
+	public void mailOrder(String content) {
+		String email = "tofucars@gmail.com";
+		String subject = "豆腐車業會員購買商品紀錄";
+
+		mailService.sendEmail(email, subject, content);
 	}
 
 }

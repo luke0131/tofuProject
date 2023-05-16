@@ -45,9 +45,6 @@
 			<button type="submit" class="btn btn-outline-primary">search</button>
 		</div>
 	</form>
-	
-	
-
 
 	<form action="http://localhost:8080/tofu/showGift/findByOption" method="get" style="width: 600px; margin: auto; border: 2px black dashed; margin-top: 25px;">
 		<div class="query">
@@ -64,7 +61,7 @@
 			<label for="name" style="margin-left: 20px;">最大：</label>
 			<input type="number" id="" name="max" value="" placeholder="請輸入金額" style="margin-left: 20px;">
 		</div>
-		<div class="query" style="text-align: center;">
+		<div class="query" style="text-align: center;padding-bottom: 20px;">
 			<input type="submit" value="查詢" class="btn btn-dark"/>
 			<input type="reset" value="清除" class="btn btn-dark"/>
 		</div>
@@ -78,7 +75,7 @@
 
 	<div class="row row-cols-1 row-cols-md-3 g-4 w" style="margin: auto;">
 
-		<c:forEach items="${page.content}" var="gList">
+		<c:forEach items="${gifts}" var="gList">
 
 			<div class="col">
 				<div class="card" style="width: 18rem;">
@@ -102,18 +99,8 @@
 		</c:forEach>
 	</div>
 
-<div style="text-align: center; padding-top: 50px;">
-<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+	<div style="margin-top: 100px;"></div>
 
-  	<c:choose>
-    	<c:when test="${page.number !=  pageNumber-1}">
-        <a href="${contextRoot}/tofu/showGift?p=${pageNumber}" style="text-decoration: none;"  class="linker"><span style="color: black;">${pageNumber}</span></a>
-    	</c:when>
-  		<c:otherwise><span style="background-color: black; color: aliceblue;" class="linker">${pageNumber}</span></c:otherwise>
-	</c:choose>
-
-</c:forEach>
-</div>
 
 
 <script>

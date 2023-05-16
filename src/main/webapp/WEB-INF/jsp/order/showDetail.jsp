@@ -20,8 +20,10 @@
 <body>
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
 	<jsp:include page="../layout/navbar.jsp" />
+
+    <h2 style="text-align: center;margin-top: 25px;">訂單資訊確認</h2>
 	
-    <div style="border: black dashed 2px;width: 800px;margin: auto">
+    <div style="border: black dashed 2px;width: 800px;margin: auto;margin-top: 25px;">
 	<div style="margin: auto; width: 800px;">
         <h5 style="text-align: center;">訂單資訊</h5>
         <div class="group">
@@ -108,6 +110,8 @@
             <input type="text" name="id" value="${order.id}" hidden>
              <button type="submit" class="btn btn-primary">PURCHASE</button>
           </div>
+          
+          
 
       </form>
 
