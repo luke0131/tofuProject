@@ -152,17 +152,16 @@ body {
 			</div>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<svg class="bd-placeholder-img" width="100%" height="100%"
-						xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+					<svg class="" width="100%" height="100%"
+						xmlns="http://www.w3.org/2000/svg" aria-hidden=""
 						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<rect width="100%" height="100%" fill="#777" /></svg>
+						<rect width="100%" height="100%" fill="" />
+						<image href="../img/productDetail/Toyota Corolla Altis1.jpg" width="100%" height="100%"></image>
+					</svg>
 
 					<div class="container">
 						<div class="carousel-caption text-start">
 							<h1>Toyota Corolla Altis</h1>
-							<p>
-								<a class="btn btn-lg btn-primary" href="#">Sign up today</a>
-							</p>
 						</div>
 					</div>
 				</div>
@@ -170,16 +169,13 @@ body {
 					<svg class="bd-placeholder-img" width="100%" height="100%"
 						xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<rect width="100%" height="100%" fill="#777" /></svg>
+						<rect width="100%" height="100%" fill="" />
+						<image href="../img/productDetail/Toyota Corolla Altis2.jpg" width="100%" height="100%"></image>
+					</svg>
 
 					<div class="container">
 						<div class="carousel-caption">
-							<h1>Another example headline.</h1>
-							<p>Some representative placeholder content for the second
-								slide of the carousel.</p>
-							<p>
-								<a class="btn btn-lg btn-primary" href="#">Learn more</a>
-							</p>
+							<h1>Another example headline.</h1>	
 						</div>
 					</div>
 				</div>
@@ -187,16 +183,13 @@ body {
 					<svg class="bd-placeholder-img" width="100%" height="100%"
 						xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<rect width="100%" height="100%" fill="#777" /></svg>
+						<rect width="100%" height="100%" fill="" />
+						<image href="../img/productDetail/Toyota Corolla Altis3.jpg" width="100%" height="100%"></image>
+					</svg>
 
 					<div class="container">
 						<div class="carousel-caption text-end">
 							<h1>One more for good measure.</h1>
-							<p>Some representative placeholder content for the third
-								slide of this carousel.</p>
-							<p>
-								<a class="btn btn-lg btn-primary" href="#">Browse gallery</a>
-							</p>
 						</div>
 					</div>
 				</div>
@@ -223,13 +216,11 @@ body {
 			<!-- Three columns of text below the carousel -->
 			<div class="row">
 				<div class="col-lg-4">
-					<svg class="bd-placeholder-img rounded-circle" width="140"
-						height="140" xmlns="http://www.w3.org/2000/svg" role="img"
-						aria-label="Placeholder: 140x140"
-						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#777" />
-						<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+					<svg class="bd-placeholder-img rounded-circle" width="200"
+						height="200" xmlns="http://www.w3.org/2000/svg" role="img">
+						<rect width="100%" height="100%" fill="" />
+						<image href="../img/productDetail/productDetail1.jpg" width="100%" height="100%"></image>
+					</svg>
 
 					<h2 class="fw-normal">設計理念</h2>
 					<p>Some representative placeholder content for the three
@@ -240,14 +231,12 @@ body {
 				</div>
 				<!-- /.col-lg-4 -->
 				<div class="col-lg-4">
-					<svg class="bd-placeholder-img rounded-circle" width="140"
-						height="140" xmlns="http://www.w3.org/2000/svg" role="img"
-						aria-label="Placeholder: 140x140"
-						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#777" />
-						<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
+					<svg class="bd-placeholder-img rounded-circle" width="200"
+						height="200" xmlns="http://www.w3.org/2000/svg" role="img">
+						<rect width="100%" height="100%" fill="" />
+						<image href="../img/productDetail/productDetail2.jpg" width="100%" height="100%"></image>
+					</svg>
+					
 					<h2 class="fw-normal">預約賞車</h2>
 					<p>Another exciting bit of representative placeholder content.
 						This time, we've moved on to the second column.</p>
@@ -257,13 +246,11 @@ body {
 				</div>
 				<!-- /.col-lg-4 -->
 				<div class="col-lg-4">
-					<svg class="bd-placeholder-img rounded-circle" width="140"
-						height="140" xmlns="http://www.w3.org/2000/svg" role="img"
-						aria-label="Placeholder: 140x140"
-						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#777" />
-						<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+					<svg class="bd-placeholder-img rounded-circle" width="200"
+						height="200" xmlns="http://www.w3.org/2000/svg" role="img">
+						<rect width="100%" height="100%" fill="" />
+						<image href="../img/productDetail/productDetail3.jpg" width="100%" height="100%"></image>
+					</svg>
 
 					<h2 class="fw-normal">打造專屬</h2>
 					<p>And lastly this, the third column of representative
@@ -284,7 +271,7 @@ body {
 			<div id="introduce" class="row featurette">
 				<div class="col-md-7">
 					<h2 class="fw-normal lh-2">
-						外觀設計：<br/>
+						外觀設計：<br/><br/>
 						Toyota Corolla Altis採用了現代化的設計風格，強調簡潔、流線型和動感的外形。車頭部分採用了大面積的中網格設計，燈組造型富有層次感，整體風格比較具有豪華感。車側部分則突出了輪拱造型，並加入了流線型的腰線和拉長的車身比例，讓整體造型更加具有時尚感和運動感。
 					</h2>
 				</div>
@@ -294,9 +281,9 @@ body {
 						width="500" height="500" xmlns="http://www.w3.org/2000/svg"
 						role="img" aria-label="Placeholder: 500x500"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#eee" />
-						<text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+						<rect width="100%" height="100%" fill="white" />
+						<image href="../img/productDetail/Toyota Corolla Altis4.jpg" width="100%" height="100%"></image>
+					</svg>
 
 				</div>
 			</div>
@@ -306,7 +293,7 @@ body {
 			<div class="row featurette">
 				<div class="col-md-7 order-md-2">
 					<h2 class="fw-normal lh-1">
-						車內空間：<br/>
+						車內空間：<br/><br/>
 						Toyota Corolla Altis車內空間較為寬敞，前排座椅支撐力度較好，後排座椅也有較為舒適的座椅設計。車內儀表盤採用了現代化的設計風格，中控臺配置合理，且有許多科技配置，如8吋多媒體顯示屏、智慧型行車輔助系統、360度全景鏡頭等，讓駕駛者和乘客可以更加方便地享受愉悅的駕乘體驗。
 					</h2>
 				</div>
@@ -316,9 +303,9 @@ body {
 						width="500" height="500" xmlns="http://www.w3.org/2000/svg"
 						role="img" aria-label="Placeholder: 500x500"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#eee" />
-						<text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+						<rect width="100%" height="100%" fill="white" />
+						<image href="../img/productDetail/Toyota Corolla Altis5.jpg" width="100%" height="100%"></image>
+					</svg>
 
 				</div>
 			</div>
@@ -328,7 +315,7 @@ body {
 			<div class="row featurette">
 				<div class="col-md-7">
 					<h2 class="fw-normal lh-1">
-						動力性能：<br/>
+						動力性能：<br/><br/>
 						Toyota Corolla Altis搭載了1.8升汽油引擎，最大馬力為138匹，最大扭力為172牛米。配合CVT無段變速器，可提供平順、靈活的動力輸出，並且具有較為經濟的油耗表現。
 					</h2>
 				</div>
@@ -338,9 +325,9 @@ body {
 						width="500" height="500" xmlns="http://www.w3.org/2000/svg"
 						role="img" aria-label="Placeholder: 500x500"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#eee" />
-						<text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+						<rect width="100%" height="100%" fill="white" />
+						<image href="../img/productDetail/Toyota Corolla Altis6.jpg" width="100%" height="100%"></image>
+					</svg>
 
 				</div>
 			</div>
@@ -364,7 +351,7 @@ body {
 					
 					<div class="mb-3">
 		  				<label for="formGroupExampleInput3" class="form-label">預約車型</label>
-		  				<input type="text" class="form-control" id="formGroupExampleInput3" placeholder="預約車型">
+		  				<input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Toyota Corolla Altis" disabled>
 					</div>								
 			
 					<label for="appointment">預約時間:</label>

@@ -77,93 +77,126 @@
 
 	<article class="py-5 text-center container">
 		<div class="row">
-			<div class="col-lg-6 col-md-8 mx-auto">
-				<h2 class="fw-light">所有車款</h2>
-				<h4 class="cmp-modelfilter__title">篩選條件</h4>
+			<div class="col-lg-8 col-md-5 mx-auto">
+				
+				<h2 class="cmp-modelfilter__title">所有車款</h2><br/>
+				<h4 class="fw-light">篩選條件</h4>
+				
 				<hr>
-				<div class="lead text-muted">
-					<h5>廠牌</h5>
-					<input class="form-check-input" type="checkbox" value="" id="Toyota"> 
+				
+				<form id="productSelect">
+					<div class="lead text-muted">
+						
+						<h5>廠牌</h5>
+						
+						<input class="form-check-input" type="checkbox" name="brand" value="Toyota" id="Toyota"> 
 						<label class="form-check-label" for="Toyota"> Toyota </label> 
-						
-					<input class="form-check-input" type="checkbox" value="" id="Honda"> 
+							
+						<input class="form-check-input" type="checkbox" name="brand" value="Honda" id="Honda"> 
 						<label class="form-check-label" for="Honda"> Honda </label>
-						 
-					<input class="form-check-input" type="checkbox" value="" id="Nissan"> 
+							 
+						<input class="form-check-input" type="checkbox" name="brand" value="Nissan" id="Nissan"> 
 						<label class="form-check-label" for="Nissan"> Nissan </label>
-						 
-					<input class="form-check-input" type="checkbox" value="" id="Mercedes-Benz"> 
+							 
+						<input class="form-check-input" type="checkbox" name="brand" value="Mercedes-Benz" id="Mercedes-Benz"> 
 						<label class="form-check-label" for="Mercedes-Benz"> Mercedes-Benz </label>
-					<br/>	 
-					<input class="form-check-input" type="checkbox" value="" id="BMW">
+						
+						<br/>
+							 
+						<input class="form-check-input" type="checkbox" name="brand" value="BMW" id="BMW">
 						<label class="form-check-label" for="BMW"> BMW </label>	
-															 
-					<input class="form-check-input" type="checkbox" value="" id="Mitsubishi">
+																 
+						<input class="form-check-input" type="checkbox" name="brand" value="Mitsubishi" id="Mitsubishi">
 						<label class="form-check-label" for="Mitsubishi"> Mitsubishi </label>
-						 
-					<input class="form-check-input" type="checkbox" value="" id="Mazda"> 
+							 
+						<input class="form-check-input" type="checkbox" name="brand" value="Mazda" id="Mazda"> 
 						<label class="form-check-label" for="Mazda"> Mazda </label>
-						 
-					<input class="form-check-input" type="checkbox" value="" id="Lexus"> 
+							 
+						<input class="form-check-input" type="checkbox" name="brand" value="Lexus" id="Lexus"> 
 						<label class="form-check-label" for="Lexus"> Lexus </label>
-					<br/>	 
-					<input class="form-check-input" type="checkbox" value="" id="Audi">
+						
+						<br/>	 
+						
+						<input class="form-check-input" type="checkbox" name="brand" value="Audi" id="Audi">
 						<label class="form-check-label" for="Audi"> Audi </label>
-						 
-					<input class="form-check-input" type="checkbox" value="" id="Porsche">
+							 
+						<input class="form-check-input" type="checkbox" name="brand" value="Porsche" id="Porsche">
 						<label class="form-check-label" for="Porsche"> Porsche </label>
-						 
-					<input class="form-check-input" type="checkbox" value="" id="Ferrari">
+							 
+						<input class="form-check-input" type="checkbox" name="brand" value="Ferrari" id="Ferrari">
 						<label class="form-check-label" for="Ferrari"> Ferrari </label>
-						 
-					<input class="form-check-input" type="checkbox" value="" id="Volvo">
+							 
+						<input class="form-check-input" type="checkbox" name="brand" value="Volvo" id="Volvo">
 						<label class="form-check-label" for="Volvo"> Volvo </label>
-						
-					<input class="form-check-input" type="checkbox" value="" id="Mini">
+							
+						<input class="form-check-input" type="checkbox" name="brand" value="Mini" id="Mini">
 						<label class="form-check-label" for="Mini"> Mini </label>
-				</div>
-				<hr>
-				<div class="lead text-muted">
-					<h5>類型</h5>
-					<input class="form-check-input" type="checkbox" value="" id="轎車">
+						
+					</div>
+					
+					<hr>
+					
+					<div class="lead text-muted">
+					
+						<h5>類型</h5>
+						<input class="form-check-input" type="checkbox" name="category" value="sedan" id="轎車">
 						<label class="form-check-label" for="轎車"> 轎車 </label> 
-						
-					<input class="form-check-input" type="checkbox" value="" id="休旅車">
+							
+						<input class="form-check-input" type="checkbox" name="category" value="suv" id="休旅車">
 						<label class="form-check-label" for="休旅車"> 休旅車 </label> 
-						
-					<input class="form-check-input" type="checkbox" value="" id="卡車">
+							
+						<input class="form-check-input" type="checkbox" name="category" value="pickup" id="卡車">
 						<label class="form-check-label" for="卡車"> 皮卡車 </label> 
-						
-					<input class="form-check-input" type="checkbox" value="" id="跑車">
+							
+						<input class="form-check-input" type="checkbox" name="category" value="sports" id="跑車">
 						<label class="form-check-label" for="跑車"> 跑車 </label>						
-				</div>
-				<hr>
-				<div class="lead text-muted">
-					<h5>動力方式</h5>
-					<input class="form-check-input" type="checkbox" value="" id="轎車">
-						<label class="form-check-label" for="轎車"> 汽油 </label> 
+					
+					</div>
+					
+					<hr>
+					
+					<div class="lead text-muted">
+					
+						<h5>動力方式</h5>
 						
-					<input class="form-check-input" type="checkbox" value="" id="休旅車">
-						<label class="form-check-label" for="休旅車"> 柴油 </label> 
+						<input class="form-check-input" type="checkbox" name="engineType" value="Petrol" id="汽油">
+						<label class="form-check-label" for="汽油"> 汽油 </label> 
+							
+						<input class="form-check-input" type="checkbox" name="engineType" value="Diesel" id="柴油">
+						<label class="form-check-label" for="柴油"> 柴油 </label> 
+							
+						<input class="form-check-input" type="checkbox" name="engineType" value="Hybrid" id="油電混和">
+						<label class="form-check-label" for="油電混和"> 油電混和 </label> 					
+					</div>
+					
+					<hr>
+					
+					<div class="lead text-muted">
 						
-					<input class="form-check-input" type="checkbox" value="" id="卡車">
-						<label class="form-check-label" for="卡車"> 油電混和 </label> 					
-				</div>
-				<hr>
-				<div class="lead text-muted">
-					<h5><label for="排氣量" class="form-label">排氣量</label></h5>
+						<h5><label for="排氣量" class="form-label">排氣量</label></h5>
 						<input type="range" class="form-range" min="1000" max="5000" id="customRange2">		
-				</div>
-				<hr>
-				<div class="lead text-muted">
-					<h5><label for="價錢" class="form-label">價錢</label></h5>
-						<input type="range" class="form-range" min="0" max="20000000" id="customRange2">					
-				</div>
-				<hr>
-				<div>
-					<a href="#" class="btn btn-primary my-2">篩選</a> 
-					<a href="#" class="btn btn-secondary my-2">清除篩選</a>
-				</div>
+					
+					</div>
+					
+					<hr>
+					
+					<div class="lead text-muted">
+						
+						<h5><label for="價錢" class="form-label">價錢</label></h5>
+						<input type="range" class="form-range" min="0" max="20000000" id="customRange2">		
+									
+					</div>
+					
+					<hr>
+					
+					<div>
+
+						<button id="searchButton" type="button" class="btn btn-primary my-2">篩選</button> 
+						<a href="${contextRoot}/product/all" class="btn btn-secondary my-2">清除篩選</a>
+						
+					</div>
+				</form>
+				
 			</div>
 		</div>
 	</article>
@@ -172,6 +205,7 @@
 	<div class="album py-5 bg-light">
 		<div class="container">
 			
+			<div id="removeCars">
 			<div class="lead text-muted"><h3>Toyota</h3></div><br/>
 			<div class="row row-cols-5 g-4">
 				
@@ -183,7 +217,7 @@
 									class="card-img-top" alt="..." width="100%" height="180">
 								<div class="card-body">
 									<h5 class="card-title">${pList.productModel}</h5>
-									<a href="${contextRoot}/product/productDetail" class="btn btn-sm btn-outline-secondary">View</a>
+									<a href="${contextRoot}/product/toyotaDetail" class="btn btn-sm btn-outline-secondary">View</a>
 								</div>
 							</div>
 						</div>			
@@ -271,7 +305,7 @@
 									class="card-img-top" alt="..." width="100%" height="180">
 								<div class="card-body">
 									<h5 class="card-title">${pList.productModel}</h5>
-									<a href="${contextRoot}/product/productDetail" class="btn btn-sm btn-outline-secondary">View</a>
+									<a href="${contextRoot}/product/bmwDetail" class="btn btn-sm btn-outline-secondary">View</a>
 								</div>
 							</div>
 						</div>			
@@ -458,8 +492,68 @@
 			
 			<br/><hr><br/>
 			
+			</div>
+			
+			<div class="lead text-muted"><h3 id="resultTitle"></h3></div><br/>
+			<div class="row row-cols-5 g-4" id="resultBody">			
+
+				
+				
+			</div>
+			
 		</div>		
 	</div>
+	
+	<script>
+		$(document).ready(function () {
+			// 查詢按鈕點擊事件
+			$("#searchButton").click(function () {
+				// 取得所有勾選的 checkbox 的值
+				var select = $('#productSelect').serialize();
+
+				let map = new Map()
+
+				$('#productSelect').serialize().split("&").forEach(item => {
+
+					let itemArray = item.split("=")
+
+					if (map.has(itemArray[0])) {
+						map.get(itemArray[0]).push(itemArray[1])
+					} else {
+						map.set(itemArray[0], [itemArray[1]])
+					}
+				})
+				
+				// 呼叫後端 API 進行篩選
+				fetch("/tofu/product/all", {
+					method: "POST",
+					body: JSON.stringify(Object.fromEntries(map)),
+					headers: {
+						"Content-Type":"application/json"
+					}
+				}).then(rs => rs.json()).then(data => {
+					$("#removeCars").remove();
+					$("#resultTitle").append("篩選結果");
+					console.log(data);
+					console.log(data.datatable);
+					console.log(data.datatable.length);
+					var dataTotal = data.datatable ;
+					
+					for(var i = 0 ; i < data.datatable.length ; i++){
+						console.log(dataTotal[i].productModel);
+						$("#resultBody").append('<div class="col">'+'<div class="card shadow-sm h-100">'+
+								'<div class="bd-placeholder-img card-img-top">'+
+								'<img src="../img/product/'+dataTotal[i].productModel+'.jpg" class="card-img-top" alt="..." width="100%" height="180">'+
+								'<div class="card-body">'+'<h5 class="card-title">'+dataTotal[i].productModel+'</h5>'+
+								'<a href="${contextRoot}/product/productDetail" class="btn btn-sm btn-outline-secondary">View</a>'+
+								'</div>'+'</div>'+'</div>'+'</div>'					
+						)
+					}
+				})
+
+			});
+		});
+	</script>
 
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>

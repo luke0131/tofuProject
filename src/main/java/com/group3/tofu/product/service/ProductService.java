@@ -2,6 +2,7 @@ package com.group3.tofu.product.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -80,4 +81,13 @@ public class ProductService {
 		return null;
 	}
 	
+	// 根據類別篩選產品
+    public List<Product> getProductsByCategories(List<String> brand,List<String> category,List<String> engineType) {
+        return findAllProduct().stream()
+                .filter(p -> p.getCategory().equals(category) || p.getEngineType().equals(engineType) || p.getBrand().equals(brand))
+                .collect(Collectors.toList());
+    }
+    
+    
+    
 }
