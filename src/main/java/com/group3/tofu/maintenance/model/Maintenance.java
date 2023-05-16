@@ -1,17 +1,24 @@
-package com.group3.tofu.maintenance;
+package com.group3.tofu.maintenance.model;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.group3.tofu.customer.model.Customer;
+import com.group3.tofu.employee.model.Employee;
+import com.group3.tofu.product.model.Product;
 
 
 @Entity
@@ -22,26 +29,73 @@ public class Maintenance {
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 @Column(name="mid")
 private Integer mid;
-@Column(name="f_customer_id")
+
+@Column(name = "f_customer_id")
 private Integer cid;
-@Column(name="f_employee_id")
-private Integer eid;
-@Column(name="f_product_id")
-private Integer pid;
+
+@JoinColumn(name="f_employee_id",referencedColumnName ="employee_id")
+@ManyToOne
+private Employee eid;
+
+@JoinColumn(name = "f_product_id", referencedColumnName = "product_id")
+@ManyToOne
+private Product pid;
+
 @Column(name="mcategory")
 private String mcategory;
+
 @Column(name="notes")
 private String notes;
+
 @Temporal(TemporalType.TIMESTAMP)
 @DateTimeFormat(pattern="yyyy-MM-dd")
 @Column(name="appointment")
 private Date appointment;
+
 private String appointmenttime;
+
 private String keycode ;
+
 private String inspection;
+
 private String electric;
+
+private String status;
+
 public Maintenance() {
 	
+}
+
+public Integer getCid() {
+	return cid;
+}
+
+public void setCid(Integer integer) {
+	this.cid = integer;
+}
+
+public Employee getEid() {
+	return eid;
+}
+
+public void setEid(Employee eid) {
+	this.eid = eid;
+}
+
+public Product getPid() {
+	return pid;
+}
+
+public void setPid(Product pid) {
+	this.pid = pid;
+}
+
+public String getStatus() {
+	return status;
+}
+
+public void setStatus(String status) {
+	this.status = status;
 }
 
 public String getInspection() {
@@ -84,29 +138,7 @@ public void setMid(Integer mid) {
 	this.mid = mid;
 }
 
-public Integer getCid() {
-	return cid;
-}
 
-public void setCid(Integer cid) {
-	this.cid = cid;
-}
-
-public Integer getEid() {
-	return eid;
-}
-
-public void setEid(Integer eid) {
-	this.eid = eid;
-}
-
-public Integer getPid() {
-	return pid;
-}
-
-public void setPid(Integer pid) {
-	this.pid = pid;
-}
 
 public String getMcategory() {
 	return mcategory;

@@ -1,4 +1,4 @@
-package com.group3.tofu.maintenance;
+package com.group3.tofu.maintenance.controller;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -19,9 +19,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +33,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.group3.tofu.appointment.Appointment;
 import com.group3.tofu.customer.model.Customer;
+import com.group3.tofu.maintenance.model.Maintenance;
+import com.group3.tofu.maintenance.service.MaintenanceService;
 
 @Controller
 public class MaintenanceController {
@@ -93,6 +98,11 @@ public class MaintenanceController {
 	public String postMaintenance(@ModelAttribute(name = "maintenanceForm") Maintenance maintenance, Model model,HttpSession session) {
 		
 		maintenance.setKeycode(generateKeyCode());
+		
+		
+		Customer customer = (Customer) session.getAttribute("loggedInCustomer");
+		//maintenance.setCid(customer.getCustomer_id());
+		maintenance.setCid(customer.getCustomer_id());
 		mService.insertMaintenance(maintenance);
 
 		LocalDateTime appointmentDateTime = LocalDateTime.ofInstant(maintenance.getAppointment().toInstant(),
@@ -113,6 +123,26 @@ public class MaintenanceController {
 		Page<Maintenance> page= mService.findByPage(pageNumber);
 		model.addAttribute("page",page);
 		return "mgm/MaintenanceManagement";
+	}
+	@GetMapping("/maintenance/update")
+	public String showEditForm(@RequestParam("mid") Integer mid, Model model) {
+	    // 透過 id 查詢需要修改的維修保養表單
+	    Maintenance mtn = mService.findById(mid);
+	    model.addAttribute("updateForm",mtn);
+	   
+	    return "mgm/edit";
+	}
+	
+	@PutMapping("/maintenance/save")
+	public String updateMaintenance(@ModelAttribute(name="updateForm") Maintenance maintenance, Model model) {
+	   mService.updateMaintenance(maintenance.getMid(), maintenance);
+	   
+	    return "redirect:/mgm/MaintenanceManagement";
+	}
+	@DeleteMapping("/maintenance/delete")
+	public String deletemaintennance(@RequestParam("mid")Integer mid) {
+		mService.deleteById(mid);
+		return "redirect:/mgm/MaintenanceManagement";
 	}
 
 }
