@@ -21,10 +21,11 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
     <jsp:include page="/WEB-INF/jsp/layout/navbar.jsp" />
 
     <div id="BH-master" style="position: relative">
-      <section class="c-section" id="post_14873">
+      <section class="c-section">
         <div class="c-section__main c-post">
           <div class="c-post__header">
             <h1 class="c-post__header__title">${allPost.title}</h1>
+            <span style="margin-left:1600px;"><a href="${contextRoot}/showPost?hot=${hot}" >返回上一頁</a></span>
             <div class="tag-category">
               <a href="#">
                 <div class="tag-category_item">豆腐討論區</div>
@@ -38,7 +39,7 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                 data-tippy-content="只看此樓"
                 >樓主</a
               >
-              <a href="#" class="username" target="_blank" title="account"
+              <a href="${contextRoot}/customer/customerCenter" class="username"  title="account"
                 >${loggedInCustomer.account}</a
               >
               <div class="postcount">
@@ -138,8 +139,8 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
     
     <script>
-      const commentsDiv = document.getElementById("comments");
-      const submitBtn = document.getElementById("submitBtn");
+      var commentsDiv = document.getElementById("comments");
+      var submitBtn = document.getElementById("submitBtn");
 
       submitBtn.addEventListener("click", async function (event) {
         //event.preventDefault();
@@ -162,7 +163,7 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
             console.log(response);
             // 成功提交留言后的逻辑
             alert("留言成功！");
-            const commentsDiv = document.getElementById("comments");
+            var commentsDiv = document.getElementById("comments");
 
             // 建立一個新的 <div> 元素來放置新留言的內容及發言者
               var newCommentDiv = document.createElement("div");

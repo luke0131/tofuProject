@@ -67,7 +67,7 @@
                       <span class="num" style="color: red;">${post.hot}</span>
                   </li> 
                   <li class="author">
-                    <a href="#" title="account" target="_blank" style="text-decoration: none;">${loggedInCustomer.name}</a>
+                    <a href="${contextRoot}/customer/customerCenter" title="account" style="text-decoration: none;">${loggedInCustomer.name}</a>
                   </li>
                   <li class="added">
                    <span style="text-decoration: none;" ><fmt:formatDate value="${post.added}"

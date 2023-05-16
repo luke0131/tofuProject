@@ -45,6 +45,7 @@ public class CommentController {
 		public String showCommentPage(@PathVariable("comment_id") Integer comment_id , Model model) {
 			
 	 		Post allPost = postService.findByPostId(comment_id);
+	 		 		
 	 		Comment allComment = commentService.findByCommentId(comment_id);
 	 		
 	 		Customer allCustomer = customerService.findCustomerById(comment_id);
@@ -65,6 +66,8 @@ public class CommentController {
 			//顯示留言者
 			model.addAttribute("allCustomer", allCustomer);
 						
+			postService.createHot(comment_id);
+			
 			return "/comment/comment";
 		}
 	 	
@@ -84,10 +87,11 @@ public class CommentController {
 //	 		newCommentDetail.setCustomer(newCustomer);
 	 		newCommentDetail.setComment(comment);
 	 		newCommentDetail.setComment_detail(newDetail);
-	 		
-	 		
-	 		
+	 			 		
 	 		detailService.crateDetail(newCommentDetail);
+	 		
+	 		
+	 		
 	 		
 	 		
 	 		Page<CommentDetail> page = detailService.findByDetailPage(1);

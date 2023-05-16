@@ -2,12 +2,14 @@ package com.group3.tofu.post.service;
 
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.group3.tofu.post.model.Post;
 import com.group3.tofu.post.model.PostDao;
@@ -111,27 +113,32 @@ public class PostService {
 	
 	
 	//更新資料
+	@Modifying
 	@Transactional
-	public Post updatePostById(Integer post_id , String newPost) {
+	public Post updatePostById(Integer post_id , Post newPost ) {
 		Optional<Post> option = postDao.findById(post_id);
 		
 		if(option.isPresent()) {
 			Post post = option.get();
-			post.setTitle(newPost);
+			post.setTitle(newPost.getTitle());
+//			post.setAdded(newPost.getAdded());
+			
+			postDao.save(post);
 			return post;
 		}
 		
 		return null;
 	}
 	
+
 	
-	public void increaseHot(Integer post_id) {
-	    Optional<Post> optionalPost = postDao.findById(post_id);
-	    if (optionalPost.isPresent()) {
-	    	Post post = optionalPost.get();
-	    	post.setHot(post.getHot() + 1);
-	    	postDao.save(post);
-	    }
+
+	//更新人氣
+	@Transactional
+	public void createHot(Integer post_id) {		
+		Post post = postDao.findById(post_id).get();
+		post.setHot(post.getHot() + 1);
+		
 	}
 
 }
