@@ -122,7 +122,7 @@ public class CustomerController {
 		for (Book book : books) {
 
 			Integer f_product_id = book.getF_product_id();
-
+			
 			Integer f_employee_id = book.getF_employee_id();
 
 			// product productDao 用f_product_id找到Product物件
@@ -135,9 +135,14 @@ public class CustomerController {
 			}
 
 			// employee EmployeeDao 用f_employee_id找到Employee物件
-			Employee employee = customerService.findEmployeeById(f_employee_id);
+			if(f_employee_id == null) {
+				Employee employee = new Employee();
+				employees.add(employee);
+			}else {
+				Employee employee = customerService.findEmployeeById(f_employee_id);
+				employees.add(employee);
+			}
 
-			employees.add(employee);
 
 		}
 		model.addAttribute("books", books);

@@ -252,8 +252,8 @@
 				<button type="submit" class="btn btn-dark" id="updateButton">送出修改資料</button>
 				<button type="button" class="btn btn-warning" id="updateMember"
 					style="margin-left: 10px">一鍵輸入</button>
-				<button type="button" class="btn btn-success" id="Jolin"
-					style="margin-left: 10px">Jolin</button>
+<!-- 				<button type="button" class="btn btn-success" id="Jolin" -->
+<!-- 					style="margin-left: 10px">Jolin</button> -->
 			</div>
 
 
