@@ -12,9 +12,11 @@
 .t1 {
 	float: left;
 }
+
 input[type="date"]::-webkit-datetime-edit-day-field:disabled {
-    color: #999; /* 顯示為灰色 */
-    pointer-events: none; /* 禁止點擊 */
+	color: #999; /* 顯示為灰色 */
+	pointer-events: none;
+} /* 禁止點擊 */
 </style>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 </head>
@@ -56,27 +58,25 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 						<div
 							style="border: 2px solid gray; border-radius: 5px; width: 600px; padding: 10px;">
 							<div style="font-size: 18px;" class="formgroup">
-								<input type="checkbox" name="mcategory" value="小保養" />
-								<label for="mcategory">小保養</label> <input type="checkbox"
-									name="mcategory" value="大保養" /> <label
-									for="mcategory">大保養</label> <input type="checkbox"
-									name="mcategory" value="電池更換" /> <label for="mcategory">電池更換</label>
-								<input type="checkbox" name="mcategory"
-									value="引擎積碳清洗" /> <label for="mcategory">引擎積碳清洗</label>
-								<input type="checkbox" name="mcategory"
-									value="引擎油泥清洗" /> <label for="mcategory">引擎油泥清洗</label>
+								<input type="checkbox" id="small"name="mcategory" value="小保養" checked /> <label
+									for="mcategory">小保養</label> <input type="checkbox"
+									name="mcategory" value="大保養" /> <label for="mcategory">大保養</label>
+								<input type="checkbox" name="mcategory" value="電池更換" /> <label
+									for="mcategory">電池更換</label> <input type="checkbox"
+									name="mcategory" value="引擎積碳清洗" /> <label for="mcategory">引擎積碳清洗</label>
+								<input type="checkbox" name="mcategory" value="引擎油泥清洗" /> <label
+									for="mcategory">引擎油泥清洗</label>
 							</div>
 							<br>
 
 							<!-- 電車 -->
 							<div style="font-size: 18px;" class="formgroup">
 
-								<input type="checkbox" name="mcategory"
-									value="配件加裝" /> <label for="">配件加裝</label> <input
-									type="checkbox" name="mcategory" value="輪胎更換" /> <label
-									for="">輪胎更換</label> <input type="checkbox" name="mcategory"
-									value="鈑金烤漆" /> <label for="">鈑金烤漆</label> <input
-									type="checkbox" name="mcategory" value="冷氣系統保養/清潔" /> <label
+								<input type="checkbox" name="mcategory" value="配件加裝" /> <label
+									for="">配件加裝</label> <input type="checkbox" id="tire" name="mcategory"
+									value="輪胎更換" /> <label for="">輪胎更換</label> <input
+									type="checkbox" name="mcategory" value="鈑金烤漆" checked /> <label for="">鈑金烤漆</label>
+								<input type="checkbox" name="mcategory" value="冷氣系統保養/清潔" /> <label
 									for="">冷氣系統保養/清潔</label>
 							</div>
 						</div>
@@ -133,9 +133,8 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 								<input type="checkbox" name="electric" value="EV電池檢查" /> <label
 									for="electric">電池檢查</label> <input type="checkbox"
 									name="electric" value="EV煞車系統" /> <label for="electric">煞車系統</label>
-								<br />
-								<input type="checkbox" name="electric" value="EV輪胎保養" /> <label
-									for="electric">輪胎對調、平衡以及四輪定位</label>
+								<br /> <input type="checkbox" name="electric" value="EV輪胎保養" />
+								<label for="electric">輪胎對調、平衡以及四輪定位</label>
 							</div>
 							<br>
 
@@ -152,53 +151,19 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 					</div>
 				</div>
 
-				<!--  	<div
-				style="border: 2px solid gray; border-radius: 5px; width: 600px; padding: 10px;">
-				<div style="font-size: 18px;" class="formgroup">
-					<input type="checkbox" name="mcategory" value="Minor Service" /> <label
-						for="mcategory">小保養</label> <input type="checkbox"
-						name="mcategory" value="majorService" /> <label for="mcategory">大保養</label>
-					<input type="checkbox" name="mcategory" value="Battery" /> <label
-						for="mcategory">電池更換</label> <input type="checkbox"
-						name="mcategory" value="Engine Carbon Cleaning" /> <label
-						for="mcategory">引擎積碳清洗</label> <input type="checkbox"
-						name="mcategory" value="Engine Oil Cleaning" /> <label
-						for="mcategory">引擎油泥清洗</label>
-				</div>
-				<br>
-
-
-				<div style="font-size: 18px;" class="formgroup">
-
-					<input type="checkbox" name="mcategory"
-						value="Accessory Installation" /> <label for="">配件加裝</label> <input
-						type="checkbox" name="mcategory" value="Tire Replacement" /> <label
-						for="">輪胎更換</label> <input type="checkbox" name="mcategory"
-						value="Repair and Paint" /> <label for="">鈑金烤漆</label> <input
-						type="checkbox" name="mcategory" value="AC System" /> <label
-						for="">冷氣系統保養/清潔</label>
-				</div>
-			</div>
-			-->
+			
 				<br>
 
 				<div class="formgroup">
 
-					<span for="notes" class="t1">備註:</span> <p class="text-danger">可簡單敘述車輛狀況，方便技師快速診斷</p>
+					<span for="notes" class="t1">備註:</span>
+					<p class="text-danger">可簡單敘述車輛狀況，方便技師快速診斷</p>
 					<textarea style="border: 2px solid gray;" name="notes" id="note"
 						cols="72" rows="3"></textarea>
 				</div>
 				<br>
 
-				<!-- 
-			<label for="appointment">預約時間:</label>
-			<div class="formgroup">
-				<input type="datetime-local" id="appointment" name="appointment"
-					value="2023-06-01 10:00" min="2023-06-01 10:00"
-					max="2023-06-30 18:00">
-			</div>
-
- -->
+			
 
 
 
@@ -209,9 +174,9 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 						<input type="date"
 							style="border: 2px solid dark; border-radius: 5px; padding: 6px;"
 							id="date" name="appointment" required value="2023-06-01 10:00"
-							min="" max="2023-06-30">  <select
+							min="" max="2023-06-30"> <select
 							style="border: 3px solid dark; border-radius: 5px; padding: 8px;"
-							name="appointmenttime" required>
+							id="part" name="appointmenttime" required>
 							<option value="">請點擊選擇時段</option>
 							<option value="上午10:00">上午10:00</option>
 							<option value="上午11:00">上午11:00</option>
@@ -238,6 +203,7 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 				<br>
 
 				<button type="submit" class="btn btn-dark">確認送出</button>
+				<button type="button" class="btn btn-success" id="verified">輸入</button>
 		</div>
 		</form:form>
 	</div>
@@ -267,27 +233,41 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 				}
 			}
 			if (!checked) {
-				 var message = "您需要在保修項目勾選至少一項才能提交";
-			      var dialog = bootbox.alert(message);
+				var message = "您需要在保修項目勾選至少一項才能提交";
+				var dialog = bootbox.alert(message);
 				return false;
 			}
 			return true;
 		}
-		
+
 		const dateInput = document.getElementById("date");
-		  dateInput.addEventListener("input", function(event) {
-		    const selectedDate = new Date(event.target.value);
-		    if (selectedDate.getDay() === 6 || selectedDate.getDay() === 0) {
-		      event.target.setCustomValidity("請選擇週一至週五的日期");
-		    } else {
-		      event.target.setCustomValidity("");
-		    }
-		  });
-		  let today = new Date();
-		  // 計算今天的兩天後的日期
-		  let futureDate = new Date(today.getTime() + 2 * 24 * 60 * 60 * 1000);
-		  // 設定日期選擇器的初始值為今天的兩天後
-		  document.getElementById("date").value = futureDate.toISOString().slice(0, 10);
+		dateInput.addEventListener("input", function(event) {
+			const selectedDate = new Date(event.target.value);
+			if (selectedDate.getDay() === 6 || selectedDate.getDay() === 0) {
+				event.target.setCustomValidity("請選擇週一至週五的日期");
+			} else {
+				event.target.setCustomValidity("");
+			}
+		});
+		let today = new Date();
+		// 計算今天的兩天後的日期
+		let futureDate = new Date(today.getTime() + 2 * 24 * 60 * 60 * 1000);
+		// 設定日期選擇器的初始值為今天的兩天後
+		document.getElementById("date").value = futureDate.toISOString().slice(
+				0, 10);
+		
+		
+		
+		document
+		.querySelector('#verified')
+		.addEventListener(
+				'click',
+				function() {
+					
+					document.querySelector('#note').value = '引擎有異音，要一起做檢修';
+					document.querySelector('#date').value = '2023-06-30';
+					document.querySelector('#part').value = '下午13:00';
+				});
 	</script>
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>

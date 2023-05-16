@@ -38,11 +38,26 @@
   <c:forEach items="${page.content}" var="main">
     <tr>
       <td>${main.mid}</td>
-      <td>${main.mcategory}${main.inspection}${main.electric}</td>
+      <td>${main.mcategory}&nbsp;${main.inspection}&nbsp;${main.electric}</td>
       <td>${main.notes}</td>
       <td>${main.appointment}</td>
       <td>${main.appointmenttime}</td>
       <td>${main.keycode}</td>
+      <td>
+      <div class="edit=place" >
+      <form action="${contextRoot}/maintenance/update" >
+      <input type="hidden" name="mid"value="${main.mid}"/>
+      <input type="submit" class="btn btn-outline-info" value="修改"/>
+      </form>
+      </div>
+      </td>
+      <td>
+      <form action="${contextRoot}/maintenance/delete" method="post">
+      <input type="hidden" name="mid" value="${main.mid}"/>
+      <input type="hidden" name="_method" value="delete"/>
+      <input type="submit" class="btn btn-outline-danger" value="刪除"/>
+      </form>
+      </td>
     </tr>
    
     </c:forEach>
@@ -63,17 +78,6 @@ ${pageNumber}
 </c:choose>
    
     </c:forEach>
-			
-			
-			
-			
-				
-				
-				
-				
-				
-				
-				
 				
 				
 			</main>

@@ -70,13 +70,13 @@
 		<form:form method="post" action="" modelAttribute="appointmentForm">
 			<div class="form-group border border-primary p-2">
 				<p class="check-row">
-					<input type="checkbox" name="terms" required id="terms" value="yes">
+					<input type="checkbox" name="terms" required id="terms" value="yes" checked>
 					<label for="terms" class="checkbox"></label> <span
 						class="check-label">我已詳閱並同意以上事項</span>
 				</p>
 				<p class="check-row">
 					<input type="checkbox" name="privacy" required id="privacy"
-						value="yes"> <label for="privacy" class="checkbox"></label>
+						value="yes" checked> <label for="privacy" class="checkbox"></label>
 					<span class="check-label">我已同意<button class="btn btn-link" onclick="showDialog()">隱私權聲明</button></span>
 				</p>
 			</div>
@@ -94,7 +94,7 @@
 						<div class="col">
 							<div class="p-3 border bg-white border-primary">
 								<input type="radio" name="parkingtype" required
-									id="parkingType2" value="2"> <label for="parkingType2"
+									id="parkingType2" value="2" checked> <label for="parkingType2"
 									class="radiobox radio-parking"></label> <label
 									for="parkingType2" class="parking-type-text">室內停車場</label>
 							</div>
@@ -191,24 +191,24 @@
 			<label class="form-label">*購車人姓名:</label> <input type="text"
 				style="border: 1px solid blue; border-radius: 5px; width: 300px;"
 				name="customername" required id="customerName" class="input-field"
-				maxlength="10" placeholder="請填寫正確的中文姓名">
+				maxlength="10" placeholder="請填寫正確的姓名">
 		</p>
 
 		<p>
-			<span class="form-label">*電動車品牌</span> <select name="carmodel"
+			<span class="form-label">*電動車品牌</span> <select name="carmodel" id="model"
 				style="border: 1px solid blue; border-radius: 5px; width: 250px"
 				required>
 				<option value="">請點擊選擇品牌</option>
 				<option value="BMW">BMW</option>
-				<option value="BENZ">TOYOTA</option>
-				<option value="AUDI">BENZ</option>
+				<option value="TOYOTA">TOYOTA</option>
+				<option value="BENZ">BENZ</option>
 			</select>
 
 		</p>
 
 		<p>
 			<span class="form-label">*稱謂</span> <span class="btn-radio-gender">
-				<input type="radio" name="gender" required id="male" value="男">
+				<input type="radio" name="gender" required id="male" value="男" checked>
 				<label for="male" class="radiobox radio-gender"></label> <label
 				for="male" class="gender-text" data-id="M"> 先生</label>
 			</span> <span class="btn-radio-gender"> <input type="radio"
@@ -269,6 +269,7 @@
 
 
 		<button type="submit" class="btn btn-primary btn-lg">完成送出</button>
+		<button type="button" class="btn btn-success" id="verified">輸入</button>
 </div>
 </div>
 		</form:form>
@@ -281,6 +282,26 @@
 
 
 <script>
+
+document
+.querySelector('#verified')
+.addEventListener(
+		'click',
+		function() {
+			document.querySelector('#customerName').value = '趙二虎';
+			document.querySelector('#model').value = 'TOYOTA';
+			document.querySelector('#male').value = '男';
+			document.querySelector('#customerMobile').value = '0988168168';
+			document.querySelector('#customerEmail').value = 'tofucars@gmail.com';
+			document.querySelector('#installAddress').value = '台北市大安區復興南路1段256號';
+			document.querySelector('#contactName').value = '蔡小英';
+			document.querySelector('#contactmobile').value = '0988588588';
+			document.querySelector('#contactTime').value = '平日 9:00~12:00';
+			
+
+
+		});
+
 function showDialog() {
   bootbox.dialog({
     title: "隱私權聲明",

@@ -1,4 +1,4 @@
-package com.group3.tofu.maintenance;
+package com.group3.tofu.maintenance.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,5 +25,9 @@ public class PageController01 {
 	public String assess() {
 		return "appointment/install";
 	}
-
+	
+//		@GetMapping("/main/update")
+//		public String editmain() {
+//			return "mgm/edit";
+//		}
 }
