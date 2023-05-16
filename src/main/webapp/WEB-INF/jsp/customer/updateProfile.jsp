@@ -107,7 +107,7 @@
 
 						<div class="collapse" id="account-collapse" style="">
 							<ul class="btn-toggle-nav list-unstyled fw-normal pb-1 large">
-								<li style="margin-left: 20px"><a href="#"
+								<li style="margin-left: 20px"><a href="${contextRoot}/searchPost"
 									class="link-dark d-inline-flex text-decoration-none rounded">發文留言</a></li>
 							</ul>
 						</div>

@@ -3,20 +3,31 @@ pageEncoding="UTF-8"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/core"
 prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<link href="${contextRoot}/img/indexPicture/favicon.ico" rel="icon" type="image/x-icon"/>
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>Comment論壇留言</title>
     <link
+      href="${contextRoot}/img/indexPicture/favicon.ico"
+      rel="icon"
+      type="image/x-icon"
+    />
+    <link
       rel="stylesheet"
       href="${contextRoot}/css/postAndComment/comment.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
-<%--     <span id="comment_id" style="display: none">${allComment.comment_id}</span> --%>
+    <%--
+    <span id="comment_id" style="display: none">${allComment.comment_id}</span>
+    --%>
     <jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
     <jsp:include page="/WEB-INF/jsp/layout/navbar.jsp" />
 
@@ -25,7 +36,9 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
         <div class="c-section__main c-post">
           <div class="c-post__header">
             <h1 class="c-post__header__title">${allPost.title}</h1>
-            <span style="margin-left:1600px;"><a href="${contextRoot}/showPost?hot=${hot}" >返回上一頁</a></span>
+            <span style="margin-left: 1600px"
+              ><a href="${contextRoot}/showPost?hot=${hot}">返回上一頁</a></span
+            >
             <div class="tag-category">
               <a href="#">
                 <div class="tag-category_item">豆腐討論區</div>
@@ -39,7 +52,10 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                 data-tippy-content="只看此樓"
                 >樓主</a
               >
-              <a href="${contextRoot}/customer/customerCenter" class="username"  title="account"
+              <a
+                href="${contextRoot}/customer/customerCenter"
+                class="username"
+                title="account"
                 >${loggedInCustomer.account}</a
               >
               <div class="postcount">
@@ -67,10 +83,11 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
             <div class="c-post__body__buttonbar">
               <div>
                 <div class="gp">
-                  <button                    
-                    class="ef-btn ef-firework tippy-gpbp"
-                    type="button"
-                  ><img src="../img/comment/star.png"></button>
+                  <i
+                    id="emptyHeart"
+                    class="fa-regular fa-heart fa-2xl" 
+                    style="color: #ff0000"
+                  ></i>
                   <!-- <div class="ef-btn__effect">
                     <i class="icon material-icons"></i>
                     <div class="effect-group">
@@ -88,13 +105,25 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
           <div>
             <div class="c-post__footer c-reply">
-              <div class="c-reply__head nocontent"><button type="button" class="btn btn-outline-secondary" onclick="toggleComments()" >顯示留言</button></div>
-              
+              <div class="c-reply__head nocontent">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  onclick="toggleComments()"
+                >
+                  顯示留言
+                </button>
+              </div>
+
               <div class="c-reply__item">
                 <!-- <c:forEach items="${allDetail}" var="allDetail" > -->
 
-                <div class="c-reply-content" id="comments" style="display:none;">
-                   <div class="reply-content__user">${allCustomer.account}</div>
+                <div
+                  class="c-reply-content"
+                  id="comments"
+                  style="display: none"
+                >
+                  <div class="reply-content__user">${allCustomer.account}</div>
                   <article class="reply-content__article c-article">
                     <span class="comment_content"
                       >${allDetail.comment_detail}</span
@@ -102,8 +131,11 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                   </article>
                   <div class="reply-content__footer">
                     <div class="edittime" style="font-size: 6px">
-                      留言時間：<span style="text-decoration: none" ><fmt:formatDate value="${allDetail.commentDate}"
-                      pattern="yyyy-MM-dd HH:mm EEEE"/></span>
+                      留言時間：<span style="text-decoration: none"
+                        ><fmt:formatDate
+                          value="${allDetail.commentDate}"
+                          pattern="yyyy-MM-dd HH:mm EEEE"
+                      /></span>
                     </div>
                   </div>
                 </div>
@@ -118,7 +150,7 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
                 </a>
 
                 <div class="reply-input">
-                  <input type="hidden" id="myCustomer" class="content-edit"/>
+                  <input type="hidden" id="myCustomer" class="content-edit" />
                   <input
                     id="myComment"
                     class="content-edit"
@@ -137,7 +169,6 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
       </section>
     </div>
 
-    
     <script>
       var commentsDiv = document.getElementById("comments");
       var submitBtn = document.getElementById("submitBtn");
@@ -151,7 +182,7 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
           alert("留言不能為空！");
           return;
         }
-        
+
         let json = {
           csutomer: myCustomer,
           comment: myComment,
@@ -166,18 +197,18 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
             var commentsDiv = document.getElementById("comments");
 
             // 建立一個新的 <div> 元素來放置新留言的內容及發言者
-              var newCommentDiv = document.createElement("div");
-              newCommentDiv.classList.add("c-reply-content");
-           
-            //新發言者 
-              // var newCustomer = document.createElement("div");
-              //  newCustomer.classList.add(
-              //   "reply-content__user"
-              //   );
-              // var newCustomerAdd = document.createTextNode(myCustomer);
-              // newCustomer.appendChild(newCustomerAdd);
-              // newCommentDiv.appendChild(newCustomer);
-            
+            var newCommentDiv = document.createElement("div");
+            newCommentDiv.classList.add("c-reply-content");
+
+            //新發言者
+            // var newCustomer = document.createElement("div");
+            //  newCustomer.classList.add(
+            //   "reply-content__user"
+            //   );
+            // var newCustomerAdd = document.createTextNode(myCustomer);
+            // newCustomer.appendChild(newCustomerAdd);
+            // newCommentDiv.appendChild(newCustomer);
+
             // 新留言的內容
             var newCommentArticle = document.createElement("article");
             newCommentArticle.classList.add(
@@ -192,19 +223,30 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
             var newCommentTime = document.createElement("div");
             newCommentTime.classList.add("edittime");
             newCommentTime.style.fontSize = "6px";
-			
-			var day_list = ['日', '一', '二', '三', '四', '五', '六'];
-            var currentTime = new Date();
-			var month = currentTime.getMonth() +1;
-			var day =currentTime.getDay(); 
 
-            var commentDate = currentTime.getFullYear() + "-0"+ month +"-" + currentTime.getDate() + " " + 
-            currentTime.getHours() + ":" + currentTime.getMinutes() + " " + "星期" + day_list[day];
+            var day_list = ["日", "一", "二", "三", "四", "五", "六"];
+            var currentTime = new Date();
+            var month = currentTime.getMonth() + 1;
+            var day = currentTime.getDay();
+
+            var commentDate =
+              currentTime.getFullYear() +
+              "-0" +
+              month +
+              "-" +
+              currentTime.getDate() +
+              " " +
+              currentTime.getHours() +
+              ":" +
+              currentTime.getMinutes() +
+              " " +
+              "星期" +
+              day_list[day];
             var newCommentTimeContent = document.createTextNode(
               "留言時間：" + commentDate
             );
-			var p = document.createElement('div');
-			p.appendChild(newCommentTimeContent);
+            var p = document.createElement("div");
+            p.appendChild(newCommentTimeContent);
             newCommentTime.appendChild(p);
             newCommentDiv.appendChild(newCommentTime);
 
@@ -222,14 +264,26 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
       });
 
       function toggleComments() {
-  var commentsDiv = document.getElementById("comments");
-  if (commentsDiv.style.display === "none") {
-    commentsDiv.style.display = "block";
-  } else {
-    commentsDiv.style.display = "none";
-  }
-}
+        var commentsDiv = document.getElementById("comments");
+        if (commentsDiv.style.display === "none") {
+          commentsDiv.style.display = "block";
+        } else {
+          commentsDiv.style.display = "none";
+        }
+      }
 
+      var emptyHeart = document.querySelector("#emptyHeart");
+      let isClicked = false;
+      emptyHeart.addEventListener("click", function (event) {
+        isClicked = !isClicked;
+        if (isClicked) {
+          event.target.classList.remove("fa-regular");
+          event.target.classList.add("fa-solid");
+        } else {
+          event.target.classList.remove("fa-solid");
+          event.target.classList.add("fa-regular");
+        }
+      });
     </script>
   </body>
 </html>
