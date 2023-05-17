@@ -40,7 +40,7 @@ public class PostController {
 
 		Customer customer = (Customer) session.getAttribute("loggedInCustomer");
 
-		System.out.println("尚未登入-------------" + customer);
+
 
 		if (customer == null) {
 			model.addAttribute("message", "請先登入會員");
