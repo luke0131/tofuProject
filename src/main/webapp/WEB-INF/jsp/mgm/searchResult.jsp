@@ -10,18 +10,6 @@
 	type="image/x-icon" />
 <meta charset="UTF-8" />
 <title>豆腐車業管理平台-會員管理</title>
-<style>
-.search-input {
-  width: 200px; /* 設定文字框的寬度 */
-  height: 37px; /* 設定文字框的高度 */
-  padding: 5px; /* 設定文字框內容的內距 */
-  border: 1px solid #ccc; /* 設定文字框的邊框 */
-  border-radius: 5px; /* 設定文字框的邊框圓角 */
-  background-color: #fff; /* 設定文字框的背景顏色 */
-  color: #000; /* 設定文字框的文字顏色 */
-  /* 可根據需要添加其他樣式屬性 */
-}
-</style>
 <script type="text/javascript"
 	src="${contextRoot}/js/pages/dashboard.js"></script>
 <script type="text/javascript" src="${contextRoot}/css/dashboard.css"></script>
@@ -37,12 +25,7 @@
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 				<h2>維修保養管理</h2>
 			<table class="table">
-			<div class="search-form">
-			<form  action="${contextRoot}/maintenance/search" method="get">
-    <input  type="text"  name="keycode" placeholder="請輸入訂單編號" class="search-input"/>
-    <input type="submit" class="btn btn-outline-dark"  value="查詢" />
-</form>
-</div>
+			
   <thead>
     <tr>
       <th scope="col">Serial number</th>
@@ -54,7 +37,7 @@
     </tr>
   </thead>
   <tbody>
-  <c:forEach items="${page.content}" var="main">
+  <c:forEach items="${searchResult.content}" var="main">
     <tr>
       <td>${main.mid}</td>
       <td>${main.mcategory}&nbsp;${main.inspection}&nbsp;${main.electric}</td>
@@ -65,12 +48,12 @@
       <td>${main.appointmenttime}</td>
       <td>${main.keycode}</td>
       <td>
-      <div class="edit=place" >
+      
       <form action="${contextRoot}/maintenance/update" >
       <input type="hidden" name="mid"value="${main.mid}"/>
       <input type="submit" class="btn btn-outline-info" value="修改"/>
       </form>
-      </div>
+     
       </td>
       <td>
       <form action="${contextRoot}/maintenance/delete" method="post">
@@ -91,7 +74,7 @@
 <c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
 <c:choose>
 <c:when test="${page.number!= pageNumber-1}">
- <a href="${contextRoot}/mgm/MaintenanceManagement?m=${pageNumber}" >${pageNumber}</a>
+ <a href="${contextRoot}/mgm/searchResult?n=${pageNumber}" >${pageNumber}</a>
 </c:when>
 <c:otherwise>
 ${pageNumber}

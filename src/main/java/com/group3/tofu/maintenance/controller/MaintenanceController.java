@@ -98,6 +98,7 @@ public class MaintenanceController {
 	public String postMaintenance(@ModelAttribute(name = "maintenanceForm") Maintenance maintenance, Model model,HttpSession session) {
 		
 		maintenance.setKeycode(generateKeyCode());
+		maintenance.setStatus("waiting");
 		
 		
 		Customer customer = (Customer) session.getAttribute("loggedInCustomer");
@@ -124,6 +125,17 @@ public class MaintenanceController {
 		model.addAttribute("page",page);
 		return "mgm/MaintenanceManagement";
 	}
+	@GetMapping("/maintenance/search")
+	public String searchByKeyCode(@RequestParam(name = "n",defaultValue = "1") Integer pageNumber,@RequestParam("keycode") String keycode, Model model,HttpSession session) {
+	    // 执行根据订单编号查询的操作
+	    Page<Maintenance> searchResult = mService.findByKeyCode(keycode,pageNumber);
+	    
+	    // 将查询结果添加到Model中供JSP页面使用
+	    model.addAttribute("searchResult", searchResult);
+	    
+	    return "mgm/searchResult"; // 返回展示查询结果的页面
+	}
+
 	@GetMapping("/maintenance/update")
 	public String showEditForm(@RequestParam("mid") Integer mid, Model model) {
 	    // 透過 id 查詢需要修改的維修保養表單
@@ -144,5 +156,5 @@ public class MaintenanceController {
 		mService.deleteById(mid);
 		return "redirect:/mgm/MaintenanceManagement";
 	}
-
+	
 }

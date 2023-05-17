@@ -67,8 +67,8 @@ public class AppointmentController {
 			 
 			
 			 String to = appointment.getCustomeremail();
-		        String subject = "預約確認";
-		        String content = "<h2>您已成功預約！請查看以下訊息是否正確</h2><br/>"
+		        String subject = "tofu充電座安裝預約確認";
+		        String content = "<h2>您已成功預約tofu充電座安裝！請查看以下訊息是否正確</h2><br/>"
 		        +"<h4>您的訂單編號:</h4>"+appointment.getKeycode()+"<br/>"		
 		        +"<h4>聯絡人:</h4>"+appointment.getContactperson()+"\n"
 		        +"<h4>聯絡人電話:</h4>"+appointment.getContactmobile()+"\n"
