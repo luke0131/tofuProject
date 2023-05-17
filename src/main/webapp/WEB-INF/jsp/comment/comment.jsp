@@ -35,10 +35,7 @@ prefix="c"%> <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
       <section class="c-section">
         <div class="c-section__main c-post">
           <div class="c-post__header">
-            <h1 class="c-post__header__title">${allPost.title}</h1>
-            <span style="margin-left: 1600px"
-              ><a href="${contextRoot}/showPost?hot=${hot}">返回上一頁</a></span
-            >
+            <h1 class="c-post__header__title" style="font-size:35px;">${allPost.title}</h1>
             <div class="tag-category">
               <a href="#">
                 <div class="tag-category_item">豆腐討論區</div>

@@ -64,7 +64,7 @@
                     </div>
                   </li>
                   <li class="hot">
-                      <span class="num" style="color: red;">${post.hot}</span>
+                      <span class="num" style="color: red; font-size:30px">${post.hot}</span>
                   </li> 
                   <li class="author">
                     <a href="${contextRoot}/customer/customerCenter" title="account" style="text-decoration: none;">${loggedInCustomer.name}</a>
