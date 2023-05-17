@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.group3.tofu.customer.service.MailService;
 import com.group3.tofu.order.model.bean.Order;
 import com.group3.tofu.order.model.dao.OrderDAO;
+import com.group3.tofu.order.model.dao.OrderQueryDAO;
 
 @Service
 public class OrderService {
@@ -21,6 +22,9 @@ public class OrderService {
 	
 	@Autowired
 	private MailService mailService;
+	
+	@Autowired
+	private OrderQueryDAO oqDAO;;
 	
 	public Order findbyId(Integer id) {
 		return orderDAO.findById(id).get();
@@ -78,6 +82,76 @@ public class OrderService {
 		String subject = "豆腐車業會員購買商品紀錄";
 
 		mailService.sendEmail(email, subject, content);
+	}
+	
+	public List<Order> findByOption(String payment,String shipment,String status,Integer start) {
+				
+		String sql = "from Order where";
+		String str = "";
+		String hql = "";
+		
+		if(payment != null) {
+			str += " " + "payment=" + "'" + payment + "'";
+			System.out.println(str);
+		}
+		if(shipment != null) {
+			if(str.equals("")) {
+				str += " " + "ship_status=" + "'" + shipment + "'";
+				System.out.println(str);				
+			}else {
+				str += " " + "and ship_status=" + "'" + shipment + "'";
+				System.out.println(str);			
+			}
+		}
+		if(status != null) {
+			if(str.equals("")) {
+				str += " " + "order_status=" + "'" + status + "'";
+				System.out.println(str);				
+			}else {
+				str += " " + "and order_status=" + "'" + status + "'";
+				System.out.println(str);			
+			}
+		}
+		hql = sql + str;
+		
+		System.out.println("TOTAL COUNT = " + oqDAO.count(hql));
+		
+		return oqDAO.findByOption(hql,start);
+	}
+	
+	public int findTotalCount(String payment,String shipment,String status) {
+		
+		String sql = "from Order where";
+		String str = "";
+		String hql = "";
+		
+		if(payment != null) {
+			str += " " + "payment=" + "'" + payment + "'";
+			System.out.println(str);
+		}
+		if(shipment != null) {
+			if(str.equals("")) {
+				str += " " + "ship_status=" + "'" + shipment + "'";
+				System.out.println(str);				
+			}else {
+				str += " " + "and ship_status=" + "'" + shipment + "'";
+				System.out.println(str);			
+			}
+		}
+		if(status != null) {
+			if(str.equals("")) {
+				str += " " + "order_status=" + "'" + status + "'";
+				System.out.println(str);				
+			}else {
+				str += " " + "and order_status=" + "'" + status + "'";
+				System.out.println(str);			
+			}
+		}
+		hql = sql + str;
+		
+		System.out.println("TOTAL COUNT = " + oqDAO.count(hql));
+		
+		return oqDAO.count(hql);
 	}
 
 }

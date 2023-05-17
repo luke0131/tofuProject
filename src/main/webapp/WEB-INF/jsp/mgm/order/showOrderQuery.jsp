@@ -97,10 +97,10 @@
 		  </tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${page.content}" var="orders">
+			<c:forEach items="${orders}" var="orders">
 				<tr>
 					<td>
-						<p class="fw-bold mb-1 id">ORD0000${orders.id }</p>
+						<p class="fw-bold mb-1">ORD0000${orders.id }</p>
 					</td>
 					<td>
 						<p class="fw-bold mb-1">${orders.order_date }</p>
@@ -127,10 +127,6 @@
 						<a href="${contextRoot}/order/updateStatus?id=${orders.id}&source=${str}" style="text-decoration: none;">
 							<button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-trash-can" style="width: 20px;"></i></button>
 						</a>
-
-
-							<!-- <button type="button" class="btn btn-outline-danger" onclick="callRemove(${orders.id})"><i class="fa-solid fa-trash-can" style="width: 20px;"></i></button> -->
-
 						
 					</td>
 				</tr>
@@ -138,11 +134,11 @@
 		</tbody>
 	  </table>
 	<div style="text-align: center; padding-top: 50px;">
-		<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
+		<c:forEach var="pageNumber" begin="1" end="${totalPage}">
 
 			<c:choose>
 				<c:when test="${page.number !=  pageNumber-1}">
-				<a href="${contextRoot}/order/${str}?p=${pageNumber}" style="text-decoration: none;" class="linker"><span style="color: black;">${pageNumber}</span></a>
+				<a href="${contextRoot}/order/findByOption?p=${pageNumber}&payment=${payment}&shipment=${shipment}&status=${status}" style="text-decoration: none;" class="linker"><span style="color: black;">${pageNumber}</span></a>
 				</c:when>
 				<c:otherwise><span style="background-color: black; color: aliceblue;" class="linker">${pageNumber}</span></c:otherwise>
 			</c:choose>
@@ -234,24 +230,12 @@
 	function callRemove(id) {
 		console.log("id = "+id);
 		axios.get("http://localhost:8080/tofu/order/cancel/"+id).then(function(response) {
-			// console.log("response",response);
 			console.log("response",response);
-			let index = id;
-			console.log(index);
-			console.log($('.id')[0]);
-
-
-			
-			for (let i = 0; i < $('.status').length; i++) {
-			var str = $('.status')[i].innerText;
-			console.log(str);
-			if(str == "訂單完成"){
-				$('.status')[i].style.backgroundColor="red";
-				$('.status')[i].style.borderColor="red";
-				$('.status')[i].innerText="訂單取消";
-			}
-		}
-
+			let index = id-1;
+			$('.status')[index].innerText = "訂單取消";
+			console.log($(this));
+			$('.status')[index].style.backgroundColor="red";
+			$('.status')[index].style.borderColor="red";
 
 
 		}).catch(function(){

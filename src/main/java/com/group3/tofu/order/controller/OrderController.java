@@ -1,9 +1,7 @@
 package com.group3.tofu.order.controller;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -179,7 +177,7 @@ public class OrderController {
 		return "order/showDetail";
 	}
 
-	
+	//ECPAY
 	@ResponseBody
 	@GetMapping("order/ecpay")
 	public String ECPay(@RequestParam(name = "id") Integer id) {
@@ -232,7 +230,7 @@ public class OrderController {
 		return allInOne.aioCheckOut(aioCheckOutALL, null);
 	}
 	
-	
+	//訂單生成功能
 	@GetMapping("order/test")
 	public String insert(HttpSession session,Model model) {
 		
@@ -322,17 +320,58 @@ public class OrderController {
 		return order;
 	}
 	
-	@GetMapping("/order/findByCondition")
-	public String findByCondition(@RequestParam(name = "payment",required = false)String payment,
+	@GetMapping("/order/findByOption")
+	public String findByOption(@RequestParam(name = "payment",required = false)String payment,
 			  					  @RequestParam(name = "shipment",required = false)String shipment,
-			  					  @RequestParam(name = "status",required = false)String status) {
+			  					  @RequestParam(name = "status",required = false)String status,
+			  					  @RequestParam(name = "p",defaultValue = "1") Integer pageNumber,Model model) {
+		Integer start = (pageNumber-1)*10;
 		
-	System.out.println("*************************************");
-	System.out.println("payment = " + payment);
-	System.out.println("shipment = " + shipment);
-	System.out.println("status = " + status);
+		if(payment!=null) {
+			if(payment.equals("")) {
+				payment=null;
+			}
+		}
+		if(shipment!=null) {
+			if(shipment.equals("")) {
+				shipment=null;
+			}
+		}
+		if(status!=null) {
+			if(status.equals("")) {
+				status=null;
+			}
+		}
+		System.out.println("*************************************");
+		System.out.println("payment = " + payment);
+		System.out.println("shipment = " + shipment);
+		System.out.println("status = " + status);
+			
+		if(payment==null && shipment==null && status==null) {
+			return "redirect:/order/findAll";
+		}
+		List<Order> orders = orderService.findByOption(payment, shipment, status,start);
+		for (Order order : orders) {
+			System.out.println(order.toString());
+		}
+		int count = orderService.findTotalCount(payment, shipment, status);
+		int totalPage=0;
+		if (count%10==0) {
+			totalPage=count/10;
+		}else {
+			totalPage=count/10+1;
+		}
+		System.out.println("totalCount = " + count);
+		System.out.println("totalPage = " + totalPage);
+
 		
-		return "mgm/order/showOrder2";
+		model.addAttribute("orders",orders);
+		model.addAttribute("totalPage",totalPage);
+		model.addAttribute("payment",payment);
+		model.addAttribute("shipment",shipment);
+		model.addAttribute("status",status);
+		
+		return "mgm/order/showOrderQuery";
 	}
 	
 	
