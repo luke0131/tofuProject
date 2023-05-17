@@ -35,7 +35,7 @@
     <div class="col mb-3">
       <h5 class="text-white fw-bold py-4">豆腐論壇</h5>
       <ul class="nav flex-column">
-        <li class="nav-item mb-2"><a href="${contextRoot}/post" class="nav-link p-0 text-white">豆腐討論區</a></li>
+        <li class="nav-item mb-2"><a href="${contextRoot}/showPost" class="nav-link p-0 text-white">豆腐討論區</a></li>
         <li class="nav-item mb-2"><a href="${contextRoot}/contactUs" class="nav-link p-0 text-white">聯絡我們</a></li>
 
       </ul>

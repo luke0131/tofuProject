@@ -190,11 +190,8 @@ label {
 		<h1>聯絡我們</h1>
 		<!--Content begin-->
 		<div id="page_content">
-			<table>
-				<tbody>
-					<tr>
-						<td>
-							<table>
+			
+							<table id="myTable">
 								<tbody>
 									<tr>
 										<td height="25" class="copy">
@@ -245,8 +242,8 @@ label {
 																	style="width: 250px" size="40" />
 															</c:when>
 															<c:otherwise>
-																<input id="email" value="${loggedInCustomer.email}"
-																	disabled="true" name="email" type="text"
+																<input id="email" value="tofucars@gmail.com}"
+																	 name="email" type="text"
 																	style="width: 250px" size="40" />
 															</c:otherwise>
 														</c:choose>
@@ -274,7 +271,7 @@ label {
 															<option value="ddd">贈品介紹</option>
 															<option value="eee">如何進行會員註冊登入</option>
 														</select> 
-														<input id="subject" name="subject" type="text"
+														<input id="subjectTitle" name="subject" type="text"
 															 style="width: 250px" size="40"> <br>
 														<span style="margin-left: 70px;">(請先選擇來信主旨類別，再填上您來信的主旨)</span>
 													</div>
@@ -292,7 +289,8 @@ label {
 																	<a href="https://customer.bmwgroup.com/pm2/pm-document-service/api/v1link/documents/policyName/BMW_CONNECTED_DRIVE_DPP/TW/PDF?language=zh&KeyId=04e8c043-ad07-48d0-8ed6-94fee52f18ec" >隱私權政策	</a>
 																</span>
 															</label>
-													</div>	
+													</div>
+													
 														<button class="ctTitle clearfix" style="margin-bottom: 20px;" type="button" id="sendButton">確認送出</button>
 													
 												</form>
@@ -301,22 +299,36 @@ label {
 									</tr>
 								</tbody>
 							</table>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+			 <button onclick="fillTable()">一鍵輸入</button>
 		</div>
 	</div>
 	
 
 	<script type="text/javascript"
 		src="${contextRoot}/js/pages/contactUs.js"></script>
+		
+		<script>
+        function fillTable() {
+            // 將表格內容填入對應的元素
+            document.getElementById("userName").value = "哈哈哈";
+            document.getElementById("salutation").value = "Mr";
+            document.getElementById("istofu1").checked = false;
+ //           document.getElementById("carno").value = "AAA-1234";
+            document.getElementById("email").value = "tofucars@gmail.com";
+            document.getElementById("phoneNumber").value = "0912-345-678";
+            document.getElementById("mailtype").value = "aaa";
+             document.getElementById("subjectTitle").value = "如何維修保養";
+            document.getElementById("contents").value = "這是我對維修保養的問題和疑慮...";
+            document.getElementById("privacyPolicy").checked = true;
+        }
+    </script>
 
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>
 
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
 	<jsp:include page="/WEB-INF/jsp/layout/footer.jsp" />
+
 </body>
 
 
