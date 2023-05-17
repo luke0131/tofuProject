@@ -27,6 +27,9 @@ public class Gift {
 	@Column(name = "photo")
 	private byte[] photo;
 	
+	@Column(name = "type")
+	private String type;
+	
 	@OneToMany(mappedBy = "gift",cascade = CascadeType.ALL)
 	private List<ShoppingCart> shoppingcarts;
 	
@@ -65,6 +68,14 @@ public class Gift {
 		this.photo = photo;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public List<ShoppingCart> getShoppingcarts() {
 		return shoppingcarts;
 	}
@@ -72,6 +83,10 @@ public class Gift {
 	public void setShoppingcarts(List<ShoppingCart> shoppingcarts) {
 		this.shoppingcarts = shoppingcarts;
 	}
+
+	
+
+	
 
 	
 	
