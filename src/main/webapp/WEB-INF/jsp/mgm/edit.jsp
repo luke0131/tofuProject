@@ -167,10 +167,14 @@
 
 							<td><textarea style="border: 2px solid gray;" name="notes"
 									id="note" cols="30" rows="2">${updateForm.notes}</textarea></td>
-							<td><input type="date"
+							<td>
+							<fmt:formatDate value="${updateForm.appointment}" pattern="yyyy-MM-dd" var="formattedDate" />
+							<input type="date"
 								style="border: 2px solid dark; border-radius: 5px; padding: 6px;"
-								id="appointment" name="appointment" value="${updateForm.appointment}">
+								id="appointment" name="appointment" value="${formattedDate}" />
+								
 							</td>
+							
 							<td><select
 								style="border: 3px solid dark; border-radius: 5px; padding: 8px;"
 								id="part" name="appointmenttime" required>
@@ -189,7 +193,7 @@
 							</select></td>
 
 
-							<td><button type="submit" class="btn btn-success"style="width: 80px; height: 50px;">儲存</button></td>
+							<td><button type="submit" class="btn btn-dark"style="width: 80px; height: 50px;">更新</button></td>
 						</tr>
 						</form:form>
 
@@ -206,11 +210,7 @@
 			</main>
 		</div>
 	</div>
-	<script>
-		var appointmentInput = document.getElementById("appointment");
-		appointmentInput.value = "${updateForm.appointment}";
-	</script>
-
+	
 
 
 	<jsp:include page="/WEB-INF/jsp/layout/mgmfooter.jsp" />

@@ -75,5 +75,11 @@ public class MaintenanceService {
 		Page<Maintenance> page = mDAO.findAll(pge);
 		return page;
 	}
+	
+	public Page<Maintenance>findByKeyCode(String keycode,Integer pageNumber){
+		Pageable pgb = PageRequest.of(pageNumber - 1, 5);
+		Page<Maintenance> page= mDAO.findByMaintenanceKeycodeLike(keycode, pgb);
+		return page;
+	}
 
 }
