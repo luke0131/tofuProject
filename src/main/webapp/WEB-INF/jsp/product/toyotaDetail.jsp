@@ -175,7 +175,7 @@ body {
 
 					<div class="container">
 						<div class="carousel-caption">
-							<h1>Another example headline.</h1>	
+							<h1>Extreme Performance & Amazing Driving Control</h1>	
 						</div>
 					</div>
 				</div>
@@ -189,7 +189,7 @@ body {
 
 					<div class="container">
 						<div class="carousel-caption text-end">
-							<h1>One more for good measure.</h1>
+							<h1>Possibilities are infinite</h1>
 						</div>
 					</div>
 				</div>
@@ -223,8 +223,7 @@ body {
 					</svg>
 
 					<h2 class="fw-normal">設計理念</h2>
-					<p>Some representative placeholder content for the three
-						columns of text below the carousel. This is the first column.</p>
+					<p>將美學、功能性和創新融合於汽車設計的指導原則。追求駕駛者和乘客的舒適性和便利性、獨特外觀、優化空間配置和人機交互設計，此外，設計理念還考慮性能、安全性和環境友好性，以提供卓越的行駛體驗。</p>
 					<p>
 						<a class="btn btn-secondary" href="#introduce">前往介紹 &raquo;</a>
 					</p>
@@ -238,8 +237,7 @@ body {
 					</svg>
 					
 					<h2 class="fw-normal">預約賞車</h2>
-					<p>Another exciting bit of representative placeholder content.
-						This time, we've moved on to the second column.</p>
+					<p>讓顧客可以事先安排時間到汽車展廳試駕並欣賞所感興趣的車款。透過預約賞車，顧客可以享受個人化的專屬服務，提前體驗汽車性能和功能，幫助做出更明智的購車決策。</p>
 					<p>
 						<a class="btn btn-secondary" href="#book">前往預約 &raquo;</a>
 					</p>
@@ -253,8 +251,7 @@ body {
 					</svg>
 
 					<h2 class="fw-normal">打造專屬</h2>
-					<p>And lastly this, the third column of representative
-						placeholder content.</p>
+					<p>根據顧客的喜好和需求，量身訂製獨一無二的汽車。從選擇車身顏色、內飾材質到加裝個性化配件，打造出與眾不同的汽車。這種定制化的汽車體驗能夠提供顧客獨特的駕乘樂趣和滿足感。</p>
 					<p>
 						<a class="btn btn-secondary" href="${contextRoot}/product/buyCar">前往打造 &raquo;</a>
 					</p>
@@ -336,28 +333,23 @@ body {
 		
 			<!-- /END THE FEATURETTES -->
 			
-			<div id="book" class="row featurette">
+			<div class="row featurette">
 				<h1>預約賞車</h1>
-				<form action="">
+				<form id="book" method="POST" action="${contextRoot}/product/book" onclick="validateForm()">
 					<div class="mb-3">
-		  				<label for="formGroupExampleInput" class="form-label">姓名</label>
-		  				<input type="text" class="form-control" id="formGroupExampleInput" placeholder="姓名">
+		  				<label for="name" class="form-label">姓名</label>
+		  				<input type="text" class="form-control" id="name" name="name" value="姓名">
 					</div>
 					
 					<div class="mb-3">
-		  				<label for="formGroupExampleInput2" class="form-label">連絡電話</label>
-		  				<input type="text" class="form-control" id="formGroupExampleInput2" placeholder="連絡電話">
-					</div>
-					
-					<div class="mb-3">
-		  				<label for="formGroupExampleInput3" class="form-label">預約車型</label>
-		  				<input type="text" class="form-control" id="formGroupExampleInput3" placeholder="Toyota Corolla Altis" disabled>
+		  				<label for="car" class="form-label">預約車型</label>
+		  				<input type="text" class="form-control" id="car" name="car" value="Toyota Corolla Altis">
 					</div>								
 			
-					<label for="appointment">預約時間:</label>
+					<label for="time">預約時間:</label>
 					<div class="formgroup">
-						<input type="datetime-local" id="appointment" name="appointment"
-							value="2023-06-01 10:00" min="2023-06-01 10:00"
+						<input type="datetime-local" id="time" name="time"
+							value="2023-05-24 10:00" min="2023-05-24 10:00"
 							max="2023-06-30 18:00">
 					</div>	
 					
@@ -376,7 +368,11 @@ body {
 	</main>
 
 
-	<script src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
+	<script>
+		
+		
+		
+	</script>
 
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>

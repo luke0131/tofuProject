@@ -26,5 +26,9 @@ public interface CustomerDao extends JpaRepository<Customer, Integer> {
 	// 模糊搜尋顧客姓名
 	@Query(value = "select * from Customer where name like %:name%", nativeQuery = true)
 	Page<Customer> findByCustomerNameLike(@Param("name") String keyword, Pageable pageble);
+	
+	// 透過顧客姓名找顧客
+	@Query("from Customer where name = :name")
+	public Customer findByCustomerName(@Param("name") String name) ;
 
 }

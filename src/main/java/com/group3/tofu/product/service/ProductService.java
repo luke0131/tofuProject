@@ -54,6 +54,16 @@ public class ProductService {
 		productDAO.deleteById(id);
 	}
 	
+	public Integer findProductId(String productModel) {
+		Product p = productDAO.findByProductModel(productModel);
+		
+		if (p != null) {
+            return p.getProductId();
+        }
+		
+		return null ;
+	}
+	
 	public Product findById(Integer productId) {
 		Optional<Product> op = productDAO.findById(productId);
 		

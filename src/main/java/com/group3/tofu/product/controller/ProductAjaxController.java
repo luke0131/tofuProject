@@ -26,9 +26,7 @@ public class ProductAjaxController {
 	
 	@PostMapping( path = "/product/all",consumes = "application/json")
 	public String find(@RequestBody Map<String, List<String>> body ) {		
-		
-		System.out.println(body);
-		
+
 		JSONObject responseJson = new JSONObject();		
 		JSONArray array = new JSONArray();
 		

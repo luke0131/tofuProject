@@ -66,12 +66,17 @@
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
 	<jsp:include page="/WEB-INF/jsp/layout/navbar.jsp" />
 
+	<noscript>
+		<iframe src="//www.googletagmanager.com/ns.html?id=GTM-WT473T"
+			height="0" width="0" style="display: none; visibility: hidden"></iframe>
+	</noscript>
+
 	<div class="mastbody">
 		<div class="mastbody-inner grid-centre pd-bottom">
 			<div class="headingbar">
 				<div class="headingbar-main">
 
-					<h1 class="title">打造我的專屬愛車</h1>
+					<h1 class="title">打造我的專屬</h1>
 
 				</div>
 			</div>
@@ -81,15 +86,14 @@
 				<span
 					style="display: none; background: rgba(255, 255, 255, .9); border: 1px solid #eee; margin: 1px; font-family: monospace; position: fixed; right: 10px; top: 0; z-index: 99; overflow-x: hidden; overflow-y: auto; width: 500px; font-size: 11px; line-height: 1; padding: 1em; max-height: 140px;">prog={{main.prog}}<br>
 					<form action="https://new.nissan.com.tw/nissan/build/choose" id="bmn_form" method="post">
-						<input type="text" name="operation" id="operation" value=""
-							style="width: 40px;" /> <input type="text" name="val" id="val"
-							value="" style="width: 90px;" /> <input type="text"
-							name="currentStep" id="currentStep" value="-1"
-							style="width: 40px;" /> <input type="text" name="bmnId"
-							id="bmnId" /> <input type="text" name="modelId" id="modelId" />
-						<input type="text" name="varSno" id="varSno" value="0" /> <input
-							type="text" name="colorSno" id="colorSno" value="0" /> <input
-							type="text" name="partIds" id="partIds" />
+						<input type="text" name="operation" id="operation" value="" style="width: 40px;" /> 
+						<input type="text" name="val" id="val" value="" style="width: 90px;" /> 
+						<input type="text" name="currentStep" id="currentStep" value="-1" style="width: 40px;" /> 
+						<input type="text" name="bmnId" id="bmnId" /> 
+						<input type="text" name="modelId" id="modelId" />
+						<input type="text" name="varSno" id="varSno" value="0" /> 
+						<input type="text" name="colorSno" id="colorSno" value="0" /> 
+						<input type="text" name="partIds" id="partIds" />
 					</form> carId=<br> totalPrice={{main.totalPrice}}<br>
 					selectedVersion=0<br> selectedColor=0<br>
 					selectedAccessory= <!--carData={{main.carData | json}},<br>-->
@@ -98,15 +102,13 @@
 				<nav class="bmnapp-stepnav stepnav">
 					<ul class="stepnav-inner">
 						<li class="stepnav-item first   "><span class="stepnav-btn"><span
-								class="txt">選擇愛車</span></span> <i class="stepnav-arrow"></i></li>
+								class="txt">選擇愛車</span></span> <i class="step nav-arrow"></i></li>
 						<li class="stepnav-item   "><span class="stepnav-btn"><span
-								class="txt">選擇規格</span></span> <i class="stepnav-arrow"></i></li>
+								class="txt">愛車顏色</span></span> <i class="step nav-arrow"></i></li>
 						<li class="stepnav-item   "><span class="stepnav-btn"><span
-								class="txt">愛車顏色</span></span> <i class="stepnav-arrow"></i></li>
-						<li class="stepnav-item   "><span class="stepnav-btn"><span
-								class="txt">加購選配件</span></span> <i class="stepnav-arrow"></i></li>
+								class="txt">加購選配件</span></span> <i class="step nav-arrow"></i></li>
 						<li class="stepnav-item last   "><span class="stepnav-btn"><span
-								class="txt">我的愛車</span></span> <i class="stepnav-arrow"></i></li>
+								class="txt">我的愛車</span></span> <i class="step nav-arrow"></i></li>
 					</ul>
 				</nav>
 				<!--/.bmnapp-stepnav.stepnav-->
@@ -122,7 +124,7 @@
 							var $form = $("#bmn_form");
 							$form.find("[name=operation]").val("jump");
 							$form.find("[name=currentStep]").val(order);
-							global.sendBmnOperation("/nissan/build/choose",
+							global.sendBmnOperation("https://new.nissan.com.tw/nissan/build/choose",
 									$form.serialize());
 						}
 					})(jQuery, getGlobal());
@@ -163,6 +165,7 @@
 
 		</div>
 	</div>
+	<!--/.mastbody-->
 
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>

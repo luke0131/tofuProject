@@ -13,7 +13,7 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Hugo 0.104.2">
-<title>BMW X5</title>
+<title>Product Detail</title>
 
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/5.2/examples/carousel/">
@@ -152,17 +152,16 @@ body {
 			</div>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<svg class="bd-placeholder-img" width="100%" height="100%"
-						xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+					<svg class="" width="100%" height="100%"
+						xmlns="http://www.w3.org/2000/svg" aria-hidden=""
 						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<rect width="100%" height="100%" fill="#777" /></svg>
+						<rect width="100%" height="100%" fill="" />
+						<image href="../img/productDetail/BMW X51.jpg" width="100%" height="100%"></image>
+					</svg>
 
 					<div class="container">
 						<div class="carousel-caption text-start">
 							<h1>BMW X5</h1>
-							<p>
-								<a class="btn btn-lg btn-primary" href="#">Sign up today</a>
-							</p>
 						</div>
 					</div>
 				</div>
@@ -170,16 +169,13 @@ body {
 					<svg class="bd-placeholder-img" width="100%" height="100%"
 						xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<rect width="100%" height="100%" fill="#777" /></svg>
+						<rect width="100%" height="100%" fill="" />
+						<image href="../img/productDetail/BMW X52.jpg" width="100%" height="100%"></image>
+					</svg>
 
 					<div class="container">
 						<div class="carousel-caption">
-							<h1>Another example headline.</h1>
-							<p>Some representative placeholder content for the second
-								slide of the carousel.</p>
-							<p>
-								<a class="btn btn-lg btn-primary" href="#">Learn more</a>
-							</p>
+							<h1>Extreme Performance & Amazing Driving Control</h1>	
 						</div>
 					</div>
 				</div>
@@ -187,16 +183,13 @@ body {
 					<svg class="bd-placeholder-img" width="100%" height="100%"
 						xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<rect width="100%" height="100%" fill="#777" /></svg>
+						<rect width="100%" height="100%" fill="" />
+						<image href="../img/productDetail/BMW X53.jpg" width="100%" height="100%"></image>
+					</svg>
 
 					<div class="container">
 						<div class="carousel-caption text-end">
-							<h1>One more for good measure.</h1>
-							<p>Some representative placeholder content for the third
-								slide of this carousel.</p>
-							<p>
-								<a class="btn btn-lg btn-primary" href="#">Browse gallery</a>
-							</p>
+							<h1>Possibilities are infinite</h1>
 						</div>
 					</div>
 				</div>
@@ -223,51 +216,42 @@ body {
 			<!-- Three columns of text below the carousel -->
 			<div class="row">
 				<div class="col-lg-4">
-					<svg class="bd-placeholder-img rounded-circle" width="140"
-						height="140" xmlns="http://www.w3.org/2000/svg" role="img"
-						aria-label="Placeholder: 140x140"
-						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#777" />
-						<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+					<svg class="bd-placeholder-img rounded-circle" width="200"
+						height="200" xmlns="http://www.w3.org/2000/svg" role="img">
+						<rect width="100%" height="100%" fill="" />
+						<image href="../img/productDetail/productDetail1.jpg" width="100%" height="100%"></image>
+					</svg>
 
 					<h2 class="fw-normal">設計理念</h2>
-					<p>Some representative placeholder content for the three
-						columns of text below the carousel. This is the first column.</p>
+					<p>將美學、功能性和創新融合於汽車設計的指導原則。追求駕駛者和乘客的舒適性和便利性、獨特外觀、優化空間配置和人機交互設計，此外，設計理念還考慮性能、安全性和環境友好性，以提供卓越的行駛體驗。</p>
 					<p>
 						<a class="btn btn-secondary" href="#introduce">前往介紹 &raquo;</a>
 					</p>
 				</div>
 				<!-- /.col-lg-4 -->
 				<div class="col-lg-4">
-					<svg class="bd-placeholder-img rounded-circle" width="140"
-						height="140" xmlns="http://www.w3.org/2000/svg" role="img"
-						aria-label="Placeholder: 140x140"
-						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#777" />
-						<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-
+					<svg class="bd-placeholder-img rounded-circle" width="200"
+						height="200" xmlns="http://www.w3.org/2000/svg" role="img">
+						<rect width="100%" height="100%" fill="" />
+						<image href="../img/productDetail/productDetail2.jpg" width="100%" height="100%"></image>
+					</svg>
+					
 					<h2 class="fw-normal">預約賞車</h2>
-					<p>Another exciting bit of representative placeholder content.
-						This time, we've moved on to the second column.</p>
+					<p>讓顧客可以事先安排時間到汽車展廳試駕並欣賞所感興趣的車款。透過預約賞車，顧客可以享受個人化的專屬服務，提前體驗汽車性能和功能，幫助做出更明智的購車決策。</p>
 					<p>
 						<a class="btn btn-secondary" href="#book">前往預約 &raquo;</a>
 					</p>
 				</div>
 				<!-- /.col-lg-4 -->
 				<div class="col-lg-4">
-					<svg class="bd-placeholder-img rounded-circle" width="140"
-						height="140" xmlns="http://www.w3.org/2000/svg" role="img"
-						aria-label="Placeholder: 140x140"
-						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#777" />
-						<text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+					<svg class="bd-placeholder-img rounded-circle" width="200"
+						height="200" xmlns="http://www.w3.org/2000/svg" role="img">
+						<rect width="100%" height="100%" fill="" />
+						<image href="../img/productDetail/productDetail3.jpg" width="100%" height="100%"></image>
+					</svg>
 
 					<h2 class="fw-normal">打造專屬</h2>
-					<p>And lastly this, the third column of representative
-						placeholder content.</p>
+					<p>根據顧客的喜好和需求，量身訂製獨一無二的汽車。從選擇車身顏色、內飾材質到加裝個性化配件，打造出與眾不同的汽車。這種定制化的汽車體驗能夠提供顧客獨特的駕乘樂趣和滿足感。</p>
 					<p>
 						<a class="btn btn-secondary" href="${contextRoot}/product/buyCar">前往打造 &raquo;</a>
 					</p>
@@ -285,7 +269,8 @@ body {
 				<div class="col-md-7">
 					<h2 class="fw-normal lh-2">
 						外觀設計：<br/><br/>
-						BMW X5擁有現代而豪華的外觀設計，兼具力量感和優雅感。其前臉採用了BMW典型的雙腎型進氣格柵設計，緊貼頭燈延伸至車側，营造出強烈的視覺效果。整個車身設計線條流暢、氣勢磅礴，並且融入了輕量化的元素，提高了車輛的整體效能。					</h2>
+						BMW X5擁有現代而豪華的外觀設計，兼具力量感和優雅感。其前臉採用了BMW典型的雙腎型進氣格柵設計，緊貼頭燈延伸至車側，营造出強烈的視覺效果。整個車身設計線條流暢、氣勢磅礴，並且融入了輕量化的元素，提高了車輛的整體效能。
+					</h2>
 				</div>
 				<div class="col-md-5">
 					<svg
@@ -293,9 +278,9 @@ body {
 						width="500" height="500" xmlns="http://www.w3.org/2000/svg"
 						role="img" aria-label="Placeholder: 500x500"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#eee" />
-						<text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+						<rect width="100%" height="100%" fill="white" />
+						<image href="../img/productDetail/BMW X54.jpg" width="100%" height="100%"></image>
+					</svg>
 
 				</div>
 			</div>
@@ -315,9 +300,9 @@ body {
 						width="500" height="500" xmlns="http://www.w3.org/2000/svg"
 						role="img" aria-label="Placeholder: 500x500"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#eee" />
-						<text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+						<rect width="100%" height="100%" fill="white" />
+						<image href="../img/productDetail/BMW X55.jpg" width="100%" height="100%"></image>
+					</svg>
 
 				</div>
 			</div>
@@ -337,9 +322,9 @@ body {
 						width="500" height="500" xmlns="http://www.w3.org/2000/svg"
 						role="img" aria-label="Placeholder: 500x500"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
-						<title>Placeholder</title><rect width="100%" height="100%"
-							fill="#eee" />
-						<text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+						<rect width="100%" height="100%" fill="white" />
+						<image href="../img/productDetail/BMW X56.jpg" width="100%" height="100%"></image>
+					</svg>
 
 				</div>
 			</div>
@@ -348,28 +333,23 @@ body {
 		
 			<!-- /END THE FEATURETTES -->
 			
-			<div id="book" class="row featurette">
+			<div class="row featurette">
 				<h1>預約賞車</h1>
-				<form action="">
+				<form id="book" method="POST" action="${contextRoot}/product/book" onclick="validateForm()">
 					<div class="mb-3">
-		  				<label for="formGroupExampleInput" class="form-label">姓名</label>
-		  				<input type="text" class="form-control" id="formGroupExampleInput" placeholder="姓名">
+		  				<label for="name" class="form-label">姓名</label>
+		  				<input type="text" class="form-control" id="name" name="name" value="姓名">
 					</div>
 					
 					<div class="mb-3">
-		  				<label for="formGroupExampleInput2" class="form-label">連絡電話</label>
-		  				<input type="text" class="form-control" id="formGroupExampleInput2" placeholder="連絡電話">
-					</div>
-					
-					<div class="mb-3">
-		  				<label for="formGroupExampleInput3" class="form-label">預約車型</label>
-		  				<input type="text" class="form-control" id="formGroupExampleInput3" placeholder="預約車型">
+		  				<label for="car" class="form-label">預約車型</label>
+		  				<input type="text" class="form-control" id="car" name="car" value="BMW X5">
 					</div>								
 			
-					<label for="appointment">預約時間:</label>
+					<label for="time">預約時間:</label>
 					<div class="formgroup">
-						<input type="datetime-local" id="appointment" name="appointment"
-							value="2023-06-01 10:00" min="2023-06-01 10:00"
+						<input type="datetime-local" id="time" name="time"
+							value="2023-05-24 10:00" min="2023-05-24 10:00"
 							max="2023-06-30 18:00">
 					</div>	
 					
@@ -388,7 +368,11 @@ body {
 	</main>
 
 
-	<script src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
+	<script>
+		
+		
+		
+	</script>
 
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>

@@ -60,6 +60,7 @@ private String inspection;
 
 private String electric;
 
+@Column(name="status")
 private String status;
 
 public Maintenance() {
