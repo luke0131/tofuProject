@@ -242,7 +242,7 @@ label {
 																	style="width: 250px" size="40" />
 															</c:when>
 															<c:otherwise>
-																<input id="email" value="tofucars@gmail.com}"
+																<input id="email" value="tofucars@gmail.com"
 																	 name="email" type="text"
 																	style="width: 250px" size="40" />
 															</c:otherwise>
