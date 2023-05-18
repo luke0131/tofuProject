@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.product.model.Product;
 import com.group3.tofu.product.model.ProductDao;
 import com.group3.tofu.product.service.ProductService;
+
 
 
 @Controller
@@ -124,6 +126,14 @@ public class ProductController {
 
 		model.addAttribute("productList", productList);
 
+		return "mgm/ProductManagement";
+	}
+    
+    @GetMapping("/messages/show")
+	public String showMessages(@RequestParam(name="p", defaultValue = "1") Integer pageNumber,Model model) {
+		Page<Product> page = pService.findByPage(pageNumber);
+		
+		model.addAttribute("page", page);
 		return "mgm/ProductManagement";
 	}
 	

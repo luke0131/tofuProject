@@ -39,6 +39,14 @@ public class ProductPageController {
 				
 	}
 	
+	//跳轉到Honda頁面
+	@GetMapping("product/nissanDetail")
+	public String nissanDetail() {
+						
+		return "product/nissanDetail";
+					
+	}
+	
 	//跳轉到Benz頁面
 	@GetMapping("product/benzDetail")
 	public String benzDetail() {
@@ -52,6 +60,30 @@ public class ProductPageController {
 	public String productDetail() {
 					
 		return "product/bmwDetail";
+				
+	}
+	
+	//跳轉到Mazda頁面
+	@GetMapping("product/mazdaDetail")
+	public String mazdaDetail() {
+					
+		return "product/mazdaDetail";
+				
+	}
+	
+	//跳轉到Lexus頁面
+	@GetMapping("product/lexusDetail")
+	public String lexusDetail() {
+					
+		return "product/lexusDetail";
+				
+	}
+	
+	//跳轉到Audi頁面
+	@GetMapping("product/audiDetail")
+	public String audiDetail() {
+					
+		return "product/audiDetail";
 				
 	}
 

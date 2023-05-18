@@ -20,7 +20,9 @@
 	<div class="container-fluid">
 		<div class="row">
 			<jsp:include page="/WEB-INF/jsp/layout/mgmNavbar.jsp" />
+			
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+			
 				<h2>產品列表</h2>
 
 				<div>
@@ -38,6 +40,7 @@
 								<th scope="col">刪除</th>
 							</tr>
 						</thead>
+						
 						<tbody>
 							<c:forEach items="${productList}" var="pList" begin="0" end="69">
 								<tr>
@@ -65,9 +68,10 @@
 								    </td>
 								</tr>
 							</c:forEach>
-						</tbody>
+						</tbody>						
 					</table>
 				</div>
+				
 			</main>
 		</div>
 	</div>

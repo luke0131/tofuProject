@@ -289,7 +289,7 @@
 									class="card-img-top" alt="..." width="100%" height="180">
 								<div class="card-body">
 									<h5 class="card-title">${pList.productModel}</h5>
-									<a href="${contextRoot}/product/productDetail" class="btn btn-sm btn-outline-secondary">View</a>
+									<a href="${contextRoot}/product/nissanDetail" class="btn btn-sm btn-outline-secondary">View</a>
 								</div>
 							</div>
 						</div>			
@@ -377,7 +377,7 @@
 									class="card-img-top" alt="..." width="100%" height="180">
 								<div class="card-body">
 									<h5 class="card-title">${pList.productModel}</h5>
-									<a href="${contextRoot}/product/productDetail" class="btn btn-sm btn-outline-secondary">View</a>
+									<a href="${contextRoot}/product/mazdaDetail" class="btn btn-sm btn-outline-secondary">View</a>
 								</div>
 							</div>
 						</div>			
@@ -399,7 +399,7 @@
 									class="card-img-top" alt="..." width="100%" height="180">
 								<div class="card-body">
 									<h5 class="card-title">${pList.productModel}</h5>
-									<a href="${contextRoot}/product/productDetail" class="btn btn-sm btn-outline-secondary">View</a>
+									<a href="${contextRoot}/product/lexusDetail" class="btn btn-sm btn-outline-secondary">View</a>
 								</div>
 							</div>
 						</div>			
@@ -421,7 +421,7 @@
 									class="card-img-top" alt="..." width="100%" height="180">
 								<div class="card-body">
 									<h5 class="card-title">${pList.productModel}</h5>
-									<a href="${contextRoot}/product/productDetail" class="btn btn-sm btn-outline-secondary">View</a>
+									<a href="${contextRoot}/product/audiDetail" class="btn btn-sm btn-outline-secondary">View</a>
 								</div>
 							</div>
 						</div>			

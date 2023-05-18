@@ -36,31 +36,42 @@
 				<h2>Find Your Right Car Now</h2>
 				
 				
-					<h3 style="color: white">Customer Name</h3>
+					<h3 style="color: white;margin-bottom:10px; ">Customer Name</h3>
 					<input type="text" class="name" name="name" placeholder="JolinTsai" value="JolinTsai" required=""> 
-					<h3 style="color: white">Model</h3>
+					<h3 style="color: white;margin-bottom:10px; margin-top:10px;">Model</h3>
 					<input type="text" class="name"name="car" placeholder="Toyota Corolla Altis" value="Toyota Corolla Altis" required="">
-					<h3 style="color: white">Price</h3> 
+					<h3 style="color: white;margin-bottom:10px; margin-top:10px;">Price</h3> 
 					<input type="text" class="price" name="price" placeholder="78000" value="78000" required="">
 					<div class="clear"></div>
 					<div class="form-control">
 						<div class="content-wthree2">
+							
+							<select name="country" style="margin-top:30px;">
+								<option value="none" selected="" disabled="">Select Color</option>
+								<option value="Job-2">white</option>
+								<option value="Job-3">black</option>
+								<option value="Job-4">silver</option>
+								<option value="Job-5">red</option>
+								<option value="Job-6">blue</option>
+								<option value="Job-7">brown</option>
+							</select>
+							
 							<div class="grid-w3layouts1">
 								<div class="w3-agile1"><br/>
-									<label class="rating">Select Your color</label>
+									<label style="color: white; text-align:center" class="rating">Choose Your Car Options</label>
 									<ul>
-										<li><input class="form-check-input" type="radio" id="white" name="color" value="white">
-											<label class="form-check-label" for="white">white</label></li>
-										<li><input class="form-check-input" type="radio" id="black" name="color" value="black">
-											<label class="form-check-label" for="black">black</label></li>
-										<li><input class="form-check-input" type="radio" id="silver" name="color" value="silver">
-											<label class="form-check-label" for="silver">silver</label></li>
-										<li><input class="form-check-input" type="radio" id="red" name="color" value="red">
-											<label class="form-check-label" for="red">red</label></li>
-										<li><input class="form-check-input" type="radio" id="brown" name="color" value="brown">
-											<label class="form-check-label" for="brown">brown</label></li>
-										<li><input class="form-check-input" type="radio" id="blue" name="color" value="blue">
-											<label class="form-check-label" for="blue">blue</label></li>
+										<li><input class="form-check-input" type="checkbox" id="前保險杠" name="choose" value="前保險杠">
+											<label style="margin-right:15px" class="form-check-label" for="前保險杠">Leather Seat</label></li>
+										<li><input class="form-check-input" type="checkbox" id="後保險杠" name="choose" value="後保險杠">
+											<label class="form-check-label" for="後保險杠">Bumper</label></li>
+										<li><input class="form-check-input" type="checkbox" id="車頂行李架" name="choose" value="車頂行李架">
+											<label style="margin-right:40px" class="form-check-label" for="車頂行李架">Roof Rack</label></li>
+										<li><input class="form-check-input" type="checkbox" id="皮革方向盤" name="choose" value="皮革方向盤">
+											<label style="margin-right:5px" class="form-check-label" for="皮革方向盤">Spoiler</label></li>
+										<li><input class="form-check-input" type="checkbox" id="多功能方向盤" name="choose" value="多功能方向盤">
+											<label class="form-check-label" for="多功能方向盤">Steering Wheel</label></li>
+										<li><input class="form-check-input" type="checkbox" id="天窗" name="choose" value="天窗">
+											<label class="form-check-label" for="天窗">Sunroof</label></li>
 									</ul>
 								</div>
 							</div>
