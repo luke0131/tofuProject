@@ -111,9 +111,9 @@
 			</tr>
         </tbody>
       </table>
-      <span>選擇付款方式</span>
-      <label for=""><input type="checkbox" name="" id="">信用卡</label>
-      <label for=""><input type="checkbox" name="" id="">信用卡</label>
+
+
+
 
       <form action="http://localhost:8080/tofu/order/ecpay" method="get">
 

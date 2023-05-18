@@ -205,14 +205,14 @@ public class OrderController {
 		//Add car name/price to ecpay
 		Product car = pService.findById(1);
 		str += car.getProductModel();
-		sum += car.getProductPrice();
+		sum += 78900;
 
 		//JavaMail send mail to customer
 		String mailStr = "<table><thead><tr><th>商品</th><th>數量</th><th>價錢</th></tr></thead><tbody>";
 		for (OrderDetail d : details) {
 			mailStr+="<tr><td>"+d.getName()+"</td><td>"+d.getQty()+"</td><td>"+d.getPrice()+"</td></tr>";			
 		}
-		mailStr+="<tr><td>"+car.getProductModel()+"</td><td>1</td><td>"+car.getProductPrice()+"</td></tr>";	
+		mailStr+="<tr><td>"+car.getProductModel()+"</td><td>1</td><td>78900</td></tr>";	
 		mailStr+="</tbody></table><br><span>總價:"+sum+"</span>";
 		orderService.mailOrder(mailStr);
 		

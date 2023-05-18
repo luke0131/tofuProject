@@ -42,8 +42,7 @@
                     <img src="${contextRoot}/tofu/showGift/${carts.gift.id}" class="img-fluid rounded-3"
                       style="width: 120px; height: 100px;" alt="Book">
                     <div class="flex-column ms-4">
-                      <p class="mb-2">Thinking, Fast and Slow</p>
-                      <p class="mb-0">Daniel Kahneman</p>
+                      <p class="">${carts.gift.desc}</p>
                     </div>
                   </div>
                 </th>
@@ -91,7 +90,7 @@
                 <input id="" min="1" name="quantity" value="1" type="number" class="form-control form-control-sm number" style="width: 50px;" readonly="readonly"/>
             </td>
             <td class="align-middle">
-                <p class="mb-0 price" style="font-weight: 500;">${product.productPrice}</p>
+                <p class="mb-0 price" style="font-weight: 500;">78900</p>
             </td>
             <td class="align-middle">
               <span class="s_price"></span>

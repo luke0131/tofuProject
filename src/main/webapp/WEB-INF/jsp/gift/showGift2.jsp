@@ -33,9 +33,9 @@
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
 	<jsp:include page="../layout/navbar.jsp" />
 	
-	<a href="http://localhost:8080/tofu/showCart">
+	<!-- <a href="http://localhost:8080/tofu/showCart">
         <button class="btn btn-danger"><i class="fa-solid fa-cart-shopping" style="font-size:24px;"></i> cart</button>
-    </a>
+    </a> -->
 	
 	<h1 style="text-align: center;">豆腐商城</h1>
 	
@@ -71,7 +71,11 @@
 
 	</form>
 
-
+	<div style="text-align: end; margin-top: 25px; margin-right: 500px;">
+		<a href="http://localhost:8080/tofu/showCart">
+			<button class="btn btn-danger"><i class="fa-solid fa-cart-shopping" style="font-size:24px;"></i> cart</button>
+		</a>
+	</div>
 
 	<div class="row row-cols-1 row-cols-md-3 g-4 w" style="margin: auto;">
 

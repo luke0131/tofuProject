@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "Gift")
 public class Gift {
@@ -30,6 +32,13 @@ public class Gift {
 	@Column(name = "type")
 	private String type;
 	
+	@Column(name = "descrip")
+	private String desc;
+	
+	@Column(name = "isEnabled")
+	private boolean isEnabled;
+	
+	@JsonIgnore
 	@OneToMany(mappedBy = "gift",cascade = CascadeType.ALL)
 	private List<ShoppingCart> shoppingcarts;
 	
@@ -76,6 +85,22 @@ public class Gift {
 		this.type = type;
 	}
 
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+	public void setEnabled(boolean isEnabled) {
+		this.isEnabled = isEnabled;
+	}
+
 	public List<ShoppingCart> getShoppingcarts() {
 		return shoppingcarts;
 	}
@@ -86,10 +111,5 @@ public class Gift {
 
 	
 
-	
-
-	
-	
-	
 
 }

@@ -33,11 +33,10 @@
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
 	<jsp:include page="../layout/navbar.jsp" />
 	
-	<a href="http://localhost:8080/tofu/showCart">
-        <button class="btn btn-danger"><i class="fa-solid fa-cart-shopping" style="font-size:24px;"></i> cart</button>
-    </a>
 	
-	<h1 style="text-align: center;">豆腐商城</h1>
+
+	
+	<h1 style="text-align: center; margin-top: 25px;">豆腐商城</h1>
 	
 	<form action="http://localhost:8080/tofu/showGift/findBySearch" method="get">
 		<div class="input-group" style="width: 600px;margin: auto;">
@@ -64,17 +63,17 @@
 			<label for="name" style="margin-left: 20px;">最大：</label>
 			<input type="number" id="" name="max" value="" placeholder="請輸入金額" style="margin-left: 20px;">
 		</div>
-		<div class="query" style="text-align: center;">
-			<input type="submit" value="查詢" class="btn btn-dark"/>
+		<div class="query" style="text-align: center;margin-bottom:20px">
+			<input type="submit" value="查詢" class="btn btn-dark" />
 			<input type="reset" value="清除" class="btn btn-dark"/>
 		</div>
-
-
-
-
 	</form>
 
-
+	<div style="text-align: end; margin-top: 25px; margin-right: 500px;">
+		<a href="http://localhost:8080/tofu/showCart">
+			<button class="btn btn-danger"><i class="fa-solid fa-cart-shopping" style="font-size:24px;"></i> cart</button>
+		</a>
+	</div>
 
 	<div class="row row-cols-1 row-cols-md-3 g-4 w" style="margin: auto;">
 
