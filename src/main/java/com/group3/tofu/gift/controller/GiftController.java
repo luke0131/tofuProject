@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.group3.tofu.gift.model.bean.Gift;
 import com.group3.tofu.gift.service.GiftService;
@@ -36,6 +37,59 @@ public class GiftController {
 		}
 
 		return "gift/showGift";
+	}
+	
+	@GetMapping("/findByEnable")
+	public String findByEnable(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber, Model model) {
+		
+		Page<Gift> page = gService.findByEnable(pageNumber);
+		List<Gift> gifts = page.getContent();
+		for (Gift gift : gifts) {
+			System.out.println(gift.getName());
+		}
+		model.addAttribute("page", page);
+
+		return "gift/showGift";
+	}
+	
+	//商品修改
+//	@GetMapping("gift/updateGift")
+//	public String updateGift(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber, Model model) {
+//		
+//		Page<Gift> page = gService.findByPage(pageNumber);
+//		model.addAttribute("page", page);
+//		
+//		return "gift/showAllOrder";
+//	}
+	
+	
+	@GetMapping("gift/findGifts")
+	public String findGifts(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber, Model model) {
+		
+		Page<Gift> page = gService.findByPage(pageNumber);
+		model.addAttribute("page", page);
+		
+		return "mgm/gift/showAllOrder" ;
+	}
+	
+	
+	
+//	@ResponseBody
+	@GetMapping("gift/isEnable")
+	public String isEnable(@RequestParam(name = "id",defaultValue = "1") Integer id) {
+		
+		Gift gift = gService.findById(id);
+
+		if(gift.isEnabled()) {
+			gift.setEnabled(false);
+		}else {
+			gift.setEnabled(true);
+		}
+		
+		Gift savedGift = gService.save(gift);
+		
+		return "redirect:/gift/findGifts" ;
+//		return gift;
 	}
 	
 	@GetMapping("/showGift/{id}")

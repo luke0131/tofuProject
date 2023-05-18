@@ -72,7 +72,7 @@ public class Order {
 			c.add(Calendar.DATE, 7);
 			shipped_date = c.getTime();
 			
-			payment="未付款";
+			payment="已付款";
 			ship_status="未出貨";
 			order_status="正在處理";
 		}

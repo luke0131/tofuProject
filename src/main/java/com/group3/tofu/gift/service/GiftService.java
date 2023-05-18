@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.group3.tofu.gift.model.bean.Gift;
 import com.group3.tofu.gift.model.dao.GiftDAO;
 import com.group3.tofu.gift.model.dao.GiftQueryDAO;
+import com.group3.tofu.order.model.bean.Order;
 
 @Service
 public class GiftService {
@@ -29,6 +30,11 @@ public class GiftService {
 		return gDAO.findAll();
 	}
 	
+	public Page<Gift> findByEnable(Integer pageNumber) {	
+		Pageable pgb = PageRequest.of(pageNumber-1, 9, Direction.ASC, "id");
+		return gDAO.findByEnable(true,pgb);
+	}
+	
 	public Page<Gift> findByPage(Integer pageNumber) {
 		Pageable pgb = PageRequest.of(pageNumber-1, 9, Direction.ASC, "id");
 		Page<Gift> page = gDAO.findAll(pgb);
@@ -37,6 +43,10 @@ public class GiftService {
 	
 	public void createGift(Gift newGift) {
 		gDAO.save(newGift);
+	}
+	
+	public Gift save(Gift gift) {
+		return gDAO.save(gift);
 	}
 	
 	public List<Gift> findBySearch(String search,int start) {
