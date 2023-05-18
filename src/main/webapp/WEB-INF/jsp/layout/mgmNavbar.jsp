@@ -51,7 +51,7 @@
                     <polyline points="13 2 13 9 20 9"></polyline>
                   </svg> 訂單及禮物管理
 						</a></li>
-						<li class="nav-item"><a class="nav-link active" href="#"
+						<li class="nav-item"><a class="nav-link active" href="${contextRoot}/mgm/ProductManagement"
 							style="color: black"> <svg xmlns="http://www.w3.org/2000/svg"
 									width="24" height="24" viewBox="0 0 24 24" fill="none"
 									stroke="currentColor" stroke-width="2" stroke-linecap="round"

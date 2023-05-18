@@ -54,5 +54,10 @@ public class ProductPageController {
 			return "product/test2";
 						
 		}
+		
+//	@GetMapping("/mgm/ProductManagement")
+//	public String productManagement() {
+//		return "mgm/ProductManagement";
+//	}
 
 }

@@ -169,25 +169,7 @@
 						<label class="form-check-label" for="油電混和"> 油電混和 </label> 					
 					</div>
 					
-					<hr>
-					
-					<div class="lead text-muted">
-						
-						<h5><label for="排氣量" class="form-label">排氣量</label></h5>
-						<input type="range" class="form-range" min="1000" max="5000" id="customRange2">		
-					
-					</div>
-					
-					<hr>
-					
-					<div class="lead text-muted">
-						
-						<h5><label for="價錢" class="form-label">價錢</label></h5>
-						<input type="range" class="form-range" min="0" max="20000000" id="customRange2">		
-									
-					</div>
-					
-					<hr>
+					<hr>					
 					
 					<div>
 

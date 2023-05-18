@@ -335,7 +335,7 @@ body {
 			
 			<div class="row featurette">
 				<h1>預約賞車</h1>
-				<form id="book" method="POST" action="${contextRoot}/product/book" onclick="validateForm()">
+				<form id="book" method="POST" action="${contextRoot}/product/book">
 					<div class="mb-3">
 		  				<label for="name" class="form-label">姓名</label>
 		  				<input type="text" class="form-control" id="name" name="name" value="姓名">

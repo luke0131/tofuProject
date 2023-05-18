@@ -117,5 +117,14 @@ public class ProductController {
         return "product/toyotaDetail" ;
     }
 	
+    @GetMapping("/mgm/ProductManagement")
+	public String AllProduct(Model model) {
+
+		List<Product> productList = pService.findAllProduct();
+
+		model.addAttribute("productList", productList);
+
+		return "mgm/ProductManagement";
+	}
 	
 }

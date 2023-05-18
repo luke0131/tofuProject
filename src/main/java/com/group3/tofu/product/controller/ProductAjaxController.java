@@ -64,4 +64,23 @@ public class ProductAjaxController {
 		return responseJson.toString();
 	}
 	
+//	@PostMapping( path = "/mgm/ProductManagement",consumes = "application/json")
+//    public String findAllProduct(@RequestBody Map<String, List<String>> body ) {
+//		JSONObject responseJson = new JSONObject();		
+//		JSONArray array = new JSONArray();
+//		
+//		List<Product> products = pService.find(body);
+//		
+//		if(products!=null && !products.isEmpty()) {
+//			for(Product product : products) {
+//				JSONObject item = new JSONObject()
+//						.put("productModel", product.getProductModel());
+//
+//				array = array.put(item);
+//			}
+//		}
+//		responseJson = responseJson.put("datatable", array);
+//		return responseJson.toString();
+//    }
+	
 }
