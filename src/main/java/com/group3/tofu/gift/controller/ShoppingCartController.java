@@ -7,9 +7,14 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,8 +28,10 @@ import com.group3.tofu.gift.service.GiftService;
 import com.group3.tofu.gift.service.ShoppingCartService;
 import com.group3.tofu.order.service.OrderDetailService;
 import com.group3.tofu.order.service.OrderService;
+import com.group3.tofu.photo.model.Photo;
+import com.group3.tofu.photo.model.PhotoDao;
 import com.group3.tofu.product.model.Product;
-import com.group3.tofu.product.model.ProductDao;
+import com.group3.tofu.product.service.ProductService;
 
 @Controller
 public class ShoppingCartController {
@@ -41,7 +48,10 @@ public class ShoppingCartController {
 	private OrderDetailService odService;
 	
 	@Autowired
-	private ProductDao pDAO;
+	private ProductService pService;
+	
+	@Autowired
+	private PhotoDao pDAO;
 	
 	@GetMapping("/showCart")
 	public String showCart(Model model,HttpSession session) {
@@ -49,15 +59,35 @@ public class ShoppingCartController {
 		//登入資料存在session,透過session.getAttribute()拿到 f_customer_id
 		//get foreign key customer id by session
 		Customer customer = (Customer)session.getAttribute("loggedInCustomer");
+		
+		//檢查是否登入沒有導到登入畫面
+		if (customer == null) {
+			model.addAttribute("message", "請先登入會員");
+			return "customer/login";
+		}
+		
 		Integer customerId= customer.getCustomer_id();
 		
-		Product product = pDAO.findById((int)(Math.random()*10+1)).get();
+		
+		//Toyota Corolla Altis For Demo Only
+		Product product = pService.findById(1);
 		
 		List<ShoppingCart> carts = spcService.findByCustomerId(customerId);
 		model.addAttribute("carts",carts);
 		model.addAttribute("product",product);
 		
 		return "gift/showCart";
+	}
+	
+	@GetMapping("/showCarPhoto/{id}")
+	public ResponseEntity<byte[]> findProductPhotoById(@PathVariable Integer id) {
+		Photo carPhoto = pDAO.findById(1).get();
+		byte[] photo = carPhoto.getPhoto();
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_JPEG);
+		
+		return new ResponseEntity<byte[]>(photo, headers, HttpStatus.OK);
 	}
 	
 	@GetMapping("/remove")

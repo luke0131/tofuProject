@@ -92,6 +92,17 @@
 					<td class="price">${details.price}</td>
 				</tr>
 			</c:forEach>
+
+            <!-- this column for product car only begin-->
+            <tr>
+                <th scope="row">1</th>
+                <td>${product.productModel}</td>
+                <td class="qty">1</td>
+                <td class="price">${product.productPrice}</td>
+            </tr>
+            <!-- this column for product car only end-->
+
+
 			<tr>
 				<th scope="row">總共:</th>
 				<td> </td>
