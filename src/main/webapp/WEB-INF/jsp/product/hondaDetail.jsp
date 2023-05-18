@@ -156,12 +156,12 @@ body {
 						xmlns="http://www.w3.org/2000/svg" aria-hidden=""
 						preserveAspectRatio="xMidYMid slice" focusable="false">
 						<rect width="100%" height="100%" fill="" />
-						<image href="../img/productDetail/Toyota Corolla Altis1.jpg" width="100%" height="100%"></image>
+						<image href="../img/productDetail/Honda CR-V1.jpg" width="100%" height="100%"></image>
 					</svg>
 
 					<div class="container">
 						<div class="carousel-caption text-start">
-							<h1>Toyota Corolla Altis</h1>
+							<h1>Honda CR-V</h1>
 						</div>
 					</div>
 				</div>
@@ -170,7 +170,7 @@ body {
 						xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
 						<rect width="100%" height="100%" fill="" />
-						<image href="../img/productDetail/Toyota Corolla Altis2.jpg" width="100%" height="100%"></image>
+						<image href="../img/productDetail/Honda CR-V2.jpg" width="100%" height="100%"></image>
 					</svg>
 
 					<div class="container">
@@ -184,7 +184,7 @@ body {
 						xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
 						<rect width="100%" height="100%" fill="" />
-						<image href="../img/productDetail/Toyota Corolla Altis3.jpg" width="100%" height="100%"></image>
+						<image href="../img/productDetail/Honda CR-V3.jpg" width="100%" height="100%"></image>
 					</svg>
 
 					<div class="container">
@@ -269,7 +269,7 @@ body {
 				<div class="col-md-7">
 					<h2 class="fw-normal lh-2">
 						外觀設計：<br/><br/>
-						Toyota Corolla Altis採用了現代化的設計風格，強調簡潔、流線型和動感的外形。車頭部分採用了大面積的中網格設計，燈組造型富有層次感，整體風格比較具有豪華感。車側部分則突出了輪拱造型，並加入了流線型的腰線和拉長的車身比例，讓整體造型更加具有時尚感和運動感。
+						Honda CR-V的外觀設計整體上顯得十分簡潔，線條流暢，並且具有現代感。前臉採用了飛翼式的設計，與日系車常見的設計風格相符。整個車身線條流暢，前燈與尾燈採用LED燈，並且具有很高的辨識度。
 					</h2>
 				</div>
 				<div class="col-md-5">
@@ -279,7 +279,7 @@ body {
 						role="img" aria-label="Placeholder: 500x500"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
 						<rect width="100%" height="100%" fill="white" />
-						<image href="../img/productDetail/Toyota Corolla Altis4.jpg" width="100%" height="100%"></image>
+						<image href="../img/productDetail/Honda CR-V4.jpg" width="100%" height="100%"></image>
 					</svg>
 
 				</div>
@@ -291,7 +291,7 @@ body {
 				<div class="col-md-7 order-md-2">
 					<h2 class="fw-normal lh-1">
 						車內空間：<br/><br/>
-						Toyota Corolla Altis車內空間較為寬敞，前排座椅支撐力度較好，後排座椅也有較為舒適的座椅設計。車內儀表盤採用了現代化的設計風格，中控臺配置合理，且有許多科技配置，如8吋多媒體顯示屏、智慧型行車輔助系統、360度全景鏡頭等，讓駕駛者和乘客可以更加方便地享受愉悅的駕乘體驗。
+						Honda CR-V在車內空間方面表現也十分優秀，提供了寬敞舒適的乘坐空間，包括頭部、肩部和腿部空間都十分寬裕。其後座座椅採用了靠背可調節的設計，可以讓乘客更加舒適地坐在車內。車頂設計也十分合理，加大了車內高度，進一步提高了車內空間的舒適度。
 					</h2>
 				</div>
 				<div class="col-md-5 order-md-1">
@@ -301,7 +301,7 @@ body {
 						role="img" aria-label="Placeholder: 500x500"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
 						<rect width="100%" height="100%" fill="white" />
-						<image href="../img/productDetail/Toyota Corolla Altis5.jpg" width="100%" height="100%"></image>
+						<image href="../img/productDetail/Honda CR-V5.jpg" width="100%" height="100%"></image>
 					</svg>
 
 				</div>
@@ -313,7 +313,7 @@ body {
 				<div class="col-md-7">
 					<h2 class="fw-normal lh-1">
 						動力性能：<br/><br/>
-						Toyota Corolla Altis搭載了1.8升汽油引擎，最大馬力為138匹，最大扭力為172牛米。配合CVT無段變速器，可提供平順、靈活的動力輸出，並且具有較為經濟的油耗表現。
+						Honda CR-V在動力性能方面也十分優秀，它搭載了一款1.5升渦輪增壓引擎，最大馬力達193匹，峰值扭力達24.5kgm，並且具有極佳的燃油經濟性。該引擎與CVT變速箱搭配，提供了平穩順暢的動力輸出。此外，Honda CR-V還搭載了多項智慧科技，如Adaptive Cruise Control、Lane Keeping Assist等，提高了車輛的安全性和駕駛體驗。
 					</h2>
 				</div>
 				<div class="col-md-5">
@@ -323,7 +323,7 @@ body {
 						role="img" aria-label="Placeholder: 500x500"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
 						<rect width="100%" height="100%" fill="white" />
-						<image href="../img/productDetail/Toyota Corolla Altis6.jpg" width="100%" height="100%"></image>
+						<image href="../img/productDetail/Honda CR-V6.jpg" width="100%" height="100%"></image>
 					</svg>
 
 				</div>
@@ -343,7 +343,7 @@ body {
 					
 					<div class="mb-3">
 		  				<label for="car" class="form-label">預約車型</label>
-		  				<input type="text" class="form-control" id="car" name="car" value="Toyota Corolla Altis">
+		  				<input type="text" class="form-control" id="car" name="car" value="Honda CR-V">
 					</div>								
 			
 					<label for="time">預約時間:</label>
@@ -354,7 +354,7 @@ body {
 					</div>	
 					
 					<div class="col-md-4 offset-md-11">
-					<button id="bookbutton" type="submit" class="btn btn-primary" onclick="abc();">預約</button>
+					<button type="submit" class="btn btn-primary">預約</button>
 					</div>
 								
 				</form>			
@@ -370,9 +370,7 @@ body {
 
 	<script>
 		
-		function abc() {
-	        alert('預約完成');
-	    }
+		
 		
 	</script>
 

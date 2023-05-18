@@ -178,17 +178,63 @@
 						
 					</div>
 				</form>
-				
+							
 			</div>
 		</div>
 	</article>
 	
+	<ul class="nav justify-content-center">
+  		<li class="nav-item">
+    		<a class="nav-link text-dark fw-bold" href="#">快速導覽</a>
+  		</li>
+  		<li class="nav-item">
+    		<a class="nav-link text-secondary" href="#toyota">Toyota</a>
+  		</li>
+		<li class="nav-item">
+			<a class="nav-link text-secondary" href="#honda">Honda</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-secondary" href="#nissan">Nissan</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link text-secondary" href="#benz">Mercedes-Benz</a>
+	  	</li>
+	  	<li class="nav-item">
+	    	<a class="nav-link text-secondary" href="#bmw">BMW</a>
+	  	</li>
+	  	<li class="nav-item">
+	    	<a class="nav-link text-secondary" href="#mitsubishi">Mitsubishi</a>
+	  	</li>
+	  	<li class="nav-item">
+	    	<a class="nav-link text-secondary" href="#mazda">Mazda</a>
+	  	</li>
+	  	<li class="nav-item">
+	    	<a class="nav-link text-secondary" href="#lexus">Lexus</a>
+	  	</li>
+	  	<li class="nav-item">
+	    	<a class="nav-link text-secondary" href="#audi">Audi</a>
+	  	</li>
+	  	<li class="nav-item">
+	    	<a class="nav-link text-secondary" href="#porsche">Porsche</a>
+	  	</li>
+	  	<li class="nav-item">
+	    	<a class="nav-link text-secondary " href="#ferrari">Ferrari</a>
+	  	</li>
+	  	<li class="nav-item">
+	    	<a class="nav-link text-secondary" href="#volvo">Volvo</a>
+	  	</li>
+	  	<li class="nav-item">
+	    	<a class="nav-link text-secondary" href="#mini">Mini</a>
+	  	</li>
+	</ul>
+	
+	<br/>
 	
 	<div class="album py-5 bg-light">
 		<div class="container">
 			
 			<div id="removeCars">
-			<div class="lead text-muted"><h3>Toyota</h3></div><br/>
+			<div id="toyota" class="lead text-muted"><h3>Toyota</h3></div><br/>
 			<div class="row row-cols-5 g-4">
 				
 				<c:forEach items="${productList}" var="pList" begin="0" end="6">
@@ -208,7 +254,7 @@
 				
 			</div>
 			
-			<br/><hr><br/>
+			<br/><hr id="honda"><br/>
 			
 			<div class="lead text-muted"><h3>Honda</h3></div><br/>
 			<div class="row row-cols-5 g-4">
@@ -221,7 +267,7 @@
 									class="card-img-top" alt="..." width="100%" height="180">
 								<div class="card-body">
 									<h5 class="card-title">${pList.productModel}</h5>
-									<a href="${contextRoot}/product/productDetail" class="btn btn-sm btn-outline-secondary">View</a>
+									<a href="${contextRoot}/product/hondaDetail" class="btn btn-sm btn-outline-secondary">View</a>
 								</div>
 							</div>
 						</div>			
@@ -230,7 +276,7 @@
 				
 			</div>
 			
-			<br/><hr><br/>
+			<br/><hr id="nissan"><br/>
 			
 			<div class="lead text-muted"><h3>Nissan</h3></div><br/>
 			<div class="row row-cols-5 g-4">
@@ -252,7 +298,7 @@
 				
 			</div>
 			
-			<br/><hr><br/>
+			<br/><hr id="benz"><br/>
 			
 			<div class="lead text-muted"><h3>Mercedes-Benz</h3></div><br/>
 			<div class="row row-cols-5 g-4">
@@ -265,7 +311,7 @@
 									class="card-img-top" alt="..." width="100%" height="180">
 								<div class="card-body">
 									<h5 class="card-title">${pList.productModel}</h5>
-									<a href="${contextRoot}/product/productDetail" class="btn btn-sm btn-outline-secondary">View</a>
+									<a href="${contextRoot}/product/benzDetail" class="btn btn-sm btn-outline-secondary">View</a>
 								</div>
 							</div>
 						</div>			
@@ -274,7 +320,7 @@
 				
 			</div>
 			
-			<br/><hr><br/>
+			<br/><hr id="bmw"><br/>
 			
 			<div class="lead text-muted"><h3>BMW</h3></div><br/>
 			<div class="row row-cols-5 g-4">
@@ -296,7 +342,7 @@
 				
 			</div>
 			
-			<br/><hr><br/>
+			<br/><hr id="mitsubishi"><br/>
 			
 			<div class="lead text-muted"><h3>Mitsubishi</h3></div><br/>
 			<div class="row row-cols-5 g-4">
@@ -318,7 +364,7 @@
 				
 			</div>
 			
-			<br/><hr><br/>
+			<br/><hr id="mazda"><br/>
 			
 			<div class="lead text-muted"><h3>Mazda</h3></div><br/>
 			<div class="row row-cols-5 g-4">
@@ -340,7 +386,7 @@
 				
 			</div>
 			
-			<br/><hr><br/>
+			<br/><hr id="lexus"><br/>
 			
 			<div class="lead text-muted"><h3>Lexus</h3></div><br/>
 			<div class="row row-cols-5 g-4">
@@ -362,7 +408,7 @@
 				
 			</div>
 			
-			<br/><hr><br/>
+			<br/><hr id="audi"><br/>
 			
 			<div class="lead text-muted"><h3>Audi</h3></div><br/>
 			<div class="row row-cols-5 g-4">
@@ -384,7 +430,7 @@
 				
 			</div>
 			
-			<br/><hr><br/>
+			<br/><hr id="porsche"><br/>
 			
 			<div class="lead text-muted"><h3>Porsche</h3></div><br/>
 			<div class="row row-cols-5 g-4">
@@ -406,7 +452,7 @@
 				
 			</div>
 			
-			<br/><hr><br/>
+			<br/><hr id="ferrari"><br/>
 			
 			<div class="lead text-muted"><h3>Ferrari</h3></div><br/>
 			<div class="row row-cols-5 g-4">
@@ -428,7 +474,7 @@
 				
 			</div>
 			
-			<br/><hr><br/>
+			<br/><hr id="volvo"><br/>
 			
 			<div class="lead text-muted"><h3>Volvo</h3></div><br/>
 			<div class="row row-cols-5 g-4">
@@ -450,7 +496,7 @@
 				
 			</div>
 			
-			<br/><hr><br/>
+			<br/><hr id="mini"><br/>
 			
 			<div class="lead text-muted"><h3>Mini</h3></div><br/>
 			<div class="row row-cols-5 g-4">

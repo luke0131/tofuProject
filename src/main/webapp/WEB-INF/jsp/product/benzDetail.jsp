@@ -156,12 +156,12 @@ body {
 						xmlns="http://www.w3.org/2000/svg" aria-hidden=""
 						preserveAspectRatio="xMidYMid slice" focusable="false">
 						<rect width="100%" height="100%" fill="" />
-						<image href="../img/productDetail/Toyota Corolla Altis1.jpg" width="100%" height="100%"></image>
+						<image href="../img/productDetail/Mercedes-Benz C3001.jpg" width="100%" height="100%"></image>
 					</svg>
 
 					<div class="container">
 						<div class="carousel-caption text-start">
-							<h1>Toyota Corolla Altis</h1>
+							<h1>Mercedes-Benz C300</h1>
 						</div>
 					</div>
 				</div>
@@ -170,7 +170,7 @@ body {
 						xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
 						<rect width="100%" height="100%" fill="" />
-						<image href="../img/productDetail/Toyota Corolla Altis2.jpg" width="100%" height="100%"></image>
+						<image href="../img/productDetail/Mercedes-Benz C3002.jpg" width="100%" height="100%"></image>
 					</svg>
 
 					<div class="container">
@@ -184,7 +184,7 @@ body {
 						xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
 						<rect width="100%" height="100%" fill="" />
-						<image href="../img/productDetail/Toyota Corolla Altis3.jpg" width="100%" height="100%"></image>
+						<image href="../img/productDetail/Mercedes-Benz C3003.jpg" width="100%" height="100%"></image>
 					</svg>
 
 					<div class="container">
@@ -269,7 +269,7 @@ body {
 				<div class="col-md-7">
 					<h2 class="fw-normal lh-2">
 						外觀設計：<br/><br/>
-						Toyota Corolla Altis採用了現代化的設計風格，強調簡潔、流線型和動感的外形。車頭部分採用了大面積的中網格設計，燈組造型富有層次感，整體風格比較具有豪華感。車側部分則突出了輪拱造型，並加入了流線型的腰線和拉長的車身比例，讓整體造型更加具有時尚感和運動感。
+						Mercedes-Benz C300擁有流暢的線條和優雅的設計，配有大型三角形狀前燈和中央星徽，尾部採用了橫向設計的尾燈和兩側雙排氣管。車身尺寸方面，長度為4686mm、寬度為1810mm、高度為1442mm，軸距為2865mm。更加時尚、精緻，也更具動感。
 					</h2>
 				</div>
 				<div class="col-md-5">
@@ -279,7 +279,7 @@ body {
 						role="img" aria-label="Placeholder: 500x500"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
 						<rect width="100%" height="100%" fill="white" />
-						<image href="../img/productDetail/Toyota Corolla Altis4.jpg" width="100%" height="100%"></image>
+						<image href="../img/productDetail/Mercedes-Benz C3004.jpg" width="100%" height="100%"></image>
 					</svg>
 
 				</div>
@@ -291,7 +291,7 @@ body {
 				<div class="col-md-7 order-md-2">
 					<h2 class="fw-normal lh-1">
 						車內空間：<br/><br/>
-						Toyota Corolla Altis車內空間較為寬敞，前排座椅支撐力度較好，後排座椅也有較為舒適的座椅設計。車內儀表盤採用了現代化的設計風格，中控臺配置合理，且有許多科技配置，如8吋多媒體顯示屏、智慧型行車輔助系統、360度全景鏡頭等，讓駕駛者和乘客可以更加方便地享受愉悅的駕乘體驗。
+						Mercedes-Benz C300 車內空間寬敞舒適，配備了豪華的真皮座椅、光滑的木紋或金屬裝飾和高端音響系統。車內儀表板採用簡潔明瞭的設計，中控屏幕尺寸為10.25英寸，可以通過觸摸屏或中控旋鈕進行操作。
 					</h2>
 				</div>
 				<div class="col-md-5 order-md-1">
@@ -301,7 +301,7 @@ body {
 						role="img" aria-label="Placeholder: 500x500"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
 						<rect width="100%" height="100%" fill="white" />
-						<image href="../img/productDetail/Toyota Corolla Altis5.jpg" width="100%" height="100%"></image>
+						<image href="../img/productDetail/Mercedes-Benz C3005.jpg" width="100%" height="100%"></image>
 					</svg>
 
 				</div>
@@ -313,7 +313,7 @@ body {
 				<div class="col-md-7">
 					<h2 class="fw-normal lh-1">
 						動力性能：<br/><br/>
-						Toyota Corolla Altis搭載了1.8升汽油引擎，最大馬力為138匹，最大扭力為172牛米。配合CVT無段變速器，可提供平順、靈活的動力輸出，並且具有較為經濟的油耗表現。
+						Mercedes-Benz C300搭載2.0升四缸渦輪增壓引擎，最大馬力為258匹，最大扭矩為370牛米，配備9速手自一體變速箱。加速方面，0-100公里/小時加速時間約為6.0秒，極速達到了250公里/小時。此外，它還配備了先進的安全技術和行車輔助系統，例如主動制動輔助、車道保持輔助和自適應巡航控制等。
 					</h2>
 				</div>
 				<div class="col-md-5">
@@ -323,7 +323,7 @@ body {
 						role="img" aria-label="Placeholder: 500x500"
 						preserveAspectRatio="xMidYMid slice" focusable="false">
 						<rect width="100%" height="100%" fill="white" />
-						<image href="../img/productDetail/Toyota Corolla Altis6.jpg" width="100%" height="100%"></image>
+						<image href="../img/productDetail/Mercedes-Benz C3006.jpg" width="100%" height="100%"></image>
 					</svg>
 
 				</div>
@@ -343,7 +343,7 @@ body {
 					
 					<div class="mb-3">
 		  				<label for="car" class="form-label">預約車型</label>
-		  				<input type="text" class="form-control" id="car" name="car" value="Toyota Corolla Altis">
+		  				<input type="text" class="form-control" id="car" name="car" value="Mercedes-Benz C300">
 					</div>								
 			
 					<label for="time">預約時間:</label>
@@ -354,7 +354,7 @@ body {
 					</div>	
 					
 					<div class="col-md-4 offset-md-11">
-					<button id="bookbutton" type="submit" class="btn btn-primary" onclick="abc();">預約</button>
+					<button type="submit" class="btn btn-primary">預約</button>
 					</div>
 								
 				</form>			
@@ -370,9 +370,7 @@ body {
 
 	<script>
 		
-		function abc() {
-	        alert('預約完成');
-	    }
+		
 		
 	</script>
 
@@ -383,4 +381,4 @@ body {
 	<jsp:include page="/WEB-INF/jsp/layout/footer.jsp" />
 
 </body>
-</html>
+</html>html>

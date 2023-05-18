@@ -34,10 +34,14 @@
 		<div class="main-agilerow">
 			<div class="sub-w3lsright agileits-w3layouts">
 				<h2>Find Your Right Car Now</h2>
-				<form action="#" method="post">
+				
+				
+					<h3 style="color: white">Customer Name</h3>
 					<input type="text" class="name" name="name" placeholder="JolinTsai" value="JolinTsai" required=""> 
-					<input type="email" class="name"name="car" placeholder="Toyota Corolla Altis" value="Toyota Corolla Altis" required=""> 
-					<input type="text" class="price" name="price" placeholder="789000" value="789000" required="">
+					<h3 style="color: white">Model</h3>
+					<input type="text" class="name"name="car" placeholder="Toyota Corolla Altis" value="Toyota Corolla Altis" required="">
+					<h3 style="color: white">Price</h3> 
+					<input type="text" class="price" name="price" placeholder="78000" value="78000" required="">
 					<div class="clear"></div>
 					<div class="form-control">
 						<div class="content-wthree2">
@@ -64,7 +68,8 @@
 						</div>
 					</div>
 					<div class="clear"></div>
-					<input type="submit" value="Send">
+				<form action="${contextRoot}/tofu/showGift" method="GET">
+					<input id="buycarbuttom" type="submit" value="Send">
 				</form>
 			</div>
 			<div class="clear"></div>
@@ -85,7 +90,12 @@
 		src="../css/product/js/jquery-2.1.4.min.js"></script>
 	<script src="../css/product/js/jquery.vide.min.js"></script>
 	<!-- //js -->
-
+	
+	<script>
+	
+		
+		
+	</script>
 
 
 

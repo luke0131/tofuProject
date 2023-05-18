@@ -21,7 +21,7 @@
 		<div class="row">
 			<jsp:include page="/WEB-INF/jsp/layout/mgmNavbar.jsp" />
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-				<h2>這裡是產品的管理頁面</h2>
+				<h2>產品列表</h2>
 
 				<div>
 					<table class="table align-middle text-center">

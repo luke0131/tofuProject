@@ -31,6 +31,22 @@ public class ProductPageController {
 			
 	}
 	
+	//跳轉到Honda頁面
+	@GetMapping("product/hondaDetail")
+	public String hondaDetail() {
+					
+		return "product/hondaDetail";
+				
+	}
+	
+	//跳轉到Benz頁面
+	@GetMapping("product/benzDetail")
+	public String benzDetail() {
+						
+		return "product/benzDetail";
+					
+	}
+	
 	//跳轉到BMW頁面
 	@GetMapping("product/bmwDetail")
 	public String productDetail() {
@@ -38,26 +54,5 @@ public class ProductPageController {
 		return "product/bmwDetail";
 				
 	}
-	
-	//測試頁面
-	@GetMapping("product/test1")
-	public String test() {
-						
-		return "product/test";
-					
-	}
-	
-	//測試頁面
-		@GetMapping("product/test2")
-		public String test2() {
-							
-			return "product/test2";
-						
-		}
-		
-//	@GetMapping("/mgm/ProductManagement")
-//	public String productManagement() {
-//		return "mgm/ProductManagement";
-//	}
 
 }
