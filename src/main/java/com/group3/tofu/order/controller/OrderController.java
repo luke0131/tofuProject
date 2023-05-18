@@ -23,6 +23,8 @@ import com.group3.tofu.order.model.bean.Order;
 import com.group3.tofu.order.model.bean.OrderDetail;
 import com.group3.tofu.order.service.OrderDetailService;
 import com.group3.tofu.order.service.OrderService;
+import com.group3.tofu.product.model.Product;
+import com.group3.tofu.product.service.ProductService;
 
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutALL;
@@ -41,6 +43,9 @@ public class OrderController {
 	
 	@Autowired
 	private CustomerService cService;
+	
+	@Autowired
+	private ProductService pService;
 	
 	@GetMapping("order/findAll")
 	public String findCustomerOrder(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber,Model model) {
@@ -86,9 +91,13 @@ public class OrderController {
 		Customer customer = cService.findCustomerById(customerId);
 		List<OrderDetail> orderDetails = order.getOrderDetails();
 		
+		Integer product_id = order.getF_product_id();
+		Product product = pService.findById(product_id);
+		
 		model.addAttribute("customer",customer);
 		model.addAttribute("order",order);
 		model.addAttribute("orderDetails",orderDetails);
+		model.addAttribute("product",product);
 
 		return "mgm/order/showDetail";
 	}
@@ -193,14 +202,21 @@ public class OrderController {
 			sum += d.getPrice()*d.getQty();
 		}
 		
+		//Add car name/price to ecpay
+		Product car = pService.findById(1);
+		str += car.getProductModel();
+		sum += car.getProductPrice();
+
+		//JavaMail send mail to customer
 		String mailStr = "<table><thead><tr><th>商品</th><th>數量</th><th>價錢</th></tr></thead><tbody>";
 		for (OrderDetail d : details) {
 			mailStr+="<tr><td>"+d.getName()+"</td><td>"+d.getQty()+"</td><td>"+d.getPrice()+"</td></tr>";			
 		}
+		mailStr+="<tr><td>"+car.getProductModel()+"</td><td>1</td><td>"+car.getProductPrice()+"</td></tr>";	
 		mailStr+="</tbody></table><br><span>總價:"+sum+"</span>";
-
-		 
 		orderService.mailOrder(mailStr);
+		
+		
 		
 		//綠界方法
 		AllInOne allInOne = new AllInOne("");
@@ -237,12 +253,13 @@ public class OrderController {
 		Customer customer = (Customer)session.getAttribute("loggedInCustomer");
 		Integer customerId= customer.getCustomer_id();
 		
+		Product product = pService.findById(1);
 		
 		Order newOrder = new Order();
 		newOrder.setF_customer_id(customerId);
 		newOrder.setShip_address(customer.getAddress());
 		newOrder.setF_employee_id((int)(Math.random()*10+1));
-		newOrder.setF_product_id((int)(Math.random()*20+1));
+		newOrder.setF_product_id(1);
 		newOrder.setPayment("已付款");
 		
 		Order saved = orderService.insertOrder(newOrder);
@@ -266,9 +283,13 @@ public class OrderController {
 		model.addAttribute("customer",customer);
 		model.addAttribute("order",saved);
 		model.addAttribute("orderDetails",odList);
+		model.addAttribute("product", product);
 		
 		return "order/showDetail";
 	}
+	
+	
+	
 	@GetMapping("order/findStatus")
 	public String findByShipment(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber,Model model) {
 		Page<Order> page = orderService.findByShipment2(pageNumber,"已送達");

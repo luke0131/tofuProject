@@ -69,6 +69,50 @@
               </tr>
            </c:forEach>   
            
+
+
+<!-- FOR CAR ONLY -->
+
+           <tr>
+            <th scope="row">
+              <div class="d-flex align-items-center">
+                <img src="${contextRoot}/tofu/showCarPhoto/${product.productId}" class=""
+                  style="width: 120px; height: 100px;" alt="">
+                <div class="flex-column ms-4">
+                  <p class="mb-2">Thinking, Fast and Slow</p>
+                  <p class="mb-0">Daniel Kahneman</p>
+                </div>
+              </div>
+            </th>
+            <td class="align-middle">
+                <p class="mb-0" style="font-weight: 500;">${product.productModel}</p>
+            </td>
+            <td class="align-middle">
+                <input id="" min="1" name="quantity" value="1" type="number" class="form-control form-control-sm number" style="width: 50px;" readonly="readonly"/>
+            </td>
+            <td class="align-middle">
+                <p class="mb-0 price" style="font-weight: 500;">${product.productPrice}</p>
+            </td>
+            <td class="align-middle">
+              <span class="s_price"></span>
+          </td>
+             <td class="align-middle">
+                <p class="mb-0" style="font-weight: 500;">
+                <a href="">
+                  
+                </a>
+              </p>
+            </td>
+          </tr>
+
+
+<!-- FOR CAR ONLY -->
+
+
+
+
+
+
             </tbody>
           </table>
           
