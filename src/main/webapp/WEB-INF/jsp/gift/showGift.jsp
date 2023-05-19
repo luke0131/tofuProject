@@ -91,7 +91,7 @@
 
 	<div style="text-align: end; margin-top: 25px; margin-right: 500px;" id="cart" data-totalitems="0" class="cart">
 		<a href="http://localhost:8080/tofu/showCart">
-			<button class="btn btn-dark"><i class="fa-solid fa-cart-shopping" style="font-size:24px;"></i> <span class='badge badge-warning' id='lblCartCount'> 1 </span></button>
+			<button class="btn btn-dark"><i class="fa-solid fa-cart-shopping" style="font-size:24px;"></i> <span class='badge badge-warning' id='lblCartCount'> ${count} </span></button>
 		</a>
 	</div>
 

@@ -19,12 +19,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.group3.tofu.gift.model.bean.Gift;
+import com.group3.tofu.gift.model.bean.ShoppingCart;
 import com.group3.tofu.gift.service.GiftService;
+import com.group3.tofu.gift.service.ShoppingCartService;
 
 @Controller
 public class GiftController {
 	@Autowired
 	private GiftService gService;
+	
+	@Autowired
+	private ShoppingCartService spcService;
 	
 	@GetMapping("/showGift")
 	public String giftIndex(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber, Model model) {
@@ -35,10 +40,12 @@ public class GiftController {
 		Page<Gift> page = gService.findByPage(pageNumber);
 		model.addAttribute("page", page);
 		
-		for (Gift gift : page.getContent()) {
-			System.out.println(gift.getId());		
-		}
-
+		
+		List<ShoppingCart> carts = spcService.findByCustomerId(2);
+		int count = carts.size();
+		model.addAttribute("count", count);
+		
+		
 		return "gift/showGift";
 	}
 	
@@ -51,6 +58,11 @@ public class GiftController {
 			System.out.println(gift.getName());
 		}
 		model.addAttribute("page", page);
+		
+		
+		List<ShoppingCart> carts = spcService.findByCustomerId(2);
+		int count = carts.size();
+		model.addAttribute("count", count);
 
 		return "gift/showGift";
 	}
@@ -76,7 +88,7 @@ public class GiftController {
 		gift.setPhoto(file.getBytes());
 		gService.save(gift);
 		
-		return "mgm/gift/uploadGift";
+		return "redirect:/gift/findGifts";
 	}
 	
 //	顯示商品修改頁面
@@ -183,6 +195,14 @@ public class GiftController {
 		List<Gift> gifts = gService.findByOption(tool, food, elec, drink, outdoor, min, max,startItem);
 		
 		model.addAttribute("gifts", gifts);
+		
+		List<ShoppingCart> carts = spcService.findByCustomerId(2);
+		int count = carts.size();
+		model.addAttribute("count", count);
+		
+		
+		
+		
 		
 		return"gift/showGift2";
 	}

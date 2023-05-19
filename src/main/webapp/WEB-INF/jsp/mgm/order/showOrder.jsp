@@ -112,7 +112,7 @@
 						<button type="button" class="btn btn-success Shipment">${orders.ship_status }</button>
 					</td>
 					<td>
-						<button type="button" class="btn btn-success status">${orders.order_status }</button>
+						<button type="button" class="btn btn-success status" id="${orders.id}">${orders.order_status }</button>
 					</td>
 					<td>
 						<a href="${contextRoot}/order/showDetail?id=${orders.id}">
@@ -124,12 +124,12 @@
 							<button type="button" class="btn btn-outline-primary"><i class="fa-solid fa-file-pen" style="width: 20px;"></i></button>
 						</a>
 					
-						<a href="${contextRoot}/order/updateStatus?id=${orders.id}&source=${str}" style="text-decoration: none;">
+						<!-- <a href="${contextRoot}/order/updateStatus?id=${orders.id}&source=${str}" style="text-decoration: none;">
 							<button type="button" class="btn btn-outline-danger"><i class="fa-solid fa-trash-can" style="width: 20px;"></i></button>
-						</a>
+						</a> -->
 
 
-							<!-- <button type="button" class="btn btn-outline-danger" onclick="callRemove(${orders.id})"><i class="fa-solid fa-trash-can" style="width: 20px;"></i></button> -->
+							<button type="button" class="btn btn-outline-danger" onclick="callRemove(${orders.id})"><i class="fa-solid fa-trash-can" style="width: 20px;"></i></button>
 
 						
 					</td>
@@ -236,21 +236,22 @@
 		axios.get("http://localhost:8080/tofu/order/cancel/"+id).then(function(response) {
 			// console.log("response",response);
 			console.log("response",response);
+
+			var status = response.data.order_status;
+
 			let index = id;
-			console.log(index);
-			console.log($('.id')[0]);
+			console.log(document.getElementById(id));
+
+			var btn = document.getElementById(id);
 
 
-			
-			for (let i = 0; i < $('.status').length; i++) {
-			var str = $('.status')[i].innerText;
-			console.log(str);
-			if(str == "訂單完成"){
-				$('.status')[i].style.backgroundColor="red";
-				$('.status')[i].style.borderColor="red";
-				$('.status')[i].innerText="訂單取消";
+
+			if(status == "訂單取消"){
+				btn.style.backgroundColor="red";
+				btn.style.borderColor="red";
+				btn.innerText="訂單取消";
 			}
-		}
+		
 
 
 
