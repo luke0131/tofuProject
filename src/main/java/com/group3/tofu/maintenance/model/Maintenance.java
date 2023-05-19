@@ -33,9 +33,8 @@ private Integer mid;
 @Column(name = "f_customer_id")
 private Integer cid;
 
-@JoinColumn(name="f_employee_id",referencedColumnName ="employee_id")
-@ManyToOne
-private Employee eid;
+@Column(name="f_employee_id")
+private Integer eid;
 
 @JoinColumn(name = "f_product_id", referencedColumnName = "product_id")
 @ManyToOne
@@ -75,11 +74,11 @@ public void setCid(Integer integer) {
 	this.cid = integer;
 }
 
-public Employee getEid() {
+public Integer getEid() {
 	return eid;
 }
 
-public void setEid(Employee eid) {
+public void setEid(Integer eid) {
 	this.eid = eid;
 }
 

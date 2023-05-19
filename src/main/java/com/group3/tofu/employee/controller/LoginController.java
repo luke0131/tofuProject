@@ -18,11 +18,16 @@ public class LoginController {
 	
 	@Autowired
 	private EmployeeService employeeService;
-
+	
 	@GetMapping("/login_emp")
 	public String showLoginPage() {
 		return "employee/login";
 	}
+	
+    @GetMapping("/access-denied")
+    public String showAccessDenied() {
+        return "employee/access-denied";
+    }
     
     @ResponseBody
     @GetMapping("/info/employee/role")
@@ -31,9 +36,10 @@ public class LoginController {
         authentication.getAuthorities().forEach(authority -> {
             roles.add(authority.getAuthority());
         });
+        
         return roles;
     }
-
+    
     @ResponseBody
     @GetMapping("/info/employee/user")
     public Map<String, String> getUserName(Authentication authentication) {
@@ -42,7 +48,7 @@ public class LoginController {
         
         return user;
     }
-
+    
     @ResponseBody
     @GetMapping("/info/employee/userId")
     public Map<String, Integer> getUserId(Authentication authentication) {
