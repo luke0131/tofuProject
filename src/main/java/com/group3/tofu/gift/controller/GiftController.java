@@ -52,15 +52,33 @@ public class GiftController {
 		return "gift/showGift";
 	}
 	
-	//商品修改
-//	@GetMapping("gift/updateGift")
-//	public String updateGift(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber, Model model) {
-//		
-//		Page<Gift> page = gService.findByPage(pageNumber);
-//		model.addAttribute("page", page);
-//		
-//		return "gift/showAllOrder";
-//	}
+//	商品修改
+	@GetMapping("gift/showUpdate")
+	public String showupdate(@RequestParam(name = "id",defaultValue = "1") Integer pageNumber, Model model) {
+		
+		Gift gift = gService.findById(pageNumber);
+		model.addAttribute("gift", gift);
+		
+		return "mgm/gift/updateGift";
+	}
+	
+	@GetMapping("gift/updateGift")
+	public String updateGift(@RequestParam(name = "id") Integer id,
+			@RequestParam(name = "name") String name,
+			@RequestParam(name = "desc") String desc,
+			@RequestParam(name = "price") Integer price,
+			@RequestParam(name = "type") String type,Model model) {
+		
+		Gift gift = gService.findById(id);
+		model.addAttribute("gift", gift);
+		gift.setName(name);
+		gift.setDesc(desc);
+		gift.setPrice(price);
+		gift.setType(type);
+		gService.save(gift);
+		
+		return "redirect:/gift/findGifts";
+	}
 	
 	
 	@GetMapping("gift/findGifts")
@@ -69,14 +87,14 @@ public class GiftController {
 		Page<Gift> page = gService.findByPage(pageNumber);
 		model.addAttribute("page", page);
 		
-		return "mgm/gift/showAllOrder" ;
+		return "mgm/gift/showAllGift" ;
 	}
 	
 	
 	
-//	@ResponseBody
+	@ResponseBody
 	@GetMapping("gift/isEnable")
-	public String isEnable(@RequestParam(name = "id",defaultValue = "1") Integer id) {
+	public Gift isEnable(@RequestParam(name = "id") Integer id) {
 		
 		Gift gift = gService.findById(id);
 
@@ -88,8 +106,8 @@ public class GiftController {
 		
 		Gift savedGift = gService.save(gift);
 		
-		return "redirect:/gift/findGifts" ;
-//		return gift;
+//		return "redirect:/gift/findGifts" ;
+		return gift;
 	}
 	
 	@GetMapping("/showGift/{id}")
