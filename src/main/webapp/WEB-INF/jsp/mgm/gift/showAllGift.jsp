@@ -95,7 +95,7 @@
 	
 								   <td class="align-middle">
 										<p class="mb-0" style="font-weight: 500;">
-										<a href="http://localhost:8080/tofu/remove?id=${gList.id}">
+										<a href="http://localhost:8080/tofu/gift/showUpdate?id=${gList.id}">
 										<button class="btn btn-warning">修改</button>
 										</a>
 									</p>
