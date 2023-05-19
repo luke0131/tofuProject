@@ -1,19 +1,24 @@
 package com.group3.tofu.employee.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "Employee")
@@ -44,6 +49,7 @@ public class Employee {
 	@Column(name= "birthday")
 	private LocalDate birthday;
 	
+	
 	@Column(name= "email")
 	private String email;
 	
@@ -73,6 +79,21 @@ public class Employee {
 	@Lob
 	@Column(name= "photo")
 	private byte[] photo;
+	
+	
+	@JsonManagedReference(value = "empCheckedIn")
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	private List<Checks> checks;
+	
+	
+	public void addCheck(Checks tempCheck) {
+		
+		if(checks == null) {
+			checks = new ArrayList<>();
+		}
+		checks.add(tempCheck);
+		tempCheck.setEmployee(this);
+	}
 	
 	public Employee() {
 	}
@@ -204,6 +225,14 @@ public class Employee {
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+	
+	public List<Checks> getChecks() {
+		return checks;
+	}
+
+	public void setChecks(List<Checks> checks) {
+		this.checks = checks;
+	}
 
 	public Employee(Integer eid, String firstName, String lastName, String account, String password, String gender,
 			LocalDate birthday, String email, String phone, String department, String position, LocalDate hireDate,
@@ -232,8 +261,13 @@ public class Employee {
 				+ ", password=" + password + ", gender=" + gender + ", birthday=" + birthday + ", email=" + email
 				+ ", phone=" + phone + ", department=" + department + ", position=" + position + ", hireDate="
 				+ hireDate + ", salary=" + salary + ", enabled=" + enabled + ", authority=" + authority + ", photo="
-				+ Arrays.toString(photo) + "]";
+				+ Arrays.toString(photo) + ", checks=" + checks + "]";
 	}
+
+
+	
+
+	
 
 	
 	

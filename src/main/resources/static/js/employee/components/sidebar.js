@@ -1,31 +1,55 @@
-function Sidebar() {
+function Sidebar({targetData}) {
 
 	const USER_API_BASE_URL = "http://localhost:8080/tofu/info/employee/";
 	const EMP_API_BASE_URL = "http://localhost:8080/tofu/employee/";
 	const [account, setAccount] = React.useState([]);
 	const [id, setId] = React.useState(null);
 	const [role, setRole] = React.useState([]);
+	const [waitforassign, setWaitforassign] = React.useState([]);
+	const [waittodo, setWaittodo] = React.useState([]);
+
 	React.useEffect(() => {
 		const getLoggedinInfo = async () => {
-			const { data: infoAccount } = await axios.get(USER_API_BASE_URL + "user"); 
+			const { data: infoAccount } = await axios.get(USER_API_BASE_URL + "user"); //用了await，所在的函式就要用async
 			setAccount(infoAccount.name);
 		};
 		getLoggedinInfo();
 	}, []);
+
 	React.useEffect(() => {
 		const getLoggedinInfo = async () => {
-			const { data: infoID } = await axios.get(USER_API_BASE_URL + "userId"); 
+			const { data: infoID } = await axios.get(USER_API_BASE_URL + "userId"); //用了await，所在的函式就要用async
 			setId(infoID.id);
 		};
 		getLoggedinInfo();
 	}, []);
+
 	React.useEffect(() => {
 		const getLoggedinInfo = async () => {
-			const { data: infoRole } = await axios.get(USER_API_BASE_URL + "role"); 
+			const { data: infoRole } = await axios.get(USER_API_BASE_URL + "role"); //用了await，所在的函式就要用async
 			setRole(infoRole[0]);
 		};
 		getLoggedinInfo();
 	}, []);
+	
+	React.useEffect(() => {
+		const getTasksNumber = async () => {
+			const { data: countWaitingAssign } = await axios.get(EMP_API_BASE_URL + "task/waiting_assign");
+			setWaitforassign(countWaitingAssign);	
+		};
+		getTasksNumber();
+	}, [targetData]);
+	
+	React.useEffect(() => {
+		const getTasksNumber = async () => {
+			const { data: countWaitingTodo } = await axios.get(EMP_API_BASE_URL + "task/waiting_todo");
+			setWaittodo(countWaitingTodo);	
+		};
+		getTasksNumber();
+	}, [targetData]);
+
+
+
 	return (
 		<div className="flex">
 			<div className="min-h-screen flex flex-col flex-none w-64 flex-shrink-0 antialiased bg-opacity-0 bg-gray-50 text-gray-200">
@@ -89,11 +113,11 @@ function Sidebar() {
 							</li>
 							<li>
 								<a
-									href="#"
+									href={EMP_API_BASE_URL + "check"}
 									className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-200 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
 								>
 									<span className="inline-flex justify-center items-center ml-4">
-										<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+										<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
 									</span>{" "}
 									<span className="ml-2 text-sm tracking-wide truncate">
 										打卡
@@ -102,11 +126,11 @@ function Sidebar() {
 							</li>
 							{role === "ROLE_MANAGER" ? (<li>
 								<a
-									href="#"
+									href={EMP_API_BASE_URL + "allcheckin"}
 									className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-200 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
 								>
 									<span className="inline-flex justify-center items-center ml-4">
-										<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+										<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
 									</span>{" "}
 									<span className="ml-2 text-sm tracking-wide truncate">
 										差勤管理
@@ -234,65 +258,100 @@ function Sidebar() {
 							
 							{role === "ROLE_MANAGER" ? (<li>
 								<a
-									href="#"
+									href={EMP_API_BASE_URL + "task/management_book"}
 									className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-200 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
 								>
 									<span className="inline-flex justify-center items-center ml-4">
-										<svg
-											className="w-5 h-5"
-											fill="none"
-											stroke="currentColor"
-											viewBox="0 0 24 24"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth="2"
-												d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-											></path>
-										</svg>
+										<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
 									</span>{" "}
 									<span className="ml-2 text-sm tracking-wide truncate">
-										任務管理
+										預約賞車管理
 									</span>
-									<span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">
-										1.2k
-									</span>
+									
+
+										{waitforassign.waitingBooks === 0 ? null : <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">{waitforassign.waitingBooks}</span>}
+									
 								</a>
 							</li>):(<li>
 								<a
-									href="#"
+									href={EMP_API_BASE_URL + "task/todo_book"}
 									className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-200 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
 								>
 									<span className="inline-flex justify-center items-center ml-4">
-										<svg
-											className="w-5 h-5"
-											fill="none"
-											stroke="currentColor"
-											viewBox="0 0 24 24"
-											xmlns="http://www.w3.org/2000/svg"
-										>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth="2"
-												d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-											></path>
-										</svg>
+										<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
 									</span>{" "}
 									<span className="ml-2 text-sm tracking-wide truncate">
-										任務清單
+										預約賞車任務
 									</span>
-									<span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">
-										1.2k
-									</span>
+
+										{waittodo.waitingBooks === 0 ? null : <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">{waittodo.waitingBooks}</span>}
+									
 								</a>
 							</li>)}
 							
 							{role === "ROLE_MANAGER" ? (<li>
 								<a
-									href="#"
+									href={EMP_API_BASE_URL + "task/management_mtn"}
+									className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-200 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
+								>
+									<span className="inline-flex justify-center items-center ml-4">
+										<svg
+											className="w-5 h-5"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth="2"
+												d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+											></path>
+										</svg>
+									</span>{" "}
+									<span className="ml-2 text-sm tracking-wide truncate">
+										維修保養管理
+									</span>
+									
+										
+										
+										{waitforassign.waitingMtns === 0 ? null : <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">{waitforassign.waitingMtns}</span>}
+									
+								</a>
+							</li>):(<li>
+								<a
+									href={EMP_API_BASE_URL + "task/todo_mtn"}
+									className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-200 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
+								>
+									<span className="inline-flex justify-center items-center ml-4">
+										<svg
+											className="w-5 h-5"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth="2"
+												d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+											></path>
+										</svg>
+									</span>{" "}
+									<span className="ml-2 text-sm tracking-wide truncate">
+										維修保養任務
+									</span>
+									
+										{waittodo.waitingMtns === 0 ? null : <span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-red-500 bg-red-50 rounded-full">{waittodo.waitingMtns}</span>}
+									
+								</a>
+							</li>)}
+							
+							{role === "ROLE_MANAGER" ? (<li>
+								<a
+									href={EMP_API_BASE_URL + "leave/approval"}
 									className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-200 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
 								>
 									<span className="inline-flex justify-center items-center ml-4">
@@ -320,16 +379,16 @@ function Sidebar() {
 								</a>
 							</li>) : (<li>
 								<a
-									href="#"
+									href={EMP_API_BASE_URL + "leave/application"}
 									className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-200 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
 								>
 									<span className="inline-flex justify-center items-center ml-4">
-										<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/></svg>
+										<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-4M17 8l-5-5-5 5M12 4.2v10.3"/></svg>
 									</span>{" "}
 									<span className="ml-2 text-sm tracking-wide truncate">
 										請假申請
 									</span>{" "}
-									<span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full">
+									<span className="px-2 py-0.5 ml-auto text-xs font-medium tracking-wide text-indigo-500 bg-indigo-50 rounded-full" hidden>
 										New
 									</span>
 								</a>
@@ -377,7 +436,7 @@ function Sidebar() {
 
 							<li>
 								<a
-									href="#"
+									href={EMP_API_BASE_URL + "edit_my_profile"}
 									className="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-200 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6"
 								>
 									<span className="inline-flex justify-center items-center ml-4">

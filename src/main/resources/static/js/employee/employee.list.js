@@ -2,7 +2,10 @@ function Home() {
 
   const [data, setData] = React.useState([]);
   const [currentUserInfo, setCurrentUserInfo] = React.useState([]);
+
   const [showModal, setShowModal] = React.useState(false);
+
+
   const tableRowRemove = (index) => {
     axios
       .delete("http://localhost:8080/tofu/employee/delete/" + index)

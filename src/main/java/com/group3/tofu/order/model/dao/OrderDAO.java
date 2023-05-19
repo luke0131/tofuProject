@@ -22,4 +22,7 @@ public interface OrderDAO extends JpaRepository<Order, Integer> {
 	
 	@Query(value = "select o from Order o where o.ship_status = ?1")
 	Page<Order> findByShipment2(String ship_status,Pageable pageable);
+	
+	@Query(value = "select count(*) as Sales from Orders group by f_employee_id", nativeQuery = true)
+	List<Integer> getSalesOfEmp();
 }

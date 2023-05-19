@@ -48,32 +48,43 @@
 						<p class="text-blue-600 inline-block align-middle">您已登出帳戶</p>
 					</div>
 				</c:if>
+
 				<div>
 					<label class="label"> <span class="text-base label-text">User
 							Name</span>
-					</label> <input type="text" placeholder="Enter User Name" name="username"
+					</label> <input type="text" placeholder="Enter User Name" name="username" id="username" 
 						class="w-full input input-bordered" />
 				</div>
+
+
+
 				<div>
 					<label class="label"> <span class="text-base label-text">Password</span>
 					</label> <input type="password" placeholder="Enter Password"
-						name="password" class="w-full input input-bordered" />
+						name="password" id="password" class="w-full input input-bordered" />
 				</div>
+
 				<div class="hidden">
 					<label class="label"> <span
 						class="text-base label-text text-red-500">Password</span>
 					</label> <input type="password" placeholder="Enter Password"
-						name="password"
+						name="password" 
 						class="w-full input input-bordered border border-red-500" />
 					<p class="text-red-500 text-xs italic mt-2">Sorry! You entered
 						invalid username or password.</p>
 				</div>
+
+				<div class="text-right mr-2">
 				<a href="#"
 					class="text-xs text-gray-600 hover:underline hover:text-blue-600 hidden">Forget
-					Password?</a> <a href="#"
-					class="text-xs text-gray-600 hover:underline hover:text-blue-600 hidden">Quick
-					Pass</a>
-
+					Password?</a>
+				<a href="${contextRoot}"
+					class="text-xs text-gray-600 hover:text-blue-600 mr-2">Home Page</a>
+				<a href="#"
+					class="text-xs text-gray-600 hover:text-blue-600 mr-2" id="manager">Manager Demo</a> 
+				<a href="#"
+					class="text-xs text-gray-600 hover:text-blue-600" id="employee">Employee Demo</a>
+				</div>
 				<div>
 					<button class="btn btn-block">Login</button>
 				</div>
@@ -81,6 +92,23 @@
 		</div>
 	</div>
 
+<script>
+
+	document
+		.querySelector('#manager')
+		.addEventListener('click', function() {
+				document.querySelector('#username').value = 'Emma';
+				document.querySelector('#password').value = '1234';
+		});
+		
+	document
+	.querySelector('#employee')
+	.addEventListener('click', function() {
+			document.querySelector('#username').value = 'Emma2';
+			document.querySelector('#password').value = '1234';
+	});	
+
+</script>
 
 </body>
 </html>
