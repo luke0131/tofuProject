@@ -26,6 +26,26 @@
 		height: 30px;
 		display: inline-block;
 	}
+
+	.badge {
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+  background-color: #c67605;
+}
+#lblCartCount {
+    font-size: 16px;
+    background: #ff0000;
+    color: #fff;
+    padding: 0 5px;
+    vertical-align: top;
+}
 </style>
 
 </head>
@@ -71,9 +91,9 @@
 
 	</form>
 
-	<div style="text-align: end; margin-top: 25px; margin-right: 500px;">
+	<div style="text-align: end; margin-top: 25px; margin-right: 500px;" id="cart" data-totalitems="0" class="cart">
 		<a href="http://localhost:8080/tofu/showCart">
-			<button class="btn btn-danger"><i class="fa-solid fa-cart-shopping" style="font-size:24px;"></i> cart</button>
+			<button class="btn btn-dark"><i class="fa-solid fa-cart-shopping" style="font-size:24px;"></i> <span class='badge badge-warning' id='lblCartCount'> 1 </span></button>
 		</a>
 	</div>
 
@@ -110,6 +130,15 @@
 <script>
 	function addToCart(id){
 		console.log("id = " + id);
+
+
+
+		var cart = document.getElementById("lblCartCount");
+		var count = parseInt(cart.innerText);
+		count = count+1;
+		console.log(cart.innerText=count);
+
+
 
 		let requestBody = {
 			"giftid":id,
