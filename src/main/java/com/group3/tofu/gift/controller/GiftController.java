@@ -1,5 +1,6 @@
 package com.group3.tofu.gift.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.group3.tofu.gift.model.bean.Gift;
 import com.group3.tofu.gift.service.GiftService;
@@ -52,7 +55,31 @@ public class GiftController {
 		return "gift/showGift";
 	}
 	
-//	商品修改
+//顯示上傳商品頁面	
+	@GetMapping("/gift/showUpload")
+	public String uploadAction() {
+	
+		return "mgm/gift/uploadGift";
+	}
+//上傳商品	
+	@PostMapping("/gift/upload")
+	public String uploadAction(@RequestParam(name = "name",required = false) String name,
+								@RequestParam(name = "desc",required = false) String desc,
+								@RequestParam(name = "price",required = false) Integer price,
+								@RequestParam(name = "type",required = false) String type,
+								@RequestParam("file")MultipartFile  file) throws IOException {
+		Gift gift = new Gift();
+		gift.setName(name);
+		gift.setDesc(desc);
+		gift.setPrice(price);
+		gift.setType(type);
+		gift.setPhoto(file.getBytes());
+		gService.save(gift);
+		
+		return "mgm/gift/uploadGift";
+	}
+	
+//	顯示商品修改頁面
 	@GetMapping("gift/showUpdate")
 	public String showupdate(@RequestParam(name = "id",defaultValue = "1") Integer pageNumber, Model model) {
 		
@@ -61,7 +88,7 @@ public class GiftController {
 		
 		return "mgm/gift/updateGift";
 	}
-	
+//	商品修改	
 	@GetMapping("gift/updateGift")
 	public String updateGift(@RequestParam(name = "id") Integer id,
 			@RequestParam(name = "name") String name,
@@ -91,7 +118,7 @@ public class GiftController {
 	}
 	
 	
-	
+	//商品上下架BY AJAX
 	@ResponseBody
 	@GetMapping("gift/isEnable")
 	public Gift isEnable(@RequestParam(name = "id") Integer id) {

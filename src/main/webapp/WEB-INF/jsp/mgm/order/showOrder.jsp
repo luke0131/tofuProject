@@ -62,7 +62,7 @@
 						<span class="t1">出貨狀態：</span>
 						<label><input type="radio" name="shipment" value="未出貨" style="margin-left: 20px;">未出貨</label>
 						<label><input type="radio" name="shipment" value="運送中" style="margin-left: 20px;">運送中</label>
-						<label><input type="radio" name="shipment" value="已出貨" style="margin-left: 20px;">已出貨</label>
+						<label><input type="radio" name="shipment" value="已送達" style="margin-left: 20px;">已送達</label>
 					</div>
 					<div style="margin-top: 10px;">
 						<span class="t1">訂單狀態：</span>

@@ -46,7 +46,7 @@
 		<div class="row">
 			<jsp:include page="/WEB-INF/jsp/layout/mgmNavbar.jsp" />
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-				<h1 style="text-align: center; margin-top: 50px;">禮物管理頁面</h1>
+				<h1 style="text-align: center; margin-top: 50px;">豆腐商城管理頁面</h1>
 
 
 
@@ -58,15 +58,20 @@
 					<div class="container h-100 py-5" style="width: 1000px;">
 					  <div class="row d-flex justify-content-center align-items-center h-100">
 						<div class="col">
+
+
+							<a href="http://localhost:8080/tofu/gift/showUpload">
+								<button class="btn btn-primary">新增商品</button>
+							</a>
 				  
 						  <div class="table-responsive">
 							<table class="table">
 							  <thead>
 								<tr>
 								  <th scope="col" class="h5">ID</th>
-								  <th scope="col">圖片</th>
-								  <th scope="col">產品名稱</th>
-								  <th scope="col">價錢</th>
+								  <th scope="col">商品圖片</th>
+								  <th scope="col">商品名稱</th>
+								  <th scope="col">商品價錢</th>
 								  <th scope="col">商品修改</th>
 								  <th scope="col">商品上架</th>
 								</tr>
