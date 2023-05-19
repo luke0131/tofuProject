@@ -338,7 +338,7 @@ body {
 				<form id="book" method="POST" action="${contextRoot}/product/book">
 					<div class="mb-3">
 		  				<label for="name" class="form-label">姓名</label>
-		  				<input type="text" class="form-control" id="name" name="name" value="姓名">
+		  				<input type="text" class="form-control" id="name" name="name" value="JolinTsai">
 					</div>
 					
 					<div class="mb-3">

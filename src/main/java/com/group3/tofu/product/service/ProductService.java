@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,13 +31,36 @@ public class ProductService {
 		return pageProduct;
 	}
 	
+	//製作分頁功能
 	public Page<Product> findByPage(Integer pageNumber){
-		PageRequest pgb = PageRequest.of(pageNumber-1, 3, Sort.Direction.DESC, "added");
+		
+		//拿到Pageable物件
+		PageRequest pgb = PageRequest.of(pageNumber-1 , 10);
 		
 		Page<Product> page = productDAO.findAll(pgb);
 		
 		return page;
+	
 	}
+	
+	//製作模糊搜尋功能
+	public Page<Product> findByKeyword(String keyword , Integer pageNumber){
+		
+		//拿到Pageable物件
+		PageRequest pgb = PageRequest.of(pageNumber-1 , 10);
+		
+		Page<Product> page = productDAO.findByProductNameLike(keyword, pgb);
+		
+		return page;
+	}
+	
+//	public Page<Product> findByPage(Integer pageNumber){
+//		PageRequest pgb = PageRequest.of(pageNumber-1, 3, Sort.Direction.DESC, "added");
+//		
+//		Page<Product> page = productDAO.findAll(pgb);
+//		
+//		return page;
+//	}
 	
 	public byte[] getProductPhotoByID(Integer photoID) {
 		Optional<Photo> oPhoto = photoDAO.findById(photoID) ;

@@ -87,4 +87,12 @@ public class ProductPageController {
 				
 	}
 
+	//跳轉到Audi頁面
+	@GetMapping("product/update")
+	public String productUpdate() {
+					
+		return "product/update";
+				
+	}
+	
 }

@@ -119,15 +119,15 @@ public class ProductController {
         return "product/toyotaDetail" ;
     }
 	
-    @GetMapping("/mgm/ProductManagement")
-	public String AllProduct(Model model) {
-
-		List<Product> productList = pService.findAllProduct();
-
-		model.addAttribute("productList", productList);
-
-		return "mgm/ProductManagement";
-	}
+//    @GetMapping("/mgm/ProductManagement")
+//	public String AllProduct(Model model) {
+//
+//		List<Product> productList = pService.findAllProduct();
+//
+//		model.addAttribute("productList", productList);
+//
+//		return "mgm/ProductManagement";
+//	}
     
     @GetMapping("/messages/show")
 	public String showMessages(@RequestParam(name="p", defaultValue = "1") Integer pageNumber,Model model) {
@@ -136,5 +136,28 @@ public class ProductController {
 		model.addAttribute("page", page);
 		return "mgm/ProductManagement";
 	}
+    
+ 	// 以及增加分頁功能
+ 	@GetMapping(path = "mgm/ProductManagement")
+ 	public String findAllCustomers(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber,
+ 			@RequestParam(name = "keyword", required = false) String keyword, Model model, HttpSession session) {
+
+ 		Page<Product> page;
+ 		
+ 		page = pService.findByPage(pageNumber);
+ 		
+ 		if (keyword == null || keyword.isEmpty()) {
+ 			page = pService.findByPage(pageNumber);
+ 		} else {
+ 			page = pService.findByKeyword(keyword, pageNumber);
+
+ 			model.addAttribute("keyword", keyword);
+ 		}
+
+ 		// 要帶到下一頁，要用model帶過去
+ 		model.addAttribute("page", page);
+
+ 		return "mgm/ProductManagement";
+ 	}
 	
 }
