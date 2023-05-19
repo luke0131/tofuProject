@@ -21,6 +21,20 @@
 		<div class="content">			
 			<h1 >歡樂豆腐討論區</h1>
 			
+
+<h3>今日瀏覽人數：<span id="viewCount">0</span></h3>
+
+<script>
+    // 获取当前浏览人数
+    var viewCount = parseInt(document.getElementById("viewCount").innerText);
+
+    // 增加浏览人数
+    viewCount++;
+
+    // 更新页面上的浏览人数显示
+    document.getElementById("viewCount").innerText = viewCount;
+  </script>
+			
             <div class="addArticle">
             
                 <a id="postButton" href="${contextRoot}/showPost/add"><input type="button" value="發表文章"></a>
