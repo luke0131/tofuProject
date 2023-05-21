@@ -68,9 +68,13 @@ public class LeaveApplicationService {
 		} else {
 			return false;
 		}
-		
+
 		Integer leaveId = annualLeave.getLid();
 		Integer annualUsedDays = leaveApplicationDao.findUsedAnnualLeave(emp.getEid(), leaveId);
+		if (annualUsedDays == null) {
+			annualUsedDays = 0;
+		}
+		
 		Integer annualLeftDays = annualMaxDays - annualUsedDays;
 
 		if (annualLeftDays > 0) {

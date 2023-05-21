@@ -112,7 +112,7 @@ function LeaveForm() {
 					<td>{ele.leave.leaveCategory}</td>
 					<td>{ele.beginDate}</td>
 					<td>{ele.endDate}</td>
-					<td>{ele.managerApproved !== null ? ele.managerApproved ? '淮許' : '駁回' : '等待審核'}</td>
+					<td>{ele.managerApproved !== null ? ele.managerApproved ? '核准' : '駁回' : '等待審核'}</td>
 					<td>{ele.createdDate}</td>
 				</tr>
 			}));
