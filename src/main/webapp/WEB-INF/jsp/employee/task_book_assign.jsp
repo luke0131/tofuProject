@@ -22,6 +22,7 @@
 <div id="root"></div>
 <script type="text/babel" src="${contextRoot}/js/employee/components/sidebar.js"></script>
 <script type="text/babel" src="${contextRoot}/js/employee/taskBookAssignmentManager.js"></script>
+<script type="text/babel" src="${contextRoot}/js/employee/components/pagination.js"></script>
 <script type="text/babel">ReactDOM.render(<TaskBookAssignmentManager />, document.getElementById('root'));</script>
 </body>
 </html>

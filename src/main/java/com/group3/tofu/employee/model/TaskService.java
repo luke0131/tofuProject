@@ -20,6 +20,8 @@ import com.group3.tofu.customer.model.Customer;
 import com.group3.tofu.customer.model.CustomerDao;
 import com.group3.tofu.maintenance.model.Maintenance;
 import com.group3.tofu.maintenance.model.MaintenanceDao;
+import com.group3.tofu.photo.model.Photo;
+import com.group3.tofu.photo.model.PhotoDao;
 import com.group3.tofu.product.model.Product;
 import com.group3.tofu.product.model.ProductDao;
 
@@ -41,6 +43,9 @@ public class TaskService {
 
 	@Autowired
 	private ProductDao productDao;
+
+	@Autowired
+	private PhotoDao photoDao;
 
 	@Autowired
 	private LeaveApplicationDao leaveApplicationDao;
@@ -101,20 +106,30 @@ public class TaskService {
 		Optional<Maintenance> op = maintenanceDao.findById(mid);
 		if (op.isPresent()) {
 			Maintenance maintenance = op.get();
-			maintenance.setEid(eid);
-			maintenance.setStatus("assigned");
-			return maintenance;
+
+			if (eid != null) { 
+				maintenance.setEid(eid);
+				maintenance.setStatus("assigned");
+				return maintenance;
+			}
+			return null;
+
 		}
 		return null;
 	}
-	
+
 	public Book setEmployeeToBookTask(Integer bid, Integer eid) {
 		Optional<Book> op = bookDao.findById(bid);
 		if (op.isPresent()) {
 			Book book = op.get();
-			book.setF_employee_id(eid);
-			book.setStatus("assigned");
-			return book;
+
+			if (eid != null) {
+				book.setF_employee_id(eid);
+				book.setStatus("assigned");
+				return book;
+			}
+			return null;
+
 		}
 		return null;
 	}
@@ -128,7 +143,7 @@ public class TaskService {
 		}
 		return null;
 	}
-	
+
 	public Book setClosedToBookTask(Integer bid) {
 		Optional<Book> op = bookDao.findById(bid);
 		if (op.isPresent()) {
@@ -138,8 +153,37 @@ public class TaskService {
 		}
 		return null;
 	}
+
+	public Maintenance setDateToMtnTask(Integer mid, Date newDate) {
+		Optional<Maintenance> op = maintenanceDao.findById(mid);
+		if (op.isPresent()) {
+			Maintenance maintenance = op.get();
+
+			if (newDate != null) { 
+				maintenance.setAppointment(newDate);
+				return maintenance;
+			}
+			return null;
+
+		}
+		return null;
+	}
 	
-	
+	public Book setDateToBookTask(Integer bid, Date newDate) {
+		Optional<Book> op = bookDao.findById(bid);
+		if (op.isPresent()) {
+			Book book = op.get();
+
+			if (newDate != null) { 
+				book.setBook_date(newDate);
+				return book;
+			}
+			return null;
+
+		}
+		return null;
+	}
+
 	public List<Employee> getAvailableEmp(Date reseverdDate) {
 		LocalDate reseverdLocalDate = convertToLocalDateViaInstant(reseverdDate);
 		System.out.println(reseverdLocalDate);
@@ -153,18 +197,17 @@ public class TaskService {
 			allIdList.add(emp.getEid());
 		}
 
-
 		allIdList.removeAll(notAvailableIdList);
 
 		for (Integer availableId : allIdList) {
 			availableEmplist.add(employeeDao.findById(availableId).get());
-
 		}
 		return availableEmplist;
 	}
-	
+
 	public LocalDate convertToLocalDateViaInstant(java.util.Date dateToConvert) {
-		return dateToConvert == null ? null : LocalDate.ofInstant(Instant.ofEpochMilli(dateToConvert.getTime()), ZoneId.systemDefault());
+		return dateToConvert == null ? null
+				: LocalDate.ofInstant(Instant.ofEpochMilli(dateToConvert.getTime()), ZoneId.systemDefault());
 	}
 
 	public Maintenance findMtnById(Integer mid) {
@@ -174,11 +217,25 @@ public class TaskService {
 		}
 		return null;
 	}
-	
+
 	public Book findBookById(Integer bid) {
 		Optional<Book> op = bookDao.findById(bid);
 		if (op.isPresent()) {
 			return op.get();
+		}
+		return null;
+	}
+
+	public byte[] findPhotoByProductId(Integer pid) {
+
+		List<Photo> allPhoto = photoDao.findAll();
+
+		Integer photoId = null;
+		for (Photo photo : allPhoto) {
+			if (photo.getProduct().getProductId().equals(pid)) {
+				photoId = photo.getPhotoId();
+				return allPhoto.get(photoId).getPhoto();
+			}
 		}
 		return null;
 	}

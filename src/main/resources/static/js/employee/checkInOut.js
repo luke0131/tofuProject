@@ -32,7 +32,7 @@ function CheckInOut() {
 		return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec
 	}
 
-	const [checkInfo, setCheckInfo] = React.useState([]); 
+	const [checkInfo, setCheckInfo] = React.useState([]); // 儲存該使用者所有打卡資料
 	const [todayCheckIn, setTodayCheckIn] = React.useState(false);
 	const [todayCheckOut, setTodayCheckOut] = React.useState(false);
 	const [todayCheckInTime, setTodayCheckInTime] = React.useState(null);
@@ -53,6 +53,7 @@ function CheckInOut() {
 			}
 			try {
 				const todayCheckResponse = await axios.get(todayCheckEndpointUrl);
+
 				if (todayCheckResponse.data !== null && todayCheckResponse.data !== "") {
 					setTodayCheckIn(true)
 					setTodayCheckInTime(todayCheckResponse.data.checkInTime)

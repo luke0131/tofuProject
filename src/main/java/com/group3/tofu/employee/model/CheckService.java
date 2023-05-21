@@ -50,7 +50,6 @@ public class CheckService {
 
 	}
 
-
 	public Checks findTodaysCheck(Integer eid) {
 		LocalDate todaysDate = LocalDate.now();
 		Checks todaysCheck = checkDao.findTodaysCheck(eid, todaysDate);
@@ -110,7 +109,33 @@ public class CheckService {
 		return resultPage;
 
 	}
+	
+	public List<Checks> searchChecksWithoutPage(CheckSearchVO searchCheck) throws Exception {
 
+		Specification<Checks> specification = new Specification<Checks>() {
+			private static final long serialVersionUID = 1L;
 
+			@Override
+			public Predicate toPredicate(Root<Checks> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
+
+				Join<Checks, Employee> joinEmpRoot = root.join("employee");
+				List<Predicate> list = new ArrayList<>();
+
+				if (StringUtils.isNotBlank(searchCheck.getName())) {
+					list.add(cb.or(cb.like(joinEmpRoot.get("firstName").as(String.class), "%" + searchCheck.getName() + "%"), cb.like(joinEmpRoot.get("lastName").as(String.class), "%" + searchCheck.getName() + "%")));
+				}
+
+				if (searchCheck.getCheckDate() != null && !"".equals(searchCheck.getCheckDate().toString())) {
+					list.add(cb.and(cb.greaterThanOrEqualTo(root.get("checkInTime").as(LocalDate.class), searchCheck.getCheckDate()), cb.lessThanOrEqualTo(root.get("checkInTime").as(LocalDate.class), searchCheck.getCheckDate().plusDays(1))));
+				}
+				
+				return criteriaQuery.where(list.toArray(new Predicate[list.size()])).getRestriction();
+			}
+		};
+
+		List<Checks> resultPage = checkDao.findAll(specification);
+		return resultPage;
+
+	}
 
 }

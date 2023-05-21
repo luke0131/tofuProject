@@ -1,15 +1,133 @@
 function LeaveForm() {
 
-	const [posts, setPosts] = React.useState([]);
-	const [todos, setTodos] = React.useState([]);
+	const empLeaveEndPoint = 'http://localhost:8080/tofu/employee/leave/leaveCat'
+	const myLeaveEndPoint = 'http://localhost:8080/tofu/employee/leave/my_leave_application'
+
+	const [leaveCategory, setLeaveCategory] = React.useState([]);
+	const [myLeave, setMyLeave] = React.useState([]);
+	const [modalTitle, setModalTitle] = React.useState('請假請求已送出');
+	const [modalContent, setModalContent] = React.useState('等待請求回應');
 	const [selectedValue, setSelectedValue] = React.useState("default");
-	const apiEndPoint = "https://jsonplaceholder.typicode.com/posts";
-	const todosApiEndPoint = "https://jsonplaceholder.typicode.com/todos";
-	const myinfosApiEndPoint = "https://jsonplaceholder.typicode.com/myinfos";
+
+	React.useEffect(() => {
+		document.querySelector("html").setAttribute("data-theme", "emerald");
+	}, []);
+
+	React.useEffect(() => {
+		const getLeaveCategory = async () => {
+			const { data: res } = await axios.get(empLeaveEndPoint);
+			setLeaveCategory(res.map((ele) => {
+				if (ele.leaveCategory === '喪假') return <option key={ele.lid} value={ele.lid}>{ele.leaveCategory + ' (' + ele.leaveReason + ')'}</option>
+				return <option key={ele.lid} value={ele.lid}>{ele.leaveCategory}</option>
+			}))
+		};
+		getLeaveCategory();
+	}, []);
+
+	React.useEffect(() => {
+		const getMyLeave = async () => {
+			const { data: res } = await axios.get(myLeaveEndPoint);
+
+			setMyLeave(res.map((ele) => {
+				return <tr key={ele.aid}>
+					<th>{ele.aid}</th>
+					<td>{ele.employee.firstName}</td>
+					<td>{ele.leave.leaveCategory}</td>		
+					<td>{ele.beginDate}</td>
+					<td>{ele.endDate}</td>
+					<td>{ele.managerApproved !== null ? ele.managerApproved ? '核准' : '駁回' : '等待審核'}</td>
+					<td>{ele.createdDate}</td>
+				</tr>
+			}));
+		};
+		getMyLeave();
+	}, []);
+
+	const [formData, setFormData] = React.useState({
+		"leave": {
+			"lid": null
+		},
+		"beginDate": "",
+		"endDate": "",
+		"leaveReason": "",
+		"fileAttached": null
+	})
+
+	const [formValue, setFormValue] = React.useState({
+		"leave": "",
+		"beginDate": "",
+		"endDate": "",
+		"leaveReason": "",
+		"fileAttached": null
+	})
+
+	const handleChange = (e) => {
+		if (e.target.name === 'category') {
+			setFormData({ ...formData, ["leave"]: { "lid": Number(e.target.value) } });
+			setFormValue({ ...formValue, [e.target.name]: e.target.value })
+			setSelectedValue(e.target.value);
+
+		} else if (e.target.name !== 'category') {
+			setFormData({ ...formData, [e.target.name]: e.target.value });
+			setFormValue({ ...formValue, [e.target.name]: e.target.value })
+		}
+	};
+
+	const [responseOnSubmit, setResponseOnSubmit] = React.useState([]);
+
+    const handleReset = () => {
+        setFormValue({
+                     		"leave": "",
+                     		"beginDate": "",
+                     		"endDate": "",
+                     		"leaveReason": "",
+                     		"fileAttached": null
+                     	})
+        setSelectedValue('default')
+    }
+
+	const handleSubmit = async (event) => {
+        setFormValue({
+                            "leave": "",
+                            "beginDate": "",
+                            "endDate": "",
+                            "leaveReason": "",
+                            "fileAttached": null
+                        })
+	    setSelectedValue("default");
+		event.preventDefault();
+        document.getElementById('my-modal').checked = true;
+		try {
+			let { data: submitData } = await axios.post('http://localhost:8080/tofu/employee/leave/application', formData)
+            setModalTitle(submitData.submitResult==='您已成功提交請假申請。' ? '提交成功' : '提交失敗');
+            setModalContent(submitData.submitResult);
+
+            setFormData([])
+
+			const { data: res } = await axios.get(myLeaveEndPoint);
+			setMyLeave(res.map((ele) => {
+				return <tr key={ele.aid}>
+					<th>{ele.aid}</th>
+					<td>{ele.employee.firstName}</td>
+					<td>{ele.leave.leaveCategory}</td>
+					<td>{ele.beginDate}</td>
+					<td>{ele.endDate}</td>
+					<td>{ele.managerApproved !== null ? ele.managerApproved ? '淮許' : '駁回' : '等待審核'}</td>
+					<td>{ele.createdDate}</td>
+				</tr>
+			}));
+
+		} catch (error) {
+            setModalTitle('');
+            setModalContent('請檢查是否有漏填欄位。');
+
+			console.error(error);
+            setFormData([])
+		}
+	}
 
 	const myinfo_API_BASE_URL = "http://localhost:8080/tofu/info/employee/";
 	const EMP_API_BASE_URL = "http://localhost:8080/tofu/employee/";
-
 	const [myinfo, setMyinfo] = React.useState([]);
 
 	const [waitforassign, setWaitforassign] = React.useState([]);
@@ -28,7 +146,6 @@ function LeaveForm() {
 	React.useEffect(() => {
 		const getTasksNumber = async () => {
 			const { data: countWaitingAssign } = await axios.get(EMP_API_BASE_URL + "task/waiting_assign");
-			//console.log(countWaitingAssign.waitingTotal);
 			setWaitforassign(countWaitingAssign);
 		};
 		getTasksNumber();
@@ -38,8 +155,6 @@ function LeaveForm() {
 		const getWaitingBooks = async () => {
 			const { data: booklist } = await axios.get(EMP_API_BASE_URL + "task/booklist");
 			setBookdata(booklist.reverse());
-			//console.log(mtnlist);
-			//console.log(mtnlist.length);
 		};
 		getWaitingBooks();
 	}, []);
@@ -53,12 +168,11 @@ function LeaveForm() {
 	}, []);
 
 	function getTheCusName(cid) {
-		let namelist = [];
-		{ clist.map((cus) => (namelist.push(cus.name))) };
-		let arraynumber = cid - 1;
-		let name = namelist[arraynumber];
-		return name;
-	}
+        const customer = clist.find((cus) => {
+            return (cus.customer_id === cid);
+        });
+        return (customer.name);
+    }
 
 	React.useEffect(() => {
 		const getProductList = async () => {
@@ -69,31 +183,11 @@ function LeaveForm() {
 	}, []);
 
 	function getTheProductName(pid) {
-		let namelist = [];
-		{ plist.map((product) => (namelist.push(product.productModel))) };
-		let arraynumber = pid - 1;
-		let name = namelist[arraynumber];
-		return name;
-	}
-
-	React.useEffect(() => {
-		const getTodos = async () => {
-			const { data: res } = await axios.get(todosApiEndPoint); 
-			setTodos(res);
-		};
-		getTodos();
-	}, []);
-	const handleChange = async (todo) => {
-		setSelectedValue("default");
-
-		todo.myinfoId = event.target.value;
-		await axios.put(todosApiEndPoint + "/" + todo.id);
-
-		const todosClone = [...todos];
-		const index = todosClone.indexOf(todo);
-		todosClone[index] = { ...todo };
-		setTodos(todosClone);
-	};
+        const product = plist.find((pro) => {
+            return (pro.productId === pid);
+        });
+        return (product.productModel);
+    }
 
 	return (
 		<>
@@ -104,10 +198,10 @@ function LeaveForm() {
 						<p className="text-2xl my-6">請假申請</p>
 					</div>
 					<div className="overflow-x-auto">
-						<div className="container mx-auto justify-between bg-gray-600">
-						</div>
+
 						<div className="container mx-auto flex justify-center">
-							<form action="http://localhost:8080/tofu/employee/leave/application" method="post" enctype="multipart/form-data">
+
+							<form onSubmit={handleSubmit} encType="multipart/form-data">
 								<div className="space-y-12">
 									<div className="border-b border-gray-900/10 pb-12" hidden></div>
 									<h2 className="text-xl font-semibold leading-7 text-gray-900" hidden>
@@ -129,7 +223,7 @@ function LeaveForm() {
 											</label>
 											<div className="mt-2">
 												<input
-													disabled="true"
+													disabled={true}
 													type="text"
 													id="eid"
 													autoComplete="eid"
@@ -149,7 +243,7 @@ function LeaveForm() {
 											</label>
 											<div className="mt-2">
 												<input
-													disabled="true"
+													disabled={true}
 													type="text"
 													id="firstName"
 													defaultValue={myinfo.firstName}
@@ -170,7 +264,7 @@ function LeaveForm() {
 											</label>
 											<div className="mt-2">
 												<input
-													disabled="true"
+													disabled={true}
 													type="text"
 													id="lastName"
 													defaultValue={myinfo.lastName}
@@ -191,7 +285,7 @@ function LeaveForm() {
 											</label>
 											<div className="mt-2">
 												<input
-													disabled="true"
+													disabled={true}
 													id="position"
 													type="text"
 													autoComplete="position"
@@ -212,7 +306,7 @@ function LeaveForm() {
 											</label>
 											<div className="mt-2">
 												<input
-													disabled="true"
+													disabled={true}
 													id="email"
 													type="email"
 													autoComplete="email"
@@ -237,12 +331,14 @@ function LeaveForm() {
 													name="category"
 													required="required"
 													autoComplete="country-name"
+													onChange={(e) => handleChange(e)}
+                                                    value={selectedValue}
 													className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
 												>
-													<option value="3">特別休假</option>
-													<option value="31">病假</option>
-													<option value="27">婚假</option>
-													
+                                                    <option value="default" disabled selected>
+                                                        請選擇假別
+                                                    </option>
+												    {leaveCategory}
 												</select>
 											</div>
 										</div>
@@ -262,6 +358,7 @@ function LeaveForm() {
 													required="required"
 													autoComplete="beginDate"
 													onChange={(e) => handleChange(e)}
+													value={formValue.beginDate}
 													className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 												/>
 											</div>
@@ -282,6 +379,7 @@ function LeaveForm() {
 													required="required"
 													autoComplete="endDate"
 													onChange={(e) => handleChange(e)}
+													value={formValue.endDate}
 													className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 												/>
 											</div>
@@ -297,18 +395,15 @@ function LeaveForm() {
 											<div className="mt-2">
 												<input
 													id="reason"
-													name="reason"
+													name="leaveReason"
 													type="text"
 													// autoComplete="department"
 													onChange={(e) => handleChange(e)}
+													value={formValue.leaveReason}
 													className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 												/>
 											</div>
 										</div>
-
-
-
-
 
 										<div className="col-span-4">
 											<label
@@ -327,11 +422,14 @@ function LeaveForm() {
 												/>
 											</div>
 											<div className="modal-action gap-x-2">
-												<a href="#" className="btn btn-outline btn-primary">
-													Cancel
-												</a>
-												<input type="submit" class="btn btn-outline btn-primary"
-													value="Submit" />
+												<button onClick={handleReset} className="btn btn-outline btn-primary">
+													Reset
+												</button>
+
+                                                    <button onClick={handleSubmit} className="btn btn-primary">
+                                                        Save
+                                                    </button>
+
 											</div>
 										</div>
 									</div>
@@ -385,9 +483,39 @@ function LeaveForm() {
 							</form>
 							<div className="border-b border-gray-900/10 pb-12"></div>
 						</div>
+						<div className="container mx-auto justify-between">
+							<div className="flex justify-between">
+								<p className="text-2xl my-6">假單狀態查詢</p>
+							</div>
+							<table className="table table-zebra w-full">
+								<thead>
+									<tr>
+										<th></th>
+										<th>名字</th>
+										<th>假別</th>
+										<th>起始日期</th>
+										<th>結束日期</th>
+										<th>狀態</th>
+										<th>提交時間</th>
+									</tr>
+								</thead>
+								<tbody>
+									{myLeave}
+								</tbody>
+							</table>
+
+						</div>
 					</div>
 				</div>
 			</div>
+			<input type="checkbox" id="my-modal"  className="modal-toggle" />
+            <label htmlFor="my-modal" className="modal cursor-pointer">
+              <label className="modal-box relative" htmlFor="">
+                <label htmlFor="my-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                <h3 className="text-lg font-bold">{modalTitle}</h3>
+                <p className="py-4">{modalContent}</p>
+              </label>
+            </label>
 		</>
 
 	);

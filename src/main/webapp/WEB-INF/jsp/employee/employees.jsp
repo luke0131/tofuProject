@@ -12,6 +12,10 @@
 <script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.2.0/react-router-dom.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link rel="stylesheet" href=
+    "//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.6/dist/full.css" rel="stylesheet" type="text/css" />
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet"
@@ -23,6 +27,7 @@
 <script type="text/babel" src="${contextRoot}/js/employee/components/sidebar.js"></script>
 <script type="text/babel" src="${contextRoot}/js/employee/editEmployee.js"></script>
 <script type="text/babel" src="${contextRoot}/js/employee/employee.list.js"></script>
+<script type="text/babel" src="${contextRoot}/js/employee/components/pagination.js"></script>
 <script type="text/babel">ReactDOM.render(<Home />, document.getElementById('root'));</script>
 </body>
 </html>

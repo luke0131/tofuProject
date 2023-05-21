@@ -2,7 +2,9 @@ package com.group3.tofu.employee.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -126,8 +128,6 @@ public class EmployeeService {
 
 	}
 
-
-
 	public Page<Employee> searchEmployee(Integer pageNumber, int size, EmployeeSearchVO searchEmp) throws Exception {
 
 		Pageable pageable = PageRequest.of(pageNumber - 1, size, Sort.by(Direction.ASC, "eid"));
@@ -140,12 +140,8 @@ public class EmployeeService {
 
 				List<Predicate> list = new ArrayList<>();
 
-				if (StringUtils.isNotBlank(searchEmp.getFirstName())) {
-					list.add(cb.like(root.get("firstName").as(String.class), "%" + searchEmp.getFirstName() + "%"));
-				}
-
-				if (StringUtils.isNotBlank(searchEmp.getLastName())) {
-					list.add(cb.like(root.get("lastName").as(String.class), "%" + searchEmp.getLastName() + "%"));
+				if (StringUtils.isNotBlank(searchEmp.getName())) {
+					list.add(cb.or(cb.like(root.get("firstName").as(String.class), "%" + searchEmp.getName() + "%"), cb.like(root.get("lastName").as(String.class), "%" + searchEmp.getName() + "%")));
 				}
 
 				if (searchEmp.getHireDateStart() != null && !"".equals(searchEmp.getHireDateStart().toString())) {
@@ -182,6 +178,55 @@ public class EmployeeService {
 		return resultPage;
 
 	}
+	
+	public List<Employee> searchEmployeeWithoutPage(EmployeeSearchVO searchEmp) throws Exception {
+
+		Specification<Employee> specification = new Specification<Employee>() {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public Predicate toPredicate(Root<Employee> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder cb) {
+
+				List<Predicate> list = new ArrayList<>();
+
+				if (StringUtils.isNotBlank(searchEmp.getName())) {
+						list.add(cb.or(cb.like(root.get("firstName").as(String.class), "%" + searchEmp.getName() + "%"), cb.like(root.get("lastName").as(String.class), "%" + searchEmp.getName() + "%")));
+					}
+
+				if (searchEmp.getHireDateStart() != null && !"".equals(searchEmp.getHireDateStart().toString())) {
+
+					list.add(cb.greaterThanOrEqualTo(root.get("hireDate").as(LocalDate.class),
+							searchEmp.getHireDateStart()));
+				}
+				if (searchEmp.getHireDateEnd() != null && !"".equals(searchEmp.getHireDateEnd().toString())) {
+
+					list.add(
+							cb.lessThanOrEqualTo(root.get("hireDate").as(LocalDate.class), searchEmp.getHireDateEnd()));
+				}
+
+				if (StringUtils.isNotBlank(searchEmp.getPosition())) {
+					list.add(cb.equal(root.get("position").as(String.class), searchEmp.getPosition()));
+				}
+
+				if (StringUtils.isNotBlank(searchEmp.getDepartment())) {
+					list.add(cb.equal(root.get("department").as(String.class), searchEmp.getDepartment()));
+				}
+
+				if (searchEmp.getSalaryMin() != null && !"".equals(searchEmp.getSalaryMin().toString())) {
+					list.add(cb.greaterThanOrEqualTo(root.get("salary").as(Integer.class), searchEmp.getSalaryMin()));
+				}
+				if (searchEmp.getSalaryMax() != null && !"".equals(searchEmp.getSalaryMax().toString())) {
+					list.add(cb.lessThanOrEqualTo(root.get("salary").as(Integer.class), searchEmp.getSalaryMax()));
+				}
+
+				return criteriaQuery.where(list.toArray(new Predicate[list.size()])).getRestriction();
+			}
+		};
+
+		List<Employee> resultPage = employeeDao.findAll(specification);
+		return resultPage;
+
+	}
 
 	public Integer findIdByName(String account) {
 		Employee emp = employeeDao.findByAccount(account);
@@ -192,6 +237,19 @@ public class EmployeeService {
 
 		return null;
 	}
+	
+	public Map<String, List<String>> getDepAndPos() {
+		
+		List<String> depList = employeeDao.findAllDepartment();
+		List<String> posList = employeeDao.findAllPosition();
+		
+		Map<String, List<String>> depAndPos = new HashMap<>();
+		depAndPos.put("departmentList", depList);
+		depAndPos.put("positionList", posList);
+
+		return depAndPos;
+	}
+	
 	
 	public List<Integer> getSalesOfEmp() {
 		List<Integer> salesList = orderDao.getSalesOfEmp();

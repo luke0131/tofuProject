@@ -1,14 +1,8 @@
 function LeaveApproval() {
-	const [posts, setPosts] = React.useState([]);
-	const [todos, setTodos] = React.useState([]);
-	const [selectedValue, setSelectedValue] = React.useState("default");
-	const apiEndPoint = "https://jsonplaceholder.typicode.com/posts";
-	const todosApiEndPoint = "https://jsonplaceholder.typicode.com/todos";
-	const usersApiEndPoint = "https://jsonplaceholder.typicode.com/users";
 
-	const EMP_API_BASE_URL = "http://localhost:8080/tofu/employee/";
+    const EMP_API_BASE_URL = "http://localhost:8080/tofu/employee/";
 	const [waitingdata, setWaitingdata] = React.useState([]);
-	const [processeddata, setProcesseddata] = React.useState([]);
+	const [processedData, setProcessedData] = React.useState([]);
 	const [elist, setElist] = React.useState([]);
 
 	React.useEffect(() => {
@@ -21,8 +15,8 @@ function LeaveApproval() {
 
 	React.useEffect(() => {
 		const getProcessedList = async () => {
-			const { data: processedlist } = await axios.get(EMP_API_BASE_URL + "leave/processedlist");
-			setProcesseddata(processedlist.reverse());
+			const { data: processedList } = await axios.get(EMP_API_BASE_URL + "leave/processedlist");
+			setProcessedData(processedList.reverse());
 		};
 		getProcessedList();
 	}, []);
@@ -36,31 +30,26 @@ function LeaveApproval() {
 	}, []);
 
 	function getTheEmpName(eid) {
-		let namelist = [];
-		{ elist.map((emp) => (namelist.push(emp.firstName + " " + emp.lastName))) };
-		let arraynumber = eid - 1;
-		let name = namelist[arraynumber];
-		return name;
-	}
+        const employee = elist.find((emp) => {
+            return (emp.eid === eid);
+        });
+        return (employee.firstName + ' ' + employee.lastName);
+    }
 
-	React.useEffect(() => {
-		const getTodos = async () => {
-			const { data: res } = await axios.get(todosApiEndPoint); //用了await，所在的函式就要用async
-			setTodos(res);
-		};
-		getTodos();
-	}, []);
-	const handleChange = async (todo) => {
-		setSelectedValue("default");
-
-		todo.userId = event.target.value;
-		await axios.put(todosApiEndPoint + "/" + todo.id);
-
-		const todosClone = [...todos];
-		const index = todosClone.indexOf(todo);
-		todosClone[index] = { ...todo };
-		setTodos(todosClone);
-	};
+    const handleApprove = async (ele) => {
+        await axios.put(EMP_API_BASE_URL + "leave/approve/" + ele.aid);
+        const { data: waitinglist } = await axios.get(EMP_API_BASE_URL + "leave/waitinglist");
+        setWaitingdata(waitinglist.reverse());
+        const { data: processedList } = await axios.get(EMP_API_BASE_URL + "leave/processedlist");
+        setProcessedData(processedList.reverse());
+    }
+    const handleReject = async (ele) => {
+        await axios.put(EMP_API_BASE_URL + "leave/reject/" + ele.aid);
+        const { data: waitinglist } = await axios.get(EMP_API_BASE_URL + "leave/waitinglist");
+        setWaitingdata(waitinglist.reverse());
+        const { data: processedList } = await axios.get(EMP_API_BASE_URL + "leave/processedlist");
+        setProcessedData(processedList.reverse());
+    }
 
 	return (
 		<>
@@ -68,17 +57,20 @@ function LeaveApproval() {
 				<Sidebar />
 				<div className="flex-wrap justify-center w-full w-4/5">
 					<div className="flex justify-between">
-						<p className="text-2xl my-6">目前共有 {waitingdata.length} 件請假申請等待審核中</p>
+						<p className="text-2xl my-6">目前共有 {waitingdata.length} 件休假申請等待審核中</p>
 					</div>
-					<div className="overflow-x-auto flex">
+					<div className="overflow-x-auto">
+                    <div className="container mx-auto flex justify-center">
 						<table className="table w-full w-4/5">
 							<thead>
 								<tr>
-									<th>ID</th>
+									<th></th>
 									<th>Employee</th>
 									<th>Leave</th>
 									<th>Begin Date</th>
 									<th>End Date</th>
+									<th>Reason</th>
+									<th>Submit Time</th>
 									<th>Reject</th>
 									<th>Approve</th>
 								</tr>
@@ -91,13 +83,15 @@ function LeaveApproval() {
 										<td> {anapp.leave.leaveCategory}</td>
 										<td> {anapp.beginDate}</td>
 										<td> {anapp.endDate} </td>
+										<td> {anapp.leaveReason} </td>
+										<td> {anapp.createdDate} </td>
 										<td>
-											<button onClick={() => handleComplete(anapp)} className="btn btn-outline">
+											<button onClick={() => handleReject(anapp)} className="btn btn-outline btn-error">
 												Reject
 											</button>
 										</td>
 										<td>
-											<button onClick={() => handleComplete(anapp)} className="btn btn-outline">
+											<button onClick={() => handleApprove(anapp)} className="btn btn-outline btn-success">
 												Approve
 											</button>
 										</td>
@@ -105,6 +99,39 @@ function LeaveApproval() {
 								))}
 							</tbody>
 						</table>
+                        </div>
+						<div className="container mx-auto justify-between">
+                        <div className="flex justify-between">
+						<p className="text-2xl my-6">假單審核紀錄</p>
+					</div>
+                              <table className="table table-zebra w-full">
+                                <thead>
+                                  <tr>
+                                    <th></th>
+                                    <th>姓名</th>
+                                    <th>假別</th>
+                                    <th>起始日期</th>
+                                    <th>結束日期</th>
+                                    <th>狀態</th>
+                                    <th>提交時間</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    {processedData.map((eleOfProcessedData) => (
+                                        <tr key={eleOfProcessedData.aid}>
+                                            <td> {eleOfProcessedData.aid} </td>
+                                            <td> {eleOfProcessedData.employee.firstName} {eleOfProcessedData.employee.lastName}</td>
+                                            <td> {eleOfProcessedData.leave.leaveCategory}</td>
+                                            <td> {eleOfProcessedData.beginDate}</td>
+                                            <td> {eleOfProcessedData.endDate} </td>
+                                            <td> {eleOfProcessedData.managerApproved ? "核准" : "駁回"} </td>
+                                            <td> {eleOfProcessedData.createdDate.substr(0,10)}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                              </table>
+
+                        </div>
 					</div>
 				</div>
 			</div>

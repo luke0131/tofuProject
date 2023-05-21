@@ -46,7 +46,7 @@ public class EmployeeSecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeRequests()
-				.antMatchers("/login_emp", "/authenticateTheUser", "/login_emp?logout").permitAll()
+				.antMatchers("/login_emp", "/authenticateTheUser", "/login_emp?logout").permitAll() //設置不管有無登入都可以直接訪問(permitAll)
 				.antMatchers(HttpMethod.GET, "/info/employee/").hasAnyRole("MANAGER","EMPLOYEE")
 				.antMatchers(HttpMethod.GET, "/employee/getEmployeePhoto/*").hasAnyRole("MANAGER","EMPLOYEE")
 				.antMatchers(HttpMethod.GET, "/employee/edit_my_profile").hasAnyRole("MANAGER","EMPLOYEE")
@@ -68,6 +68,8 @@ public class EmployeeSecurityConfig {
 				
 				.antMatchers(HttpMethod.PUT, "/employee/task/management_book/finished/**").hasAnyRole("MANAGER","EMPLOYEE")
 				.antMatchers(HttpMethod.PUT, "/employee/task/management_mtn/finished/**").hasAnyRole("MANAGER","EMPLOYEE")
+				.antMatchers(HttpMethod.PUT, "/employee/task/management_book/edit/**").hasAnyRole("MANAGER","EMPLOYEE")
+				.antMatchers(HttpMethod.PUT, "/employee/task/management_mtn/edit/**").hasAnyRole("MANAGER","EMPLOYEE")
 				.antMatchers(HttpMethod.GET, "/employee/task/management_mtn").hasRole("MANAGER")
 				.antMatchers(HttpMethod.GET, "/employee/task/management_book").hasRole("MANAGER")
 				.antMatchers(HttpMethod.PUT, "/employee/task/management_mtn").hasRole("MANAGER")
@@ -92,7 +94,10 @@ public class EmployeeSecurityConfig {
 					.logout()
 					.logoutUrl("/logout")
 					.logoutSuccessUrl("/login_emp?logout")
-					.permitAll();
+					.permitAll()
+				.and()
+					.exceptionHandling()
+					.accessDeniedPage("/access-denied");
 
 		http.httpBasic();
 

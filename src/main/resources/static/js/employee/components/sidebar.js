@@ -55,7 +55,7 @@ function Sidebar({targetData}) {
 			<div className="min-h-screen flex flex-col flex-none w-64 flex-shrink-0 antialiased bg-opacity-0 bg-gray-50 text-gray-200">
 				<div className="fixed flex flex-col top-0 left-0 w-64 bg-gray-700 h-full border-r">
 					<div className="flex items-center justify-center h-20 border-b border-gray-700">
-						<div><svg xmlns="http://www.w3.org/2000/svg" className="w-32 h-20" stroke="white" fill="white" viewBox="0 0 500 131">
+						<div><a href={EMP_API_BASE_URL}><svg xmlns="http://www.w3.org/2000/svg" className="w-32 h-20" stroke="white" fill="white" viewBox="0 0 500 131">
 							<g>
 								<path d="M127.1,32H81c-2.4,0-4.2,0.5-5.4,1.6c-1.3,1.1-1.9,2.5-1.9,4.4c0,1.8,0.6,3.2,1.8,4.3c1.2,1.1,3,1.6,5.5,1.6h15.8v52
 		c0,3,0.7,5.2,2,6.6c1.4,1.5,3.1,2.2,5.2,2.2c2.1,0,3.8-0.7,5.2-2.2c1.3-1.4,2-3.7,2-6.7V44h15.8c2.5,0,4.3-0.5,5.6-1.6
@@ -71,7 +71,7 @@ function Sidebar({targetData}) {
 								<path d="M201.7,31.7c-19.7,0-35.7,16-35.7,35.7s16,35.7,35.7,35.7c19.7,0,35.7-16,35.7-35.7S221.4,31.7,201.7,31.7z M219.8,77.7
 		l-18.1,10.4l-18.1-10.4V56.9l18.1-10.4l18.1,10.4V77.7z"/>
 							</g>
-						</svg><div className="w-32 h-0.5 border-b border-gray-500"></div></div>
+						</svg></a><div className="w-32 h-0.5 border-b border-gray-500"></div></div>
 					</div>
 					<div
 						className="overflow-y-auto overflow-x-hidden flex-grow"
@@ -133,7 +133,7 @@ function Sidebar({targetData}) {
 										<svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
 									</span>{" "}
 									<span className="ml-2 text-sm tracking-wide truncate">
-										差勤管理
+										出勤查詢
 									</span>
 								</a>
 							</li>):null}

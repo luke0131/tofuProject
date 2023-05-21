@@ -21,6 +21,7 @@
 <body id="journal-scroll">
 <div id="root"></div>
 <script type="text/babel" src="${contextRoot}/js/employee/components/sidebar.js"></script>
+<script type="text/babel" src="${contextRoot}/js/employee/components/pagination.js"></script>
 <script type="text/babel" src="${contextRoot}/js/employee/leaveApproval.js"></script>
 <script type="text/babel">ReactDOM.render(<LeaveApproval />, document.getElementById('root'));</script>
 </body>

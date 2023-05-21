@@ -55,9 +55,6 @@
 					</label> <input type="text" placeholder="Enter User Name" name="username" id="username" 
 						class="w-full input input-bordered" />
 				</div>
-
-
-
 				<div>
 					<label class="label"> <span class="text-base label-text">Password</span>
 					</label> <input type="password" placeholder="Enter Password"
