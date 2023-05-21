@@ -4,6 +4,10 @@ function EditMyProfile() {
 	const EMP_API_BASE_URL = "http://localhost:8080/tofu/employee/";
 
 	const [myinfo, setMyinfo] = React.useState([]);
+	
+	React.useEffect(() => {
+		document.querySelector("html").setAttribute("data-theme", "emerald");
+	}, []);
 
 	React.useEffect(() => {
 		const getLoggedinInfo = async () => {
@@ -60,7 +64,6 @@ function EditMyProfile() {
 		const value = event.target.value;
 		modifiedUserInfo[event.target.name] = value
 	};
-
 
 
 	return (
@@ -227,6 +230,7 @@ function EditMyProfile() {
 
 												{changed === false ? (<img src={"http://localhost:8080/tofu/employee/getEmployeePhoto/" + myinfo.eid}></img>) : (<img src={image}></img>)}
 
+												
 												<button
 													id="photoChange"
 													type="button"
@@ -264,7 +268,7 @@ function EditMyProfile() {
 													defaultValue={myinfo.birthday}
 													key={myinfo.birthday}
 													onChange={(e) => handleChange(e)}
-													className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+													className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 												/>
 											</div>
 										</div>
@@ -308,7 +312,7 @@ function EditMyProfile() {
 															defaultChecked={myinfo.gender === "Male"}
 															key={myinfo.gender === "Male"}
 															onChange={(e) => handleChange(e)}
-															className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+															className="radio h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
 														/>
 														<label
 															htmlFor="male"
@@ -327,7 +331,7 @@ function EditMyProfile() {
 															defaultChecked={myinfo.gender === "Female"}
 															key={myinfo.gender === "Female"}
 															onChange={(e) => handleChange(e)}
-															className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+															className="radio h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
 														/>
 														<label
 															htmlFor="female"
@@ -345,7 +349,7 @@ function EditMyProfile() {
 															defaultChecked={myinfo.gender === "Not-disclosed"}
 															key={myinfo.gender === "Not-disclosed"}
 															onChange={(e) => handleChange(e)}
-															className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+															className="radio h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
 														/>
 														<label
 															htmlFor="not-disclosed"
@@ -369,8 +373,6 @@ function EditMyProfile() {
 										</div>
 									</div>
 								</div>
-
-
 							</form>
 
 							<div className="border-b border-gray-900/10 pb-12"></div>

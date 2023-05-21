@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -32,7 +34,6 @@ public class TaskController {
 
 	@Autowired
 	private TaskService taskService;
-
 
 	@GetMapping("/management_mtn")
 	public String toMtnTaskManagementPage() {
@@ -111,7 +112,7 @@ public class TaskController {
 	@ResponseBody
 	@GetMapping("/available_emplist/book/{bid}")
 	public ResponseEntity<List<Employee>> getBookAvailableEmpList(@PathVariable(name = "bid") Integer bid) {
-
+		
 		Book book = taskService.findBookById(bid);
 		System.out.println(book.getBook_date());
 		List<Employee> emplist = taskService.getAvailableEmp(book.getBook_date());
@@ -145,34 +146,67 @@ public class TaskController {
 
 		return ResponseEntity.status(HttpStatus.OK).body(booklist);
 	}
-	
+
 	@ResponseBody
 	@PutMapping("/management_mtn/finished/{mid}")
-	public ResponseEntity<List<Maintenance>> setClosedToMtn(@PathVariable(name = "mid") Integer mid, Authentication authentication) {
-		
+	public ResponseEntity<List<Maintenance>> setClosedToMtn(@PathVariable(name = "mid") Integer mid,
+			Authentication authentication) {
+
 		if (taskService.ifMtnExists(mid)) {
 			taskService.setClosedToMtnTask(mid);
 		}
-		
+
+		Integer eid = employeeService.findIdByName(authentication.getName());
+		List<Maintenance> mtnTodos = taskService.findMyMtnTodos(eid);
+
+		return ResponseEntity.status(HttpStatus.OK).body(mtnTodos);
+	}
+
+	@ResponseBody
+	@PutMapping("/management_book/finished/{bid}")
+	public ResponseEntity<List<Book>> setClosedToBook(@PathVariable(name = "bid") Integer bid,
+			Authentication authentication) {
+
+		if (taskService.ifBookExists(bid)) {
+			taskService.setClosedToBookTask(bid);
+		}
+
+		Integer eid = employeeService.findIdByName(authentication.getName());
+		List<Book> bookTodos = taskService.findMyBookTodos(eid);
+
+		return ResponseEntity.status(HttpStatus.OK).body(bookTodos);
+	}
+	
+	@ResponseBody
+	@PutMapping("/management_book/edit/{bid}")
+	public ResponseEntity<List<Book>> setDateToBook(@PathVariable(name = "bid") Integer bid, @RequestBody Book book,
+			Authentication authentication) {
+
+		if (taskService.ifBookExists(bid)) {
+			taskService.setDateToBookTask(bid, book.getBook_date());
+		}
+
+		Integer eid = employeeService.findIdByName(authentication.getName());
+		List<Book> bookTodos = taskService.findMyBookTodos(eid);
+
+		return ResponseEntity.status(HttpStatus.OK).body(bookTodos);
+	}
+	
+	@ResponseBody
+	@PutMapping("/management_mtn/edit/{mid}")
+	public ResponseEntity<List<Maintenance>> setDateToMtn(@PathVariable(name = "mid") Integer mid, @RequestBody Maintenance maintenance,
+			Authentication authentication) {
+
+		if (taskService.ifMtnExists(mid)) {
+			taskService.setDateToMtnTask(mid, maintenance.getAppointment());
+		}
+
 		Integer eid = employeeService.findIdByName(authentication.getName());
 		List<Maintenance> mtnTodos = taskService.findMyMtnTodos(eid);
 
 		return ResponseEntity.status(HttpStatus.OK).body(mtnTodos);
 	}
 	
-	@ResponseBody
-	@PutMapping("/management_book/finished/{bid}")
-	public ResponseEntity<List<Book>> setClosedToBook(@PathVariable(name = "bid") Integer bid, Authentication authentication) {
-		
-		if (taskService.ifBookExists(bid)) {
-			taskService.setClosedToBookTask(bid);
-		}
-		
-		Integer eid = employeeService.findIdByName(authentication.getName());
-		List<Book> bookTodos = taskService.findMyBookTodos(eid);
-
-		return ResponseEntity.status(HttpStatus.OK).body(bookTodos);
-	}
 
 	@ResponseBody
 	@GetMapping("/customerlist")
@@ -186,6 +220,18 @@ public class TaskController {
 	public ResponseEntity<List<Product>> getProductList() {
 		List<Product> productlist = taskService.findAllProducts();
 		return ResponseEntity.status(HttpStatus.OK).body(productlist);
+	}
+	
+	@GetMapping("/getProductPhoto/{pid}")
+	public ResponseEntity<byte[]> getEmployeePhotoByEID(@PathVariable Integer pid) {
+
+		byte[] productSamplePhoto = taskService.findPhotoByProductId(pid);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_JPEG);
+
+		return new ResponseEntity<byte[]>(productSamplePhoto, headers, HttpStatus.OK);
+
 	}
 
 

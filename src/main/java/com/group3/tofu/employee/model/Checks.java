@@ -28,8 +28,7 @@ public class Checks {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "check_id")
 	private Integer cid;
-	
-	
+		
 	@JoinColumn(name = "f_employee_id")
 	@JsonBackReference(value = "empCheckedIn")
 	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
@@ -47,7 +46,6 @@ public class Checks {
 	@Column(name = "checkout_time")
 	private Date checkOutTime;
 
-	
 	public Checks() {
 		
 	}

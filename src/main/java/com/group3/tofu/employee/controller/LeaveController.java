@@ -1,8 +1,6 @@
 package com.group3.tofu.employee.controller;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
@@ -17,10 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.group3.tofu.employee.model.Employee;
 import com.group3.tofu.employee.model.EmployeeService;
@@ -58,65 +55,112 @@ public class LeaveController {
 
 	@ResponseBody
 	@PostMapping("/application")
-	public ResponseEntity<Map<String, String>> submitLeaveForm(@RequestParam("category") Integer category,
-			@RequestParam("beginDate") String beginDate, @RequestParam("endDate") String endDate,
-			@RequestParam("reason") String reason,
-			@RequestParam(value = "attachedFile", required = false) MultipartFile attachedFile,
-			Authentication authentication) throws IOException {
+	public ResponseEntity<Map<String, String>> submitLeaveForm(@RequestBody LeaveApplication leaveapplication, Authentication authentication) {
 
 		Map<String, String> messages = new HashMap<>();
 
 		Integer eid = employeeService.findIdByName(authentication.getName());
 		Employee currentEmp = employeeService.findEmployeeById(eid);
+		
+		if (leaveapplication.getLeave().getLid() != null && leaveapplication.getBeginDate() != null && leaveapplication.getEndDate() != null) {
+			
+			Leave leaveCat = leaveApplicationService.findLeaveById(leaveapplication.getLeave().getLid());
+			
+			LocalDate localDateBegin = leaveapplication.getBeginDate();
+			LocalDate localDateEnd = leaveapplication.getEndDate();
+			
+			
+			LeaveApplication lapp = new LeaveApplication();
+			long dayslong = localDateBegin.until(localDateEnd.plusDays(1), ChronoUnit.DAYS);
+			Integer days = Integer.parseInt(String.valueOf(dayslong));
 
-		Leave leaveCat = leaveApplicationService.findLeaveById(category);
+			boolean ifAvailable = leaveApplicationService.checkIfThereAreLeftAnnualDays(currentEmp, days);
+			boolean ifTaken = leaveApplicationService.ifDateIsAlreadyTaken(localDateBegin, eid);
+				
+			
+			if (ifTaken == false) {
+				
+				if (localDateBegin != null && localDateEnd != null && localDateBegin.isAfter(localDateEnd) != true) {
+					
+					if (leaveCat.getLeaveCategory() != null && leaveCat.getLeaveCategory().equals("特別休假")) {
+						
+						if (ifAvailable == true) {
+							lapp.setEmployee(currentEmp);
+							lapp.setLeave(leaveCat);
+							lapp.setBeginDate(localDateBegin);
+							lapp.setEndDate(localDateEnd);
+							lapp.setLeaveDays(days);
+							if (leaveapplication.getLeaveReason() != "" && leaveapplication.getLeaveReason() != null) {
+								lapp.setLeaveReason(leaveapplication.getLeaveReason());
+							}
+							
+							if (leaveapplication.getFileAttached() != null) {
 
-		LocalDate localDateBegin = LocalDate.parse(beginDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		LocalDate localDateEnd = LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+								try {
+									lapp.setFileAttached(leaveapplication.getFileAttached());
+								} catch (Exception e) {
+									System.out.println("Error");
+								}
 
-		LeaveApplication lapp = new LeaveApplication();
-		long dayslong = localDateBegin.until(localDateEnd.plusDays(1), ChronoUnit.DAYS);
-		Integer days = Integer.parseInt(String.valueOf(dayslong));
+							} else {
+								lapp.setFileAttached(null);
+							}
 
-		boolean ifAvailable = leaveApplicationService.checkIfThereAreLeftAnnualDays(currentEmp, days);
-		boolean ifTaken = leaveApplicationService.ifDateIsAlreadyTaken(localDateBegin, eid);
+							leaveApplicationService.newLeaveApp(lapp);
+							messages.put("submitResult", "您已成功提交請假申請。");
+							return ResponseEntity.status(HttpStatus.OK).body(messages);
+						} else { 
+							String failMessage = "剩餘特休天數不足。";
+							messages.put("submitResult", failMessage);
+							return ResponseEntity.status(HttpStatus.OK).body(messages);
+						}
+						
+					} else { 
+						
+						lapp.setEmployee(currentEmp);
+						lapp.setLeave(leaveCat);
+						lapp.setBeginDate(localDateBegin);
+						lapp.setEndDate(localDateEnd);
+						lapp.setLeaveDays(days);
+						if (leaveapplication.getLeaveReason() != "" && leaveapplication.getLeaveReason() != null) {
+							lapp.setLeaveReason(leaveapplication.getLeaveReason());
+						}
+						
+						if (leaveapplication.getFileAttached() != null) {
 
-		if (ifTaken == false) {
+							try {
+								lapp.setFileAttached(leaveapplication.getFileAttached());
+							} catch (Exception e) {
+								System.out.println("Error");
+							}
 
-			if (ifAvailable == true) {
-				lapp.setEmployee(currentEmp);
-				lapp.setLeave(leaveCat);
-				lapp.setBeginDate(localDateBegin);
-				lapp.setEndDate(localDateEnd);
-				lapp.setLeaveDays(days);
-				lapp.setLeaveReason(reason);
+						} else {
+							lapp.setFileAttached(null);
+						}
 
-				if (attachedFile != null) {
-
-					try {
-						lapp.setFileAttached(attachedFile.getBytes());
-					} catch (Exception e) {
-						System.out.println("Error");
+						leaveApplicationService.newLeaveApp(lapp);
+						messages.put("submitResult", "您已成功提交請假申請。");
+						return ResponseEntity.status(HttpStatus.OK).body(messages);
 					}
-
-				} else {
-					lapp.setFileAttached(null);
+				
+				} else {  
+					String failMessage = "請確認您的請假天數大於 0 日。";
+					messages.put("submitResult", failMessage);
+					return ResponseEntity.status(HttpStatus.OK).body(messages);
 				}
-
-				leaveApplicationService.newLeaveApp(lapp);
-				messages.put("submitResult", "success!");
-				return ResponseEntity.status(HttpStatus.OK).body(messages);
+				
 			} else {
-				String failMessage = "剩餘特休天數不足。";
+				String failMessage = "此日期期間已提出過請假申請。";
 				messages.put("submitResult", failMessage);
 				return ResponseEntity.status(HttpStatus.OK).body(messages);
 			}
-
+			
 		} else {
-			String failMessage = "此日期期間已提出過請假申請。";
+			String failMessage = "請檢查是否有漏填欄位。";
 			messages.put("submitResult", failMessage);
 			return ResponseEntity.status(HttpStatus.OK).body(messages);
 		}
+
 
 	}
 

@@ -27,13 +27,19 @@ public class LeaveApplicationService {
 	}
 
 	public Leave findLeaveById(Integer id) {
-		Optional<Leave> op = leaveDao.findById(id);
+		
+		if (id != null) {
+			Optional<Leave> op = leaveDao.findById(id);
 
-		if (op.isPresent()) {
-			return op.get();
-		}
+			if (op.isPresent()) {
+				return op.get();
+			}
 
+			return null;
+		} 
 		return null;
+		
+		
 	}
 
 	public List<Leave> getAvailableLeaveCat(Employee emp) {
@@ -56,10 +62,14 @@ public class LeaveApplicationService {
 		Integer monthTenure = Integer.parseInt(String.valueOf(longMonth));
 
 		Leave annualLeave = leaveDao.findAnnualLeaveDaysAvailable(monthTenure);
-		Integer annualMaxDays = annualLeave.getMaxLeaveDays();
-
+		Integer annualMaxDays = 0;
+		if (annualLeave != null) {
+			annualMaxDays = annualLeave.getMaxLeaveDays();
+		} else {
+			return false;
+		}
+		
 		Integer leaveId = annualLeave.getLid();
-
 		Integer annualUsedDays = leaveApplicationDao.findUsedAnnualLeave(emp.getEid(), leaveId);
 		Integer annualLeftDays = annualMaxDays - annualUsedDays;
 
@@ -79,7 +89,6 @@ public class LeaveApplicationService {
 			System.out.println("請假的天數大於剩餘特休天數，剩餘特休天數不足");
 			return false;
 		}
-
 
 	}
 
@@ -137,6 +146,5 @@ public class LeaveApplicationService {
 		}
 		return null;
 	}
-
 
 }

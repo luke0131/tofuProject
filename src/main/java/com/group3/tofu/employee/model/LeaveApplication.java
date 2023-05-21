@@ -71,8 +71,7 @@ public class LeaveApplication {
 	@Column(name = "created_date")
 	private Date createdDate;
 
-	
-	@PrePersist 
+	@PrePersist
 	public void onCreate() {
 		if (createdDate == null) {
 			createdDate = new Date();

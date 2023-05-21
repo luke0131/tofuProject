@@ -13,5 +13,4 @@ public interface CheckDao extends JpaRepository<Checks, Integer>, JpaSpecificati
 	Checks findTodaysCheck(@Param("eid") Integer eid, @Param("checkintime") LocalDate checkintime);
 	
 	
-	
 }

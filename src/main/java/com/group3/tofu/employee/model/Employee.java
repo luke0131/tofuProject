@@ -49,7 +49,6 @@ public class Employee {
 	@Column(name= "birthday")
 	private LocalDate birthday;
 	
-	
 	@Column(name= "email")
 	private String email;
 	
@@ -79,12 +78,10 @@ public class Employee {
 	@Lob
 	@Column(name= "photo")
 	private byte[] photo;
-	
-	
+		
 	@JsonManagedReference(value = "empCheckedIn")
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
 	private List<Checks> checks;
-	
 	
 	public void addCheck(Checks tempCheck) {
 		
@@ -264,17 +261,4 @@ public class Employee {
 				+ Arrays.toString(photo) + ", checks=" + checks + "]";
 	}
 
-
-	
-
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
 }

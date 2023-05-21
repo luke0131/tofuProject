@@ -10,9 +10,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class EmployeeSearchVO {
 	
-	private String firstName;
-
-	private String lastName;
+	private String name;
 	
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
@@ -32,20 +30,12 @@ public class EmployeeSearchVO {
 	
 	private Integer salaryMax;
 
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public LocalDate getHireDateStart() {
@@ -98,12 +88,9 @@ public class EmployeeSearchVO {
 		this.salaryMax = salaryMax;
 	}
 
-	
-
-	public EmployeeSearchVO(String firstName, String lastName, LocalDate hireDateStart, LocalDate hireDateEnd,
-			String department, String position, Integer salaryMin, Integer salaryMax) {
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public EmployeeSearchVO(String name, LocalDate hireDateStart, LocalDate hireDateEnd, String department,
+			String position, Integer salaryMin, Integer salaryMax) {
+		this.name = name;
 		this.hireDateStart = hireDateStart;
 		this.hireDateEnd = hireDateEnd;
 		this.department = department;
@@ -114,10 +101,12 @@ public class EmployeeSearchVO {
 
 	@Override
 	public String toString() {
-		return "EmployeeSearchVO [firstName=" + firstName + ", lastName=" + lastName + ", hireDateStart="
-				+ hireDateStart + ", hireDateEnd=" + hireDateEnd + ", department=" + department + ", position="
-				+ position + ", salaryMin=" + salaryMin + ", salaryMax=" + salaryMax + "]";
+		return "EmployeeSearchVO [name=" + name + ", hireDateStart=" + hireDateStart + ", hireDateEnd=" + hireDateEnd
+				+ ", department=" + department + ", position=" + position + ", salaryMin=" + salaryMin + ", salaryMax="
+				+ salaryMax + "]";
 	}
+
+	
 
 	
 
