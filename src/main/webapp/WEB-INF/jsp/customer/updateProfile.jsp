@@ -318,20 +318,20 @@
 		});
 		
 		document.querySelector('#updateMember').addEventListener('click', function() {
-			document.querySelector('#name').value = '嗨我是測試喔!';
+			document.querySelector('#name').value = 'JolinTsai';
 			document.querySelector('#phone').value = '0988-888-888';
 			document.querySelector('#birthday').value = '2023-05-24';
 			document.querySelector('#age').value = '18';
 			document.querySelector('#newAddress').value = '台北市大安區復興南路一段390號2樓';
 		});
 		
-		document.querySelector('#Jolin').addEventListener('click', function() {
-			document.querySelector('#name').value = 'JolinTsai';
-			document.querySelector('#phone').value = '0928-456-789';
-			document.querySelector('#birthday').value = '1985-01-01';
-			document.querySelector('#age').value = '18';
-			document.querySelector('#newAddress').value = '台北市大安區敦化南路二段300號';
-		});
+// 		document.querySelector('#Jolin').addEventListener('click', function() {
+// 			document.querySelector('#name').value = 'JolinTsai';
+// 			document.querySelector('#phone').value = '0928-456-789';
+// 			document.querySelector('#birthday').value = '1985-01-01';
+// 			document.querySelector('#age').value = '18';
+// 			document.querySelector('#newAddress').value = '台北市大安區敦化南路二段300號';
+// 		});
 		
 
 		
