@@ -68,8 +68,12 @@ public class ContactController {
 		
 		
 		String to = contact.getEmail();
-		String subject = "謝謝您的來信";
-		String content = "<h3>感謝您的來信</h3><br/>";
+		String subject = "收到您的來信";
+		String content = "<h1>感謝各位廠商的聆聽！</h1><br/>" + 
+						"<p>我們深切感謝您對我們產品或服務的寶貴意見和建議。您的回饋對於我們改進和提升客戶滿意度至關重要。</p>" +
+						"<p>我們會認真考慮並採取措施來解決任何問題，以確保提供優質的產品和無可挑剔的客戶體驗。</p>" +
+						"<p>再次衷心感謝您的寶貴意見和持續的支持。</p>";
+						
 		
 		
 		contactService.saveContact(contact);

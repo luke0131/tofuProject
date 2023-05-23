@@ -32,7 +32,7 @@
                                  </div> 
                                
                                 <div class="c-post__body">
-                                    <input type="hidden" class="form-control" name="name" value="${post.authorName}">  
+                                    <input type="hidden" class="form-control" name="name" value="${loggedInCustomer.account}">  
                                 
                                     <input type="text" class="form-control" name="title" value="" placeholder="請輸入文章標題>>>">
                                     <textarea class="form-control main-editor is-focused" name="text" id="editor" style="height: 462px;"

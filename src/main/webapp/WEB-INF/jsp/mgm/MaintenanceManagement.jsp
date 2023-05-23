@@ -31,7 +31,7 @@
 	<jsp:include page="/WEB-INF/jsp/layout/mgmHeader.jsp" />
 	
 	
-	<div class="container-fluid">
+	<div class="container-fluid" style="margin-bottom:170px">
 		<div class="row">
 			<jsp:include page="/WEB-INF/jsp/layout/mgmNavbar.jsp" />
 			<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
