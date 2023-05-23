@@ -122,5 +122,7 @@ ${pageNumber}
 	
 	
 	<jsp:include page="/WEB-INF/jsp/layout/mgmfooter.jsp" />
+	
+	<!--  -->
 </body>
 </html>
