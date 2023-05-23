@@ -70,7 +70,7 @@ public class MaintenanceController {
 		// 檢查會員是否已登入
 		Customer customer = (Customer) session.getAttribute("loggedInCustomer");
 		
-		System.out.println(customer);
+		//System.out.println(customer);
 
 //		if (customer != null) {
 //			// 如果會員已經登入，顯示預約頁面

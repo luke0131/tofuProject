@@ -290,7 +290,7 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 					
 					document.querySelector('#note').value = '引擎有異音，要一起做檢修';
 					document.querySelector('#date').value = '2023-06-24';
-					document.querySelector('#part').value = '晚上19:00';
+					document.querySelector('#part').value = '下午15:00';
 				});
 	</script>
 	<script>
