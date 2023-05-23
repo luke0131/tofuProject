@@ -73,7 +73,7 @@
       </div>
       </td>
       <td>
-      <form action="${contextRoot}/maintenance/delete" method="post">
+      <form action="${contextRoot}/maintenance/delete" method="post" onsubmit="return confirmDelete()">
       <input type="hidden" name="mid" value="${main.mid}"/>
       <input type="hidden" name="_method" value="delete"/>
       <input type="submit" class="btn btn-outline-danger" value="刪除"/>
@@ -104,6 +104,23 @@ ${pageNumber}
 			</main>
 		</div>
 	</div>
+	
+	<script>
+    function confirmDelete() {
+        // 使用 confirm 函式顯示確認對話框
+        var confirmed = confirm("確定要刪除嗎？");
+
+        // 如果使用者確定刪除，返回 true，執行刪除相關程式碼
+        if (confirmed) {
+            return true;
+        }
+        
+        // 如果使用者取消刪除，返回 false，取消提交表單
+        return false;
+    }
+</script>
+	
+	
 	<jsp:include page="/WEB-INF/jsp/layout/mgmfooter.jsp" />
 </body>
 </html>

@@ -34,6 +34,32 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 		<div class="container">
 			<h3 style="text-decoration: underline;">豆腐專業保養</h3>
 			<br>
+			
+			<span for="" class="text-danger">請先選擇愛車品牌型號</span>
+			<select style="border: 3px solid dark; border-radius: 5px; padding: 8px;" id="brandSelect" onchange="filterModels()" >
+    <option value="">請選擇汽車品牌</option>
+    <option value="Toyota">Toyota</option>
+    <option value="Honda">Honda</option>
+    <option value="Nissan">Nissan</option>
+    <option value="Mercedes-Benz">Mercedes-Benz</option>
+    <option value="BMW">BMW</option>
+    <option value="Mitsubishi">Mitsubishi</option>
+    <option value="Mazda">Mazda</option>
+    <option value="Lexus">Lexus</option>
+    <option value="Audi">Audi</option>
+    <option value="Porsche">Porsche</option>
+    <option value="Ferrari">Ferrari</option>
+    <option value="Volvo">Volvo</option>
+    <option value="Mini">Mini</option>
+</select>
+
+<!-- 建立汽車型號下拉選單 -->
+<select style="border: 3px solid dark; border-radius: 5px; padding: 8px;" id="modelSelect">
+    <option value="">請選擇型號</option>
+</select>
+
+<br>
+<br>
 
 			<h4>選擇預約保修項目</h4>
 
@@ -174,22 +200,20 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 						<input type="date"
 							style="border: 2px solid dark; border-radius: 5px; padding: 6px;"
 							id="date" name="appointment" required value="2023-06-01 10:00"
-							min="" max="2023-06-30"> <select
-							style="border: 3px solid dark; border-radius: 5px; padding: 8px;"
-							id="part" name="appointmenttime" required>
-							<option value="">請點擊選擇時段</option>
-							<option value="上午10:00">上午10:00</option>
-							<option value="上午11:00">上午11:00</option>
-							<option value="上午12:00">上午12:00</option>
-							<option value="下午13:00">下午13:00</option>
-							<option value="下午14:00">下午14:00</option>
-							<option value="下午15:00">下午15:00</option>
-							<option value="下午16:00">下午16:00</option>
-							<option value="下午17:00">下午17:00</option>
-							<option value="下午18:00">下午18:00</option>
-							<option value="晚上19:00">晚上19:00</option>
-							<option value="晚上20:00">晚上20:00</option>
-						</select>
+							min="" max="2023-06-30"> <select style="border: 3px solid dark; border-radius: 5px; padding: 8px;" id="part" name="appointmenttime" >
+    <option value="">請點擊選擇時段</option>
+    <option value="上午10:00" data-timeslot="morning">上午10:00</option>
+    <option value="上午11:00" data-timeslot="morning">上午11:00</option>
+    <option value="上午12:00" data-timeslot="morning">上午12:00</option>
+    <option value="下午13:00" data-timeslot="afternoon">下午13:00</option>
+    <option value="下午14:00" data-timeslot="afternoon">下午14:00</option>
+    <option value="下午15:00" data-timeslot="afternoon">下午15:00</option>
+    <option value="下午16:00" data-timeslot="afternoon">下午16:00</option>
+    <option value="下午17:00" data-timeslot="afternoon">下午17:00</option>
+    <option value="下午18:00" data-timeslot="afternoon">下午18:00</option>
+    <option value="晚上19:00" data-timeslot="evening">晚上19:00</option>
+    <option value="晚上20:00" data-timeslot="evening">晚上20:00</option>
+</select>
 
 					</div>
 				</div>
@@ -244,7 +268,7 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 		dateInput.addEventListener("input", function(event) {
 			const selectedDate = new Date(event.target.value);
 			if (selectedDate.getDay() === 6 || selectedDate.getDay() === 0) {
-				event.target.setCustomValidity("請選擇週一至週五的日期");
+				event.target.setCustomValidity("請選擇平日週一至週五的日期");
 			} else {
 				event.target.setCustomValidity("");
 			}
@@ -265,10 +289,91 @@ input[type="date"]::-webkit-datetime-edit-day-field:disabled {
 				function() {
 					
 					document.querySelector('#note').value = '引擎有異音，要一起做檢修';
-					document.querySelector('#date').value = '2023-06-30';
-					document.querySelector('#part').value = '下午13:00';
+					document.querySelector('#date').value = '2023-06-24';
+					document.querySelector('#part').value = '晚上19:00';
 				});
 	</script>
+	<script>
+    function filterModels() {
+        var brandSelect = document.getElementById("brandSelect");
+        var modelSelect = document.getElementById("modelSelect");
+        
+        // 清空原有的型號選項
+        modelSelect.innerHTML = "";
+        
+        // 取得選取的品牌
+        var selectedBrand = brandSelect.value;
+        
+        // 定義汽車品牌和型號的對應關係
+        var brandModels = {
+            "Toyota": ["Toyota Corolla Altis", "Toyota RAV4", "Toyota Yaris", "Toyota Camry", "Toyota Sienta", "Toyota Vios", "Toyota Hilux"],
+            "Honda": ["Honda CR-V", "Honda Civic", "Honda HR-V", "Honda Accord", "Honda Fit", "Honda City", "Honda Odyssey"],
+            "Nissan": ["Nissan Kicks", "Nissan Altima", "Nissan Maxima", "Nissan Rogue", "Nissan Murano", "Nissan Pathfinder"],
+            "Mercedes-Benz": ["Mercedes-Benz C300", "Mercedes-Benz E-200", "Mercedes-Benz GLC 300", "Mercedes-Benz GLE 450", "Mercedes-Benz CLA 250", "Mercedes-Benz S450L", "Mercedes-Benz GLS 450"],
+            "BMW": ["BMW 320i", "BMW 530i", "BMW X3", "BMW 730Li", "BMW X1", "BMW 330i", "BMW X5", "BMW 420i"],
+            "Mitsubishi": ["Mitsubishi Outlander", "Mitsubishi ASX", "Mitsubishi Triton"],
+            "Mazda": ["Mazda CX-5", "Mazda3", "Mazda CX-30", "Mazda6", "Mazda2", "Mazda CX-3"],
+            "Lexus": ["Lexus ES", "Lexus RX 350", "Lexus NX 200", "Lexus LS", "Lexus UX 200", "Lexus LC 500"],
+            "Audi": ["Audi A3", "Audi A4", "Audi Q3", "Audi Q5", "Audi TT", "Audi RS4", "Audi RS5", "Audi R8"],
+            "Porsche": ["Porsche 911 Carrera", "Porsche 911 GT3", "Porsche Macan", "Porsche Cayenne"],
+            "Ferrari": ["Ferrari F8 Tributo", "Ferrari Portofino", "Ferrari Roma"],
+            "Volvo": ["Volvo XC90", "Volvo S60", "Volvo V60"],
+            "Mini": ["Mini Cooper 3 Door", "Mini Countryman"]
+        };
+        
+        // 根據選取的品牌設定型號選項
+        var models = brandModels[selectedBrand];
+        if (models) {
+            for (var i = 0; i < models.length; i++) {
+                var option = document.createElement("option");
+                option.value = models[i];
+                option.text = models[i];
+                modelSelect.appendChild(option);
+            }
+        }
+    }
+</script>
+<script>
+    var reservationCount = {
+        morning: 0,
+        afternoon: 0,
+        evening: 3
+    };
+
+    var partSelect = document.getElementById("part");
+    partSelect.addEventListener("change", function() {
+        var selectedOption = partSelect.options[partSelect.selectedIndex];
+        var selectedTimeslot = selectedOption.getAttribute("data-timeslot");
+
+        if (reservationCount[selectedTimeslot] >= 3) {
+            disableOption(selectedTimeslot);
+        } else {
+            enableOption(selectedTimeslot);
+        }
+    });
+
+    function disableOption(timeslot) {
+        var options = partSelect.options;
+        for (var i = 0; i < options.length; i++) {
+            var option = options[i];
+            if (option.getAttribute("data-timeslot") === timeslot) {
+                option.disabled = true;
+                option.style.color = "gray";
+            }
+        }
+    }
+
+    function enableOption(timeslot) {
+        var options = partSelect.options;
+        for (var i = 0; i < options.length; i++) {
+            var option = options[i];
+            if (option.getAttribute("data-timeslot") === timeslot) {
+                option.disabled = false;
+                option.style.color = "initial";
+            }
+        }
+    }
+</script>
 	<!-- 製作回到頂端的TOP-->
 	<a href="#top" class="top">Top</a>
 

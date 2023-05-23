@@ -9,6 +9,13 @@
 <meta charset="UTF-8">
 <title>tofu家用充電座安裝與評估</title>
 <style>
+
+#contentContainer {
+      opacity: 0; /* 初始時將內容隱藏 */
+      transition: opacity 8s; /* 使用淡入淡出的過渡效果 */
+    }
+
+
 .steps {
 	list-style-type: none;
 	margin: 0;
@@ -46,6 +53,8 @@
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
 	<jsp:include page="/WEB-INF/jsp/layout/navbar.jsp" />
 <body style="">
+
+<div id="contentContainer">
 	<div class="wrap">
 		<div class="section section-1 show">
 
@@ -82,6 +91,9 @@
 	</div>
 	<br>
 	<br>
+	
+	
+	
 	<ol class="steps">
 		<li><img src="./img/mPicture/icon_index_s1.png" alt="1"><P>安裝預約評估-><p>(1)</></P></li>
 		
@@ -157,11 +169,26 @@
 	</div>
 	<br>
 	<br>
+	
+	</div>
 
 	<a href="#top" class="top">Top</a>
 
 	<jsp:include page="/WEB-INF/jsp/layout/common_dependencies.jsp" />
 	<jsp:include page="/WEB-INF/jsp/layout/footer.jsp" />
+	
+	 <script>
+    document.addEventListener('wheel', function(event) {
+      var contentContainer = document.getElementById('contentContainer');
+      var scrollPosition = window.pageYOffset; // 獲取滾動的垂直位置
+
+      if (scrollPosition > 70) { // 當滾動位置超過一定值時，逐漸顯示內容
+        contentContainer.style.opacity = '1';
+      }
+    });
+  </script>
+	
+	
 </body>
 </body>
 </html>
